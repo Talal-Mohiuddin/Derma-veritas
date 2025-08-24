@@ -2,17 +2,17 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "@/config/tanstack";
 
 // Get All Blogs
-export const useBlogsData = (category = "", status = "published") => {
+export const useBlogsData = (category = "", status = "") => {
   return useQuery({
     queryKey: ["blogs", category, status],
     queryFn: async () => {
       const params = new URLSearchParams();
-      
+
       if (category) {
-        params.append('category', category);
+        params.append("category", category);
       }
       if (status) {
-        params.append('status', status);
+        params.append("status", status);
       }
 
       const response = await fetch(`/api/blog?${params}`);
@@ -46,22 +46,19 @@ export const useCreateBlog = () => {
   return useMutation({
     mutationFn: async (blogData) => {
       const formData = new FormData();
-      
+
       // Append all blog fields
-      Object.keys(blogData).forEach(key => {
-        if (key === 'coverImage' && blogData[key]) {
+      Object.keys(blogData).forEach((key) => {
+        if (key === "coverImage" && blogData[key]) {
           // Handle cover image file
-          formData.append('coverImage', blogData[key]);
-        } else if (key === 'tags' && Array.isArray(blogData[key])) {
+          formData.append("coverImage", blogData[key]);
+        } else if (key === "tags" && Array.isArray(blogData[key])) {
           // Convert tags array to JSON string
-          formData.append('tags', JSON.stringify(blogData[key]));
+          formData.append("tags", JSON.stringify(blogData[key]));
         } else if (blogData[key] !== undefined && blogData[key] !== null) {
           formData.append(key, blogData[key]);
         }
       });
-
-      // Add admin flag
-      formData.append('isAdmin', 'true');
 
       const response = await fetch("/api/blog", {
         method: "POST",
@@ -78,11 +75,11 @@ export const useCreateBlog = () => {
     onSuccess: (data) => {
       // Invalidate and refetch blogs list
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
-      
+
       // Optionally add the new blog to existing cache
       const queryCache = queryClient.getQueryCache();
       const blogQueries = queryCache.findAll({
-        queryKey: ["blogs"]
+        queryKey: ["blogs"],
       });
 
       blogQueries.forEach((query) => {
@@ -105,22 +102,22 @@ export const useUpdateBlog = () => {
   return useMutation({
     mutationFn: async ({ id, blogData }) => {
       const formData = new FormData();
-      
+
       // Append all blog fields
-      Object.keys(blogData).forEach(key => {
-        if (key === 'coverImage' && blogData[key]) {
+      Object.keys(blogData).forEach((key) => {
+        if (key === "coverImage" && blogData[key]) {
           // Handle cover image file
-          formData.append('coverImage', blogData[key]);
-        } else if (key === 'tags' && Array.isArray(blogData[key])) {
+          formData.append("coverImage", blogData[key]);
+        } else if (key === "tags" && Array.isArray(blogData[key])) {
           // Convert tags array to JSON string
-          formData.append('tags', JSON.stringify(blogData[key]));
+          formData.append("tags", JSON.stringify(blogData[key]));
         } else if (blogData[key] !== undefined && blogData[key] !== null) {
           formData.append(key, blogData[key]);
         }
       });
 
       // Add admin flag
-      formData.append('isAdmin', 'true');
+      formData.append("isAdmin", "true");
 
       const response = await fetch(`/api/blog/${id}`, {
         method: "PUT",
@@ -136,14 +133,14 @@ export const useUpdateBlog = () => {
     },
     onSuccess: (data, variables) => {
       const { id } = variables;
-      
+
       // Invalidate single blog cache to refetch updated data
       queryClient.invalidateQueries({ queryKey: ["blog", id] });
-      
+
       // Update blogs list cache
       const queryCache = queryClient.getQueryCache();
       const blogQueries = queryCache.findAll({
-        queryKey: ["blogs"]
+        queryKey: ["blogs"],
       });
 
       blogQueries.forEach((query) => {
@@ -162,22 +159,22 @@ export const useDeleteBlog = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ isAdmin: true }),
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to delete blog");
       }
-      
-      return { id, ...await response.json() };
+
+      return { id, ...(await response.json()) };
     },
     onSuccess: (data) => {
       // Remove from single blog cache
       queryClient.removeQueries({ queryKey: ["blog", data.id] });
-      
+
       // Update blogs list cache
       const queryCache = queryClient.getQueryCache();
       const blogQueries = queryCache.findAll({
-        queryKey: ["blogs"]
+        queryKey: ["blogs"],
       });
 
       blogQueries.forEach((query) => {
@@ -185,7 +182,7 @@ export const useDeleteBlog = () => {
           if (!oldData) return oldData;
 
           const updatedBlogs = oldData.blogs.filter(
-            blog => blog.id !== data.id
+            (blog) => blog.id !== data.id
           );
 
           return {
@@ -218,7 +215,7 @@ export const useAddBlogComment = () => {
     },
     onSuccess: (data, variables) => {
       const { blogId } = variables;
-      
+
       // Invalidate single blog to refetch with new comment
       queryClient.invalidateQueries({ queryKey: ["blog", blogId] });
     },
@@ -230,7 +227,9 @@ export const useBlogsByCategory = (category) => {
   return useQuery({
     queryKey: ["blogs", "category", category],
     queryFn: async () => {
-      const response = await fetch(`/api/blog?category=${category}&status=published`);
+      const response = await fetch(
+        `/api/blog?category=${category}&status=published`
+      );
       if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     },
@@ -261,7 +260,9 @@ export const useSearchBlogs = (searchTerm) => {
   return useQuery({
     queryKey: ["blogs", "search", searchTerm],
     queryFn: async () => {
-      const response = await fetch(`/api/blog?search=${encodeURIComponent(searchTerm)}&status=published`);
+      const response = await fetch(
+        `/api/blog?search=${encodeURIComponent(searchTerm)}&status=published`
+      );
       if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     },
@@ -277,31 +278,31 @@ export const useBulkDeleteBlogs = () => {
   return useMutation({
     mutationFn: async ({ ids }) => {
       const deletePromises = ids.map((id) =>
-        fetch(`/api/blog/${id}`, { 
+        fetch(`/api/blog/${id}`, {
           method: "DELETE",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ isAdmin: true }),
-        }).then(res => {
+        }).then((res) => {
           if (!res.ok) throw new Error(`Failed to delete blog ${id}`);
           return res.json();
         })
       );
-      
+
       const results = await Promise.all(deletePromises);
       return { ids, results };
     },
     onSuccess: (data) => {
       const { ids } = data;
-      
+
       // Remove from individual blog caches
-      ids.forEach(id => {
+      ids.forEach((id) => {
         queryClient.removeQueries({ queryKey: ["blog", id] });
       });
-      
+
       // Update blogs list cache
       const queryCache = queryClient.getQueryCache();
       const blogQueries = queryCache.findAll({
-        queryKey: ["blogs"]
+        queryKey: ["blogs"],
       });
 
       blogQueries.forEach((query) => {
@@ -309,7 +310,7 @@ export const useBulkDeleteBlogs = () => {
           if (!oldData) return oldData;
 
           const updatedBlogs = oldData.blogs.filter(
-            blog => !ids.includes(blog.id)
+            (blog) => !ids.includes(blog.id)
           );
 
           return {
@@ -328,8 +329,8 @@ export const useUpdateBlogStatus = () => {
   return useMutation({
     mutationFn: async ({ id, status }) => {
       const formData = new FormData();
-      formData.append('status', status);
-      formData.append('isAdmin', 'true');
+      formData.append("status", status);
+      formData.append("isAdmin", "true");
 
       const response = await fetch(`/api/blog/${id}`, {
         method: "PUT",
@@ -345,10 +346,10 @@ export const useUpdateBlogStatus = () => {
     },
     onSuccess: (data, variables) => {
       const { id } = variables;
-      
+
       // Invalidate single blog cache
       queryClient.invalidateQueries({ queryKey: ["blog", id] });
-      
+
       // Invalidate all blogs queries to reflect status change
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
     },

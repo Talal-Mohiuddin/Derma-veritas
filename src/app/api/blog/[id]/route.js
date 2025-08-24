@@ -7,7 +7,7 @@ import path from "path";
 // GET - Fetch blog by ID
 export async function GET(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const blogRef = doc(db, "blogs", id);
     const blogSnap = await getDoc(blogRef);
 
@@ -33,7 +33,7 @@ export async function GET(request, { params }) {
 // PUT - Update blog (admin only)
 export async function PUT(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const formData = await request.formData();
     const isAdmin = formData.get("isAdmin") === "true";
 
@@ -111,7 +111,7 @@ export async function PUT(request, { params }) {
 // DELETE - Delete blog (admin only)
 export async function DELETE(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { isAdmin } = await request.json();
 
     if (!isAdmin) {

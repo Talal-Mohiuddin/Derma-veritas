@@ -7,7 +7,7 @@ import path from 'path';
 // GET - Get Single Product
 export async function GET(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     
     const docRef = doc(db, 'products', id);
     const docSnap = await getDoc(docRef);
@@ -40,7 +40,7 @@ export async function GET(request, { params }) {
 // PUT - Update Product
 export async function PUT(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     
     // Check if product exists
     const docRef = doc(db, 'products', id);
@@ -175,7 +175,7 @@ export async function PUT(request, { params }) {
 // DELETE - Delete Product
 export async function DELETE(request, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     
     const docRef = doc(db, 'products', id);
     const docSnap = await getDoc(docRef);

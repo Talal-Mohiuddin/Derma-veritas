@@ -64,15 +64,24 @@ export async function GET(request) {
     
     q = query(q, orderBy('createdAt', 'desc'), limit(pageSize));
 
-    const querySnapshot = await getDocs(q);
     const products = [];
     
-    querySnapshot.forEach((doc) => {
-      products.push({
-        id: doc.id,
-        ...doc.data()
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        products.push({
+          id: doc.id,
+          ...doc.data()
+        });
       });
-    });
+    } catch (firestoreError) {
+      // Handle case when collection doesn't exist or other Firestore errors
+      console.log(
+        "Firestore query error (possibly empty collection):",
+        firestoreError.message
+      );
+      // Return empty array instead of throwing error
+    }
 
     return NextResponse.json({
       success: true,

@@ -1,5 +1,5 @@
 import { db } from "../../../config/db.js";
-import { doc, getDoc, setDoc, updateDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth } from "firebase-admin";
 import Stripe from "stripe";
 
