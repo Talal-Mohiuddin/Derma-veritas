@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "@/config/tanstack";
 import { AuthProvider } from "@/store/FirebaseAuthProvider";
-import { useStore } from "@/store/zustand";
+import { queryClient } from "@/config/tanstack";
 
 const ChildLayout = ({ children }) => {
   return (

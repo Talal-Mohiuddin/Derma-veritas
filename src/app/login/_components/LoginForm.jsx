@@ -4,24 +4,60 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { auth, googleProvider } from "@/config/db";
+import { auth, googleProvider, db } from "@/config/db";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 
 export default function LoginForm({ csrfToken }) {
   const [isSignup, setIsSignup] = useState(false);
-  const [inputValue, setInputValue] = useState({ 
-    email: "", 
-    password: "", 
-    confirmPassword: "" 
+  const [inputValue, setInputValue] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
   });
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
+
+  const createUserDocument = async (user, displayName = null) => {
+    try {
+      // Check if user document already exists
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+
+      if (userDoc.exists()) {
+        console.log("User document already exists");
+        return;
+      }
+
+      // Create new user document
+      const userData = {
+        name: displayName || user.displayName || inputValue.name || user.email.split("@")[0],
+        email: user.email.toLowerCase().trim(),
+        role: "user",
+        Buyinghistory: [],
+        plan: null,
+        isBanned: false,
+        createdAt: new Date(),
+      };
+
+      await setDoc(userDocRef, userData);
+      console.log("User document created successfully");
+    } catch (error) {
+      console.error("Error creating user document:", error);
+      // Don't throw here to avoid breaking the auth flow
+    }
+  };
 
   async function handleEmailLogin(e) {
     e.preventDefault();
@@ -39,11 +75,14 @@ export default function LoginForm({ csrfToken }) {
           throw new Error("Password must be at least 6 characters long");
         }
 
-        await createUserWithEmailAndPassword(
+        const userCredential = await createUserWithEmailAndPassword(
           auth,
           inputValue.email,
           inputValue.password
         );
+
+        // Create user document in Firestore
+        await createUserDocument(userCredential.user, inputValue.name);
 
         toast({
           title: "Success",
@@ -62,12 +101,16 @@ export default function LoginForm({ csrfToken }) {
         });
       }
 
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error("Authentication error:", error);
       toast({
         title: "Error",
-        description: error.message || `Failed to ${isSignup ? 'create account' : 'log in'}. Please try again.`,
+        description:
+          error.message ||
+          `Failed to ${
+            isSignup ? "create account" : "log in"
+          }. Please try again.`,
         variant: "destructive",
       });
     } finally {
@@ -81,17 +124,21 @@ export default function LoginForm({ csrfToken }) {
     try {
       const result = await signInWithPopup(auth, googleProvider);
 
+      // Always try to create user document (API will handle existing users)
+      await createUserDocument(result.user);
+
       toast({
         title: "Success",
-        description: `${isSignup ? 'Account created' : 'Logged in'} with Google successfully!`,
+        description: "Logged in with Google successfully!",
       });
 
-      router.push("/dashboard");
+      router.push("/");
     } catch (error) {
       console.error("Google authentication error:", error);
       toast({
         title: "Error",
-        description: error.message || `Failed to ${isSignup ? 'create account' : 'log in'} with Google. Please try again.`,
+        description:
+          error.message || "Failed to log in with Google. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -101,7 +148,8 @@ export default function LoginForm({ csrfToken }) {
 
   function handleInputChange(e) {
     const { id, value } = e.target;
-    const trimmedValue = id === "password" || id === "confirmPassword" ? value.trim() : value;
+    const trimmedValue =
+      id === "password" || id === "confirmPassword" ? value.trim() : value;
     setInputValue((prev) => ({ ...prev, [id]: trimmedValue }));
   }
 
@@ -115,7 +163,7 @@ export default function LoginForm({ csrfToken }) {
 
   const toggleMode = () => {
     setIsSignup(!isSignup);
-    setInputValue({ email: "", password: "", confirmPassword: "" });
+    setInputValue({ email: "", password: "", confirmPassword: "", name: "" });
   };
 
   return (
@@ -126,9 +174,9 @@ export default function LoginForm({ csrfToken }) {
             type="button"
             onClick={() => setIsSignup(false)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-              !isSignup 
-                ? 'bg-white text-blue-600 shadow-sm' 
-                : 'text-gray-500 hover:text-gray-700'
+              !isSignup
+                ? "bg-white text-blue-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700"
             }`}
           >
             Sign In
@@ -137,9 +185,9 @@ export default function LoginForm({ csrfToken }) {
             type="button"
             onClick={() => setIsSignup(true)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
-              isSignup 
-                ? 'bg-white text-blue-600 shadow-sm' 
-                : 'text-gray-500 hover:text-gray-700'
+              isSignup
+                ? "bg-white text-blue-600 shadow-sm"
+                : "text-gray-500 hover:text-gray-700"
             }`}
           >
             Sign Up
@@ -150,6 +198,25 @@ export default function LoginForm({ csrfToken }) {
       <form className="space-y-6" onSubmit={handleEmailLogin}>
         <input type="hidden" name="csrfToken" value={csrfToken} />
         <div className="rounded-md space-y-4">
+          {isSignup && (
+            <div>
+              <Label htmlFor="name" className="sr-only">
+                Full Name
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                placeholder="Full name"
+                value={inputValue.name}
+                onChange={handleInputChange}
+                disabled={loading}
+              />
+            </div>
+          )}
           <div>
             <Label htmlFor="email" className="sr-only">
               Email address
@@ -178,7 +245,9 @@ export default function LoginForm({ csrfToken }) {
               autoComplete={isSignup ? "new-password" : "current-password"}
               required
               className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm pr-10"
-              placeholder={isSignup ? "Password (min. 6 characters)" : "Password"}
+              placeholder={
+                isSignup ? "Password (min. 6 characters)" : "Password"
+              }
               value={inputValue.password}
               onChange={handleInputChange}
               disabled={loading}
@@ -236,7 +305,13 @@ export default function LoginForm({ csrfToken }) {
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#0042af] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             disabled={loading || googleLoading}
           >
-            {loading ? <LoaderCircle className="animate-spin" /> : (isSignup ? "Create Account" : "Sign in")}
+            {loading ? (
+              <LoaderCircle className="animate-spin" />
+            ) : isSignup ? (
+              "Create Account"
+            ) : (
+              "Sign in"
+            )}
           </Button>
         </div>
 
@@ -245,7 +320,9 @@ export default function LoginForm({ csrfToken }) {
             <div className="w-full border-t border-gray-300" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Or continue with</span>
+            <span className="px-2 bg-white text-gray-500">
+              Or continue with
+            </span>
           </div>
         </div>
 
