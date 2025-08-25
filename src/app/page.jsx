@@ -5,15 +5,22 @@ import { ChevronDown, Menu, MessageCircle, X, ShieldCheck, BadgeCheck } from "lu
 import { useState } from "react"
 import ClinicsModal from "@/app/modal/ClinicsModal"
 import { motion, AnimatePresence } from "framer-motion"
-
+import TreatmentSlider from "@/components/TreatmentSlider"
+import ReviewsSection from "@/components/reviews-section"
+import ConsultationSection from "@/components/consultation-section"
+import BeforeAfterSection from "@/components/before-after-section"
+import TechnologiesBrandsSection from "@/components/technologies-brands-section"
+import RecentBlogsSection from "@/components/recent-blogs-section"
+import Simplicity from "@/components/simplicity"
+import { CalendarDays } from "lucide-react"
+import ClubMembership from "@/components/ClubMembership"
+import MediaCoverage from "@/components/MediaCoverage"
+import Footer from "@/components/Footer"
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [expandedSections, setExpandedSections] = useState({})
   const [isClinicsOpen, setIsClinicsOpen] = useState(false)
-
-
-
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
@@ -79,99 +86,97 @@ export default function Home() {
       </nav>
 
       {/* Mobile Menu Drawer */}
-<AnimatePresence>
-  {isMobileMenuOpen && (
-    <motion.div
-      initial={{ y: "-100%" }}
-      animate={{ y: 0 }}
-      exit={{ y: "-100%" }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed inset-0 z-50 bg-background flex flex-col"
-    >
-      {/* Drawer Header */}
-      <div className="flex justify-between items-center p-6 border-b border-border">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-bold">AL</span>
-          </div>
-          <span className="text-xl font-light text-foreground">Aesthetics</span>
-        </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="text-muted-foreground hover:text-foreground"
-        >
-          <X className="w-6 h-6" />
-        </Button>
-      </div>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 bg-background flex flex-col"
+          >
+            {/* Drawer Header */}
+            <div className="flex justify-between items-center p-6 border-b border-border">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-primary flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold">AL</span>
+                </div>
+                <span className="text-xl font-light text-foreground">Aesthetics</span>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X className="w-6 h-6" />
+              </Button>
+            </div>
 
-      {/* Drawer Nav Content */}
-      <div className="flex-1 overflow-y-auto px-6 py-6">
-        {/* Section: Treatments */}
-        <div className="border-b border-section-divider pb-4 mb-4">
-          <h3 className="text-sm font-bold uppercase text-section-fg mb-3">Treatments</h3>
-          {["Injectables", "Minor Ops", "Skincare", "Wellness"].map((item) => (
-            <button
-              key={item}
-              onClick={() => toggleSection(item)}
-              className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
-            >
-              <span>{item}</span>
-              <ChevronDown
-                className={`w-5 h-5 transition-transform ${expandedSections[item] ? "rotate-180" : ""}`}
-              />
-            </button>
-          ))}
-        </div>
+            {/* Drawer Nav Content */}
+            <div className="flex-1 overflow-y-auto px-6 py-6">
+              {/* Section: Treatments */}
+              <div className="border-b border-section-divider pb-4 mb-4">
+                <h3 className="text-sm font-bold uppercase text-section-fg mb-3">Treatments</h3>
+                {["Injectables", "Minor Ops", "Skincare", "Wellness"].map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => toggleSection(item)}
+                    className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
+                  >
+                    <span>{item}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform ${expandedSections[item] ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                ))}
+              </div>
 
-        {/* Section: Conditions */}
-        <div className="border-b border-section-divider pb-4 mb-4">
-          <h3 className="text-sm font-bold uppercase text-section-fg mb-3">Conditions</h3>
-          {["Medical Conditions", "Facial Concerns"].map((item) => (
-            <button
-              key={item}
-              onClick={() => toggleSection(item)}
-              className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
-            >
-              <span className={item === "Facial Concerns" ? "font-semibold" : ""}>{item}</span>
-              <ChevronDown
-                className={`w-5 h-5 transition-transform ${expandedSections[item] ? "rotate-180" : ""}`}
-              />
-            </button>
-          ))}
-        </div>
+              {/* Section: Conditions */}
+              <div className="border-b border-section-divider pb-4 mb-4">
+                <h3 className="text-sm font-bold uppercase text-section-fg mb-3">Conditions</h3>
+                {["Medical Conditions", "Facial Concerns"].map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => toggleSection(item)}
+                    className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
+                  >
+                    <span className={item === "Facial Concerns" ? "font-semibold" : ""}>{item}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform ${expandedSections[item] ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                ))}
+              </div>
 
-        {/* Static Links */}
-        <div className="border-b border-section-divider pb-4 mb-4">
-          <button className="w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground">
-            Contact Us
-          </button>
-        </div>
-        <div className="border-b border-section-divider pb-4 mb-4">
-          <button className="w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground">
-            About Us
-          </button>
-        </div>
-        <div className="border-b border-section-divider pb-4 mb-4">
-          <button className="w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground">
-            AL Training Academy
-          </button>
-        </div>
+              {/* Static Links */}
+              <div className="border-b border-section-divider pb-4 mb-4">
+                <button className="w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground">
+                  Contact Us
+                </button>
+              </div>
+              <div className="border-b border-section-divider pb-4 mb-4">
+                <button className="w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground">
+                  About Us
+                </button>
+              </div>
+              <div className="border-b border-section-divider pb-4 mb-4">
+                <button className="w-full text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground">
+                  AL Training Academy
+                </button>
+              </div>
 
-        {/* Footer Link */}
-        <div className="mt-8 border-t border-section-divider pt-6 text-center">
-          <button className="flex items-center justify-center gap-2 mx-auto text-muted-foreground hover:text-foreground text-sm uppercase tracking-wide">
-            <span>CALL US</span>
-            <ChevronDown className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
-
-
+              {/* Footer Link */}
+              <div className="mt-8 border-t border-section-divider pt-6 text-center">
+                <button className="flex items-center justify-center gap-2 mx-auto text-muted-foreground hover:text-foreground text-sm uppercase tracking-wide">
+                  <span>CALL US</span>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <main className="relative h-screen overflow-hidden">
@@ -194,7 +199,9 @@ export default function Home() {
             </div>
             <div className="flex gap-1">
               {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-yellow-400 text-lg">★</span>
+                <span key={i} className="text-yellow-400 text-lg">
+                  ★
+                </span>
               ))}
             </div>
             <span className="text-white/80 text-sm">Read Reviews</span>
@@ -228,7 +235,10 @@ export default function Home() {
             <p className="text-gray-600 leading-relaxed">
               With an impressive track record of over 10 years in the industry, our CQC registered clinic...
             </p>
-            <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 mt-8 bg-transparent">
+            <Button
+              variant="outline"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 mt-8 bg-transparent"
+            >
               READ ABOUT US
             </Button>
           </div>
@@ -272,6 +282,74 @@ export default function Home() {
           </article>
         </div>
       </section>
+
+      {/* Treatments Section */}
+
+      <section id="treatments" className="bg-black py-20">
+        <div>
+          {/* Header */}
+          <div className="text-center mb-16">
+            <p className="text-gray-400 text-sm uppercase tracking-wider mb-4">
+              — Choose a Treatment
+            </p>
+            <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+              Relax, Rejuvenate,
+              <br />
+              Refresh, Renew.
+            </h2>
+          </div>
+
+          {/* Treatment Slider */}
+          <div className="relative mb-16">
+            <TreatmentSlider />
+          </div>
+
+          {/* Common Conditions */}
+          <div className="text-center px-4">
+            <h3 className="text-white text-lg mb-8">
+              Common Conditions we treat...
+            </h3>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                "CROW'S FEET",
+                "EYE BAGS / DARK CIRCLES",
+                "SAGGING JOWLS",
+                "PEBBLED CHIN",
+                "FROWN LINES",
+                "FOREHEAD LINES",
+                "TEMPLE HOLLOWS",
+                "BUMP ON NOSE",
+                "GUMMY SMILE",
+              ].map((condition) => (
+                <span
+                  key={condition}
+                  className="bg-gray-700 text-white px-4 py-2 text-xs uppercase tracking-wide hover:bg-gray-600 transition-colors cursor-pointer"
+                >
+                  {condition}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ReviewsSection />
+
+      <ConsultationSection />
+
+      <BeforeAfterSection />
+
+      <TechnologiesBrandsSection />
+      <RecentBlogsSection />
+
+      <Simplicity />
+
+
+      <ClubMembership />
+
+      <MediaCoverage />
+
+      <Footer />
 
       <ClinicsModal isOpen={isClinicsOpen} onClose={() => setIsClinicsOpen(false)} />
     </div>
