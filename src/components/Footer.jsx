@@ -12,7 +12,7 @@ const clinics = {
     address: "10 Harley St, Marylebone",
     postcode: "London, W1G 7JA",
     phone: "0203 6085 241",
-    image: "/sample_image.jpg",
+    image: "/images/sample_image.jpg",
   },
   Birmingham: {
     name: "AL Aesthetics – Birmingham",
