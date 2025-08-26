@@ -26,7 +26,6 @@ import Footer from "@/components/Footer";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 
 export default function Home() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const toggleSection = (section) => {

@@ -26,7 +26,6 @@ import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
 export default function DermalFillersSection() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
 

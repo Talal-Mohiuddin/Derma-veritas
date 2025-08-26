@@ -24,7 +24,6 @@ import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
 export default function ChinFillerSection() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
