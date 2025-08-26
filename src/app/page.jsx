@@ -2,16 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  ChevronDown,
-  Menu,
   MessageCircle,
-  X,
   ShieldCheck,
   BadgeCheck,
 } from "lucide-react";
 import { useState } from "react";
-import ClinicsModal from "@/app/modal/ClinicsModal";
-import { motion, AnimatePresence } from "framer-motion";
 import TreatmentSlider from "@/components/TreatmentSlider";
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
@@ -19,16 +14,11 @@ import BeforeAfterSection from "@/components/before-after-section";
 import TechnologiesBrandsSection from "@/components/technologies-brands-section";
 import RecentBlogsSection from "@/components/recent-blogs-section";
 import Simplicity from "@/components/simplicity";
-import { CalendarDays } from "lucide-react";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
-import Footer from "@/components/Footer";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 
 export default function Home() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [expandedSections, setExpandedSections] = useState({});
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
@@ -155,7 +145,6 @@ export default function Home() {
       </section>
 
       {/* Treatments Section */}
-
       <section id="treatments" className="bg-black py-20">
         <div>
           {/* Header */}
@@ -205,24 +194,13 @@ export default function Home() {
       </section>
 
       <ReviewsSection />
-
       <ConsultationSection />
-
       <BeforeAfterSection />
-
       <TechnologiesBrandsSection />
       <RecentBlogsSection />
-
       <Simplicity />
-
       <ClubMembership />
-
       <MediaCoverage />
-
-      <ClinicsModal
-        isOpen={isClinicsOpen}
-        onClose={() => setIsClinicsOpen(false)}
-      />
     </div>
   );
 }

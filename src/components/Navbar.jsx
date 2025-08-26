@@ -3,9 +3,12 @@
 import { Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import MobileMenuDrawer from "./MobileMenuDrawer";
+import ClinicsModal from "./ClinicsModal"; // import your modal
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+
   return (
     <>
       <header className="bg-gray-100 px-4 py-2">
@@ -67,6 +70,12 @@ export default function Navbar() {
       <MobileMenuDrawer
         isOpen={isMobileMenuOpen}
         setIsOpen={setIsMobileMenuOpen}
+      />
+
+      {/* Clinics Modal - only 1 time render */}
+      <ClinicsModal
+        isOpen={isClinicsOpen}
+        onClose={() => setIsClinicsOpen(false)}
       />
     </>
   );
