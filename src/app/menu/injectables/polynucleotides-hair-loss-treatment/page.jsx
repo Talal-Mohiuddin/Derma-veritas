@@ -1,25 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
-import ClinicsModal from "@/components/ClinicsModal";
-import PriceCard from "@/components/pricecard/price-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Play } from "lucide-react";
+
 import BeforeAfterSection from "@/components/before-after-section";
-import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 import {
   Eye,
   CheckCircle,
@@ -29,9 +14,13 @@ import {
   TrendingDown,
   AlertTriangle,
   KeyRound as Pound,
-  Scalpel,
+  Scissors,
   Droplets,
   HeartPulse,
+  ChevronDown,
+  Menu,
+  X,
+  Star,
 } from "lucide-react";
 
 import ReviewsSection from "@/components/reviews-section";
@@ -404,7 +393,7 @@ export default function PolynucleotidesHairLossSection() {
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
-                  <Scalpel className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <Scissors className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                   Treatments performed only by experienced doctors & pharmacy
                   leads
                 </li>
