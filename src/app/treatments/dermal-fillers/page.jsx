@@ -27,7 +27,6 @@ import ConsultationSection from "@/components/consultation-section";
 
 export default function DermalFillersSection() {
   const [expandedSections, setExpandedSections] = useState({});
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
 
   const [openIndex, setOpenIndex] = useState(null);
 

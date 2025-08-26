@@ -1,11 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  MessageCircle,
-  ShieldCheck,
-  BadgeCheck,
-} from "lucide-react";
+import { MessageCircle, ShieldCheck, BadgeCheck } from "lucide-react";
 import { useState } from "react";
 import TreatmentSlider from "@/components/TreatmentSlider";
 import ReviewsSection from "@/components/reviews-section";
@@ -19,7 +15,6 @@ import MediaCoverage from "@/components/MediaCoverage";
 
 export default function Home() {
   const [expandedSections, setExpandedSections] = useState({});
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,

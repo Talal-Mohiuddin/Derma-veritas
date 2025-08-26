@@ -36,7 +36,6 @@ import ConsultationSection from "@/components/consultation-section";
 
 export default function LipFillersSection() {
   const [expandedSections, setExpandedSections] = useState({});
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
