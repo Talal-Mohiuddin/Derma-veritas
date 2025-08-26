@@ -5,7 +5,7 @@ import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react"; // Added useRef import
-import ClinicsModal from "@/app/modal/ClinicsModal";
+import ClinicsModal from "@/components/ClinicsModal";
 
 import BeforeAfterSection from "@/components/before-after-section";
 import Footer from "@/components/Footer";

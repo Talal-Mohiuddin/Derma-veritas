@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Calendar, ChevronDown, Menu, X } from "lucide-react"
 import { AnimatePresence, motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import ClinicsModal from "@/app/modal/ClinicsModal"
+import ClinicsModal from "@/components/ClinicsModal"
 
 const blogPosts = [
   {
