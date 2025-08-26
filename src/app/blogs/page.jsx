@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Calendar, ChevronDown, Menu, X } from "lucide-react"
-import { AnimatePresence, motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import ClinicsModal from "@/components/ClinicsModal"
+import { useState } from "react";
+import Link from "next/link";
+import { Calendar, ChevronDown, Menu, X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import ClinicsModal from "@/components/ClinicsModal";
 
 const blogPosts = [
   {
@@ -15,7 +15,8 @@ const blogPosts = [
     date: "August 14, 2025",
     image: "/images/woman-at-vanity-mirror-applying-skincare.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Get your skin glowing and camera-ready for your special day with these expert tips.",
+    excerpt:
+      "Get your skin glowing and camera-ready for your special day with these expert tips.",
   },
   {
     id: 2,
@@ -24,7 +25,8 @@ const blogPosts = [
     date: "July 22, 2025",
     image: "/images/woman-wearing-sun-hat-smiling-outdoors.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Learn why proper sun protection is crucial for optimal healing and results.",
+    excerpt:
+      "Learn why proper sun protection is crucial for optimal healing and results.",
   },
   {
     id: 3,
@@ -33,7 +35,8 @@ const blogPosts = [
     date: "July 10, 2025",
     image: "/images/elegant-bride-in-white-dress-natural-lighting.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Discover the perfect aesthetic treatments to help you look radiant on your wedding day.",
+    excerpt:
+      "Discover the perfect aesthetic treatments to help you look radiant on your wedding day.",
   },
   {
     id: 4,
@@ -42,7 +45,8 @@ const blogPosts = [
     date: "June 28, 2025",
     image: "/images/luxury-skincare-products-on-marble-surface.png",
     tags: ["Face", "Skincare"],
-    excerpt: "Create a comprehensive anti-aging routine that delivers visible results.",
+    excerpt:
+      "Create a comprehensive anti-aging routine that delivers visible results.",
   },
   {
     id: 5,
@@ -51,7 +55,8 @@ const blogPosts = [
     date: "June 15, 2025",
     image: "/images/professional-aesthetic-consultation-modern-clinic.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Get the truth about Botox treatments and what to expect from the procedure.",
+    excerpt:
+      "Get the truth about Botox treatments and what to expect from the procedure.",
   },
   {
     id: 6,
@@ -60,7 +65,8 @@ const blogPosts = [
     date: "June 5, 2025",
     image: "/images/woman-applying-sunscreen-at-beach-summer-vibes.png",
     tags: ["Face", "Skincare"],
-    excerpt: "Protect and nourish your skin during the hot summer months with these expert tips.",
+    excerpt:
+      "Protect and nourish your skin during the hot summer months with these expert tips.",
   },
   {
     id: 7,
@@ -69,7 +75,8 @@ const blogPosts = [
     date: "May 20, 2025",
     image: "/images/aesthetic-treatment-room-professional-equipment.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Everything you need to know about chemical peels and their transformative benefits.",
+    excerpt:
+      "Everything you need to know about chemical peels and their transformative benefits.",
   },
   {
     id: 8,
@@ -78,7 +85,8 @@ const blogPosts = [
     date: "May 8, 2025",
     image: "/images/woman-drinking-water-glowing-skin-wellness.png",
     tags: ["Face", "Skincare"],
-    excerpt: "Discover how proper hydration impacts your skin health and appearance.",
+    excerpt:
+      "Discover how proper hydration impacts your skin health and appearance.",
   },
   {
     id: 9,
@@ -87,7 +95,8 @@ const blogPosts = [
     date: "April 25, 2025",
     image: "/images/before-after-aesthetic-treatment-natural-results.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Learn about different types of dermal fillers and their applications.",
+    excerpt:
+      "Learn about different types of dermal fillers and their applications.",
   },
   {
     id: 10,
@@ -96,21 +105,22 @@ const blogPosts = [
     date: "April 12, 2025",
     image: "/images/serene-spa-environment-recovery-skincare.png",
     tags: ["Face", "Aesthetics"],
-    excerpt: "Follow these essential aftercare tips to ensure the best possible treatment outcomes.",
+    excerpt:
+      "Follow these essential aftercare tips to ensure the best possible treatment outcomes.",
   },
-]
+];
 
 export default function BlogsPage() {
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [expandedSections, setExpandedSections] = useState({})
+  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({});
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }))
-  }
+    }));
+  };
 
   return (
     <>
@@ -159,7 +169,9 @@ export default function BlogsPage() {
               onClick={() => setIsMobileMenuOpen(true)}
               className="flex items-center justify-between px-4 py-2 border border-gray-300 bg-white rounded-none"
             >
-              <span className="text-xs font-medium text-gray-800 mr-3">MENU</span>
+              <span className="text-xs font-medium text-gray-800 mr-3">
+                MENU
+              </span>
               <Menu className="w-6 h-6 text-gray-700" />
             </button>
           </div>
@@ -182,7 +194,9 @@ export default function BlogsPage() {
                 <div className="w-10 h-10 bg-primary flex items-center justify-center">
                   <span className="text-primary-foreground font-bold">AL</span>
                 </div>
-                <span className="text-xl font-light text-foreground">Aesthetics</span>
+                <span className="text-xl font-light text-foreground">
+                  Aesthetics
+                </span>
               </div>
               <Button
                 variant="ghost"
@@ -199,20 +213,22 @@ export default function BlogsPage() {
               {/* Section: Treatments */}
               <div className="border-b pb-4 mb-4">
                 <h3 className="text-sm font-bold uppercase mb-3">Treatments</h3>
-                {["Injectables", "Minor Ops", "Skincare", "Wellness"].map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => toggleSection(item)}
-                    className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
-                  >
-                    <span>{item}</span>
-                    <ChevronDown
-                      className={`w-5 h-5 transition-transform ${
-                        expandedSections[item] ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                ))}
+                {["Injectables", "Minor Ops", "Skincare", "Wellness"].map(
+                  (item) => (
+                    <button
+                      key={item}
+                      onClick={() => toggleSection(item)}
+                      className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
+                    >
+                      <span>{item}</span>
+                      <ChevronDown
+                        className={`w-5 h-5 transition-transform ${
+                          expandedSections[item] ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  )
+                )}
               </div>
 
               {/* Section: Conditions */}
@@ -224,7 +240,11 @@ export default function BlogsPage() {
                     onClick={() => toggleSection(item)}
                     className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
                   >
-                    <span className={item === "Facial Concerns" ? "font-semibold" : ""}>
+                    <span
+                      className={
+                        item === "Facial Concerns" ? "font-semibold" : ""
+                      }
+                    >
                       {item}
                     </span>
                     <ChevronDown
@@ -305,7 +325,9 @@ export default function BlogsPage() {
                     {post.title}
                   </h3>
 
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                    {post.excerpt}
+                  </p>
 
                   <div className="flex justify-between items-center">
                     <Link
@@ -334,10 +356,6 @@ export default function BlogsPage() {
       </div>
 
       {/* ✅ Clinics Modal */}
-      <ClinicsModal
-        isOpen={isClinicsOpen}
-        onClose={() => setIsClinicsOpen(false)}
-      />
     </>
-  )
+  );
 }
