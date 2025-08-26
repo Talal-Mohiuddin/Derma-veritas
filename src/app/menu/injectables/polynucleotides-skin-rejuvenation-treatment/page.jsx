@@ -1,31 +1,48 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Star } from "lucide-react"
-import { AnimatePresence, motion } from "framer-motion"
-import { ChevronDown, Menu, X } from "lucide-react"
-import { useState, useRef } from "react"
-import ClinicsModal from "@/app/modal/ClinicsModal"
-import PriceCard from "@/components/pricecard/price-card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Play } from "lucide-react"
-import BeforeAfterSection from "@/components/before-after-section"
-import Footer from "@/components/Footer"
-import ClubMembership from "@/components/ClubMembership"
-import MediaCoverage from "@/components/MediaCoverage"
-import MobileMenuDrawer from "@/components/MobileMenuDrawer"
-import { Eye, CheckCircle, RotateCcw, Clock, Frown, TrendingDown, AlertTriangle, KeyRound as Pound, Droplets, Heart, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Star } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useState, useRef } from "react";
+import ClinicsModal from "@/app/modal/ClinicsModal";
+import PriceCard from "@/components/pricecard/price-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Play } from "lucide-react";
+import BeforeAfterSection from "@/components/before-after-section";
+import Footer from "@/components/Footer";
+import ClubMembership from "@/components/ClubMembership";
+import MediaCoverage from "@/components/MediaCoverage";
+import MobileMenuDrawer from "@/components/MobileMenuDrawer";
+import {
+  Eye,
+  CheckCircle,
+  RotateCcw,
+  Clock,
+  Frown,
+  TrendingDown,
+  AlertTriangle,
+  KeyRound as Pound,
+  Droplets,
+  Heart,
+  Sparkles,
+} from "lucide-react";
 
-import ReviewsSection from "@/components/reviews-section"
-import ConsultationSection from "@/components/consultation-section"
+import ReviewsSection from "@/components/reviews-section";
+import ConsultationSection from "@/components/consultation-section";
 
 export default function PolynucleotidesSection() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [expandedSections, setExpandedSections] = useState({})
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({});
+  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
-  
+
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
 
@@ -33,73 +50,79 @@ export default function PolynucleotidesSection() {
     {
       heading: "Results Seen",
       value: "2-4 Weeks",
-      description: "Optimal Results After Multiple Sessions"
+      description: "Optimal Results After Multiple Sessions",
     },
     {
       heading: "Results Last",
-      value: "3–6 Months"
+      value: "3–6 Months",
     },
     {
       heading: "No. of Sessions",
-      value: "2-3 Treatments"
+      value: "2-3 Treatments",
     },
     {
       heading: "Procedure Time",
-      value: "30-45 Minutes"
+      value: "30-45 Minutes",
     },
     {
       heading: "Pain",
       value: "Mild",
-      description: "Numbing Cream Available"
+      description: "Numbing Cream Available",
     },
     {
       heading: "Downtime",
-      value: "Minimal"
+      value: "Minimal",
     },
     {
       heading: "Side Effects",
-      value: "Redness, Tenderness, Bruising"
+      value: "Redness, Tenderness, Bruising",
     },
     {
       heading: "Our Pricing",
       value: "From £190",
-      description: "View all"
-    }
+      description: "View all",
+    },
   ];
 
   const faqs = [
     {
       question: "What are Polynucleotides?",
-      answer: "Polynucleotides (PN) are advanced regenerative molecules derived from natural sources that work at a cellular level to repair, hydrate, and restore the skin. This treatment stimulates collagen and elastin production without adding volume like traditional fillers."
+      answer:
+        "Polynucleotides (PN) are advanced regenerative molecules derived from natural sources that work at a cellular level to repair, hydrate, and restore the skin. This treatment stimulates collagen and elastin production without adding volume like traditional fillers.",
     },
     {
       question: "When can I see the results?",
-      answer: "Initial results are visible within 2-4 weeks, with optimal results appearing after completing the recommended treatment sessions."
+      answer:
+        "Initial results are visible within 2-4 weeks, with optimal results appearing after completing the recommended treatment sessions.",
     },
     {
       question: "How long do the results last?",
-      answer: "Results typically last 3-6 months, depending on individual factors and skin condition. Maintenance treatments are recommended for sustained benefits."
+      answer:
+        "Results typically last 3-6 months, depending on individual factors and skin condition. Maintenance treatments are recommended for sustained benefits.",
     },
     {
       question: "Is the procedure painful?",
-      answer: "Most patients experience mild discomfort. Numbing cream can be applied to minimize any pain during treatment."
+      answer:
+        "Most patients experience mild discomfort. Numbing cream can be applied to minimize any pain during treatment.",
     },
     {
       question: "What is the downtime?",
-      answer: "There is minimal downtime. Some patients may experience temporary redness or swelling for up to 24 hours."
+      answer:
+        "There is minimal downtime. Some patients may experience temporary redness or swelling for up to 24 hours.",
     },
     {
       question: "Who performs the treatment?",
-      answer: "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers."
-    }
+      answer:
+        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers.",
+    },
   ];
 
   // Function to scroll to pricing section
   const scrollToPricing = () => {
     if (pricingSectionRef.current) {
-      pricingSectionRef.current.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      pricingSectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -108,68 +131,11 @@ export default function PolynucleotidesSection() {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }))
-  }
+    }));
+  };
 
   return (
     <>
-      {/* Top Header with CALL + CLINIC */}
-      <header className="bg-gray-100 px-4 py-2">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          {/* Left - Call Us */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-          >
-            CALL US
-            <ChevronDown className="w-4 h-4" />
-          </div>
-
-          {/* Right - Find a Clinic */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-          >
-            FIND A CLINIC
-            <ChevronDown className="w-4 h-4" />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Navigation */}
-      <nav className="bg-white px-4 py-4 border-b sticky top-0 z-40 shadow-sm">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-black flex items-center justify-center">
-              <span className="text-white font-bold text-lg">DV</span>
-            </div>
-            <span className="text-2xl font-light text-black">Derma Veritas</span>
-          </div>
-
-          {/* Right - Buttons */}
-          <div className="flex items-center gap-3">
-            {/* Gradient Book Consultation */}
-            <button className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
-              BOOK A CONSULTATION
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </button>
-
-            {/* MENU Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-between px-4 py-2 border border-gray-300 bg-white rounded-none"
-            >
-              <span className="text-xs font-medium text-gray-800 mr-3">MENU</span>
-              <Menu className="w-6 h-6 text-gray-700" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Drawer */}
-      <MobileMenuDrawer isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
-
       {/* Hero Section */}
       <section className="bg-white py-16 px-6">
         <div className="max-w-7xl mx-auto">
@@ -186,12 +152,17 @@ export default function PolynucleotidesSection() {
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Polynucleotides<br />Skin Rejuvenation<br />Treatment
+                Polynucleotides
+                <br />
+                Skin Rejuvenation
+                <br />
+                Treatment
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced cellular-level repair and hydration for naturally radiant, youthful-looking skin at Derma Veritas.
+                Advanced cellular-level repair and hydration for naturally
+                radiant, youthful-looking skin at Derma Veritas.
               </p>
 
               {/* Buttons */}
@@ -203,7 +174,7 @@ export default function PolynucleotidesSection() {
                 </button>
 
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
-                <button 
+                <button
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
@@ -258,37 +229,57 @@ export default function PolynucleotidesSection() {
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Eye className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[0].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[0].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[0].value}</h3>
-                <p className="text-gray-500 text-sm font-light">{cardData[0].description}</p>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[0].value}
+                </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[0].description}
+                </p>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <CheckCircle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[1].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[1].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[1].value}</h3>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[1].value}
+                </h3>
                 {cardData[1].description && (
-                  <p className="text-gray-500 text-sm font-light">{cardData[1].description}</p>
+                  <p className="text-gray-500 text-sm font-light">
+                    {cardData[1].description}
+                  </p>
                 )}
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <RotateCcw className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[2].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[2].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[2].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[2].value}
+                </h3>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Clock className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[3].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[3].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[3].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[3].value}
+                </h3>
               </div>
             </div>
 
@@ -297,34 +288,52 @@ export default function PolynucleotidesSection() {
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Frown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[4].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[4].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[4].value}</h3>
-                <p className="text-gray-500 text-sm font-light">{cardData[4].description}</p>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[4].value}
+                </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[4].description}
+                </p>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <TrendingDown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[5].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[5].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[5].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[5].value}
+                </h3>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <AlertTriangle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[6].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[6].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[6].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[6].value}
+                </h3>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Pound className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[7].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[7].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[7].value}</h3>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[7].value}
+                </h3>
                 <p className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700">
                   {cardData[7].description}
                 </p>
@@ -342,13 +351,19 @@ export default function PolynucleotidesSection() {
               What is Polynucleotide Skin Rejuvenation?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Polynucleotides (PN) are advanced regenerative molecules derived from natural sources that work at a cellular level to repair, hydrate, and restore the skin. This treatment stimulates collagen and elastin production, improves skin elasticity, and enhances overall radiance without adding volume like traditional fillers.
+              Polynucleotides (PN) are advanced regenerative molecules derived
+              from natural sources that work at a cellular level to repair,
+              hydrate, and restore the skin. This treatment stimulates collagen
+              and elastin production, improves skin elasticity, and enhances
+              overall radiance without adding volume like traditional fillers.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Benefits Include:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Benefits Include:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <Droplets className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
@@ -374,7 +389,9 @@ export default function PolynucleotidesSection() {
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Ideal For:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Ideal For:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -409,9 +426,9 @@ export default function PolynucleotidesSection() {
       <ConsultationSection />
 
       {/* Pricing Section with ref */}
-      <section 
-        ref={pricingSectionRef} 
-        className="py-12 md:py-20 px-4" 
+      <section
+        ref={pricingSectionRef}
+        className="py-12 md:py-20 px-4"
         style={{ backgroundColor: "#f6f6f6" }}
       >
         <div className="max-w-7xl mx-auto">
@@ -419,7 +436,9 @@ export default function PolynucleotidesSection() {
             {/* Left Content */}
             <div className="space-y-6">
               <div>
-                <span className="text-sm text-gray-600 font-medium">Polynucleotides Cost</span>
+                <span className="text-sm text-gray-600 font-medium">
+                  Polynucleotides Cost
+                </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
                 </h2>
@@ -427,12 +446,14 @@ export default function PolynucleotidesSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are performed exclusively by our expert physicians and clinical pharmacy leads 
-                  who are industry-leading trainers. Our pricing reflects the expertise and premium service 
-                  you receive.
+                  All treatments are performed exclusively by our expert
+                  physicians and clinical pharmacy leads who are
+                  industry-leading trainers. Our pricing reflects the expertise
+                  and premium service you receive.
                 </p>
                 <p>
-                  If you would like to discuss any of our treatments, please feel free to{" "}
+                  If you would like to discuss any of our treatments, please
+                  feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -457,15 +478,21 @@ export default function PolynucleotidesSection() {
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Single Session:</span>
-                    <span className="text-lg font-bold text-gray-900">£190</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £190
+                    </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">2 Sessions Package:</span>
-                    <span className="text-lg font-bold text-gray-900">£350</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £350
+                    </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">3 Sessions Package:</span>
-                    <span className="text-lg font-bold text-gray-900">£500</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £500
+                    </span>
                   </div>
                 </div>
               </div>
@@ -484,8 +511,12 @@ export default function PolynucleotidesSection() {
                 <div className="divide-y divide-gray-200">
                   <div className="py-3">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">Annual Maintenance (4 sessions):</span>
-                      <span className="text-lg font-bold text-gray-900">£650</span>
+                      <span className="text-gray-900 font-medium">
+                        Annual Maintenance (4 sessions):
+                      </span>
+                      <span className="text-lg font-bold text-gray-900">
+                        £650
+                      </span>
                     </div>
                     <p className="text-sm text-gray-600">
                       Recommended for sustained results throughout the year
@@ -493,8 +524,12 @@ export default function PolynucleotidesSection() {
                   </div>
                   <div className="py-3">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">Custom Treatment Plan:</span>
-                      <span className="text-lg font-bold text-gray-900">Consultation</span>
+                      <span className="text-gray-900 font-medium">
+                        Custom Treatment Plan:
+                      </span>
+                      <span className="text-lg font-bold text-gray-900">
+                        Consultation
+                      </span>
                     </div>
                     <p className="text-sm text-gray-600">
                       Tailored to your specific skin needs and goals
@@ -518,21 +553,23 @@ export default function PolynucleotidesSection() {
           {faqs.map((faq, index) => (
             <div key={index}>
               <button
-                onClick={() =>
-                  setOpenIndex(openIndex === index ? null : index)
-                }
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex justify-between items-center py-4 text-left text-lg font-medium text-gray-900 focus:outline-none"
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-                  }`}
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
+                    ? "max-h-40 opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>
@@ -552,5 +589,5 @@ export default function PolynucleotidesSection() {
       <MediaCoverage />
       <Footer />
     </>
-  )
+  );
 }

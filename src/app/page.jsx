@@ -1,95 +1,43 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { ChevronDown, Menu, MessageCircle, X, ShieldCheck, BadgeCheck } from "lucide-react"
-import { useState } from "react"
-import ClinicsModal from "@/app/modal/ClinicsModal"
-import { motion, AnimatePresence } from "framer-motion"
-import TreatmentSlider from "@/components/TreatmentSlider"
-import ReviewsSection from "@/components/reviews-section"
-import ConsultationSection from "@/components/consultation-section"
-import BeforeAfterSection from "@/components/before-after-section"
-import TechnologiesBrandsSection from "@/components/technologies-brands-section"
-import RecentBlogsSection from "@/components/recent-blogs-section"
-import Simplicity from "@/components/simplicity"
-import { CalendarDays } from "lucide-react"
-import ClubMembership from "@/components/ClubMembership"
-import MediaCoverage from "@/components/MediaCoverage"
-import Footer from "@/components/Footer"
-import MobileMenuDrawer from "@/components/MobileMenuDrawer"
+import { Button } from "@/components/ui/button";
+import {
+  ChevronDown,
+  Menu,
+  MessageCircle,
+  X,
+  ShieldCheck,
+  BadgeCheck,
+} from "lucide-react";
+import { useState } from "react";
+import ClinicsModal from "@/app/modal/ClinicsModal";
+import { motion, AnimatePresence } from "framer-motion";
+import TreatmentSlider from "@/components/TreatmentSlider";
+import ReviewsSection from "@/components/reviews-section";
+import ConsultationSection from "@/components/consultation-section";
+import BeforeAfterSection from "@/components/before-after-section";
+import TechnologiesBrandsSection from "@/components/technologies-brands-section";
+import RecentBlogsSection from "@/components/recent-blogs-section";
+import Simplicity from "@/components/simplicity";
+import { CalendarDays } from "lucide-react";
+import ClubMembership from "@/components/ClubMembership";
+import MediaCoverage from "@/components/MediaCoverage";
+import Footer from "@/components/Footer";
+import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 
 export default function Home() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [expandedSections, setExpandedSections] = useState({})
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({});
+  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Top Header with CALL + CLINIC */}
-      <header className="bg-gray-100 px-4 py-2">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          {/* Left - Call Us */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-          >
-            CALL US
-            <ChevronDown className="w-4 h-4" />
-          </div>
-
-          {/* Right - Find a Clinic */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-          >
-            FIND A CLINIC
-            <ChevronDown className="w-4 h-4" />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Navigation */}
-      <nav className="bg-white px-4 py-4 border-b sticky top-0 z-40 shadow-sm">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-black flex items-center justify-center">
-              <span className="text-white font-bold text-lg">AL</span>
-            </div>
-            <span className="text-2xl font-light text-black">Aesthetics</span>
-          </div>
-
-          {/* Right - Buttons */}
-          <div className="flex items-center gap-3">
-            {/* Gradient Book Consultation */}
-            <button className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
-              BOOK A CONSULTATION
-              {/* subtle top white shine */}
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </button>
-
-            {/* MENU Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-between px-4 py-2 border border-gray-300 bg-white rounded-none"
-            >
-              <span className="text-xs font-medium text-gray-800 mr-3">MENU</span>
-              <Menu className="w-6 h-6 text-gray-700" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Drawer */}
-      <MobileMenuDrawer isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
-
-
       {/* Hero Section */}
       <main className="relative h-screen overflow-hidden">
         <iframe
@@ -101,7 +49,9 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black/40 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
-          <p className="text-white/80 text-lg mb-6 font-light">Facial Aesthetics Clinic</p>
+          <p className="text-white/80 text-lg mb-6 font-light">
+            Facial Aesthetics Clinic
+          </p>
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-12 max-w-4xl">
             Award-Winning <br /> Aesthetics <br /> & Wellness Clinic
           </h1>
@@ -145,7 +95,8 @@ export default function Home() {
               Prestigious clinics led by renowned specialist Dr. Ash Labib
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              With an impressive track record of over 10 years in the industry, our CQC registered clinic...
+              With an impressive track record of over 10 years in the industry,
+              our CQC registered clinic...
             </p>
             <Button
               variant="outline"
@@ -175,21 +126,29 @@ export default function Home() {
             <ShieldCheck className="w-6 h-6 text-gray-400 mt-1 shrink-0" />
             <div>
               <h3 className="text-2xl font-semibold">Qualified Injectors</h3>
-              <p className="mt-3">All practitioners at AL Aesthetics are trained by Dr Ash Labib...</p>
+              <p className="mt-3">
+                All practitioners at AL Aesthetics are trained by Dr Ash
+                Labib...
+              </p>
             </div>
           </article>
           <article className="flex gap-4 lg:border-l lg:pl-12 border-[var(--section-divider)]">
             <ShieldCheck className="w-6 h-6 text-gray-400 mt-1 shrink-0" />
             <div>
               <h3 className="text-2xl font-semibold">Quality Assured</h3>
-              <p className="mt-3">All injectable treatments are carried out using high-quality brands...</p>
+              <p className="mt-3">
+                All injectable treatments are carried out using high-quality
+                brands...
+              </p>
             </div>
           </article>
           <article className="flex gap-4 lg:border-l lg:pl-12 border-[var(--section-divider)]">
             <BadgeCheck className="w-6 h-6 text-gray-400 mt-1 shrink-0" />
             <div>
               <h3 className="text-2xl font-semibold">Allergan UK Ambassador</h3>
-              <p className="mt-3">Dr. Ash Labib is a member of the Allergan Medical Institute...</p>
+              <p className="mt-3">
+                Dr. Ash Labib is a member of the Allergan Medical Institute...
+              </p>
             </div>
           </article>
         </div>
@@ -256,14 +215,16 @@ export default function Home() {
 
       <Simplicity />
 
-
       <ClubMembership />
 
       <MediaCoverage />
 
       <Footer />
 
-      <ClinicsModal isOpen={isClinicsOpen} onClose={() => setIsClinicsOpen(false)} />
+      <ClinicsModal
+        isOpen={isClinicsOpen}
+        onClose={() => setIsClinicsOpen(false)}
+      />
     </div>
-  )
+  );
 }

@@ -1,32 +1,38 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Star } from "lucide-react"
-import { AnimatePresence, motion } from "framer-motion"
-import { ChevronDown, Menu, X } from "lucide-react"
-import { useState, useRef } from "react" // Added useRef import
-import ClinicsModal from "@/app/modal/ClinicsModal"
-import PriceCard from "@/components/pricecard/price-card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Play } from "lucide-react"
-import BeforeAfterSection from "@/components/before-after-section"
-import Footer from "@/components/Footer"
-import ClubMembership from "@/components/ClubMembership"
-import MediaCoverage from "@/components/MediaCoverage"
-import MobileMenuDrawer from "@/components/MobileMenuDrawer"
-import BotoxSection from "@/components/BotoxSection"
-import { Eye, CheckCircle, RotateCcw, Clock, Frown, TrendingDown, AlertTriangle, KeyRound as Pound } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Star } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useState, useRef } from "react"; // Added useRef import
+import ClinicsModal from "@/app/modal/ClinicsModal";
 
-import ReviewsSection from "@/components/reviews-section"
-import ConsultationSection from "@/components/consultation-section"
+import BeforeAfterSection from "@/components/before-after-section";
+import Footer from "@/components/Footer";
+import ClubMembership from "@/components/ClubMembership";
+import MediaCoverage from "@/components/MediaCoverage";
+import MobileMenuDrawer from "@/components/MobileMenuDrawer";
+import BotoxSection from "@/components/BotoxSection";
+import {
+  Eye,
+  CheckCircle,
+  RotateCcw,
+  Clock,
+  Frown,
+  TrendingDown,
+  AlertTriangle,
+  KeyRound as Pound,
+} from "lucide-react";
+
+import ReviewsSection from "@/components/reviews-section";
+import ConsultationSection from "@/components/consultation-section";
 
 export default function DermalFillersSection() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [expandedSections, setExpandedSections] = useState({})
-  const [isClinicsOpen, setIsClinicsOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({});
+  const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState(null);
-  
+
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
 
@@ -34,73 +40,78 @@ export default function DermalFillersSection() {
     {
       heading: "Results Seen",
       value: "Immediately",
-      description: "Best Results After 2-3 Weeks"
+      description: "Best Results After 2-3 Weeks",
     },
     {
       heading: "Results Last",
-      value: "9 Months – 2 Years"
+      value: "9 Months – 2 Years",
     },
     {
       heading: "No. of Sessions",
-      value: "1 Treatment"
+      value: "1 Treatment",
     },
     {
       heading: "Procedure Time",
-      value: "10-15 Minutes"
+      value: "10-15 Minutes",
     },
     {
       heading: "Pain",
       value: "None–Mild",
-      description: "Local Anaesthetic Optional"
+      description: "Local Anaesthetic Optional",
     },
     {
       heading: "Downtime",
-      value: "None / 1-2 Days"
+      value: "None / 1-2 Days",
     },
     {
       heading: "Side Effects",
-      value: "Bruising, Redness, Swelling"
+      value: "Bruising, Redness, Swelling",
     },
     {
       heading: "Our Pricing",
       value: "From £595",
-      description: "View all"
-    }
+      description: "View all",
+    },
   ];
 
   const faqs = [
     {
       question: "When can I see the results?",
-      answer: "Results are seen immediately with best results after 2-3 weeks."
+      answer: "Results are seen immediately with best results after 2-3 weeks.",
     },
     {
       question: "How long do the results last?",
-      answer: "Results last between 9 months to 2 years depending on individual factors."
+      answer:
+        "Results last between 9 months to 2 years depending on individual factors.",
     },
     {
       question: "Is the procedure painful?",
-      answer: "Most patients experience none to mild pain. Local anesthetic is optional."
+      answer:
+        "Most patients experience none to mild pain. Local anesthetic is optional.",
     },
     {
       question: "What is the downtime?",
-      answer: "There is typically no downtime, though some patients may experience 1-2 days of minor side effects."
+      answer:
+        "There is typically no downtime, though some patients may experience 1-2 days of minor side effects.",
     },
     {
       question: "What are the side effects?",
-      answer: "Possible side effects include bruising, redness, and swelling which are temporary."
+      answer:
+        "Possible side effects include bruising, redness, and swelling which are temporary.",
     },
     {
       question: "How many sessions are needed?",
-      answer: "Typically only 1 treatment is needed to achieve the desired results."
-    }
+      answer:
+        "Typically only 1 treatment is needed to achieve the desired results.",
+    },
   ];
 
   // Function to scroll to pricing section
   const scrollToPricing = () => {
     if (pricingSectionRef.current) {
-      pricingSectionRef.current.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      pricingSectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -109,68 +120,11 @@ export default function DermalFillersSection() {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
-    }))
-  }
+    }));
+  };
 
   return (
     <>
-      {/* Top Header with CALL + CLINIC */}
-      <header className="bg-gray-100 px-4 py-2">
-        <div className="flex justify-between items-center max-w-7xl mx-auto">
-          {/* Left - Call Us */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-          >
-            CALL US
-            <ChevronDown className="w-4 h-4" />
-          </div>
-
-          {/* Right - Find a Clinic */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-          >
-            FIND A CLINIC
-            <ChevronDown className="w-4 h-4" />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Navigation */}
-      <nav className="bg-white px-4 py-4 border-b sticky top-0 z-40 shadow-sm">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-black flex items-center justify-center">
-              <span className="text-white font-bold text-lg">AL</span>
-            </div>
-            <span className="text-2xl font-light text-black">Aesthetics</span>
-          </div>
-
-          {/* Right - Buttons */}
-          <div className="flex items-center gap-3">
-            {/* Gradient Book Consultation */}
-            <button className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
-              BOOK A CONSULTATION
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </button>
-
-            {/* MENU Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-between px-4 py-2 border border-gray-300 bg-white rounded-none"
-            >
-              <span className="text-xs font-medium text-gray-800 mr-3">MENU</span>
-              <Menu className="w-6 h-6 text-gray-700" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Drawer */}
-      <MobileMenuDrawer isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
-
       {/* Hero Section */}
       <section className="bg-white py-16 px-6">
         <div className="max-w-7xl mx-auto">
@@ -187,12 +141,15 @@ export default function DermalFillersSection() {
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Erase fine lines and <br /> wrinkles for lasting<br />youthfulness
+                Erase fine lines and <br /> wrinkles for lasting
+                <br />
+                youthfulness
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Turn back the clocks on your skin using Botox injections at AL Aesthetics.
+                Turn back the clocks on your skin using Botox injections at AL
+                Aesthetics.
               </p>
 
               {/* Buttons */}
@@ -204,7 +161,7 @@ export default function DermalFillersSection() {
                 </button>
 
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
-                <button 
+                <button
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
@@ -259,37 +216,57 @@ export default function DermalFillersSection() {
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Eye className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[0].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[0].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[0].value}</h3>
-                <p className="text-gray-500 text-sm font-light">{cardData[0].description}</p>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[0].value}
+                </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[0].description}
+                </p>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <CheckCircle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[1].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[1].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[1].value}</h3>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[1].value}
+                </h3>
                 {cardData[1].description && (
-                  <p className="text-gray-500 text-sm font-light">{cardData[1].description}</p>
+                  <p className="text-gray-500 text-sm font-light">
+                    {cardData[1].description}
+                  </p>
                 )}
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <RotateCcw className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[2].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[2].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[2].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[2].value}
+                </h3>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Clock className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[3].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[3].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[3].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[3].value}
+                </h3>
               </div>
             </div>
 
@@ -298,34 +275,52 @@ export default function DermalFillersSection() {
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Frown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[4].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[4].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[4].value}</h3>
-                <p className="text-gray-500 text-sm font-light">{cardData[4].description}</p>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[4].value}
+                </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[4].description}
+                </p>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <TrendingDown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[5].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[5].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[5].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[5].value}
+                </h3>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <AlertTriangle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[6].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[6].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">{cardData[6].value}</h3>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[6].value}
+                </h3>
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
                   <Pound className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">{cardData[7].heading}</span>
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[7].heading}
+                  </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">{cardData[7].value}</h3>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[7].value}
+                </h3>
                 <p className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700">
                   {cardData[7].description}
                 </p>
@@ -343,9 +338,9 @@ export default function DermalFillersSection() {
       <ConsultationSection />
 
       {/* Pricing Section with ref */}
-      <section 
-        ref={pricingSectionRef} 
-        className="py-12 md:py-20 px-4" 
+      <section
+        ref={pricingSectionRef}
+        className="py-12 md:py-20 px-4"
         style={{ backgroundColor: "#f6f6f6" }}
       >
         <div className="max-w-7xl mx-auto">
@@ -353,7 +348,9 @@ export default function DermalFillersSection() {
             {/* Left Content */}
             <div className="space-y-6">
               <div>
-                <span className="text-sm text-gray-600 font-medium">Botox Cost</span>
+                <span className="text-sm text-gray-600 font-medium">
+                  Botox Cost
+                </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
                 </h2>
@@ -361,9 +358,9 @@ export default function DermalFillersSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All of our prices are reflective of the expertise & experience of
-                  our team. If you would like to discuss any of our treatments, please
-                  feel free to{" "}
+                  All of our prices are reflective of the expertise & experience
+                  of our team. If you would like to discuss any of our
+                  treatments, please feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -388,15 +385,21 @@ export default function DermalFillersSection() {
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">One Area:</span>
-                    <span className="text-lg font-bold text-gray-900">£180</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £180
+                    </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Two Areas:</span>
-                    <span className="text-lg font-bold text-gray-900">£280</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £280
+                    </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Three Areas:</span>
-                    <span className="text-lg font-bold text-gray-900">£320</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £320
+                    </span>
                   </div>
                 </div>
               </div>
@@ -415,15 +418,21 @@ export default function DermalFillersSection() {
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">One Area:</span>
-                    <span className="text-lg font-bold text-gray-900">£185</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £185
+                    </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Two Areas:</span>
-                    <span className="text-lg font-bold text-gray-900">£285</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £285
+                    </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Three Areas:</span>
-                    <span className="text-lg font-bold text-gray-900">£385</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £385
+                    </span>
                   </div>
                 </div>
               </div>
@@ -443,21 +452,23 @@ export default function DermalFillersSection() {
           {faqs.map((faq, index) => (
             <div key={index}>
               <button
-                onClick={() =>
-                  setOpenIndex(openIndex === index ? null : index)
-                }
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex justify-between items-center py-4 text-left text-lg font-medium text-gray-900 focus:outline-none"
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-                  }`}
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
+                    ? "max-h-40 opacity-100"
+                    : "max-h-0 opacity-0"
+                }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>
@@ -477,5 +488,5 @@ export default function DermalFillersSection() {
       <MediaCoverage />
       <Footer />
     </>
-  )
+  );
 }
