@@ -143,11 +143,6 @@ export default function DermalFillersSection() {
             </div>
           </div>
         </div>
-
-        <ClinicsModal
-          isOpen={isClinicsOpen}
-          onClose={() => setIsClinicsOpen(false)}
-        />
       </section>
 
       <section className="py-12 px-4">

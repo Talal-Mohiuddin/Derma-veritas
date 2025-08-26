@@ -211,11 +211,6 @@ export default function NonSurgicalRhinoplastySection() {
             </div>
           </div>
         </div>
-
-        <ClinicsModal
-          isOpen={isClinicsOpen}
-          onClose={() => setIsClinicsOpen(false)}
-        />
       </section>
 
       <section className="py-12 bg-gray-50">

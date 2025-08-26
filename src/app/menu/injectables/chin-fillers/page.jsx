@@ -142,11 +142,6 @@ export default function ChinFillerSection() {
             </div>
           </div>
         </div>
-
-        <ClinicsModal
-          isOpen={isClinicsOpen}
-          onClose={() => setIsClinicsOpen(false)}
-        />
       </section>
 
       {/* Treatment Details Section */}

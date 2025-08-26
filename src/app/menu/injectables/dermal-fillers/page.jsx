@@ -190,11 +190,6 @@ export default function DermalFillersSection() {
             </div>
           </div>
         </div>
-
-        <ClinicsModal
-          isOpen={isClinicsOpen}
-          onClose={() => setIsClinicsOpen(false)}
-        />
       </section>
 
       {/* What are Dermal Fillers Section */}
