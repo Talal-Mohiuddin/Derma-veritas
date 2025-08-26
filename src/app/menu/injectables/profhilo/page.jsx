@@ -678,7 +678,6 @@ export default function ProfhiloSkinBoosterSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

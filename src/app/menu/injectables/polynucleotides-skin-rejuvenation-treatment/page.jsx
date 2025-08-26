@@ -587,7 +587,6 @@ export default function PolynucleotidesSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

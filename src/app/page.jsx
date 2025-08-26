@@ -219,8 +219,6 @@ export default function Home() {
 
       <MediaCoverage />
 
-      <Footer />
-
       <ClinicsModal
         isOpen={isClinicsOpen}
         onClose={() => setIsClinicsOpen(false)}

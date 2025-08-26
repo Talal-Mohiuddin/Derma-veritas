@@ -604,7 +604,6 @@ export default function FatDissolvingSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

@@ -5,6 +5,7 @@ import { AuthProvider } from "@/store/FirebaseAuthProvider";
 import { queryClient } from "@/config/tanstack";
 import { Toaster } from "sonner";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const ChildLayout = ({ children }) => {
   return (
@@ -39,6 +40,7 @@ const ChildLayout = ({ children }) => {
         />
         <Navbar />
         {children}
+        <Footer />
       </QueryClientProvider>
     </AuthProvider>
   );

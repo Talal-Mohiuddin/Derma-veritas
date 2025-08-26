@@ -601,7 +601,6 @@ export default function PolynucleotidesHairLossSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

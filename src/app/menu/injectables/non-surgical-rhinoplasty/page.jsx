@@ -583,7 +583,6 @@ export default function NonSurgicalRhinoplastySection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

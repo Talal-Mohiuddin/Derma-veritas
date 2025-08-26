@@ -603,7 +603,6 @@ export default function EightPointFaceliftSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

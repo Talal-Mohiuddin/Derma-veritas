@@ -486,7 +486,6 @@ export default function DermalFillersSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

@@ -603,7 +603,6 @@ export default function CheekFillersSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

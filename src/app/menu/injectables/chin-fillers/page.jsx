@@ -424,7 +424,6 @@ export default function ChinFillerSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

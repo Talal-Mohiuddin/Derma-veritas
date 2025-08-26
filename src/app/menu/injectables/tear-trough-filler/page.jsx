@@ -579,7 +579,6 @@ export default function TearTroughFillerSection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }

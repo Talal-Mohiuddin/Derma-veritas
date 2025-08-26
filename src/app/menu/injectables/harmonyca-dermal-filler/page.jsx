@@ -608,7 +608,6 @@ export default function HarmonyCASection() {
 
       <ClubMembership />
       <MediaCoverage />
-      <Footer />
     </>
   );
 }
