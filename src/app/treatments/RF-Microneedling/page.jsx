@@ -20,6 +20,7 @@ import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
+import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -34,7 +35,7 @@ import {
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
-export default function LipFillersSection() {
+export default function RFMicroneedlingSection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -44,71 +45,75 @@ export default function LipFillersSection() {
   const cardData = [
     {
       heading: "Results Seen",
-      value: "Immediate",
-      description: "Best Results After 2 Weeks",
+      value: "Within 2-6 weeks",
+      description: "Noticeable improvement in texture and firmness",
     },
     {
       heading: "Results Last",
-      value: "6–12 Months",
+      value: "Long-lasting",
+      description: "With continued collagen remodeling",
     },
     {
       heading: "No. of Sessions",
-      value: "1 Treatment",
+      value: "1-3 Treatments",
+      description: "Depending on area and concerns",
     },
     {
       heading: "Procedure Time",
-      value: "30–45 Minutes",
+      value: "30-60 Minutes",
+      description: "Depending on area",
     },
     {
       heading: "Pain",
       value: "Mild",
-      description: "Numbing Cream Available",
+      description: "Topical anesthesia applied as needed",
     },
     {
       heading: "Downtime",
-      value: "Minimal",
+      value: "1-2 Days",
+      description: "Mild redness and swelling",
     },
     {
       heading: "Side Effects",
-      value: "Temporary Swelling/Bruising",
+      value: "Temporary redness, mild swelling",
     },
     {
       heading: "Our Pricing",
-      value: "From £250",
+      value: "From £350",
       description: "View all",
     },
   ];
 
   const faqs = [
     {
-      question: "What are lip fillers?",
+      question: "What is RF Microneedling?",
       answer:
-        "Lip fillers are injectable dermal fillers made with hyaluronic acid that enhance the shape, structure, and volume of the lips. They are designed to give you fuller, more defined, and hydrated lips while maintaining a natural appearance.",
+        "RF Microneedling uses tiny needles to create controlled micro-injuries in the skin, stimulating collagen and elastin production. Combined with radiofrequency energy for enhanced skin tightening, scar reduction, and stretch mark improvement.",
     },
     {
-      question: "How long do lip fillers last?",
+      question: "When can I see the results?",
       answer:
-        "Lip fillers typically last 6–12 months depending on your metabolism and the specific product used.",
+        "You'll see noticeable improvement in skin texture and firmness within 2-6 weeks after treatment, with continued improvement as collagen production increases.",
+    },
+    {
+      question: "How long do the results last?",
+      answer:
+        "Results are long-lasting with continued collagen remodeling over time. The treatment stimulates your body's natural collagen production for sustained benefits.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "Most patients experience mild discomfort. We use numbing cream to minimize any pain during treatment.",
+        "Most patients experience only mild discomfort. Topical anesthesia is applied as needed to minimize any pain during treatment.",
     },
     {
       question: "What is the downtime?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary swelling or bruising for a few days.",
+        "There is minimal downtime of 1-2 days with mild redness and swelling. Most clients can resume normal activities shortly after treatment.",
     },
     {
-      question: "What is the Russian Lip Technique?",
+      question: "What concerns can RF Microneedling treat?",
       answer:
-        "The Russian Lip Technique is an advanced method that creates a more defined, lifted appearance with a focus on vertical volume rather than horizontal fullness, resulting in a natural-looking pout.",
-    },
-    {
-      question: "Who performs the treatment?",
-      answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who specialize in lip artistry and natural definition.",
+        "RF Microneedling is effective for skin rejuvenation, scar reduction, stretch mark improvement, skin tightening, and overall texture enhancement.",
     },
   ];
 
@@ -141,24 +146,24 @@ export default function LipFillersSection() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Dermal Filler Treatment
+                  Advanced Skin Rejuvenation
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Lip Fillers for
+                RF Microneedling for
                 <br />
-                natural-looking
+                Skin Rejuvenation
                 <br />
-                volume & definition
+                & Scar Reduction
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Enhance your lips with our expertly administered lip fillers for
-                fuller, more defined, and naturally beautiful lips at Derma
-                Veritas.
+                RF Microneedling combines microneedling with radiofrequency energy 
+                to stimulate collagen production, tighten skin, reduce scars, and 
+                improve stretch marks for comprehensive skin rejuvenation.
               </p>
 
               {/* Buttons */}
@@ -184,8 +189,8 @@ export default function LipFillersSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                  alt="Professional lip filler treatment"
+                  src="/images/rf-microneedling-treatment.png"
+                  alt="RF Microneedling treatment for skin rejuvenation"
                   className="w-full h-full object-cover"
                 />
 
@@ -256,9 +261,12 @@ export default function LipFillersSection() {
                     {cardData[2].heading}
                   </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">
+                <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[2].value}
                 </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[2].description}
+                </p>
               </div>
 
               <div className="text-center md:text-left">
@@ -268,9 +276,12 @@ export default function LipFillersSection() {
                     {cardData[3].heading}
                   </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">
+                <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[3].value}
                 </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[3].description}
+                </p>
               </div>
             </div>
 
@@ -298,9 +309,12 @@ export default function LipFillersSection() {
                     {cardData[5].heading}
                   </span>
                 </div>
-                <h3 className="text-lg font-light text-gray-900">
+                <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[5].value}
                 </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[5].description}
+                </p>
               </div>
 
               <div className="text-center md:text-left">
@@ -325,7 +339,7 @@ export default function LipFillersSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p
+                <p 
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -342,14 +356,14 @@ export default function LipFillersSection() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What are Lip Fillers?
+              What is RF Microneedling?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Lip fillers are injectable dermal fillers made with hyaluronic
-              acid that enhance the shape, structure, and volume of the lips.
-              They are one of the most popular non-surgical cosmetic treatments,
-              designed to give you fuller, more defined, and hydrated lips while
-              maintaining a natural appearance.
+              RF Microneedling is an advanced skin rejuvenation treatment that combines 
+              traditional microneedling with radiofrequency energy. This powerful combination 
+              creates controlled micro-injuries in the skin while delivering thermal energy 
+              to deeper layers, stimulating collagen and elastin production for comprehensive 
+              skin improvement.
             </p>
           </div>
 
@@ -361,60 +375,59 @@ export default function LipFillersSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Enhances lip volume and plumpness
+                  Stimulates collagen and elastin production
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Defines lip borders and Cupid's bow
+                  Improves skin texture, firmness, and elasticity
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Corrects asymmetry or unevenness
+                  Reduces appearance of scars and stretch marks
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Improves lip hydration and smoothness
+                  Minimizes pores and fine lines
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Results are natural-looking and tailored to your preferences
+                  Enhances skin tone and overall radiance
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our Clinic:
+                Treatment Areas:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Expert injectors specializing in lip artistry and natural
-                  definition
+                  Full Face rejuvenation
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Advanced techniques like the Russian Lip Technique for
-                  precision shaping
+                  Acne scars and surgical scars
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized approach to suit your face structure and goals
+                  Stretch marks on body
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, effective, and minimal downtime
+                  Neck and décolletage
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Comprehensive consultation to discuss all possible side
-                  effects
+                  Hands for age-related concerns
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </section>
+
+      <BotoxSection />
 
       <BeforeAfterSection />
       <ReviewsSection />
@@ -433,7 +446,7 @@ export default function LipFillersSection() {
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Lip Filler Cost
+                  RF Microneedling Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -443,9 +456,9 @@ export default function LipFillersSection() {
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
                   All treatments are performed exclusively by our expert
-                  physicians and clinical pharmacy leads who specialize in lip
-                  artistry and natural definition. Our pricing reflects the
-                  expertise and premium service you receive.
+                  physicians and clinical specialists who are
+                  industry-leading professionals. Our pricing reflects the expertise
+                  and premium service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -464,88 +477,74 @@ export default function LipFillersSection() {
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Lip Filler Treatments
+                    RF Microneedling Treatments
                   </h3>
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                    BOOK
+                  </button>
                 </div>
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">
-                      Standard Lip Filler (0.5–1.0 ml):
+                      Single Treatment – Full Face:
                     </span>
                     <span className="text-lg font-bold text-gray-900">
-                      £250
+                      £450 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Russian Lip Technique:
-                    </span>
+                    <span className="text-gray-700">Single Treatment – Scars & Stretch Marks (One Area):</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £350
+                      £350 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Add-On (extra 1.0 ml):
-                    </span>
+                    <span className="text-gray-700">3 Sessions – Full Face:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £110
+                      £1,250 + VAT
                     </span>
                   </div>
                 </div>
-
-                <button className="w-full mt-4 px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
-                  BOOK NOW
-                </button>
               </div>
 
-              {/* Treatment Details */}
+              {/* Package Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">
-                  Treatment Details
-                </h3>
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-base font-semibold text-gray-900">
+                    Additional Options
+                  </h3>
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                    BOOK
+                  </button>
+                </div>
 
-                <div className="space-y-3 text-sm text-gray-600">
-                  <div className="flex justify-between">
-                    <span>Visible Results:</span>
-                    <span className="text-gray-900">
-                      Immediate improvement in volume and definition
-                    </span>
+                <div className="divide-y divide-gray-200">
+                  <div className="py-3">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-900 font-medium">
+                        Combination Treatments:
+                      </span>
+                      <span className="text-lg font-bold text-gray-900">
+                        Consultation
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Enhanced results when combined with other therapies
+                    </p>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Duration:</span>
-                    <span className="text-gray-900">
-                      6–12 months depending on metabolism
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Number of Sessions:</span>
-                    <span className="text-gray-900">
-                      1 (touch-ups optional)
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Procedure Time:</span>
-                    <span className="text-gray-900">30–45 minutes</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Discomfort:</span>
-                    <span className="text-gray-900">
-                      Mild (numbing cream available)
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Downtime:</span>
-                    <span className="text-gray-900">
-                      Minimal; slight swelling or bruising may occur
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Side Effects:</span>
-                    <span className="text-gray-900">
-                      Temporary redness, tenderness, or swelling
-                    </span>
+                  <div className="py-3">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-900 font-medium">
+                        Custom Treatment Plan:
+                      </span>
+                      <span className="text-lg font-bold text-gray-900">
+                        Consultation
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Tailored to your specific skin concerns and goals
+                    </p>
                   </div>
                 </div>
               </div>

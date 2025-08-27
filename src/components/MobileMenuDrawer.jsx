@@ -37,35 +37,28 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
   // Minor Ops Dropdown Links
   const minorOpsLinks = [
-    "Minor Surgical Procedures",
-    "Cyst Removal",
-    "Mole Removal",
-    "Skin Tag Removal",
-    "Wart Removal",
+    { name: "Non-Surgical Face Lift", slug: "non-surgical-face-lift" },
+    { name: "Quad Laser Hair Removal", slug: "Quad-Laser-Hair-Removal" },
   ]
+
 
 
   // Skincare Dropdown Links
   const skincareLinks = [
-    "Skin Assessment",
-    "NCTF@ Skin Revitalisation",
-    "Medical HydraFacial",
-    "ZO Skin Health Facial",
-    "Skinpen Microneedling",
-    "Obagi Blue Radiance Peel",
-    "Dermalux LED Light Therapy",
-    "Chemical Peel",
-    "Milia Removal",
-    "PRX Therapy",
-    "AcuFirm Facelift",
-    "Skin Sculptor Facial",
+    { name: "Chemical Peels", slug: "chemical-peels" },
+    { name: "Microneedling", slug: "microneedling" },
+    { name: "RF Microneedling", slug: "RF-Microneedling" },
   ]
+
 
   // Wellness Dropdown Links
   const wellnessLinks = [
-    "IV Drips",
-    "Blood Tests",
+    {
+      name: "Exosome Therapy",
+      path: "/treatments/exosome-therapy",
+    },
   ]
+
 
 
 
@@ -173,21 +166,25 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="pl-4 overflow-hidden"
                     >
-                      {minorOpsLinks.map((item) => (
-                        <Link
-                          key={item}
-                          href={`/menu/minor-ops/${slugify(item)}`}
-                          className="block py-2 text-sm text-muted-foreground hover:text-foreground"
-                          onClick={() => setIsOpen(false)} // close drawer on click
-                        >
-                          {item}
-                        </Link>
-                      ))}
+                      <Link
+                        href="/treatments/non-surgical-face-lift"
+                        className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Non-Surgical Face Lift
+                      </Link>
+
+                      <Link
+                        href="/treatments/Quad-Laser-Hair-Removal"
+                        className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Quad Laser Hair Removal
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-
 
 
               {/* Skincare Dropdown */}
@@ -212,14 +209,65 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="pl-4 overflow-hidden"
                     >
-                      {skincareLinks.map((item) => (
+                      <Link
+                        href="/treatments/chemical-peels"
+                        className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Chemical Peels
+                      </Link>
+
+                      <Link
+                        href="/treatments/microneedling"
+                        className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        Microneedling
+                      </Link>
+
+                      <Link
+                        href="/treatments/RF-Microneedling"
+                        className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        RF Microneedling
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+
+              {/* Wellness Dropdown */}
+              <div>
+                <button
+                  onClick={() => toggleSection("Wellness")}
+                  className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
+                >
+                  <span>Wellness</span>
+                  <ChevronDown
+                    className={`w-5 h-5 transition-transform ${expandedSections["Wellness"] ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {expandedSections["Wellness"] && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="pl-4 overflow-hidden"
+                    >
+                      {wellnessLinks.map((item) => (
                         <Link
-                          key={item}
-                          href={`/menu/skincare/${slugify(item)}`}
+                          key={item.name}
+                          href={item.path}
                           className="block py-2 text-sm text-muted-foreground hover:text-foreground"
                           onClick={() => setIsOpen(false)} // close drawer on click
                         >
-                          {item}
+                          {item.name}
                         </Link>
                       ))}
                     </motion.div>
@@ -227,46 +275,9 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 </AnimatePresence>
               </div>
 
-{/* Wellness Dropdown */}
-<div>
-  <button
-    onClick={() => toggleSection("Wellness")}
-    className="flex justify-between items-center w-full py-2 text-base text-muted-foreground hover:text-foreground"
-  >
-    <span>Wellness</span>
-    <ChevronDown
-      className={`w-5 h-5 transition-transform ${
-        expandedSections["Wellness"] ? "rotate-180" : ""
-      }`}
-    />
-  </button>
-
-  <AnimatePresence>
-    {expandedSections["Wellness"] && (
-      <motion.div
-        initial={{ height: 0, opacity: 0 }}
-        animate={{ height: "auto", opacity: 1 }}
-        exit={{ height: 0, opacity: 0 }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="pl-4 overflow-hidden"
-      >
-        {wellnessLinks.map((item) => (
-          <Link
-            key={item}
-            href={`/menu/wellness/${slugify(item)}`}
-            className="block py-2 text-sm text-muted-foreground hover:text-foreground"
-            onClick={() => setIsOpen(false)} // close drawer on click
-          >
-            {item}
-          </Link>
-        ))}
-      </motion.div>
-    )}
-  </AnimatePresence>
-</div>
 
 
-             
+
             </div>
 
             {/* Section: Conditions */}

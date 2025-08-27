@@ -20,6 +20,7 @@ import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
+import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -34,7 +35,7 @@ import {
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
-export default function LipFillersSection() {
+export default function SaggingJowlsTreatmentsSection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -45,70 +46,72 @@ export default function LipFillersSection() {
     {
       heading: "Results Seen",
       value: "Immediate",
-      description: "Best Results After 2 Weeks",
+      description: "Progressive improvement over 6–10 months",
     },
     {
       heading: "Results Last",
       value: "6–12 Months",
+      description: "Long-lasting progressive improvement with Endolift",
     },
     {
       heading: "No. of Sessions",
-      value: "1 Treatment",
+      value: "1–2 Treatments",
     },
     {
       heading: "Procedure Time",
-      value: "30–45 Minutes",
+      value: "30-60 Minutes",
     },
     {
       heading: "Pain",
       value: "Mild",
-      description: "Numbing Cream Available",
+      description: "Local anaesthesia applied when necessary",
     },
     {
       heading: "Downtime",
       value: "Minimal",
+      description: "Resume activities within 24–48 hours",
     },
     {
       heading: "Side Effects",
-      value: "Temporary Swelling/Bruising",
+      value: "Temporary redness, mild swelling, bruising",
     },
     {
       heading: "Our Pricing",
-      value: "From £250",
+      value: "From £450",
       description: "View all",
     },
   ];
 
   const faqs = [
     {
-      question: "What are lip fillers?",
+      question: "What are sagging jowls treatments?",
       answer:
-        "Lip fillers are injectable dermal fillers made with hyaluronic acid that enhance the shape, structure, and volume of the lips. They are designed to give you fuller, more defined, and hydrated lips while maintaining a natural appearance.",
+        "Advanced non-surgical treatments designed to lift and tighten sagging jowls, restore jawline definition, and improve facial contour. Using cutting-edge technology and specialized techniques to achieve a more youthful, defined jawline without surgery.",
     },
     {
-      question: "How long do lip fillers last?",
+      question: "When can I see the results?",
       answer:
-        "Lip fillers typically last 6–12 months depending on your metabolism and the specific product used.",
+        "Results include immediate lifting and contouring with a sharper, sculpted jawline, plus progressive improvement over 6–10 months for longer-lasting treatments like Endolift.",
+    },
+    {
+      question: "How long do the results last?",
+      answer:
+        "Results typically last 6-12 months for dermal fillers, while Endolift provides long-lasting progressive improvement that continues to develop over time.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "Most patients experience mild discomfort. We use numbing cream to minimize any pain during treatment.",
+        "Most patients experience only mild discomfort. Local anesthesia is applied when necessary for Endolift treatments to ensure comfort.",
     },
     {
       question: "What is the downtime?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary swelling or bruising for a few days.",
-    },
-    {
-      question: "What is the Russian Lip Technique?",
-      answer:
-        "The Russian Lip Technique is an advanced method that creates a more defined, lifted appearance with a focus on vertical volume rather than horizontal fullness, resulting in a natural-looking pout.",
+        "There is minimal downtime. Most clients can resume normal activities within 24–48 hours after treatment.",
     },
     {
       question: "Who performs the treatment?",
       answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who specialize in lip artistry and natural definition.",
+        "All treatments are performed by our expert clinicians who use advanced fiber laser technology and expert injection techniques to provide non-surgical facelift alternatives.",
     },
   ];
 
@@ -141,24 +144,23 @@ export default function LipFillersSection() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Dermal Filler Treatment
+                  Advanced Non-Surgical Treatments
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Lip Fillers for
+                Sagging Jowls
                 <br />
-                natural-looking
+                Treatments for a
                 <br />
-                volume & definition
+                defined jawline
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Enhance your lips with our expertly administered lip fillers for
-                fuller, more defined, and naturally beautiful lips at Derma
-                Veritas.
+                Advanced non-surgical treatments designed to lift and tighten sagging jowls, 
+                restore jawline definition, and improve facial contour without surgery at Derma Veritas.
               </p>
 
               {/* Buttons */}
@@ -184,8 +186,8 @@ export default function LipFillersSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                  alt="Professional lip filler treatment"
+                  src="/images/jawline-treatment.png"
+                  alt="Professional sagging jowls treatment being administered"
                   className="w-full h-full object-cover"
                 />
 
@@ -325,7 +327,7 @@ export default function LipFillersSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p
+                <p 
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -342,14 +344,13 @@ export default function LipFillersSection() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What are Lip Fillers?
+              What are Sagging Jowls Treatments?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Lip fillers are injectable dermal fillers made with hyaluronic
-              acid that enhance the shape, structure, and volume of the lips.
-              They are one of the most popular non-surgical cosmetic treatments,
-              designed to give you fuller, more defined, and hydrated lips while
-              maintaining a natural appearance.
+              Advanced non-surgical treatments designed to lift and tighten sagging jowls, 
+              restore jawline definition, and improve facial contour. Using cutting-edge 
+              technology and specialized techniques to achieve a more youthful, defined 
+              jawline without surgery.
             </p>
           </div>
 
@@ -361,23 +362,23 @@ export default function LipFillersSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Enhances lip volume and plumpness
+                  Lifts and tightens sagging jowls
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Defines lip borders and Cupid's bow
+                  Creates sharper, more sculpted jawline
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Corrects asymmetry or unevenness
+                  Improves overall facial contour and definition
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Improves lip hydration and smoothness
+                  Stimulates natural collagen and elastin production
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Results are natural-looking and tailored to your preferences
+                  Non-surgical alternative with minimal downtime
                 </li>
               </ul>
             </div>
@@ -389,32 +390,31 @@ export default function LipFillersSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Expert injectors specializing in lip artistry and natural
-                  definition
+                  Uses advanced fiber laser technology and expert injection techniques
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Advanced techniques like the Russian Lip Technique for
-                  precision shaping
+                  Provides non-surgical facelift alternatives
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized approach to suit your face structure and goals
+                  Multiple treatment options to achieve desired results
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, effective, and minimal downtime
+                  Minimal downtime with long-lasting, natural-looking results
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Comprehensive consultation to discuss all possible side
-                  effects
+                  Personalized consultation to create treatment plan tailored to your goals
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </section>
+
+      <BotoxSection />
 
       <BeforeAfterSection />
       <ReviewsSection />
@@ -433,7 +433,7 @@ export default function LipFillersSection() {
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Lip Filler Cost
+                  Sagging Jowls Treatments Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -442,10 +442,9 @@ export default function LipFillersSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are performed exclusively by our expert
-                  physicians and clinical pharmacy leads who specialize in lip
-                  artistry and natural definition. Our pricing reflects the
-                  expertise and premium service you receive.
+                  All treatments are performed by our expert clinicians who use 
+                  advanced fiber laser technology and expert injection techniques. 
+                  Our pricing reflects the expertise and premium service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -460,92 +459,88 @@ export default function LipFillersSection() {
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Individual Treatment Pricing */}
+              {/* Sagging Jowls Treatment Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Lip Filler Treatments
+                    Sagging Jowls Treatments
                   </h3>
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                    BOOK
+                  </button>
                 </div>
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">
-                      Standard Lip Filler (0.5–1.0 ml):
+                      Endolift Full Face:
                     </span>
                     <span className="text-lg font-bold text-gray-900">
-                      £250
+                      £1,600 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">
-                      Russian Lip Technique:
+                      Endolift One Area:
                     </span>
                     <span className="text-lg font-bold text-gray-900">
-                      £350
+                      £800 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">
-                      Add-On (extra 1.0 ml):
+                      Jawline Dermal Fillers (3.0 ml):
                     </span>
                     <span className="text-lg font-bold text-gray-900">
-                      £110
+                      £450
                     </span>
                   </div>
                 </div>
-
-                <button className="w-full mt-4 px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
-                  BOOK NOW
-                </button>
+                
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <h4 className="text-sm font-medium text-gray-900 mb-2">Visible Results:</h4>
+                  <p className="text-sm text-gray-600">Immediate lifting and contouring; sharper, sculpted jawline; progressive improvement over 6–10 months</p>
+                  
+                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">Duration:</h4>
+                  <p className="text-sm text-gray-600">6–12 months (fillers) or long-lasting progressive improvement (Endolift)</p>
+                  
+                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">Procedure Time:</h4>
+                  <p className="text-sm text-gray-600">30–60 minutes depending on treatment</p>
+                </div>
               </div>
 
-              {/* Treatment Details */}
+              {/* Complementary Treatments */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
-                <h3 className="text-base font-semibold text-gray-900 mb-4">
-                  Treatment Details
-                </h3>
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-base font-semibold text-gray-900">
+                    Jawline Definition Packages
+                  </h3>
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                    BOOK
+                  </button>
+                </div>
 
-                <div className="space-y-3 text-sm text-gray-600">
-                  <div className="flex justify-between">
-                    <span>Visible Results:</span>
-                    <span className="text-gray-900">
-                      Immediate improvement in volume and definition
+                <div className="divide-y divide-gray-200">
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-gray-700">
+                      Comprehensive Jawline Rejuvenation:
+                    </span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £1,950
                     </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Duration:</span>
-                    <span className="text-gray-900">
-                      6–12 months depending on metabolism
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Number of Sessions:</span>
-                    <span className="text-gray-900">
-                      1 (touch-ups optional)
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Procedure Time:</span>
-                    <span className="text-gray-900">30–45 minutes</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Discomfort:</span>
-                    <span className="text-gray-900">
-                      Mild (numbing cream available)
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Downtime:</span>
-                    <span className="text-gray-900">
-                      Minimal; slight swelling or bruising may occur
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Side Effects:</span>
-                    <span className="text-gray-900">
-                      Temporary redness, tenderness, or swelling
-                    </span>
+                  <div className="py-3">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-gray-900 font-medium">
+                        Custom Treatment Plan:
+                      </span>
+                      <span className="text-lg font-bold text-gray-900">
+                        Consultation
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Tailored to your specific jawline concerns and goals
+                    </p>
                   </div>
                 </div>
               </div>

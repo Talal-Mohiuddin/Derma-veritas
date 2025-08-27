@@ -20,6 +20,7 @@ import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
+import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -29,12 +30,15 @@ import {
   TrendingDown,
   AlertTriangle,
   KeyRound as Pound,
+  FlaskRound,
+  Atom,
+  Leaf
 } from "lucide-react";
 
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
-export default function LipFillersSection() {
+export default function ExosomeTherapySection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -43,72 +47,80 @@ export default function LipFillersSection() {
 
   const cardData = [
     {
-      heading: "Results Seen",
-      value: "Immediate",
-      description: "Best Results After 2 Weeks",
+      heading: "Visible Results",
+      value: "Rejuvenated, firmer, radiant skin",
+      description: "Maximum results with 5 sessions",
+      icon: <Eye className="w-5 h-5 text-gray-600" />
     },
     {
       heading: "Results Last",
-      value: "6–12 Months",
+      value: "Several Months",
+      icon: <CheckCircle className="w-5 h-5 text-gray-600" />
     },
     {
       heading: "No. of Sessions",
-      value: "1 Treatment",
+      value: "3-5 Sessions",
+      description: "5 recommended for optimal results",
+      icon: <RotateCcw className="w-5 h-5 text-gray-600" />
     },
     {
       heading: "Procedure Time",
       value: "30–45 Minutes",
+      icon: <Clock className="w-5 h-5 text-gray-600" />
     },
     {
-      heading: "Pain",
+      heading: "Discomfort",
       value: "Mild",
-      description: "Numbing Cream Available",
+      icon: <Frown className="w-5 h-5 text-gray-600" />
     },
     {
       heading: "Downtime",
       value: "Minimal",
+      icon: <TrendingDown className="w-5 h-5 text-gray-600" />
     },
     {
       heading: "Side Effects",
-      value: "Temporary Swelling/Bruising",
+      value: "Temporary redness or mild swelling",
+      icon: <AlertTriangle className="w-5 h-5 text-gray-600" />
     },
     {
       heading: "Our Pricing",
-      value: "From £250",
+      value: "From £500",
       description: "View all",
+      icon: <Pound className="w-5 h-5 text-gray-600" />
     },
   ];
 
   const faqs = [
     {
-      question: "What are lip fillers?",
+      question: "What is Exosome Therapy?",
       answer:
-        "Lip fillers are injectable dermal fillers made with hyaluronic acid that enhance the shape, structure, and volume of the lips. They are designed to give you fuller, more defined, and hydrated lips while maintaining a natural appearance.",
+        "Exosome Therapy uses nano-sized vesicles derived from stem cells and peptides to promote cell regeneration. Our advanced formula combines high molecular weight polynucleotides, synthetic exosomes, oligopeptides-20, acetyl decapeptide-3, and vegetable stem cells for optimal skin rejuvenation.",
     },
     {
-      question: "How long do lip fillers last?",
+      question: "How does Exosome Therapy work?",
       answer:
-        "Lip fillers typically last 6–12 months depending on your metabolism and the specific product used.",
+        "Exosomes are extracellular vesicles that carry important signaling molecules between cells. When applied to the skin, they deliver growth factors, proteins, and genetic material that stimulate cellular repair, collagen production, and tissue regeneration, resulting in rejuvenated, firmer, and more radiant skin.",
+    },
+    {
+      question: "How long do the results last?",
+      answer:
+        "Results improve over several weeks and last for months. For optimal and longer-lasting results, we recommend a series of 5 sessions followed by maintenance treatments every 6-12 months.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "Most patients experience mild discomfort. We use numbing cream to minimize any pain during treatment.",
+        "Most patients experience only mild discomfort during the procedure. The treatment involves minimal injections or topical application that are generally well-tolerated.",
     },
     {
       question: "What is the downtime?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary swelling or bruising for a few days.",
-    },
-    {
-      question: "What is the Russian Lip Technique?",
-      answer:
-        "The Russian Lip Technique is an advanced method that creates a more defined, lifted appearance with a focus on vertical volume rather than horizontal fullness, resulting in a natural-looking pout.",
+        "There is minimal downtime. Some patients may experience temporary redness or mild swelling, but these typically resolve within a few hours to a day.",
     },
     {
       question: "Who performs the treatment?",
       answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who specialize in lip artistry and natural definition.",
+        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers in advanced regenerative techniques.",
     },
   ];
 
@@ -141,24 +153,22 @@ export default function LipFillersSection() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Dermal Filler Treatment
+                  Advanced Regenerative Treatment
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Lip Fillers for
+                Exosome Therapy
                 <br />
-                natural-looking
+                for cellular
                 <br />
-                volume & definition
+                regeneration
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Enhance your lips with our expertly administered lip fillers for
-                fuller, more defined, and naturally beautiful lips at Derma
-                Veritas.
+                Advanced regenerative treatment using nano-sized vesicles derived from stem cells and peptides to promote cell regeneration and skin rejuvenation.
               </p>
 
               {/* Buttons */}
@@ -184,8 +194,8 @@ export default function LipFillersSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                  alt="Professional lip filler treatment"
+                  src="/images/exosome-therapy-treatment.png"
+                  alt="Professional exosome therapy treatment being administered"
                   className="w-full h-full object-cover"
                 />
 
@@ -219,7 +229,7 @@ export default function LipFillersSection() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8">
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Eye className="w-5 h-5 text-gray-600" />
+                  {cardData[0].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[0].heading}
                   </span>
@@ -234,7 +244,7 @@ export default function LipFillersSection() {
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <CheckCircle className="w-5 h-5 text-gray-600" />
+                  {cardData[1].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[1].heading}
                   </span>
@@ -251,7 +261,7 @@ export default function LipFillersSection() {
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <RotateCcw className="w-5 h-5 text-gray-600" />
+                  {cardData[2].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[2].heading}
                   </span>
@@ -259,11 +269,16 @@ export default function LipFillersSection() {
                 <h3 className="text-lg font-light text-gray-900">
                   {cardData[2].value}
                 </h3>
+                {cardData[2].description && (
+                  <p className="text-gray-500 text-sm font-light">
+                    {cardData[2].description}
+                  </p>
+                )}
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Clock className="w-5 h-5 text-gray-600" />
+                  {cardData[3].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[3].heading}
                   </span>
@@ -271,6 +286,11 @@ export default function LipFillersSection() {
                 <h3 className="text-lg font-light text-gray-900">
                   {cardData[3].value}
                 </h3>
+                {cardData[3].description && (
+                  <p className="text-gray-500 text-sm font-light">
+                    {cardData[3].description}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -278,7 +298,7 @@ export default function LipFillersSection() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Frown className="w-5 h-5 text-gray-600" />
+                  {cardData[4].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[4].heading}
                   </span>
@@ -286,14 +306,16 @@ export default function LipFillersSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[4].value}
                 </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[4].description}
-                </p>
+                {cardData[4].description && (
+                  <p className="text-gray-500 text-sm font-light">
+                    {cardData[4].description}
+                  </p>
+                )}
               </div>
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <TrendingDown className="w-5 h-5 text-gray-600" />
+                  {cardData[5].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[5].heading}
                   </span>
@@ -305,7 +327,7 @@ export default function LipFillersSection() {
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <AlertTriangle className="w-5 h-5 text-gray-600" />
+                  {cardData[6].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[6].heading}
                   </span>
@@ -317,7 +339,7 @@ export default function LipFillersSection() {
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Pound className="w-5 h-5 text-gray-600" />
+                  {cardData[7].icon}
                   <span className="text-gray-600 text-sm font-light">
                     {cardData[7].heading}
                   </span>
@@ -325,7 +347,7 @@ export default function LipFillersSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p
+                <p 
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -342,18 +364,42 @@ export default function LipFillersSection() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What are Lip Fillers?
+              What is Exosome Therapy?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Lip fillers are injectable dermal fillers made with hyaluronic
-              acid that enhance the shape, structure, and volume of the lips.
-              They are one of the most popular non-surgical cosmetic treatments,
-              designed to give you fuller, more defined, and hydrated lips while
-              maintaining a natural appearance.
+              Exosome Therapy uses nano-sized vesicles derived from stem cells and peptides to promote cell regeneration. Our advanced formula combines high molecular weight polynucleotides, synthetic exosomes, oligopeptides-20, acetyl decapeptide-3, and vegetable stem cells for optimal skin rejuvenation and regeneration.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <h3 className="text-xl font-semibold text-gray-900">
+                Advanced Formula Includes:
+              </h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start gap-3">
+                  <FlaskRound className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  High molecular weight polynucleotides
+                </li>
+                <li className="flex items-start gap-3">
+                  <Atom className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  Synthetic exosomes
+                </li>
+                <li className="flex items-start gap-3">
+                  <FlaskRound className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  Oligopeptides-20
+                </li>
+                <li className="flex items-start gap-3">
+                  <FlaskRound className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  Acetyl decapeptide-3
+                </li>
+                <li className="flex items-start gap-3">
+                  <Leaf className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  Vegetable stem cells
+                </li>
+              </ul>
+            </div>
+
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
                 Benefits Include:
@@ -361,54 +407,23 @@ export default function LipFillersSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Enhances lip volume and plumpness
+                  Promotes cellular regeneration and repair
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Defines lip borders and Cupid's bow
+                  Stimulates collagen and elastin production
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Corrects asymmetry or unevenness
+                  Improves skin texture and elasticity
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Improves lip hydration and smoothness
+                  Reduces appearance of fine lines and wrinkles
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Results are natural-looking and tailored to your preferences
-                </li>
-              </ul>
-            </div>
-
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our Clinic:
-              </h3>
-              <ul className="space-y-3 text-gray-600">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Expert injectors specializing in lip artistry and natural
-                  definition
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Advanced techniques like the Russian Lip Technique for
-                  precision shaping
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized approach to suit your face structure and goals
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, effective, and minimal downtime
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Comprehensive consultation to discuss all possible side
-                  effects
+                  Enhances skin radiance and overall complexion
                 </li>
               </ul>
             </div>
@@ -433,7 +448,7 @@ export default function LipFillersSection() {
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Lip Filler Cost
+                  Exosome Therapy Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -443,9 +458,9 @@ export default function LipFillersSection() {
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
                   All treatments are performed exclusively by our expert
-                  physicians and clinical pharmacy leads who specialize in lip
-                  artistry and natural definition. Our pricing reflects the
-                  expertise and premium service you receive.
+                  physicians and clinical pharmacy leads who are
+                  industry-leading trainers. Our pricing reflects the expertise
+                  and premium service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -460,92 +475,69 @@ export default function LipFillersSection() {
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Individual Treatment Pricing */}
+              {/* Exosome Therapy Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Lip Filler Treatments
+                    Exosome Therapy Packages
                   </h3>
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                    BOOK
+                  </button>
                 </div>
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Standard Lip Filler (0.5–1.0 ml):
-                    </span>
+                    <span className="text-gray-700">3 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £250
+                      £500
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Russian Lip Technique:
-                    </span>
+                    <span className="text-gray-700">5 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £350
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Add-On (extra 1.0 ml):
-                    </span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £110
+                      £700
                     </span>
                   </div>
                 </div>
-
-                <button className="w-full mt-4 px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
-                  BOOK NOW
-                </button>
+                
+                <div className="mt-4 p-3 bg-blue-50 border border-blue-100">
+                  <p className="text-sm text-blue-700">
+                    <strong>Recommended:</strong> 5 sessions for optimal results
+                  </p>
+                </div>
               </div>
 
-              {/* Treatment Details */}
+              {/* Additional Information */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <h3 className="text-base font-semibold text-gray-900 mb-4">
                   Treatment Details
                 </h3>
-
+                
                 <div className="space-y-3 text-sm text-gray-600">
                   <div className="flex justify-between">
                     <span>Visible Results:</span>
-                    <span className="text-gray-900">
-                      Immediate improvement in volume and definition
-                    </span>
+                    <span className="font-medium">Rejuvenated, firmer, radiant skin</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Duration:</span>
-                    <span className="text-gray-900">
-                      6–12 months depending on metabolism
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Number of Sessions:</span>
-                    <span className="text-gray-900">
-                      1 (touch-ups optional)
-                    </span>
+                    <span className="font-medium">Results improve over several weeks and last months</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Procedure Time:</span>
-                    <span className="text-gray-900">30–45 minutes</span>
+                    <span className="font-medium">30–45 minutes</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Discomfort:</span>
-                    <span className="text-gray-900">
-                      Mild (numbing cream available)
-                    </span>
+                    <span className="font-medium">Mild</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Downtime:</span>
-                    <span className="text-gray-900">
-                      Minimal; slight swelling or bruising may occur
-                    </span>
+                    <span className="font-medium">Minimal</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Side Effects:</span>
-                    <span className="text-gray-900">
-                      Temporary redness, tenderness, or swelling
-                    </span>
+                    <span className="font-medium">Temporary redness or mild swelling</span>
                   </div>
                 </div>
               </div>
