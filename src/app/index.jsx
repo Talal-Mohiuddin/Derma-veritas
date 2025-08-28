@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 const ChildLayout = ({ children }) => {
   const pathname = usePathname();
-  const isLoginPage = pathname === "/login";
+  const isLoginPage = pathname === "/login" || pathname.includes("/admin");
 
   return (
     <AuthProvider>
