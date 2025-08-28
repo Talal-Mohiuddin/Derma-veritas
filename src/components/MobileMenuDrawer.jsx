@@ -108,7 +108,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     <div>
       <button
         onClick={() => toggleSection(section)}
-        className="flex justify-between items-center w-full py-2 text-base font-medium text-muted-foreground hover:text-foreground"
+        className="flex justify-between items-center w-full py-2 text-lg font-medium text-muted-foreground hover:text-foreground cursor-pointer"
       >
         <span>{label}</span>
         <ChevronDown
@@ -132,7 +132,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 <Link
                   key={item}
                   href={`/menu/injectables/${slugify(item)}`}
-                  className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                  className="block py-2 text-base text-muted-foreground hover:text-foreground cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {item}
@@ -141,7 +141,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 <Link
                   key={item.name}
                   href={item.slug ? `/treatments/${item.slug}` : item.path}
-                  className="block py-2 text-sm text-muted-foreground hover:text-foreground"
+                  className="block py-2 text-base text-muted-foreground hover:text-foreground cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -159,11 +159,11 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     <div className="py-2">
       <button
         onClick={() => toggleSection(section)}
-        className="flex justify-between items-center w-full text-left"
+        className="flex justify-between items-center w-full text-left cursor-pointer"
       >
-        <span className="text-2xl font-light text-gray-800">{label}</span>
+        <span className="text-xl font-light text-gray-800">{label}</span>
         <ChevronDown
-          className={`w-8 h-8 text-gray-600 transition-transform ${
+          className={`w-6 h-6 text-gray-600 transition-transform ${
             expandedSections[section] ? "rotate-180" : ""
           }`}
         />
@@ -183,7 +183,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 <Link
                   key={item}
                   href={`/menu/injectables/${slugify(item)}`}
-                  className="block py-2 text-xl font-light text-gray-600 hover:text-gray-800 transition-colors"
+                  className="block py-2 text-lg font-light text-gray-600 hover:text-gray-800 transition-colors cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {item}
@@ -192,7 +192,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 <Link
                   key={item.name}
                   href={item.slug ? `/treatments/${item.slug}` : item.path}
-                  className="block py-2 text-lg font-light text-gray-600 hover:text-gray-800 transition-colors"
+                  className="block py-2 text-base font-light text-gray-600 hover:text-gray-800 transition-colors cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -255,7 +255,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
               <div className="pt-16">
                 {/* Treatments */}
                 <div className="border-b border-section-divider pb-4 mb-4">
-                  <h3 className="text-sm font-bold uppercase text-section-fg mb-3">
+                  <h3 className="text-base font-bold uppercase text-section-fg mb-3">
                     Treatments
                   </h3>
                   <MobileDropdown
@@ -286,7 +286,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                 {/* Conditions */}
                 <div className="border-b border-section-divider pb-4 mb-4">
-                  <h3 className="text-sm font-bold uppercase text-section-fg mb-3">
+                  <h3 className="text-base font-bold uppercase text-section-fg mb-3">
                     Conditions
                   </h3>
                   <MobileDropdown
@@ -312,7 +312,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   >
                     <Link
                       href={item.href}
-                      className="w-full block text-left py-2 text-base font-medium text-muted-foreground hover:text-foreground"
+                      className="w-full block text-left py-2 text-lg font-medium text-muted-foreground hover:text-foreground cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       {item.name}
@@ -345,7 +345,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     onMouseLeave={hideSubmenu}
                   >
                     <button
-                      className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors text-left w-full"
+                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors text-left w-full cursor-pointer"
                       onClick={() => toggleSubmenu("treatments")}
                     >
                       Treatments
@@ -359,7 +359,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     onMouseLeave={hideSubmenu}
                   >
                     <button
-                      className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors text-left w-full"
+                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors text-left w-full cursor-pointer"
                       onClick={() => toggleSubmenu("conditions")}
                     >
                       Conditions
@@ -370,7 +370,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   <div className="py-4">
                     <Link
                       href="/pacakges"
-                      className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       Packages
@@ -380,7 +380,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   <div className="py-4">
                     <Link
                       href="/pacakges/membership"
-                      className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       Club AL Membership
@@ -390,7 +390,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   <div className="py-4">
                     <Link
                       href="/about"
-                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      className="block text-lg font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       About Us
@@ -400,7 +400,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   <div className="py-4">
                     <Link
                       href="/team"
-                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      className="block text-lg font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       Meet The Team
@@ -410,7 +410,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   <div className="py-4">
                     <Link
                       href="/refer-a-friend"
-                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      className="block text-lg font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       Refer a Friend
@@ -420,7 +420,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   <div className="py-4">
                     <Link
                       href="/contact"
-                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      className="block text-lg font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
                       Contact Us

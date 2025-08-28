@@ -8,8 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
-export function BookingModal({ children }) {
-  const [open, setOpen] = useState(false)
+export function BookingModal({ open, onOpenChange, children }) {
   const [formData, setFormData] = useState({
     treatment: "",
     clientType: "new",
@@ -26,11 +25,11 @@ export function BookingModal({ children }) {
     e.preventDefault()
     console.log("Form submitted:", formData)
     // Handle form submission here
-    setOpen(false)
+    onOpenChange(false)
   }
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent
         side="right"

@@ -3,8 +3,11 @@
 import { BookingModal } from "@/components/booking-modal";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function ClubMembershipPage() {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -25,12 +28,13 @@ export default function ClubMembershipPage() {
               with monthly treatments, premium benefits, and significant savings.
             </p>
 
-            <BookingModal>
-              <Button className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors">
-                <span>JOIN TODAY</span>
-                <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-              </Button>
-            </BookingModal>
+            <Button 
+              onClick={() => setBookingOpen(true)}
+              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
+            >
+              <span>JOIN TODAY</span>
+              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+            </Button>
           </div>
         </div>
       </div>
@@ -299,12 +303,13 @@ export default function ClubMembershipPage() {
             attention every month.
           </p>
 
-          <BookingModal>
-            <Button className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors w-fit">
-              <span>START YOUR MEMBERSHIP</span>
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </Button>
-          </BookingModal>
+          <Button 
+            onClick={() => setBookingOpen(true)}
+            className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors w-fit"
+          >
+            <span>START YOUR MEMBERSHIP</span>
+            <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+          </Button>
         </div>
 
         <div className="bg-gray-50 relative flex items-center justify-center min-h-[400px] lg:min-h-[70vh]">
@@ -322,6 +327,8 @@ export default function ClubMembershipPage() {
           </div>
         </div>
       </div>
+
+      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
     </div>
   );
 }

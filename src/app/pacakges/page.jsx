@@ -4,8 +4,11 @@ import { BookingModal } from "@/components/booking-modal";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function PackagesPage() {
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   const packageCategories = [
     {
       title: "ProFusion HydraFacial",
@@ -61,12 +64,13 @@ export default function PackagesPage() {
               and aesthetic goals with the latest in medical aesthetics technology.
             </p>
 
-            <BookingModal>
-              <Button className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors">
-                <span>BOOK A CONSULTATION</span>
-                <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-              </Button>
-            </BookingModal>
+            <Button 
+              onClick={() => setBookingOpen(true)}
+              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
+            >
+              <span>BOOK A CONSULTATION</span>
+              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+            </Button>
           </motion.div>
         </div>
       </div>
@@ -221,15 +225,18 @@ export default function PackagesPage() {
               Book a consultation to discuss which package is right for you and create
               a personalized treatment plan.
             </p>
-            <BookingModal>
-              <Button className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors">
-                <span>SCHEDULE CONSULTATION</span>
-                <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-              </Button>
-            </BookingModal>
+            <Button 
+              onClick={() => setBookingOpen(true)}
+              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
+            >
+              <span>SCHEDULE CONSULTATION</span>
+              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+            </Button>
           </motion.div>
         </div>
       </section>
+
+      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
     </div>
   );
 }
