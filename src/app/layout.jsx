@@ -5,9 +5,8 @@ import ChildLayout from ".";
 import { gtmId, headSnippet, bodySnippet } from "@/config/gtm";
 
 export const metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.app",
+  title: "DermaVaritas",
+  description: "Skin Clinic & Wellness",
 };
 
 export default function RootLayout({ children }) {
