@@ -2,41 +2,45 @@
 
 import { BookingModal } from "@/components/booking-modal";
 import { Button } from "@/components/ui/button";
+import { useStore } from "@/store/zustand";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function PackagesPage() {
-  const [bookingOpen, setBookingOpen] = useState(false);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const packageCategories = [
     {
       title: "ProFusion HydraFacial",
-      description: "Ultimate skin rejuvenation using state-of-the-art ProFusion devices",
+      description:
+        "Ultimate skin rejuvenation using state-of-the-art ProFusion devices",
       image: "/images/hydrafacial.jpg",
       href: "/packages/hydrafacial",
       treatments: "4 Treatment Options",
       duration: "40-75 minutes",
-      priceRange: "£150 - £250"
+      priceRange: "£150 - £250",
     },
     {
       title: "Signature Treatment Packages",
-      description: "Comprehensive treatment programs designed for specific skin concerns",
+      description:
+        "Comprehensive treatment programs designed for specific skin concerns",
       image: "/images/signature.jpg",
       href: "/packages/signature",
       treatments: "4 Complete Programs",
       duration: "8-18 weeks",
-      priceRange: "£1,100 - £2,500"
+      priceRange: "£1,100 - £2,500",
     },
     {
       title: "Elite Membership Program",
-      description: "Exclusive membership tiers with ongoing treatments and benefits",
+      description:
+        "Exclusive membership tiers with ongoing treatments and benefits",
       image: "/images/membership.jpg",
       href: "/packages/membership",
       treatments: "3 Membership Tiers",
       duration: "Monthly Plans",
-      priceRange: "£80 - £299/month"
-    }
+      priceRange: "£80 - £299/month",
+    },
   ];
 
   return (
@@ -53,18 +57,19 @@ export default function PackagesPage() {
             <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-8">
               <span className="text-white text-3xl font-bold">DV</span>
             </div>
-            
+
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-6">
               <span className="text-black">Treatment</span>{" "}
               <span className="text-gray-400">Packages</span>
             </h1>
-            
+
             <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mx-auto mb-12">
-              Discover our comprehensive treatment packages designed to address your unique skin concerns
-              and aesthetic goals with the latest in medical aesthetics technology.
+              Discover our comprehensive treatment packages designed to address
+              your unique skin concerns and aesthetic goals with the latest in
+              medical aesthetics technology.
             </p>
 
-            <Button 
+            <Button
               onClick={() => setBookingOpen(true)}
               className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
             >
@@ -89,8 +94,8 @@ export default function PackagesPage() {
               Choose Your Journey
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              From single treatments to comprehensive programs, find the perfect package
-              tailored to your skincare and aesthetic needs.
+              From single treatments to comprehensive programs, find the perfect
+              package tailored to your skincare and aesthetic needs.
             </p>
           </motion.div>
 
@@ -110,39 +115,57 @@ export default function PackagesPage() {
                       {/* Placeholder for image */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
-                          <span className="text-gray-600 text-2xl font-light">{index + 1}</span>
+                          <span className="text-gray-600 text-2xl font-light">
+                            {index + 1}
+                          </span>
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="p-8">
                       <h3 className="text-2xl font-light text-gray-800 mb-4 group-hover:text-gray-600 transition-colors">
                         {category.title}
                       </h3>
-                      
+
                       <p className="text-gray-600 text-base leading-relaxed mb-6">
                         {category.description}
                       </p>
-                      
+
                       <div className="space-y-3 mb-8">
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-gray-500">Treatments:</span>
-                          <span className="text-gray-800 font-medium">{category.treatments}</span>
+                          <span className="text-gray-800 font-medium">
+                            {category.treatments}
+                          </span>
                         </div>
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-gray-500">Duration:</span>
-                          <span className="text-gray-800 font-medium">{category.duration}</span>
+                          <span className="text-gray-800 font-medium">
+                            {category.duration}
+                          </span>
                         </div>
                         <div className="flex justify-between items-center text-sm">
                           <span className="text-gray-500">Price Range:</span>
-                          <span className="text-gray-800 font-medium">{category.priceRange}</span>
+                          <span className="text-gray-800 font-medium">
+                            {category.priceRange}
+                          </span>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center text-gray-800 font-medium text-sm group-hover:text-gray-600 transition-colors">
                         <span>EXPLORE PACKAGES</span>
-                        <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <svg
+                          className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -174,23 +197,26 @@ export default function PackagesPage() {
               {
                 icon: "💰",
                 title: "Cost Effective",
-                description: "Save significantly compared to individual treatments"
+                description:
+                  "Save significantly compared to individual treatments",
               },
               {
                 icon: "🎯",
                 title: "Targeted Results",
-                description: "Comprehensive programs designed for specific concerns"
+                description:
+                  "Comprehensive programs designed for specific concerns",
               },
               {
                 icon: "👥",
                 title: "Expert Care",
-                description: "Treatments by qualified medical professionals"
+                description: "Treatments by qualified medical professionals",
               },
               {
                 icon: "📊",
                 title: "Progress Tracking",
-                description: "Regular assessments to monitor your transformation"
-              }
+                description:
+                  "Regular assessments to monitor your transformation",
+              },
             ].map((benefit, index) => (
               <motion.div
                 key={index}
@@ -201,7 +227,9 @@ export default function PackagesPage() {
                 className="text-center"
               >
                 <div className="text-4xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-light text-gray-800 mb-3">{benefit.title}</h3>
+                <h3 className="text-xl font-light text-gray-800 mb-3">
+                  {benefit.title}
+                </h3>
                 <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
             ))}
@@ -222,10 +250,10 @@ export default function PackagesPage() {
               Ready to Start Your Journey?
             </h2>
             <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto">
-              Book a consultation to discuss which package is right for you and create
-              a personalized treatment plan.
+              Book a consultation to discuss which package is right for you and
+              create a personalized treatment plan.
             </p>
-            <Button 
+            <Button
               onClick={() => setBookingOpen(true)}
               className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
             >

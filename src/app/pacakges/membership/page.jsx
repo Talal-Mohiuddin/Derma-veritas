@@ -2,12 +2,11 @@
 
 import { BookingModal } from "@/components/booking-modal";
 import { Button } from "@/components/ui/button";
+import { useStore } from "@/store/zustand";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
 export default function ClubMembershipPage() {
-  const [bookingOpen, setBookingOpen] = useState(false);
-
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -24,11 +23,12 @@ export default function ClubMembershipPage() {
             </h1>
 
             <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
-              Join our exclusive membership program and experience the ultimate in aesthetic care
-              with monthly treatments, premium benefits, and significant savings.
+              Join our exclusive membership program and experience the ultimate
+              in aesthetic care with monthly treatments, premium benefits, and
+              significant savings.
             </p>
 
-            <Button 
+            <Button
               onClick={() => setBookingOpen(true)}
               className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
             >
@@ -51,15 +51,17 @@ export default function ClubMembershipPage() {
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            Our Elite Membership Program offers you the opportunity to maintain optimal skin health
-            and aesthetic enhancement through carefully curated monthly treatments. Each tier is designed
-            to provide comprehensive care while delivering exceptional value.
+            Our Elite Membership Program offers you the opportunity to maintain
+            optimal skin health and aesthetic enhancement through carefully
+            curated monthly treatments. Each tier is designed to provide
+            comprehensive care while delivering exceptional value.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            From advanced facial treatments to cutting-edge injectables, our membership ensures you
-            receive the highest quality care from our team of medical professionals, with exclusive
-            discounts and priority access to new treatments.
+            From advanced facial treatments to cutting-edge injectables, our
+            membership ensures you receive the highest quality care from our
+            team of medical professionals, with exclusive discounts and priority
+            access to new treatments.
           </p>
         </div>
 
@@ -71,7 +73,9 @@ export default function ClubMembershipPage() {
             <div>
               <span className="text-3xl font-light text-black">Elite</span>
               <br />
-              <span className="text-3xl font-light text-gray-400">Membership</span>
+              <span className="text-3xl font-light text-gray-400">
+                Membership
+              </span>
             </div>
           </div>
 
@@ -86,7 +90,7 @@ export default function ClubMembershipPage() {
               "Complimentary skin analysis and progress tracking",
               "VIP event invitations and early access to new treatments",
               "Flexible treatment banking and gifting options",
-              "Personalized treatment plans and expert consultations"
+              "Personalized treatment plans and expert consultations",
             ].map((benefit, index) => (
               <li key={index} className="flex items-start gap-4">
                 <div className="w-2 h-2 bg-gray-800 rounded-full mt-3 flex-shrink-0"></div>
@@ -111,7 +115,8 @@ export default function ClubMembershipPage() {
               Choose Your Membership Tier
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Select the membership level that best fits your aesthetic goals and lifestyle
+              Select the membership level that best fits your aesthetic goals
+              and lifestyle
             </p>
           </motion.div>
 
@@ -125,13 +130,19 @@ export default function ClubMembershipPage() {
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
               <div className="bg-gradient-to-r from-gray-100 to-gray-50 p-6 text-center">
-                <h3 className="text-2xl font-light text-gray-800 mb-2">Veritas Glow</h3>
-                <p className="text-gray-600 text-sm uppercase tracking-wide">Entry Tier</p>
+                <h3 className="text-2xl font-light text-gray-800 mb-2">
+                  Veritas Glow
+                </h3>
+                <p className="text-gray-600 text-sm uppercase tracking-wide">
+                  Entry Tier
+                </p>
               </div>
-              
+
               <div className="p-8">
                 <div className="text-center mb-8">
-                  <div className="text-3xl font-light text-gray-800 mb-2">£80<span className="text-lg text-gray-500">/month</span></div>
+                  <div className="text-3xl font-light text-gray-800 mb-2">
+                    £80<span className="text-lg text-gray-500">/month</span>
+                  </div>
                   <div className="text-gray-600">+ £300 upfront</div>
                 </div>
 
@@ -141,7 +152,7 @@ export default function ClubMembershipPage() {
                     "3× RF Microneedling areas (first 3 sessions)",
                     "1× PRP Hair/Face (alternate months)",
                     "10% off injectables & skincare",
-                    "Priority booking access"
+                    "Priority booking access",
                   ].map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-gray-800 rounded-full mt-2 flex-shrink-0"></div>
@@ -165,17 +176,25 @@ export default function ClubMembershipPage() {
               className="bg-white rounded-lg shadow-xl overflow-hidden relative transform lg:scale-105"
             >
               <div className="absolute top-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-center py-2">
-                <span className="text-xs font-medium uppercase tracking-wide">Most Popular</span>
+                <span className="text-xs font-medium uppercase tracking-wide">
+                  Most Popular
+                </span>
               </div>
-              
+
               <div className="bg-gradient-to-r from-blue-50 to-blue-25 p-6 text-center mt-8">
-                <h3 className="text-2xl font-light text-gray-800 mb-2">Veritas Sculpt</h3>
-                <p className="text-gray-600 text-sm uppercase tracking-wide">Mid Tier</p>
+                <h3 className="text-2xl font-light text-gray-800 mb-2">
+                  Veritas Sculpt
+                </h3>
+                <p className="text-gray-600 text-sm uppercase tracking-wide">
+                  Mid Tier
+                </p>
               </div>
-              
+
               <div className="p-8">
                 <div className="text-center mb-8">
-                  <div className="text-3xl font-light text-gray-800 mb-2">£160<span className="text-lg text-gray-500">/month</span></div>
+                  <div className="text-3xl font-light text-gray-800 mb-2">
+                    £160<span className="text-lg text-gray-500">/month</span>
+                  </div>
                   <div className="text-gray-600">+ £350 upfront</div>
                 </div>
 
@@ -187,7 +206,7 @@ export default function ClubMembershipPage() {
                     "1× RF Microneedling or PRP Facial",
                     "15% off injectables & fillers",
                     "Quarterly facial scans",
-                    "VIP event invitations"
+                    "VIP event invitations",
                   ].map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -211,13 +230,19 @@ export default function ClubMembershipPage() {
               className="bg-white rounded-lg shadow-lg overflow-hidden"
             >
               <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-6 text-center">
-                <h3 className="text-2xl font-light text-white mb-2">Veritas Prestige</h3>
-                <p className="text-gray-200 text-sm uppercase tracking-wide">Luxury Tier</p>
+                <h3 className="text-2xl font-light text-white mb-2">
+                  Veritas Prestige
+                </h3>
+                <p className="text-gray-200 text-sm uppercase tracking-wide">
+                  Luxury Tier
+                </p>
               </div>
-              
+
               <div className="p-8">
                 <div className="text-center mb-8">
-                  <div className="text-3xl font-light text-gray-800 mb-2">£299<span className="text-lg text-gray-500">/month</span></div>
+                  <div className="text-3xl font-light text-gray-800 mb-2">
+                    £299<span className="text-lg text-gray-500">/month</span>
+                  </div>
                   <div className="text-gray-600">+ £500 upfront</div>
                 </div>
 
@@ -230,7 +255,7 @@ export default function ClubMembershipPage() {
                     "RF Microneedling included",
                     "Complete hair care treatments",
                     "Monthly product gifts",
-                    "Annual skin health report"
+                    "Annual skin health report",
                   ].map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 bg-gray-800 rounded-full mt-2 flex-shrink-0"></div>
@@ -254,28 +279,36 @@ export default function ClubMembershipPage() {
             viewport={{ once: true }}
             className="mt-12 lg:mt-16 bg-white rounded-lg p-6 lg:p-8 shadow-md"
           >
-            <h3 className="text-2xl font-light text-gray-800 mb-8 text-center">Membership Terms & Benefits</h3>
+            <h3 className="text-2xl font-light text-gray-800 mb-8 text-center">
+              Membership Terms & Benefits
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
                   title: "Flexible Commitment",
-                  description: "3-month minimum with monthly rolling thereafter"
+                  description:
+                    "3-month minimum with monthly rolling thereafter",
                 },
                 {
                   title: "Session Banking",
-                  description: "Unused treatments can be saved for up to 3 months"
+                  description:
+                    "Unused treatments can be saved for up to 3 months",
                 },
                 {
                   title: "Priority Access",
-                  description: "Book appointments online or via personal concierge"
+                  description:
+                    "Book appointments online or via personal concierge",
                 },
                 {
                   title: "Gift Options",
-                  description: "Share unused sessions with friends twice yearly"
-                }
+                  description:
+                    "Share unused sessions with friends twice yearly",
+                },
               ].map((term, index) => (
                 <div key={index} className="text-center">
-                  <h4 className="text-lg font-medium text-gray-800 mb-3">{term.title}</h4>
+                  <h4 className="text-lg font-medium text-gray-800 mb-3">
+                    {term.title}
+                  </h4>
                   <p className="text-gray-600 text-sm">{term.description}</p>
                 </div>
               ))}
@@ -292,18 +325,19 @@ export default function ClubMembershipPage() {
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            Our membership program ensures consistent, professional care that delivers lasting results.
-            With regular treatments, progress monitoring, and exclusive member benefits, you'll achieve
-            your aesthetic goals while enjoying significant savings.
+            Our membership program ensures consistent, professional care that
+            delivers lasting results. With regular treatments, progress
+            monitoring, and exclusive member benefits, you'll achieve your
+            aesthetic goals while enjoying significant savings.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-12">
-            Join thousands of satisfied members who trust Derma Veritas for their ongoing aesthetic
-            care. Experience the difference of premium treatments, expert guidance, and personalized
-            attention every month.
+            Join thousands of satisfied members who trust Derma Veritas for
+            their ongoing aesthetic care. Experience the difference of premium
+            treatments, expert guidance, and personalized attention every month.
           </p>
 
-          <Button 
+          <Button
             onClick={() => setBookingOpen(true)}
             className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors w-fit"
           >
@@ -327,8 +361,6 @@ export default function ClubMembershipPage() {
           </div>
         </div>
       </div>
-
-      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
     </div>
   );
 }
