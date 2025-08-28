@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
+
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -58,12 +60,13 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Gradient Book Consultation - hidden on mobile */}
             <div className="hidden md:block">
-              <BookingModal currentPath={pathname}>
-                <Button className="relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
-                  <span>BOOK A CONSULTATION</span>
-                  <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-                </Button>
-              </BookingModal>
+              <Button
+                onClick={() => setBookingOpen(true)}
+                className="relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide"
+              >
+                <span>BOOK A CONSULTATION</span>
+                <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+              </Button>
             </div>
 
             {/* MENU Button (always visible) */}
@@ -92,6 +95,8 @@ export default function Navbar() {
         isOpen={isClinicsOpen}
         onClose={() => setIsClinicsOpen(false)}
       />
+
+      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
     </>
   );
 }
