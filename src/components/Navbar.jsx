@@ -35,18 +35,21 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Main Navigation */}
-      <nav className="bg-white px-4 py-4 border-b sticky top-0 z-40 shadow-sm">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-black flex items-center justify-center">
-              <span className="text-white font-bold text-lg">AL</span>
-            </div>
-            <span className="text-2xl font-light text-black">Aesthetics</span>
+      
+        <nav className="bg-white px-4 py-4 border-b sticky top-0 z-40 shadow-sm">
+          <div className="flex items-center justify-between max-w-7xl mx-auto">
+            {/* Logo */}
+            <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => window.location.href = "/"}
+            >
+          <div className="w-12 h-12 bg-black flex items-center justify-center">
+            <span className="text-white font-bold text-lg">AL</span>
           </div>
+          <span className="text-2xl font-light text-black">Aesthetics</span>
+            </div>
 
-          {/* Right - Buttons */}
+            {/* Right - Buttons */}
           <div className="flex items-center gap-4">
             {/* Gradient Book Consultation */}
             <BookingModal>

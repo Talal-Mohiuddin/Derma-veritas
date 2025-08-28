@@ -185,7 +185,7 @@ export default function RFMicroneedlingSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/rf-microneedling-treatment.png"
+                  src="https://tse4.mm.bing.net/th/id/OIP.gEjoa8oCvjr89tK-A7HNKgHaHa?cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3"
                   alt="Professional RF microneedling treatment being administered"
                   className="w-full h-full object-cover"
                 />

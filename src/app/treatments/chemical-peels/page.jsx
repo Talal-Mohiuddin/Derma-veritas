@@ -186,7 +186,7 @@ export default function CO2LaserTreatmentSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/co2-laser-treatment.png"
+                  src="https://tse1.explicit.bing.net/th/id/OIP.5hvTQpZGjLVwuOB14-AAqAHaHa?cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3"
                   alt="Professional CO₂ Fractional Laser treatment"
                   className="w-full h-full object-cover"
                 />

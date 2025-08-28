@@ -73,39 +73,40 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Dr. Ash Labib Section */}
-      <section className="bg-white py-16 px-4">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 lg:order-2">
-            <h2 className="text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
-              Prestigious clinics led by renowned specialist Dr. Ash Labib
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              With an impressive track record of over 10 years in the industry,
-              our CQC registered clinic...
-            </p>
-            <Button
-              variant="outline"
-              className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 mt-8 bg-transparent"
-            >
-              READ ABOUT US
-            </Button>
+      {/* About Section */}
+        <section className="bg-white py-16 px-4">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6 lg:order-2">
+          <h2 className="text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
+            Prestigious clinics led by renowned specialist Dr. Ash Labib
+          </h2>
+          <p className="text-gray-600 leading-relaxed">
+            With an impressive track record of over 10 years in the industry,
+            our CQC registered clinic...
+          </p>
+          <Button
+            variant="outline"
+            className="border-gray-300 text-gray-700 hover:bg-gray-50 px-8 py-3 mt-8 bg-transparent"
+            onClick={() => window.location.href = "/about"}
+          >
+            READ ABOUT US
+          </Button>
+            </div>
+            <div className="relative lg:order-1">
+          <img
+            src="/owner.png"
+            alt="Dr. Ash Labib"
+            className="w-full h-auto rounded-lg"
+          />
+          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg">
+            <h3 className="font-semibold text-gray-900">Dr. Ash Labib</h3>
+            <p className="text-sm text-gray-600">Owner & Founder</p>
           </div>
-          <div className="relative lg:order-1">
-            <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-Xe7zBTmvge6sJSjacUNr8cFiMQyOwT.png"
-              alt="Dr. Ash Labib"
-              className="w-full h-auto rounded-lg"
-            />
-            <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg">
-              <h3 className="font-semibold text-gray-900">Dr. Ash Labib</h3>
-              <p className="text-sm text-gray-600">Owner & Founder</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Trust / Credentials */}
+        {/* Trust / Credentials */}
       <section className="px-4 py-16 bg-[var(--section-bg)] text-[var(--section-fg)]">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
           <article className="flex gap-4">

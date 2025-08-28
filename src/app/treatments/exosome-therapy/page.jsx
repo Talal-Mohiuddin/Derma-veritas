@@ -194,7 +194,7 @@ export default function ExosomeTherapySection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/exosome-therapy-treatment.png"
+                  src="https://tse1.mm.bing.net/th/id/OIP.SzSDDe4fxQ8Zofe9i2cSSQHaHa?cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3"
                   alt="Professional exosome therapy treatment being administered"
                   className="w-full h-full object-cover"
                 />
