@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 const ChildLayout = ({ children }) => {
   const pathname = usePathname();
-  const isLoginPage = pathname === "/login" || pathname.includes("/admin");
+  const ShowNavbar = pathname === "/login" || pathname.includes("/admin");
 
   return (
     <AuthProvider>
@@ -42,9 +42,9 @@ const ChildLayout = ({ children }) => {
             },
           }}
         />
-        {!isLoginPage && <Navbar />}
+        {!ShowNavbar && <Navbar />}
         {children}
-        {!isLoginPage && <Footer />}
+        {!ShowNavbar && <Footer />}
       </QueryClientProvider>
     </AuthProvider>
   );
