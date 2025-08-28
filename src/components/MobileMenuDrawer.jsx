@@ -98,7 +98,10 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   ];
 
   const slugify = (str) =>
-    str.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+    str
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
 
   // Mobile Dropdown Component (for small screens)
   const MobileDropdown = ({ label, section, links, type }) => (
@@ -296,16 +299,12 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                 {/* Static Links */}
                 {[
-
-                  
-
-                  
-                  { name: "Contact Us", href: "/contact" },
-                  { name: "About Us", href: "/about" },
+                  { name: "Packages", href: "/pacakges" },
                   { name: "Club AL Membership", href: "/pacakges/membership" },
+                  { name: "About Us", href: "/about" },
                   { name: "Meet The Team", href: "/team" },
-                  { name: "AL Training Academy", href: "/training" },
-                  { name: "News & Events", href: "/news" },
+                  { name: "Refer a Friend", href: "/refer-a-friend" },
+                  { name: "Contact Us", href: "/contact" },
                 ].map((item) => (
                   <div
                     key={item.name}
@@ -323,7 +322,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                 {/* Footer */}
                 <div className="mt-8 border-t border-section-divider pt-6 text-center">
-                  <button 
+                  <button
                     onClick={() => setIsClinicsOpen(true)}
                     className="flex items-center justify-center gap-2 mx-auto text-muted-foreground hover:text-foreground text-sm uppercase tracking-wide"
                   >
@@ -339,30 +338,29 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
               {/* Left Column - Main Navigation */}
               <div className="w-1/2 px-12 pt-20 pb-12">
                 <div className="space-y-0 max-w-xs pr-4">
-                  
                   {/* Treatments Section */}
-                  <div 
+                  <div
                     className="py-4 pr-8"
-                    onMouseEnter={() => showSubmenu('treatments')}
+                    onMouseEnter={() => showSubmenu("treatments")}
                     onMouseLeave={hideSubmenu}
                   >
-                    <button 
+                    <button
                       className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors text-left w-full"
-                      onClick={() => toggleSubmenu('treatments')}
+                      onClick={() => toggleSubmenu("treatments")}
                     >
                       Treatments
                     </button>
                   </div>
 
                   {/* Conditions Section */}
-                  <div 
+                  <div
                     className="py-4 pr-8"
-                    onMouseEnter={() => showSubmenu('conditions')}
+                    onMouseEnter={() => showSubmenu("conditions")}
                     onMouseLeave={hideSubmenu}
                   >
-                    <button 
+                    <button
                       className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors text-left w-full"
-                      onClick={() => toggleSubmenu('conditions')}
+                      onClick={() => toggleSubmenu("conditions")}
                     >
                       Conditions
                     </button>
@@ -371,21 +369,21 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   {/* Static Links */}
                   <div className="py-4">
                     <Link
-                      href="/membership"
+                      href="/pacakges"
                       className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      Club AL Membership
+                      Packages
                     </Link>
                   </div>
 
                   <div className="py-4">
                     <Link
-                      href="/contact"
-                      className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
+                      href="/pacakges/membership"
+                      className="block text-2xl font-light text-gray-800 hover:text-gray-600 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      Contact Us
+                      Club AL Membership
                     </Link>
                   </div>
 
@@ -411,24 +409,23 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                   <div className="py-4">
                     <Link
-                      href="/training"
+                      href="/refer-a-friend"
                       className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      AL Training Academy
+                      Refer a Friend
                     </Link>
                   </div>
 
                   <div className="py-4">
                     <Link
-                      href="/news"
+                      href="/contact"
                       className="block text-xl font-light text-gray-800 hover:text-gray-600 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
-                      News & Events
+                      Contact Us
                     </Link>
                   </div>
-
                 </div>
               </div>
 
@@ -445,8 +442,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       onMouseEnter={keepSubmenuVisible}
                       onMouseLeave={hideSubmenu}
                     >
-                      
-                      {activeSubmenu === 'treatments' && (
+                      {activeSubmenu === "treatments" && (
                         <>
                           <DesktopDropdown
                             label="Injectables"
@@ -478,7 +474,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                         </>
                       )}
 
-                      {activeSubmenu === 'conditions' && (
+                      {activeSubmenu === "conditions" && (
                         <>
                           <DesktopDropdown
                             label="Facial Concerns"
@@ -488,7 +484,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                           />
                         </>
                       )}
-                      
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -500,8 +495,8 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
       {/* Clinics Modal */}
       {isClinicsOpen && (
-        <ClinicsModal 
-          isOpen={isClinicsOpen} 
+        <ClinicsModal
+          isOpen={isClinicsOpen}
           setIsOpen={setIsClinicsOpen}
           onClose={() => setIsClinicsOpen(false)}
         />
