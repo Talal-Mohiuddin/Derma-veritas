@@ -7,10 +7,9 @@ export async function GET(request) {
     const userId = searchParams.get("userId");
 
     if (!userId) {
-      return new Response(
-        JSON.stringify({ error: "User ID is required" }),
-        { status: 400 }
-      );
+      return new Response(JSON.stringify({ error: "User ID is required" }), {
+        status: 400,
+      });
     }
 
     // Get user document from Firestore
@@ -18,15 +17,14 @@ export async function GET(request) {
     const userDoc = await getDoc(userDocRef);
 
     if (!userDoc.exists()) {
-      return new Response(
-        JSON.stringify({ error: "User not found" }),
-        { status: 404 }
-      );
+      return new Response(JSON.stringify({ error: "User not found" }), {
+        status: 404,
+      });
     }
 
     const userData = userDoc.data();
     const referralCode = userData.referralCode;
-    
+
     if (!referralCode) {
       return new Response(
         JSON.stringify({ error: "User doesn't have a referral code" }),
@@ -34,16 +32,16 @@ export async function GET(request) {
       );
     }
 
-    // Generate the referral link
-    const baseUrl = process.env.NODE_ENV === 'production' 
-      ? 'https://dermaveritasclinic.com' 
-      : 'http://localhost:3000';
-    
+    const baseUrl =
+      process.env.NODE_ENV === "production" ?? process.env.NEXT_PUBLIC_BASE_URL;
+
     const referralLink = `${baseUrl}/?ref=${referralCode}`;
 
     // Calculate referral stats
     const totalReferrals = userData.referrals?.length || 0;
-    const completedReferrals = userData.referrals?.filter(ref => ref.status === 'completed')?.length || 0;
+    const completedReferrals =
+      userData.referrals?.filter((ref) => ref.status === "completed")?.length ||
+      0;
     const totalEarned = userData.referralRewards || 0;
 
     return new Response(
@@ -54,22 +52,21 @@ export async function GET(request) {
           totalReferrals,
           completedReferrals,
           totalEarned,
-          pendingReferrals: totalReferrals - completedReferrals
+          pendingReferrals: totalReferrals - completedReferrals,
         },
-        recentReferrals: userData.referrals?.slice(-5) || [] // Last 5 referrals
+        recentReferrals: userData.referrals?.slice(-5) || [], // Last 5 referrals
       }),
-      { 
+      {
         status: 200,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       }
     );
   } catch (error) {
     console.error("Error fetching referral data:", error);
-    return new Response(
-      JSON.stringify({ error: "Internal server error" }),
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
+    });
   }
 }
