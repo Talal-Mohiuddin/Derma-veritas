@@ -6,13 +6,17 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import ClinicsModal from "./ClinicsModal";
+import { BookingModal } from "./booking-modal";
+import { usePathname } from "next/navigation";
 
 export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const [expandedSections, setExpandedSections] = useState({});
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [submenuOpenedByClick, setSubmenuOpenedByClick] = useState(false);
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
   const hideTimeoutRef = useRef(null);
+  const pathname = usePathname();
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -55,6 +59,48 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
       clearTimeout(hideTimeoutRef.current);
       hideTimeoutRef.current = null;
     }
+  };
+
+  // Function to determine treatment based on current page
+  const getCurrentTreatment = () => {
+    // Handle injectable treatments
+    if (pathname.includes('/menu/injectables/')) {
+      const treatmentSlug = pathname.split('/menu/injectables/')[1];
+      const treatmentMap = {
+        'anti-wrinkle-treatment': 'anti-wrinkle-treatment',
+        'non-surgical-rhinoplasty': 'non-surgical-rhinoplasty',
+        '8-point-facelift': '8-point-facelift',
+        'nctf-skin-revitalisation': 'nctf-skin-revitalisation-skincare',
+        'harmonyca-dermal-filler': 'harmonyca-dermal-filler',
+        'dermal-fillers': 'dermal-fillers',
+        'lip-fillers': 'lip-fillers',
+        'chin-fillers': 'chin-fillers',
+        'tear-trough-filler': 'tear-trough-filler',
+        'cheek-fillers': 'cheek-fillers',
+        'profhilo': 'profhilo',
+        'fat-dissolving-injections': 'fat-dissolving-injections',
+        'hand-rejuvenation': 'hand-rejuvenation',
+        'polynucleotides-hair-loss-treatment': 'polynucleotides-hair-loss-treatment',
+        'polynucleotides-skin-rejuvenation-treatment': 'polynucleotides-skin-rejuvenation-treatment'
+      };
+      return treatmentMap[treatmentSlug] || '';
+    }
+    
+    // Handle other treatment types
+    if (pathname.includes('/treatments/')) {
+      const treatmentSlug = pathname.split('/treatments/')[1];
+      const treatmentMap = {
+        'chemical-peels': 'chemical-peel',
+        'microneedling': 'skinpen-microneedling',
+        'rf-microneedling': 'skinpen-microneedling',
+        'mole-removal': 'mole-removal',
+        'skin-tag-removal': 'skin-tag-removal',
+        'exosome-therapy': 'iv-drips'
+      };
+      return treatmentMap[treatmentSlug] || '';
+    }
+
+    return '';
   };
 
   // Menu data
@@ -330,6 +376,20 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     <ChevronDown className="w-6 h-6" />
                   </button>
                 </div>
+
+                {/* Add Book Consultation Button for Mobile */}
+                <div className="mt-8 border-t border-section-divider pt-6">
+                  <Button
+                    onClick={() => {
+                      setBookingOpen(true);
+                      setIsOpen(false);
+                    }}
+                    className="w-full relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide"
+                  >
+                    <span>BOOK A CONSULTATION</span>
+                    <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -501,6 +561,12 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
           onClose={() => setIsClinicsOpen(false)}
         />
       )}
+
+      <BookingModal 
+        open={bookingOpen} 
+        onOpenChange={setBookingOpen} 
+        selectedTreatment={getCurrentTreatment()}
+      />
     </>
   );
 }

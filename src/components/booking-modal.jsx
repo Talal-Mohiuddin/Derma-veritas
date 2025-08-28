@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 
-export function BookingModal({ open, onOpenChange, children }) {
+export function BookingModal({ open, onOpenChange, children, selectedTreatment = "" }) {
   const [formData, setFormData] = useState({
     treatment: "",
     clientType: "new",
@@ -20,6 +20,16 @@ export function BookingModal({ open, onOpenChange, children }) {
     ageConfirm: false,
     newsletter: false,
   })
+
+  // Auto-select treatment when modal opens or selectedTreatment changes
+  useEffect(() => {
+    if (selectedTreatment && open) {
+      setFormData(prev => ({
+        ...prev,
+        treatment: selectedTreatment
+      }))
+    }
+  }, [selectedTreatment, open])
 
   const handleSubmit = (e) => {
     e.preventDefault()

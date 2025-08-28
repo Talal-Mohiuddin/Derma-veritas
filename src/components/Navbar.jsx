@@ -11,9 +11,51 @@ import { Button } from "@/components/ui/button";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [bookingOpen, setBookingOpen] = useState(false);
-
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const pathname = usePathname();
+
+  // Function to determine treatment based on current page
+  const getCurrentTreatment = () => {
+    // Handle injectable treatments
+    if (pathname.includes('/menu/injectables/')) {
+      const treatmentSlug = pathname.split('/menu/injectables/')[1];
+      // Convert slug back to treatment name
+      const treatmentMap = {
+        'anti-wrinkle-treatment': 'anti-wrinkle-treatment',
+        'non-surgical-rhinoplasty': 'non-surgical-rhinoplasty',
+        '8-point-facelift': '8-point-facelift',
+        'nctf-skin-revitalisation': 'nctf-skin-revitalisation-skincare',
+        'harmonyca-dermal-filler': 'harmonyca-dermal-filler',
+        'dermal-fillers': 'dermal-fillers',
+        'lip-fillers': 'lip-fillers',
+        'chin-fillers': 'chin-fillers',
+        'tear-trough-filler': 'tear-trough-filler',
+        'cheek-fillers': 'cheek-fillers',
+        'profhilo': 'profhilo',
+        'fat-dissolving-injections': 'fat-dissolving-injections',
+        'hand-rejuvenation': 'hand-rejuvenation',
+        'polynucleotides-hair-loss-treatment': 'polynucleotides-hair-loss-treatment',
+        'polynucleotides-skin-rejuvenation-treatment': 'polynucleotides-skin-rejuvenation-treatment'
+      };
+      return treatmentMap[treatmentSlug] || '';
+    }
+    
+    // Handle other treatment types
+    if (pathname.includes('/treatments/')) {
+      const treatmentSlug = pathname.split('/treatments/')[1];
+      const treatmentMap = {
+        'chemical-peels': 'chemical-peel',
+        'microneedling': 'skinpen-microneedling',
+        'rf-microneedling': 'skinpen-microneedling',
+        'mole-removal': 'mole-removal',
+        'skin-tag-removal': 'skin-tag-removal',
+        'exosome-therapy': 'iv-drips'
+      };
+      return treatmentMap[treatmentSlug] || '';
+    }
+
+    return '';
+  };
 
   return (
     <>
@@ -87,7 +129,6 @@ export default function Navbar() {
       <MobileMenuDrawer
         isOpen={isMobileMenuOpen}
         setIsOpen={setIsMobileMenuOpen}
-        currentPath={pathname}
       />
 
       {/* Clinics Modal */}
@@ -96,7 +137,11 @@ export default function Navbar() {
         onClose={() => setIsClinicsOpen(false)}
       />
 
-      <BookingModal open={bookingOpen} onOpenChange={setBookingOpen} />
+      <BookingModal 
+        open={bookingOpen} 
+        onOpenChange={setBookingOpen} 
+        selectedTreatment={getCurrentTreatment()}
+      />
     </>
   );
 }
