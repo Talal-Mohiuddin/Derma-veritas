@@ -1,17 +1,20 @@
 "use client";
 
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, User } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 import ClinicsModal from "./ClinicsModal"; // import your modal
 import { BookingModal } from "./booking-modal";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/store/zustand";
+import { useAuth } from "@/store/FirebaseAuthProvider";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { bookingOpen, setBookingOpen } = useStore();
+  const { bookingOpen, setBookingOpen, userRole } = useStore();
+  const { user } = useAuth();
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -103,6 +106,27 @@ export default function Navbar() {
 
           {/* Right - Buttons */}
           <div className="flex items-center gap-3 sm:gap-4">
+            {/* Login/Profile Button - visible on larger screens */}
+            <div className="hidden sm:block">
+              {user ? (
+                <Link href={userRole === 'admin' ? '/admin' : '/profile'}>
+                  <Button className="flex items-center gap-2 px-4 py-3 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 rounded-none">
+                    <User className="w-4 h-4" />
+                    <span className="text-sm font-medium">
+                      {userRole ? userRole.toUpperCase() : 'PROFILE'}
+                    </span>
+                  </Button>
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <Button className="flex items-center gap-2 px-4 py-3 border border-gray-300 bg-white text-gray-800 hover:bg-gray-50 rounded-none">
+                    <User className="w-4 h-4" />
+                    <span className="text-sm font-medium">LOGIN</span>
+                  </Button>
+                </Link>
+              )}
+            </div>
+
             {/* Gradient Book Consultation - hidden on mobile */}
             <div className="hidden md:block">
               <Button

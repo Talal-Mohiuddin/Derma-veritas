@@ -74,17 +74,19 @@ const RouteProtection = ({
   }, [user?.uid, allowedRoles.length, authLoading, roleLoadAttempted]);
 
   useEffect(() => {
-    // Don't do anything while auth or role is loading
+    // Don't do anything while auth is loading
     if (authLoading) return;
 
-    // Don't do anything while role is loading (for role-based routes)
-    if (allowedRoles.length > 0 && (roleLoading || !roleLoadAttempted)) return;
-
     // Check if authentication is required and user is not logged in
+    // This should happen immediately, regardless of role requirements
     if (requireAuth && !user) {
       router.push(redirectTo);
       return;
     }
+
+    // Don't do anything while role is loading (for role-based routes)
+    // Only wait for role loading if we have a user
+    if (allowedRoles.length > 0 && user && (roleLoading || !roleLoadAttempted)) return;
 
     // Check role-based access - only when role loading is complete
     if (allowedRoles.length > 0 && user && roleLoadAttempted) {
@@ -106,9 +108,10 @@ const RouteProtection = ({
   ]);
 
   // Show loading while checking authentication or roles
+  // Only show loading for role checks if we have a user
   if (
     authLoading ||
-    (allowedRoles.length > 0 && (roleLoading || !roleLoadAttempted))
+    (allowedRoles.length > 0 && user && (roleLoading || !roleLoadAttempted))
   ) {
     return (
       <div className="flex items-center justify-center min-h-screen">

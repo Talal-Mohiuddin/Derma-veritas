@@ -11,11 +11,9 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
 import {
-  generateUniqueReferralCode,
   createUserDocumentWithReferral,
 } from "@/utils/sharedFirebase";
 
