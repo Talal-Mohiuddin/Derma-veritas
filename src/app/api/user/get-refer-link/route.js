@@ -33,7 +33,9 @@ export async function GET(request) {
     }
 
     const baseUrl =
-      process.env.NODE_ENV === "production" ?? process.env.NEXT_PUBLIC_BASE_URL;
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_PROD_URL
+        : process.env.NEXT_PUBLIC_BASE_URL;
 
     const referralLink = `${baseUrl}/?ref=${referralCode}`;
 

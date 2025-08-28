@@ -78,7 +78,7 @@ const RouteProtection = ({
     if (authLoading) return;
 
     // Don't do anything while role is loading (for role-based routes)
-    if (allowedRoles.length > 0 && roleLoading) return;
+    if (allowedRoles.length > 0 && (roleLoading || !roleLoadAttempted)) return;
 
     // Check if authentication is required and user is not logged in
     if (requireAuth && !user) {
@@ -87,9 +87,9 @@ const RouteProtection = ({
     }
 
     // Check role-based access - only when role loading is complete
-    if (allowedRoles.length > 0 && user) {
+    if (allowedRoles.length > 0 && user && roleLoadAttempted) {
       if (!userRole || !allowedRoles.includes(userRole)) {
-        router.push("/login");
+        router.push(redirectTo);
         return;
       }
     }
@@ -98,6 +98,7 @@ const RouteProtection = ({
     userRole,
     authLoading,
     roleLoading,
+    roleLoadAttempted,
     requireAuth,
     allowedRoles,
     router,
@@ -105,7 +106,10 @@ const RouteProtection = ({
   ]);
 
   // Show loading while checking authentication or roles
-  if (authLoading || (allowedRoles.length > 0 && roleLoading)) {
+  if (
+    authLoading ||
+    (allowedRoles.length > 0 && (roleLoading || !roleLoadAttempted))
+  ) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <LoaderCircle className="animate-spin h-8 w-8 text-blue-600" />
@@ -118,9 +122,10 @@ const RouteProtection = ({
     return null;
   }
 
-  // Don't render children if user doesn't have required role
+  // Don't render children if user doesn't have required role (only after role check is complete)
   if (
     allowedRoles.length > 0 &&
+    roleLoadAttempted &&
     (!userRole || !allowedRoles.includes(userRole))
   ) {
     return null;
