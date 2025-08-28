@@ -1,6 +1,9 @@
-import { Star } from "lucide-react"
+import { useStore } from "@/store/zustand";
+import { Star } from "lucide-react";
 
 export default function Simplicity() {
+  const { bookingOpen, setBookingOpen } = useStore();
+
   return (
     <section className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-16">
@@ -13,12 +16,16 @@ export default function Simplicity() {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0">
-                Discover how the dedicated team at AL Aesthetics can enhance your natural beauty today.
+                Discover how the dedicated team at AL Aesthetics can enhance
+                your natural beauty today.
               </p>
             </div>
 
             {/* Custom Styled Button */}
-            <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide overflow-hidden">
+            <button
+              onClick={() => setBookingOpen(!bookingOpen)}
+              className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide overflow-hidden"
+            >
               BOOK A CONSULTATION
               {/* subtle top white shine */}
               <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -43,15 +50,20 @@ export default function Simplicity() {
                 </div>
                 <div className="flex">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star
+                      key={i}
+                      className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                    />
                   ))}
                 </div>
               </div>
-              <span className="text-gray-600 text-sm font-medium">Read Reviews</span>
+              <span className="text-gray-600 text-sm font-medium">
+                Read Reviews
+              </span>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

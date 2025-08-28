@@ -1,11 +1,19 @@
-"use client"
+"use client";
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
-import { Play } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Play } from "lucide-react";
+import { useStore } from "@/store/zustand";
 
 export default function BotoxSection() {
+  const { bookingOpen, setBookingOpen } = useStore();
+
   return (
     <section className="py-12 md:py-20 px-4 bg-[#f4f4f4]">
       <div className="max-w-7xl mx-auto">
@@ -60,7 +68,9 @@ export default function BotoxSection() {
               {/* Content Section */}
               <div className="space-y-6">
                 <div>
-                  <span className="text-sm text-gray-600 font-medium">Botox Treatment</span>
+                  <span className="text-sm text-gray-600 font-medium">
+                    Botox Treatment
+                  </span>
                   <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
                     What is Botox and how does it work?
                   </h3>
@@ -68,14 +78,21 @@ export default function BotoxSection() {
 
                 <div className="space-y-4 text-gray-600 leading-relaxed">
                   <p>
-                    Anti-wrinkle treatment (Botox®) works by weakening the muscles to{" "}
-                    <span className="font-semibold text-gray-900">reduce lines and wrinkles</span> on the forehead,
-                    frown lines and the face. In small doses, these injections are a very effective anti-ageing
-                    treatment.
+                    Anti-wrinkle treatment (Botox®) works by weakening the
+                    muscles to{" "}
+                    <span className="font-semibold text-gray-900">
+                      reduce lines and wrinkles
+                    </span>{" "}
+                    on the forehead, frown lines and the face. In small doses,
+                    these injections are a very effective anti-ageing treatment.
                   </p>
                   <p>
-                    We use anti-wrinkle injections to <span className="font-semibold text-gray-900">rejuvenate</span>{" "}
-                    the skin and combat wrinkles, which strengthens the skin and smooths away lines and folds.
+                    We use anti-wrinkle injections to{" "}
+                    <span className="font-semibold text-gray-900">
+                      rejuvenate
+                    </span>{" "}
+                    the skin and combat wrinkles, which strengthens the skin and
+                    smooths away lines and folds.
                   </p>
                 </div>
 
@@ -87,7 +104,10 @@ export default function BotoxSection() {
 
                 <div className="pt-6">
                   <div className="pt-6">
-                    <button className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
+                    <button
+                      className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide"
+                      onClick={() => setBookingOpen(true)}
+                    >
                       BOOK A CONSULTATION
                       <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                     </button>
@@ -109,7 +129,9 @@ export default function BotoxSection() {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 right-4 bg-white rounded-lg px-3 py-2 shadow-lg">
-                    <div className="text-xs text-gray-600 font-medium">Dr. Ash Labib</div>
+                    <div className="text-xs text-gray-600 font-medium">
+                      Dr. Ash Labib
+                    </div>
                     <div className="text-xs text-gray-500">Owner & Founder</div>
                   </div>
                   <div className="absolute bottom-6 left-6">
@@ -128,13 +150,19 @@ export default function BotoxSection() {
               {/* Content Section */}
               <div className="space-y-6">
                 <div>
-                  <span className="text-sm text-gray-600 font-medium">Botox Injectables</span>
+                  <span className="text-sm text-gray-600 font-medium">
+                    Botox Injectables
+                  </span>
                   <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
                     What can Botox help with?
                   </h3>
                 </div>
 
-                <Accordion type="single" collapsible className="w-full space-y-2">
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="w-full space-y-2"
+                >
                   {[
                     "Frown Lines",
                     "Forehead Lines",
@@ -145,12 +173,17 @@ export default function BotoxSection() {
                     "Drooped Brows",
                     "Neck Band",
                   ].map((item, index) => (
-                    <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200">
+                    <AccordionItem
+                      key={index}
+                      value={`item-${index}`}
+                      className="border-b border-gray-200"
+                    >
                       <AccordionTrigger className="text-left font-medium text-gray-900 hover:no-underline py-4">
                         {item}
                       </AccordionTrigger>
                       <AccordionContent className="text-gray-600 pb-4">
-                        Treatment information for {item.toLowerCase()} will be displayed here.
+                        Treatment information for {item.toLowerCase()} will be
+                        displayed here.
                       </AccordionContent>
                     </AccordionItem>
                   ))}
@@ -168,5 +201,5 @@ export default function BotoxSection() {
         </Tabs>
       </div>
     </section>
-  )
+  );
 }
