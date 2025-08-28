@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/config/db";
-import { collection, getDocs, query, where, orderBy, limit, startAfter, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy, limit, startAfter, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export async function GET(request) {
   try {
@@ -37,17 +37,42 @@ export async function GET(request) {
     const querySnapshot = await getDocs(usersQuery);
     let users = [];
 
-    querySnapshot.forEach((doc) => {
-      const userData = doc.data();
+    // Get referrer information for each user
+    for (const userDoc of querySnapshot.docs) {
+      const userData = userDoc.data();
+      
       // Filter out admin users
       if (userData.role !== "admin") {
+        let referrerInfo = null;
+        
+        // If user was referred, get referrer information
+        if (userData.referredBy) {
+          const referrerQuery = query(
+            collection(db, "users"), 
+            where("referralCode", "==", userData.referredBy)
+          );
+          const referrerSnapshot = await getDocs(referrerQuery);
+          
+          if (!referrerSnapshot.empty) {
+            const referrerDoc = referrerSnapshot.docs[0];
+            const referrerData = referrerDoc.data();
+            referrerInfo = {
+              id: referrerDoc.id,
+              name: referrerData.name,
+              email: referrerData.email,
+            };
+          }
+        }
+
         users.push({
-          id: doc.id,
+          id: userDoc.id,
           ...userData,
           createdAt: userData.createdAt?.toDate?.()?.toISOString() || userData.createdAt,
+          referrerInfo,
+          referralCount: userData.referrals?.length || 0,
         });
       }
-    });
+    }
 
     // Apply search filter (client-side for simplicity)
     if (searchTerm) {
@@ -59,21 +84,97 @@ export async function GET(request) {
       );
     }
 
-    // Get total count for pagination info (excluding admins)
-    const totalSnapshot = await getDocs(query(collection(db, "users"), where("role", "!=", "admin")));
-    const totalCount = totalSnapshot.size;
-
     return NextResponse.json({
       users,
-      count: users.length,
-      totalCount,
-      hasMore: users.length === pageSize,
-      lastUserId: users.length > 0 ? users[users.length - 1].id : null,
+      total: users.length,
+      hasMore: querySnapshot.docs.length === pageSize,
+      lastUserId: querySnapshot.docs.length > 0 
+        ? querySnapshot.docs[querySnapshot.docs.length - 1].id 
+        : null,
     });
   } catch (error) {
     console.error("Error fetching users:", error);
     return NextResponse.json(
       { error: "Failed to fetch users" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request) {
+  try {
+    const body = await request.json();
+    const { id, userData, isBanned, isAdmin } = body;
+
+    // Verify admin access
+    if (!isAdmin) {
+      return NextResponse.json(
+        { error: "Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "User ID is required" },
+        { status: 400 }
+      );
+    }
+
+    const userRef = doc(db, "users", id);
+    const userDoc = await getDoc(userRef);
+
+    if (!userDoc.exists()) {
+      return NextResponse.json(
+        { error: "User not found" },
+        { status: 404 }
+      );
+    }
+
+    const currentUserData = userDoc.data();
+
+    // Prevent banning admin users
+    if (currentUserData.role === "admin" && isBanned !== undefined) {
+      return NextResponse.json(
+        { error: "Cannot ban admin users" },
+        { status: 403 }
+      );
+    }
+
+    // Prepare update data
+    const updateData = {
+      updatedAt: new Date(),
+    };
+
+    // Handle ban/unban
+    if (isBanned !== undefined) {
+      updateData.isBanned = isBanned;
+    }
+
+    // Handle other user data updates
+    if (userData) {
+      Object.assign(updateData, userData);
+    }
+
+    await updateDoc(userRef, updateData);
+
+    // Get updated user data
+    const updatedUserDoc = await getDoc(userRef);
+    const updatedUserData = updatedUserDoc.data();
+
+    return NextResponse.json({
+      message: "User updated successfully",
+      user: {
+        id: updatedUserDoc.id,
+        ...updatedUserData,
+        createdAt: updatedUserData.createdAt?.toDate?.()?.toISOString() || updatedUserData.createdAt,
+        updatedAt: updatedUserData.updatedAt?.toDate?.()?.toISOString() || updatedUserData.updatedAt,
+      },
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return NextResponse.json(
+      { error: "Failed to update user" },
       { status: 500 }
     );
   }

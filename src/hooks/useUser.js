@@ -28,12 +28,12 @@ export const useUsersData = (searchTerm = "", role = "", status = "") => {
   });
 };
 
-// Get Single User by ID
+// Get Single User by ID with referral details
 export const useUserById = (id) => {
   return useQuery({
     queryKey: ["user", id],
     queryFn: async () => {
-      const response = await fetch(`/api/user/${id}`);
+      const response = await fetch(`/api/user/${id}?includeReferrals=true`);
       if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     },

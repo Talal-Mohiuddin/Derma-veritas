@@ -2,6 +2,7 @@
 
 import { Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 import ClinicsModal from "./ClinicsModal"; // import your modal
 import { BookingModal } from "./booking-modal";
@@ -10,6 +11,7 @@ import { Button } from "@/components/ui/button";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -56,7 +58,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:gap-4">
             {/* Gradient Book Consultation - hidden on mobile */}
             <div className="hidden md:block">
-              <BookingModal>
+              <BookingModal currentPath={pathname}>
                 <Button className="relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
                   <span>BOOK A CONSULTATION</span>
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -82,6 +84,7 @@ export default function Navbar() {
       <MobileMenuDrawer
         isOpen={isMobileMenuOpen}
         setIsOpen={setIsMobileMenuOpen}
+        currentPath={pathname}
       />
 
       {/* Clinics Modal */}

@@ -1,14 +1,22 @@
-import { useUserDetails, useUserById } from "../../../../hooks/useUser";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { useUserById } from "../../../../hooks/useUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, Mail, User, Shield, CreditCard, Clock } from "lucide-react";
+import {
+  Calendar,
+  Mail,
+  User,
+  Shield,
+  CreditCard,
+  Clock,
+  Users,
+  TrendingUp,
+  UserPlus,
+  Copy,
+  X,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export function UserDetailsModal({ userId, isOpen, onClose }) {
   const { data: user, isLoading, error } = useUserById(userId);
@@ -27,30 +35,39 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
   const getRoleBadgeColor = (role) => {
     switch (role) {
       case "admin":
-        return "bg-red-100 text-red-800";
+        return "bg-red-100 text-red-800 border-red-200";
       case "user":
-        return "bg-blue-100 text-blue-800";
+        return "bg-blue-100 text-blue-800 border-blue-200";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-gray-100 text-gray-800 border-gray-200";
     }
   };
 
+  const copyReferralCode = () => {
+    if (user?.referralCode) {
+      navigator.clipboard.writeText(user.referralCode);
+      toast.success("Referral code copied to clipboard!");
+    }
+  };
+
+  if (!isOpen) return null;
+
   if (isLoading) {
     return (
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-2xl">
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh]">
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </div>
     );
   }
 
   if (error || !user) {
     return (
-      <Dialog open={isOpen} onOpenChange={onClose}>
-        <DialogContent className="max-w-2xl">
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg p-8 max-w-4xl w-full mx-4 max-h-[90vh]">
           <div className="text-center py-12">
             <div className="text-red-500 text-lg mb-2">
               Failed to load user details
@@ -59,194 +76,321 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
               {error?.message || "User not found"}
             </p>
           </div>
-        </DialogContent>
-      </Dialog>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-gray-900">
-            User Details
-          </DialogTitle>
-        </DialogHeader>
+    <div
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-lg p-4 sm:p-6 w-full max-h-[90vh] overflow-y-auto max-w-3xl mx-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+            User Profile & Details
+          </h2>
+          <Button variant="ghost" size="sm" onClick={onClose}>
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* User Header */}
-          <div className="flex items-center space-x-4 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl">
-            <Avatar className="h-20 w-20">
-              <AvatarImage src={user.photoURL} alt={user.name} />
-              <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xl">
-                {user.name?.charAt(0)?.toUpperCase() ||
-                  user.email?.charAt(0)?.toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <h3 className="text-xl font-semibold text-gray-900">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 p-4 sm:p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border">
+            <div className="flex items-center space-x-4 w-full sm:w-auto">
+              <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-white shadow-md">
+                <AvatarImage src={user.photoURL} alt={user.name} />
+                <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg sm:text-xl font-bold">
+                  {user.name?.charAt(0)?.toUpperCase() ||
+                    user.email?.charAt(0)?.toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 sm:hidden">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  {user.name || "No Name"}
+                </h3>
+                <p className="text-sm text-gray-600 mb-2">{user.email}</p>
+              </div>
+            </div>
+            
+            <div className="flex-1 hidden sm:block">
+              <h3 className="text-xl font-semibold text-gray-900 mb-1">
                 {user.name || "No Name"}
               </h3>
-              <p className="text-gray-600">{user.email}</p>
-              <div className="flex items-center space-x-2 mt-2">
-                <Badge className={getRoleBadgeColor(user.role)}>
+              <p className="text-gray-600 mb-2">{user.email}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge className={`${getRoleBadgeColor(user.role)} border`}>
                   {user.role || "user"}
                 </Badge>
                 <Badge
                   variant={user.isBanned ? "destructive" : "default"}
                   className={
                     user.isBanned
-                      ? "bg-red-100 text-red-800"
-                      : "bg-green-100 text-green-800"
+                      ? "bg-red-100 text-red-800 border-red-200"
+                      : "bg-green-100 text-green-800 border-green-200"
                   }
                 >
                   {user.isBanned ? "Banned" : "Active"}
                 </Badge>
+                {user.referralCode && (
+                  <Badge variant="outline" className="text-xs border">
+                    Code: {user.referralCode}
+                  </Badge>
+                )}
               </div>
+            </div>
+            
+            {/* Mobile badges */}
+            <div className="flex flex-wrap items-center gap-2 w-full sm:hidden">
+              <Badge className={`${getRoleBadgeColor(user.role)} border`}>
+                {user.role || "user"}
+              </Badge>
+              <Badge
+                variant={user.isBanned ? "destructive" : "default"}
+                className={
+                  user.isBanned
+                    ? "bg-red-100 text-red-800 border-red-200"
+                    : "bg-green-100 text-green-800 border-green-200"
+                }
+              >
+                {user.isBanned ? "Banned" : "Active"}
+              </Badge>
+              {user.referralCode && (
+                <Badge variant="outline" className="text-xs border">
+                  Code: {user.referralCode}
+                </Badge>
+              )}
+            </div>
+            
+            <div className="text-left sm:text-right w-full sm:w-auto">
+              <div className="text-sm text-gray-500">Member Since</div>
+              <div className="font-medium text-sm sm:text-base">{formatDate(user.createdAt)}</div>
+            </div>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-200">
+              <div className="flex items-center justify-between mb-2">
+                <CreditCard className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+              </div>
+              <div className="text-lg sm:text-2xl font-bold text-blue-600">
+                {user.plan || "Free"}
+              </div>
+              <div className="text-xs sm:text-sm text-blue-700">Current Plan</div>
+            </div>
+
+            <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200">
+              <div className="flex items-center justify-between mb-2">
+                <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
+              </div>
+              <div className="text-lg sm:text-2xl font-bold text-green-600">
+                {user.referralCount || 0}
+              </div>
+              <div className="text-xs sm:text-sm text-green-700">Users Referred</div>
+            </div>
+
+            <div className="bg-purple-50 rounded-lg p-3 sm:p-4 border border-purple-200">
+              <div className="flex items-center justify-between mb-2">
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
+              </div>
+              <div className="text-lg sm:text-2xl font-bold text-purple-600">
+                {user.referralRewards || 0}
+              </div>
+              <div className="text-xs sm:text-sm text-purple-700">Referral Rewards</div>
+            </div>
+
+            <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200">
+              <div className="flex items-center justify-between mb-2">
+                <UserPlus className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600" />
+              </div>
+              <div className="text-lg sm:text-2xl font-bold text-orange-600">
+                {user.referrerInfo ? "Yes" : "No"}
+              </div>
+              <div className="text-xs sm:text-sm text-orange-700">Was Referred</div>
             </div>
           </div>
 
           <Separator />
 
-          {/* User Information Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Main Content Grid */}
+          <div className="space-y-6 sm:space-y-8">
             {/* Personal Information */}
-            <div className="space-y-4">
-              <h4 className="text-lg font-semibold text-gray-900 flex items-center">
-                <User className="w-5 h-5 mr-2 text-purple-600" />
-                Personal Information
-              </h4>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-4">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                  <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-purple-600" />
+                  Personal Information
+                </h4>
 
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Mail className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-sm text-gray-500">Email</p>
-                    <p className="text-gray-900">{user.email}</p>
+                <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-3 sm:space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <Mail className="w-4 h-4 text-gray-500 mt-1" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-500">Email Address</p>
+                      <p className="text-gray-900 font-medium text-sm sm:text-base break-all">
+                        {user.email}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center space-x-3">
-                  <User className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-sm text-gray-500">Full Name</p>
-                    <p className="text-gray-900">
-                      {user.name || "Not provided"}
-                    </p>
+                  <div className="flex items-start space-x-3">
+                    <User className="w-4 h-4 text-gray-500 mt-1" />
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-500">Full Name</p>
+                      <p className="text-gray-900 font-medium text-sm sm:text-base">
+                        {user.name || "Not provided"}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="flex items-center space-x-3">
-                  <Shield className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-sm text-gray-500">User ID</p>
-                    <p className="text-gray-900 font-mono text-xs">{user.id}</p>
+                  <div className="flex items-start space-x-3">
+                    <Shield className="w-4 h-4 text-gray-500 mt-1" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-500">User ID</p>
+                      <p className="text-gray-900 font-mono text-xs break-all">
+                        {user.id}
+                      </p>
+                    </div>
                   </div>
+
+                  <div className="flex items-start space-x-3">
+                    <Calendar className="w-4 h-4 text-gray-500 mt-1" />
+                    <div className="flex-1">
+                      <p className="text-sm text-gray-500">Account Created</p>
+                      <p className="text-gray-900 font-medium text-sm sm:text-base">
+                        {formatDate(user.createdAt)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {user.updatedAt && (
+                    <div className="flex items-start space-x-3">
+                      <Clock className="w-4 h-4 text-gray-500 mt-1" />
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-500">Last Updated</p>
+                        <p className="text-gray-900 font-medium text-sm sm:text-base">
+                          {formatDate(user.updatedAt)}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
 
-            {/* Account Information */}
+            {/* Referral Information - Full Width */}
             <div className="space-y-4">
-              <h4 className="text-lg font-semibold text-gray-900 flex items-center">
-                <Shield className="w-5 h-5 mr-2 text-purple-600" />
-                Account Information
+              <h4 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-green-600" />
+                Referral Information
               </h4>
 
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Calendar className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-sm text-gray-500">Joined</p>
-                    <p className="text-gray-900">
-                      {formatDate(user.createdAt)}
-                    </p>
-                  </div>
-                </div>
+              <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 sm:p-6 border border-green-200">
+                <div className="space-y-4 sm:space-y-6">
+                  {user.referralCode && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">
+                        Referral Code
+                      </p>
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
+                        <code className="bg-white px-3 py-2 rounded border text-green-600 font-bold text-sm sm:text-base w-full sm:w-auto text-center sm:text-left">
+                          {user.referralCode}
+                        </code>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={copyReferralCode}
+                          className="w-full sm:w-auto"
+                        >
+                          <Copy className="w-4 h-4 mr-2 sm:mr-0" />
+                          <span className="sm:hidden">Copy Code</span>
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
-                <div className="flex items-center space-x-3">
-                  <CreditCard className="w-4 h-4 text-gray-500" />
                   <div>
-                    <p className="text-sm text-gray-500">Plan</p>
-                    <Badge variant="outline">{user.plan || "Free"}</Badge>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3">
-                  <Clock className="w-4 h-4 text-gray-500" />
-                  <div>
-                    <p className="text-sm text-gray-500">Last Updated</p>
-                    <p className="text-gray-900">
-                      {formatDate(user.updatedAt)}
-                    </p>
+                    {user.referrerInfo ? (
+                      <div>
+                        <p className="text-sm text-gray-600 mb-2">
+                          Referred By
+                        </p>
+                        <div className="flex items-center space-x-3 bg-white p-3 rounded border">
+                          <Avatar className="h-8 w-8 flex-shrink-0">
+                            <AvatarFallback className="bg-blue-100 text-blue-600 text-sm">
+                              {user.referrerInfo.name
+                                ?.charAt(0)
+                                ?.toUpperCase() ||
+                                user.referrerInfo.email
+                                  ?.charAt(0)
+                                  ?.toUpperCase()}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-gray-900 text-sm sm:text-base truncate">
+                              {user.referrerInfo.name || "Unknown"}
+                            </div>
+                            <div className="text-xs sm:text-sm text-gray-600 truncate">
+                              {user.referrerInfo.email}
+                            </div>
+                          </div>
+                          <Badge variant="outline" className="text-xs flex-shrink-0">
+                            Referrer
+                          </Badge>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center py-4">
+                        <UserPlus className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                        <p className="text-sm text-gray-600">
+                          Direct signup - not referred
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Additional Information */}
-          {(user.bio || user.phoneNumber || user.location) && (
-            <>
-              <Separator />
-              <div className="space-y-4">
-                <h4 className="text-lg font-semibold text-gray-900">
-                  Additional Information
-                </h4>
-                <div className="space-y-3">
-                  {user.bio && (
-                    <div>
-                      <p className="text-sm text-gray-500">Bio</p>
-                      <p className="text-gray-900">{user.bio}</p>
-                    </div>
-                  )}
-                  {user.phoneNumber && (
-                    <div>
-                      <p className="text-sm text-gray-500">Phone Number</p>
-                      <p className="text-gray-900">{user.phoneNumber}</p>
-                    </div>
-                  )}
-                  {user.location && (
-                    <div>
-                      <p className="text-sm text-gray-500">Location</p>
-                      <p className="text-gray-900">{user.location}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
-          )}
 
           {/* Account Status */}
           <Separator />
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h4 className="text-lg font-semibold text-gray-900 mb-3">
-              Account Status
+          <div className="bg-gray-50 rounded-lg p-4 sm:p-6 border">
+            <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 flex items-center">
+              <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-gray-600" />
+              Account Status & Security
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-500">Status</p>
+                <p className="text-sm text-gray-500 mb-1">Account Status</p>
                 <Badge
                   variant={user.isBanned ? "destructive" : "default"}
                   className={
                     user.isBanned
-                      ? "bg-red-100 text-red-800"
-                      : "bg-green-100 text-green-800"
+                      ? "bg-red-100 text-red-800 border-red-200"
+                      : "bg-green-100 text-green-800 border-green-200"
                   }
                 >
                   {user.isBanned ? "Banned" : "Active"}
                 </Badge>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Role</p>
-                <Badge className={getRoleBadgeColor(user.role)}>
-                  {user.role || "user"}
+                <p className="text-sm text-gray-500 mb-1">Email Verified</p>
+                <Badge variant={user.emailVerified ? "default" : "warning"}>
+                  {user.emailVerified ? "Verified" : "Pending"}
                 </Badge>
               </div>
             </div>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
