@@ -150,3 +150,24 @@ export const useUserStats = () => {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
+
+// Get Current User's Referral Data
+export const useUserReferralData = (userId) => {
+  return useQuery({
+    queryKey: ["user", "referral", userId],
+    queryFn: async () => {
+      if (!userId) throw new Error("User ID is required");
+      
+      const response = await fetch(`/api/user/get-refer-link?userId=${userId}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch referral data");
+      }
+      return response.json();
+    },
+    enabled: !!userId,
+    refetchOnWindowFocus: false,
+    gcTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+};

@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import ClinicsModal from "./ClinicsModal";
 
@@ -12,6 +12,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [submenuOpenedByClick, setSubmenuOpenedByClick] = useState(false);
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+  const hideTimeoutRef = useRef(null);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -31,6 +32,11 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   };
 
   const showSubmenu = (menu) => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
+    }
+
     if (!submenuOpenedByClick) {
       setActiveSubmenu(menu);
     }
@@ -38,7 +44,16 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
   const hideSubmenu = () => {
     if (!submenuOpenedByClick) {
-      setActiveSubmenu(null);
+      hideTimeoutRef.current = setTimeout(() => {
+        setActiveSubmenu(null);
+      }, 150);
+    }
+  };
+
+  const keepSubmenuVisible = () => {
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+      hideTimeoutRef.current = null;
     }
   };
 
@@ -319,11 +334,11 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
             <div className="hidden md:flex flex-1 overflow-y-auto pr-20">
               {/* Left Column - Main Navigation */}
               <div className="w-1/2 px-12 pt-20 pb-12">
-                <div className="space-y-0 max-w-xs pr-0">
+                <div className="space-y-0 max-w-xs pr-4">
                   
                   {/* Treatments Section */}
                   <div 
-                    className="py-4"
+                    className="py-4 pr-8"
                     onMouseEnter={() => showSubmenu('treatments')}
                     onMouseLeave={hideSubmenu}
                   >
@@ -337,7 +352,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                   {/* Conditions Section */}
                   <div 
-                    className="py-4"
+                    className="py-4 pr-8"
                     onMouseEnter={() => showSubmenu('conditions')}
                     onMouseLeave={hideSubmenu}
                   >
@@ -422,17 +437,9 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 20 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute top-20 -left-2 right-0 space-y-0"
-                      onMouseEnter={() => {
-                        if (submenuOpenedByClick) {
-                          setActiveSubmenu(activeSubmenu);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (!submenuOpenedByClick) {
-                          setActiveSubmenu(null);
-                        }
-                      }}
+                      className="absolute top-20 -left-8 right-0 space-y-0 pl-4"
+                      onMouseEnter={keepSubmenuVisible}
+                      onMouseLeave={hideSubmenu}
                     >
                       
                       {activeSubmenu === 'treatments' && (

@@ -7,45 +7,78 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/config/db";
 import { LoaderCircle } from "lucide-react";
 
-const RouteProtection = ({ 
-  children, 
-  allowedRoles = [], 
+const RouteProtection = ({
+  children,
+  allowedRoles = [],
   requireAuth = true,
-  redirectTo = "/login"
+  redirectTo = "/login",
 }) => {
   const { user, loading: authLoading } = useAuth();
   const [userRole, setUserRole] = useState(null);
-  const [roleLoading, setRoleLoading] = useState(false);
+  const [roleLoading, setRoleLoading] = useState(true);
+  const [roleLoadAttempted, setRoleLoadAttempted] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const checkUserRole = async () => {
-      if (!user || allowedRoles.length === 0) return;
+      // Only fetch role if we have a user AND allowedRoles are specified
+      if (!user || allowedRoles.length === 0) {
+        setUserRole(null);
+        setRoleLoading(false);
+        setRoleLoadAttempted(true);
+        return;
+      }
 
       setRoleLoading(true);
+      setRoleLoadAttempted(false);
+
+      // Add a timeout to prevent hanging
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error("Firestore query timeout")), 10000);
+      });
+
       try {
         const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await getDoc(userDocRef);
-        
+        const userDoc = await Promise.race([
+          getDoc(userDocRef),
+          timeoutPromise,
+        ]);
+
         if (userDoc.exists()) {
           const userData = userDoc.data();
-          setUserRole(userData.role);
+          setUserRole(userData.role || null);
+        } else {
+          setUserRole(null);
         }
       } catch (error) {
         console.error("Error fetching user role:", error);
+        setUserRole(null);
       } finally {
         setRoleLoading(false);
+        setRoleLoadAttempted(true);
       }
     };
 
-    if (user && allowedRoles.length > 0) {
+    // Reset states when user changes
+    if (!user) {
+      setUserRole(null);
+      setRoleLoading(false);
+      setRoleLoadAttempted(false);
+      return;
+    }
+
+    // Only run when auth is not loading and we have a user and haven't attempted yet
+    if (!authLoading && user && !roleLoadAttempted) {
       checkUserRole();
     }
-  }, [user, allowedRoles]);
+  }, [user?.uid, allowedRoles.length, authLoading, roleLoadAttempted]);
 
   useEffect(() => {
-    // Don't redirect while auth is loading
+    // Don't do anything while auth or role is loading
     if (authLoading) return;
+
+    // Don't do anything while role is loading (for role-based routes)
+    if (allowedRoles.length > 0 && roleLoading) return;
 
     // Check if authentication is required and user is not logged in
     if (requireAuth && !user) {
@@ -53,14 +86,23 @@ const RouteProtection = ({
       return;
     }
 
-    // Check role-based access
-    if (allowedRoles.length > 0 && user && !roleLoading) {
+    // Check role-based access - only when role loading is complete
+    if (allowedRoles.length > 0 && user) {
       if (!userRole || !allowedRoles.includes(userRole)) {
-        router.push("/unauthorized");
+        router.push("/login");
         return;
       }
     }
-  }, [user, userRole, authLoading, roleLoading, requireAuth, allowedRoles, router, redirectTo]);
+  }, [
+    user,
+    userRole,
+    authLoading,
+    roleLoading,
+    requireAuth,
+    allowedRoles,
+    router,
+    redirectTo,
+  ]);
 
   // Show loading while checking authentication or roles
   if (authLoading || (allowedRoles.length > 0 && roleLoading)) {
@@ -77,7 +119,10 @@ const RouteProtection = ({
   }
 
   // Don't render children if user doesn't have required role
-  if (allowedRoles.length > 0 && (!userRole || !allowedRoles.includes(userRole))) {
+  if (
+    allowedRoles.length > 0 &&
+    (!userRole || !allowedRoles.includes(userRole))
+  ) {
     return null;
   }
 

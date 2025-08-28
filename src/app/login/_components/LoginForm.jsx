@@ -14,6 +14,10 @@ import {
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
+import {
+  generateUniqueReferralCode,
+  createUserDocumentWithReferral,
+} from "@/utils/sharedFirebase";
 
 export default function LoginForm({ csrfToken }) {
   const [isSignup, setIsSignup] = useState(false);
@@ -28,36 +32,6 @@ export default function LoginForm({ csrfToken }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
-
-  const createUserDocument = async (user, displayName = null) => {
-    try {
-      // Check if user document already exists
-      const userDocRef = doc(db, "users", user.uid);
-      const userDoc = await getDoc(userDocRef);
-
-      if (userDoc.exists()) {
-        console.log("User document already exists");
-        return;
-      }
-
-      // Create new user document
-      const userData = {
-        name: displayName || user.displayName || inputValue.name || user.email.split("@")[0],
-        email: user.email.toLowerCase().trim(),
-        role: "user",
-        Buyinghistory: [],
-        plan: null,
-        isBanned: false,
-        createdAt: new Date(),
-      };
-
-      await setDoc(userDocRef, userData);
-      console.log("User document created successfully");
-    } catch (error) {
-      console.error("Error creating user document:", error);
-      // Don't throw here to avoid breaking the auth flow
-    }
-  };
 
   async function handleEmailLogin(e) {
     e.preventDefault();
@@ -75,19 +49,40 @@ export default function LoginForm({ csrfToken }) {
           throw new Error("Password must be at least 6 characters long");
         }
 
+        // First, get referral data from API
+        const signupResponse = await fetch("/api/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: inputValue.email,
+            password: inputValue.password,
+            displayName: inputValue.name,
+          }),
+        });
+
+        const signupData = await signupResponse.json();
+
+        if (!signupResponse.ok) {
+          throw new Error(signupData.error || "Signup failed");
+        }
+
+        // Create Firebase user
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           inputValue.email,
           inputValue.password
         );
 
-        // Create user document in Firestore
-        await createUserDocument(userCredential.user, inputValue.name);
+        // Create user document with referral data
+        await createUserDocumentWithReferral(
+          userCredential.user,
+          signupData.userData,
+          signupData.referredBy
+        );
 
-        toast({
-          title: "Success",
-          description: "Account created successfully!",
-        });
+        toast.success("Account created successfully!");
       } else {
         await signInWithEmailAndPassword(
           auth,
@@ -95,24 +90,13 @@ export default function LoginForm({ csrfToken }) {
           inputValue.password
         );
 
-        toast({
-          title: "Success",
-          description: "Logged in successfully!",
-        });
+        toast.success("Logged in successfully!");
       }
 
       router.push("/");
     } catch (error) {
       console.error("Authentication error:", error);
-      toast({
-        title: "Error",
-        description:
-          error.message ||
-          `Failed to ${
-            isSignup ? "create account" : "log in"
-          }. Please try again.`,
-        variant: "destructive",
-      });
+      toast.error(error.message || "Authentication failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -124,23 +108,47 @@ export default function LoginForm({ csrfToken }) {
     try {
       const result = await signInWithPopup(auth, googleProvider);
 
-      // Always try to create user document (API will handle existing users)
-      await createUserDocument(result.user);
-
-      toast({
-        title: "Success",
-        description: "Logged in with Google successfully!",
+      // Call API to handle referral logic and get user data
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: result.user.email,
+          displayName: result.user.displayName,
+          isGoogleAuth: true,
+          uid: result.user.uid,
+        }),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "User setup failed");
+      }
+
+      // Only create document if it's a new user
+      if (data.isNewUser) {
+        await createUserDocumentWithReferral(
+          result.user,
+          data.userData,
+          data.referredBy
+        );
+      }
+
+      toast.success(
+        data.isNewUser
+          ? "Account created successfully!"
+          : "Logged in successfully!"
+      );
 
       router.push("/");
     } catch (error) {
       console.error("Google authentication error:", error);
-      toast({
-        title: "Error",
-        description:
-          error.message || "Failed to log in with Google. Please try again.",
-        variant: "destructive",
-      });
+      toast.error(
+        error.message || "Google authentication failed. Please try again."
+      );
     } finally {
       setGoogleLoading(false);
     }
@@ -159,11 +167,6 @@ export default function LoginForm({ csrfToken }) {
 
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  const toggleMode = () => {
-    setIsSignup(!isSignup);
-    setInputValue({ email: "", password: "", confirmPassword: "", name: "" });
   };
 
   return (

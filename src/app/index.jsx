@@ -4,10 +4,14 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "@/store/FirebaseAuthProvider";
 import { queryClient } from "@/config/tanstack";
 import { Toaster } from "sonner";
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const ChildLayout = ({ children }) => {
+  const pathname = usePathname();
+  const isLoginPage = pathname === "/login";
+
   return (
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
@@ -38,9 +42,9 @@ const ChildLayout = ({ children }) => {
             },
           }}
         />
-        <Navbar />
+        {!isLoginPage && <Navbar />}
         {children}
-        <Footer />
+        {!isLoginPage && <Footer />}
       </QueryClientProvider>
     </AuthProvider>
   );
