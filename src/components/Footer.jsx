@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Instagram, Facebook, MapPin, Phone } from "lucide-react"
 import { useState } from "react"
 
-// ✅ Clinic Data (shared with modal ideally)
+// ✅ Clinics data
 const clinics = {
   London: {
     name: "AL Aesthetics – London",
@@ -30,12 +30,48 @@ const clinics = {
   },
   Chelsea: {
     name: "AL Aesthetics – Chelsea",
-    address: "221 King’s Rd",
+    address: "221 King's Rd",
     postcode: "London, SW3 5EJ",
     phone: "0207 123 4567",
     image: "/images/sample_image.jpg",
   },
 }
+
+// ✅ Only 13 popular treatments
+const treatments = [
+  "Anti-Wrinkle Treatment",
+  "Non Surgical Rhinoplasty",
+  "Dermal Fillers",
+  "Lip Fillers",
+  "Tear Trough Filler",
+  "Cheek Fillers",
+  "Chin Fillers",
+  "8 Point Facelift",
+  "Profhilo",
+  "Fat Dissolving Injections",
+  "HArmonyCa Dermal Filler",
+  "Polynucleotides Skin Rejuvenation Treatment",
+  "Microneedling",
+]
+
+const skincareLinks = [
+  { name: "Chemical Peels", slug: "chemical-peels" },
+  { name: "RF Microneedling", slug: "rf-microneedling" },
+]
+
+const wellnessLinks = [
+  { name: "Exosome Therapy", path: "/treatments/exosome-therapy" },
+]
+
+const facialConcernsLinks = [
+  { name: "Gummy Smile", path: "/menu/conditions/gummy-smile" },
+  { name: "Jowls Treatments", path: "/menu/conditions/jowls-treatments" },
+  { name: "Under Eye", path: "/menu/conditions/under-eye" },
+]
+
+// ✅ helper
+const slugify = (str) =>
+  str.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
 
 export default function Footer() {
   const [activeTab, setActiveTab] = useState("London")
@@ -43,27 +79,20 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white">
-      {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Popular Conditions */}
           <div>
             <h3 className="text-lg font-semibold mb-6">Popular Conditions</h3>
             <ul className="space-y-3">
-              {[
-                "Crows Feet",
-                "Eye Bags / Dark Circles",
-                "Sagging Jowls",
-                "Pebbled Chin",
-                "Frown Lines",
-                "Forehead Lines",
-                "Temple Hollows",
-                "Bump on Nose",
-                "Gummy Smile",
-              ].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-                    {item}
+              {facialConcernsLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.path}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
                   </Link>
                 </li>
               ))}
@@ -74,24 +103,38 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">Popular Treatments</h3>
             <ul className="space-y-3">
-              {[
-                "Dermal Fillers",
-                "Non-Surgical Nose Job",
-                "Non-Surgical Facelift",
-                "Non Surgical Nose Job Before and After",
-                "Cheek Fillers",
-                "Lip fillers",
-                "Chin Fillers",
-                "Anti-Wrinkle Treatment",
-                "Profhilo",
-                "HydraFacial",
-                "Dermalux LED Light Therapy",
-                "NCTF® Skin Revitalisation",
-                "PRX-T33 Peel",
-              ].map((item) => (
+              {treatments.map((item) => (
                 <li key={item}>
-                  <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+                  <Link
+                    href={`/menu/injectables/${slugify(item)}`}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
                     {item}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
+                  </Link>
+                </li>
+              ))}
+
+              {skincareLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={`/treatments/${item.slug}`}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
+                  </Link>
+                </li>
+              ))}
+
+              {wellnessLinks.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.path}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
                   </Link>
                 </li>
               ))}
@@ -103,34 +146,37 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-6">Misc</h3>
             <ul className="space-y-3">
               {[
-                "About Us",
-                "Meet The Team",
-                "AL Club Membership",
-                "AL Training Academy",
-                "News & Events",
-                "Areas We Serve",
-                "Contact Us",
+                { name: "About Us", href: "/about" },
+                { name: "Meet The Team", href: "/team" },
+                { name: "AL Training Academy", href: "/training" },
+                { name: "Contact Us", href: "/contact" },
               ].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-gray-300 hover:text-white transition-colors">
-                    {item}
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-300 hover:text-white transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
                   </Link>
                 </li>
               ))}
             </ul>
 
-            {/* Social Media Icons */}
+            {/* Socials */}
             <div className="flex space-x-4 mt-6">
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors relative group">
                 <Instagram size={24} />
+                <span className="absolute left-1/2 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
               </Link>
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors relative group">
                 <Facebook size={24} />
+                <span className="absolute left-1/2 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
               </Link>
             </div>
           </div>
 
-          {/* Our Clinics - Dynamic */}
+          {/* Clinics */}
           <div>
             <h3 className="text-lg font-semibold mb-6">Our Clinics</h3>
             <div className="bg-gray-800 rounded-lg overflow-hidden">
@@ -142,18 +188,22 @@ export default function Footer() {
                 className="w-full h-48 object-cover"
               />
 
-              {/* Location Tabs */}
               <div className="p-4">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {Object.keys(clinics).map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-3 py-1 rounded text-sm font-medium transition-colors ${
-                        activeTab === tab ? "bg-white text-gray-900" : "text-gray-300 hover:text-white"
+                      className={`px-3 py-1 rounded text-sm font-medium transition-colors relative group ${
+                        activeTab === tab
+                          ? "bg-white text-gray-900"
+                          : "text-gray-300 hover:text-white"
                       }`}
                     >
                       {tab}
+                      {activeTab !== tab && (
+                        <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
+                      )}
                     </button>
                   ))}
                 </div>
@@ -175,33 +225,39 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Footer */}
+      {/* Bottom footer */}
       <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-            {/* Left Side */}
-            <div className="flex items-center space-x-6">
-              <div className="bg-white text-black px-3 py-2 font-bold text-xl">AL</div>
-              <div className="text-sm text-gray-400">
-                <p>
-                  © Copyright 2025 - AL Aesthetics. All Rights Reserved • CPD Certification |
-                  Complaint Procedure | Web Design & SEO by Creative Ideaz
-                </p>
-                <div className="flex space-x-4 mt-2">
-                  <Link href="#" className="hover:text-white transition-colors">Terms & Conditions</Link>
-                  <Link href="#" className="hover:text-white transition-colors">Cookie Policy</Link>
-                  <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-                </div>
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+          <div className="flex items-center space-x-6">
+            <div className="bg-white text-black px-3 py-2 font-bold text-xl">AL</div>
+            <div className="text-sm text-gray-400">
+              <p>
+                © Copyright 2025 - AL Aesthetics. All Rights Reserved • CPD
+                Certification | Complaint Procedure | Web Design & SEO by
+                Creative Ideaz
+              </p>
+              <div className="flex space-x-4 mt-2">
+                <Link href="#" className="hover:text-white transition-colors relative group">
+                  Terms & Conditions
+                  <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
+                </Link>
+                <Link href="#" className="hover:text-white transition-colors relative group">
+                  Cookie Policy
+                  <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
+                </Link>
+                <Link href="#" className="hover:text-white transition-colors relative group">
+                  Privacy Policy
+                  <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
+                </Link>
               </div>
             </div>
+          </div>
 
-            {/* Right Side */}
-            <div className="flex-shrink-0">
-              <div className="bg-purple-600 text-white px-4 py-2 rounded text-sm font-medium text-center">
-                Regulated by
-                <br />
-                <span className="font-bold">Care Quality Commission</span>
-              </div>
+          <div className="flex-shrink-0">
+            <div className="bg-purple-600 text-white px-4 py-2 rounded text-sm font-medium text-center">
+              Regulated by
+              <br />
+              <span className="font-bold">Care Quality Commission</span>
             </div>
           </div>
         </div>
