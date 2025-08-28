@@ -296,11 +296,15 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                 {/* Static Links */}
                 {[
+
+                  
+
+                  
                   { name: "Contact Us", href: "/contact" },
                   { name: "About Us", href: "/about" },
+                  { name: "Club AL Membership", href: "/pacakges/membership" },
                   { name: "Meet The Team", href: "/team" },
                   { name: "AL Training Academy", href: "/training" },
-                  { name: "Club AL Membership", href: "/membership" },
                   { name: "News & Events", href: "/news" },
                 ].map((item) => (
                   <div
