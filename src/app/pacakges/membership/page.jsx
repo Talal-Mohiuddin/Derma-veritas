@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 export default function ClubMembershipPage() {
+  const { setBookingOpen } = useStore();
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
