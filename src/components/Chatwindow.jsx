@@ -122,7 +122,7 @@ export default function Chatwindow({ isOpen, onClose }) {
                 <MessageCircle className="w-8 h-8 text-gray-400" />
               </div>
               <p className="text-sm text-center">
-                👋 Hello! I'm your AL Aesthetics Assistant.
+                👋 Hello! I'm your Derma Varitas Assistant.
                 <br />
                 How can I help you today?
               </p>

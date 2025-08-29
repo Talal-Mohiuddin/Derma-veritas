@@ -10,7 +10,7 @@ const systemMessage = `You are friendly virtual assistant  for 'Derma Varitas' t
 
 This is the Site url ${process.env.NEXT_PUBLIC_BASE_URL}
 
-About AL Aesthetics:
+About Derma Varitas:
 - Founded and owned by Dr. Ash Labib, a renowned cosmetic specialist with 27+ years of experience
 - Dr. Labib is known as a "Master Injector" and specialist in advanced aesthetic techniques
 - International Ambassador for Allergan, providing training globally
