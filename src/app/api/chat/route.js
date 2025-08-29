@@ -78,7 +78,11 @@ Instructions:
 7. Be knowledgeable about the treatments but don't provide medical advice
 8. Help users navigate to relevant pages on the website
 
-Remember: You're representing a premium aesthetic clinic with a focus on natural-looking results and patient safety.`;
+Remember: You're representing a premium aesthetic clinic with a focus on natural-looking results and patient safety.
+
+ALWAYS RETURN THE RESPONSE IN MARKDOWN FORMAT.
+
+`;
 
 export async function POST(req) {
   try {
