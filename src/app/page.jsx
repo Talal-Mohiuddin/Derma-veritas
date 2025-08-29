@@ -12,9 +12,12 @@ import RecentBlogsSection from "@/components/recent-blogs-section";
 import Simplicity from "@/components/simplicity";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
+import Chatwindow from "@/components/Chatwindow";
 
 export default function Home() {
   const [expandedSections, setExpandedSections] = useState({});
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
@@ -63,7 +66,10 @@ export default function Home() {
       {/* Floating Chat */}
       <div className="fixed bottom-6 right-6 z-50">
         <div className="relative">
-          <Button className="bg-black hover:bg-gray-800 text-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg">
+          <Button 
+            className="bg-black hover:bg-gray-800 text-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg"
+            onClick={() => setIsChatOpen(true)}
+          >
             <MessageCircle className="w-5 h-5" />
             <span className="text-sm font-medium">Make an Enquiry</span>
           </Button>
@@ -72,6 +78,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Chat Window */}
+      <Chatwindow 
+        isOpen={isChatOpen} 
+        onClose={() => setIsChatOpen(false)} 
+      />
 
       {/* About Section */}
         <section className="bg-white py-16 px-4">
