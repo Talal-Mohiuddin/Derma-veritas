@@ -18,11 +18,14 @@ export const useCartData = () => {
   return useQuery({
     queryKey: ["cart", user?.uid],
     queryFn: async () => {
-      const token = await getAuthToken();
+      if (!user?.uid) throw new Error("User not authenticated");
+      
       const response = await fetch(`/api/cart`, {
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({ userId: user.uid }),
       });
       
       if (!response.ok) {
@@ -45,15 +48,14 @@ export const useAddToCart = () => {
   
   return useMutation({
     mutationFn: async ({ productId, quantity = 1 }) => {
-      const token = await getAuthToken();
+      if (!user?.uid) throw new Error("User not authenticated");
       
       const response = await fetch("/api/cart", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ productId, quantity }),
+        body: JSON.stringify({ userId: user.uid, productId, quantity }),
       });
 
       if (!response.ok) {
@@ -112,6 +114,10 @@ export const useAddToCart = () => {
     onSuccess: (data) => {
       // Update cart cache with server response
       queryClient.setQueryData(["cart", user?.uid], data);
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: ["cart", "count", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "total", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "contains"] });
     },
   });
 };
@@ -122,15 +128,14 @@ export const useRemoveFromCart = () => {
   
   return useMutation({
     mutationFn: async ({ productId, quantity = 1 }) => {
-      const token = await getAuthToken();
+      if (!user?.uid) throw new Error("User not authenticated");
       
       const response = await fetch("/api/cart/remove", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ productId, quantity }),
+        body: JSON.stringify({ userId: user.uid, productId, quantity }),
       });
 
       if (!response.ok) {
@@ -187,6 +192,10 @@ export const useRemoveFromCart = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["cart", user?.uid], data);
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: ["cart", "count", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "total", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "contains"] });
     },
   });
 };
@@ -197,7 +206,7 @@ export const useUpdateCartQuantity = () => {
   
   return useMutation({
     mutationFn: async ({ productId, quantity }) => {
-      const token = await getAuthToken();
+      if (!user?.uid) throw new Error("User not authenticated");
       
       if (quantity <= 0) {
         // Remove item if quantity is 0 or negative
@@ -205,9 +214,8 @@ export const useUpdateCartQuantity = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`,
           },
-          body: JSON.stringify({ productId, quantity: 999 }), // Remove all
+          body: JSON.stringify({ userId: user.uid, productId, quantity: 999 }), // Remove all
         });
 
         if (!response.ok) {
@@ -229,9 +237,8 @@ export const useUpdateCartQuantity = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify({ productId, quantity: difference }),
+            body: JSON.stringify({ userId: user.uid, productId, quantity: difference }),
           });
 
           if (!response.ok) {
@@ -246,9 +253,8 @@ export const useUpdateCartQuantity = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              'Authorization': `Bearer ${token}`,
             },
-            body: JSON.stringify({ productId, quantity: Math.abs(difference) }),
+            body: JSON.stringify({ userId: user.uid, productId, quantity: Math.abs(difference) }),
           });
 
           if (!response.ok) {
@@ -312,6 +318,10 @@ export const useUpdateCartQuantity = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["cart", user?.uid], data);
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: ["cart", "count", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "total", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "contains"] });
     },
   });
 };
@@ -322,47 +332,34 @@ export const useClearCart = () => {
   
   return useMutation({
     mutationFn: async () => {
-      const token = await getAuthToken();
+      if (!user?.uid) throw new Error("User not authenticated");
       
-      // Get current cart to remove all items
-      const cartData = queryClient.getQueryData(["cart", user?.uid]);
-      if (!cartData?.cart?.products?.length) {
-        return { success: true, cart: { products: [], totalPrice: 0 } };
+      const response = await fetch("/api/cart/clear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user.uid }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to clear cart");
       }
 
-      // Remove all items one by one (since we don't have a clear endpoint)
-      const removePromises = cartData.cart.products.map(item =>
-        fetch("/api/cart/remove", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ productId: item.productId, quantity: item.quantity }),
-        }).then(res => {
-          if (!res.ok) throw new Error(`Failed to remove ${item.productId}`);
-          return res.json();
-        })
-      );
-
-      const results = await Promise.all(removePromises);
-      return results[results.length - 1]; // Return the last result
+      return response.json();
     },
     onMutate: async () => {
       await queryClient.cancelQueries({ queryKey: ["cart", user?.uid] });
 
       const previousCart = queryClient.getQueryData(["cart", user?.uid]);
 
-      queryClient.setQueryData(["cart", user?.uid], (old) => {
-        if (!old) return old;
-        return {
-          ...old,
-          cart: {
-            ...old.cart,
-            products: [],
-            totalPrice: 0,
-          }
-        };
+      queryClient.setQueryData(["cart", user?.uid], {
+        success: true,
+        cart: {
+          products: [],
+          totalPrice: 0,
+        }
       });
 
       return { previousCart };
@@ -372,36 +369,10 @@ export const useClearCart = () => {
     },
     onSuccess: (data) => {
       queryClient.setQueryData(["cart", user?.uid], data);
-    },
-  });
-};
-
-// Checkout Cart
-export const useCheckoutCart = () => {
-  return useMutation({
-    mutationFn: async () => {
-      const token = await getAuthToken();
-      
-      const response = await fetch("/api/cart/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create checkout session");
-      }
-
-      return response.json();
-    },
-    onSuccess: (data) => {
-      // Redirect to Stripe checkout
-      if (data.url) {
-        window.location.href = data.url;
-      }
+      // Invalidate related queries
+      queryClient.invalidateQueries({ queryKey: ["cart", "count", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "total", user?.uid] });
+      queryClient.invalidateQueries({ queryKey: ["cart", "contains"] });
     },
   });
 };
@@ -416,11 +387,14 @@ export const useCartItemCount = () => {
       const cartData = queryClient.getQueryData(["cart", user?.uid]);
       if (!cartData?.cart?.products) {
         // Fetch cart if not in cache
-        const token = await getAuthToken();
+        if (!user?.uid) return 0;
+        
         const response = await fetch(`/api/cart`, {
+          method: "POST",
           headers: {
-            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
+          body: JSON.stringify({ userId: user.uid }),
         });
         
         if (!response.ok) return 0;
@@ -447,11 +421,14 @@ export const useIsInCart = (productId) => {
     queryFn: async () => {
       const cartData = queryClient.getQueryData(["cart", user?.uid]);
       if (!cartData?.cart?.products) {
-        const token = await getAuthToken();
+        if (!user?.uid) return { inCart: false, quantity: 0 };
+        
         const response = await fetch(`/api/cart`, {
+          method: "POST",
           headers: {
-            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
+          body: JSON.stringify({ userId: user.uid }),
         });
         
         if (!response.ok) return { inCart: false, quantity: 0 };
@@ -486,11 +463,14 @@ export const useCartTotal = () => {
     queryFn: async () => {
       const cartData = queryClient.getQueryData(["cart", user?.uid]);
       if (!cartData?.cart) {
-        const token = await getAuthToken();
+        if (!user?.uid) return 0;
+        
         const response = await fetch(`/api/cart`, {
+          method: "POST",
           headers: {
-            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
+          body: JSON.stringify({ userId: user.uid }),
         });
         
         if (!response.ok) return 0;
@@ -514,16 +494,15 @@ export const useBulkAddToCart = () => {
   
   return useMutation({
     mutationFn: async (items) => {
-      const token = await getAuthToken();
+      if (!user?.uid) throw new Error("User not authenticated");
       
       const addPromises = items.map(({ productId, quantity }) =>
         fetch("/api/cart", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`,
           },
-          body: JSON.stringify({ productId, quantity }),
+          body: JSON.stringify({ userId: user.uid, productId, quantity }),
         }).then(res => {
           if (!res.ok) throw new Error(`Failed to add ${productId}`);
           return res.json();
@@ -538,6 +517,32 @@ export const useBulkAddToCart = () => {
       // Invalidate related queries
       queryClient.invalidateQueries({ queryKey: ["cart", "count", user?.uid] });
       queryClient.invalidateQueries({ queryKey: ["cart", "total", user?.uid] });
+    },
+  });
+};
+
+// Create Payment Intent
+export const useCreatePaymentIntent = () => {
+  const { user } = useAuth();
+  
+  return useMutation({
+    mutationFn: async ({ cartId }) => {
+      if (!user?.uid) throw new Error("User not authenticated");
+      
+      const response = await fetch("/api/cart/create-payment-intent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user.uid, cartId }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create payment intent");
+      }
+
+      return response.json();
     },
   });
 };

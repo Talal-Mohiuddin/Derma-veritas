@@ -1,29 +1,19 @@
 import { db } from "../../../../config/db.js";
 import { doc, getDoc } from "firebase/firestore";
-import { auth } from "firebase-admin";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-async function verifyToken(request) {
-  try {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('No valid authorization header');
-    }
-    
-    const token = authHeader.substring(7);
-    const decodedToken = await auth().verifyIdToken(token);
-    return decodedToken;
-  } catch (error) {
-    throw new Error('Invalid token');
-  }
-}
-
 export async function POST(request) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
+    const { userId } = await request.json();
+
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
 
     const cartRef = doc(db, "carts", userId);
     const cartSnap = await getDoc(cartRef);
@@ -81,7 +71,6 @@ export async function POST(request) {
         userId: userId,
         cartId: userId, // Using userId as cartId since we're using user ID as document ID
       },
-      customer_email: decodedToken.email,
       billing_address_collection: "required",
       shipping_address_collection: {
         allowed_countries: ["US", "CA", "GB", "AU"], // Add your allowed countries

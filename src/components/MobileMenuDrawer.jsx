@@ -1,13 +1,15 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronDown } from "lucide-react";
+import { X, ChevronDown, User, ShoppingCart, Shield, Settings, LogOut, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import Link from "next/link";
 import ClinicsModal from "./ClinicsModal";
 import { BookingModal } from "./booking-modal";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/store/FirebaseAuthProvider";
+import { useCartItemCount } from "@/hooks/useCart";
 
 export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const [expandedSections, setExpandedSections] = useState({});
@@ -17,12 +19,25 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const [bookingOpen, setBookingOpen] = useState(false);
   const hideTimeoutRef = useRef(null);
   const pathname = usePathname();
+  
+  // Auth and Cart
+  const { user, logout, isAdmin } = useAuth();
+  const { data: cartCount } = useCartItemCount();
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsOpen(false);
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
   const toggleSubmenu = (menu) => {
@@ -299,6 +314,96 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
             {/* Mobile Layout (Small Screens) */}
             <div className="md:hidden flex-1 overflow-y-auto px-6 py-6">
               <div className="pt-16">
+                {/* User Section */}
+                <div className="border-b border-section-divider pb-4 mb-4">
+                  {user ? (
+                    <>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                          <User className="w-5 h-5 text-gray-600" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">
+                            {user.displayName || user.email}
+                          </p>
+                          <p className="text-xs text-gray-500">{user.email}</p>
+                        </div>
+                      </div>
+
+                      {/* Cart Link */}
+                      <Link
+                        href="/cart"
+                        className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <ShoppingCart className="w-5 h-5" />
+                        <span>Cart</span>
+                        {cartCount > 0 && (
+                          <span className="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">
+                            {cartCount}
+                          </span>
+                        )}
+                      </Link>
+
+                      {/* Admin Dashboard (only for admins) */}
+                      {isAdmin && (
+                        <Link
+                          href="/admin/dashboard"
+                          className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          <Shield className="w-5 h-5" />
+                          <span>Admin Dashboard</span>
+                        </Link>
+                      )}
+
+                      {/* Profile Settings */}
+                      <Link
+                        href="/profile"
+                        className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <Settings className="w-5 h-5" />
+                        <span>Profile Settings</span>
+                      </Link>
+
+                      {/* Logout */}
+                      <button
+                        onClick={handleLogout}
+                        className="flex items-center gap-3 py-2 text-red-600 hover:text-red-700"
+                      >
+                        <LogOut className="w-5 h-5" />
+                        <span>Sign Out</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div className="mb-4">
+                        <p className="text-sm font-medium text-gray-900">Welcome!</p>
+                        <p className="text-xs text-gray-500">Sign in to access your account</p>
+                      </div>
+
+                      <Link
+                        href="/auth/login"
+                        className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <LogIn className="w-5 h-5" />
+                        <span>Sign In</span>
+                      </Link>
+
+                      <Link
+                        href="/auth/register"
+                        className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        <User className="w-5 h-5" />
+                        <span>Create Account</span>
+                      </Link>
+                    </>
+                  )}
+                </div>
+
                 {/* Treatments */}
                 <div className="border-b border-section-divider pb-4 mb-4">
                   <h3 className="text-base font-bold uppercase text-section-fg mb-3">

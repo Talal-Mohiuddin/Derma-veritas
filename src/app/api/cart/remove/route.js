@@ -1,21 +1,5 @@
 import { db } from "../../../../config/db.js";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { auth } from "firebase-admin";
-
-async function verifyToken(request) {
-  try {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('No valid authorization header');
-    }
-    
-    const token = authHeader.substring(7);
-    const decodedToken = await auth().verifyIdToken(token);
-    return decodedToken;
-  } catch (error) {
-    throw new Error('Invalid token');
-  }
-}
 
 async function calculateTotalPrice(products) {
   let totalPrice = 0;
@@ -35,10 +19,14 @@ async function calculateTotalPrice(products) {
 
 export async function POST(request) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
-    
-    const { productId, quantity = 1 } = await request.json();
+    const { userId, productId, quantity = 1 } = await request.json();
+
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
 
     if (!productId) {
       return Response.json({
@@ -82,10 +70,49 @@ export async function POST(request) {
 
     await updateDoc(cartRef, cartData);
 
+    // Populate product details for response
+    const populatedProducts = await Promise.all(
+      cartData.products.map(async (item) => {
+        const productRef = doc(db, "products", item.productId);
+        const productSnap = await getDoc(productRef);
+        
+        if (productSnap.exists()) {
+          const productData = productSnap.data();
+          return {
+            productId: item.productId,
+            quantity: item.quantity,
+            addedAt: item.addedAt,
+            productDetails: {
+              id: item.productId,
+              name: productData.name,
+              description: productData.description,
+              price: productData.price,
+              images: productData.images,
+              category: productData.category,
+              stockQuantity: productData.stockQuantity,
+              ...productData
+            }
+          };
+        }
+        return {
+          productId: item.productId,
+          quantity: item.quantity,
+          addedAt: item.addedAt,
+          productDetails: null
+        };
+      })
+    );
+
     return Response.json({
       success: true,
       message: "Item removed from cart",
-      cart: cartData
+      cart: {
+        userId: cartData.userId,
+        products: populatedProducts,
+        totalPrice: cartData.totalPrice,
+        createdAt: cartData.createdAt,
+        updatedAt: cartData.updatedAt
+      }
     });
 
   } catch (error) {

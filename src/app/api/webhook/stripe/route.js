@@ -47,18 +47,18 @@ export async function POST(req) {
     }, { status: 400 });
   }
 
-  // Handle the checkout.session.completed event
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object;
+  // Handle the payment_intent.succeeded event for cart purchases
+  if (event.type === "payment_intent.succeeded") {
+    const paymentIntent = event.data.object;
 
     try {
-      const metadata = session.metadata || {};
-      const { userId, cartId, planName } = metadata;
+      const metadata = paymentIntent.metadata || {};
+      const { userId, cartId, orderType, planName } = metadata;
 
       console.log("Webhook metadata:", metadata);
 
-      // If metadata contains cartId, process cart purchase
-      if (cartId && userId) {
+      // If metadata contains cartId and orderType is cart_purchase, process cart purchase
+      if (cartId && userId && orderType === "cart_purchase") {
         try {
           // Get user document
           const userRef = doc(db, "users", userId);
@@ -77,22 +77,84 @@ export async function POST(req) {
           }
 
           const cartData = cartSnap.data();
+          const userData = userSnap.data();
 
-          // Create order document
+          // Get payment method and billing details from the payment intent
+          const charge = paymentIntent.charges?.data?.[0];
+          const billingDetails = charge?.billing_details || {};
+          const paymentMethodDetails = charge?.payment_method_details || {};
+
+          // Generate order number
+          const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
+          // Create comprehensive order document
           const orderData = {
+            // Order identification
+            orderNumber,
             userId,
+            status: "confirmed",
+            
+            // Products and pricing
             products: cartData.products || [],
-            totalAmount: session.amount_total / 100, // Convert from cents
-            currency: session.currency,
-            status: "completed",
-            stripeSessionId: session.id,
-            stripePaymentIntentId: session.payment_intent,
+            totalAmount: paymentIntent.amount / 100, // Convert from cents
+            currency: paymentIntent.currency.toUpperCase(),
+            
+            // Customer information
+            customerInfo: {
+              name: billingDetails.name || userData.displayName || userData.name || "",
+              email: billingDetails.email || userData.email || "",
+              phone: billingDetails.phone || userData.phone || "",
+            },
+
+            // Billing address
+            billingAddress: {
+              line1: billingDetails.address?.line1 || "",
+              line2: billingDetails.address?.line2 || "",
+              city: billingDetails.address?.city || "",
+              state: billingDetails.address?.state || "",
+              postalCode: billingDetails.address?.postal_code || "",
+              country: billingDetails.address?.country || "GB",
+            },
+
+            // Shipping address (same as billing for now, can be modified later)
+            shippingAddress: {
+              line1: billingDetails.address?.line1 || "",
+              line2: billingDetails.address?.line2 || "",
+              city: billingDetails.address?.city || "",
+              state: billingDetails.address?.state || "",
+              postalCode: billingDetails.address?.postal_code || "",
+              country: billingDetails.address?.country || "GB",
+            },
+
+            // Payment information
+            paymentInfo: {
+              stripePaymentIntentId: paymentIntent.id,
+              paymentMethod: paymentMethodDetails.type || "card",
+              cardBrand: paymentMethodDetails.card?.brand || "",
+              cardLast4: paymentMethodDetails.card?.last4 || "",
+              paymentStatus: "paid",
+            },
+
+            // Order tracking
+            fulfillmentStatus: "pending", // pending, processing, shipped, delivered, cancelled
+            trackingNumber: null,
+            shippingCarrier: null,
+            estimatedDelivery: null,
+
+            // Timestamps
             createdAt: new Date(),
-            shippingAddress: cartData.shippingAddress || {},
+            updatedAt: new Date(),
+            paidAt: new Date(),
+
+            // Additional metadata
+            orderSource: "website",
+            notes: "",
+            internalNotes: "",
           };
 
           // Add order to Firestore
-          await addDoc(collection(db, "orders"), orderData);
+          const orderRef = await addDoc(collection(db, "orders"), orderData);
+          console.log(`Order created with ID: ${orderRef.id} for user: ${userId}`);
 
           // Clear the cart
           await updateDoc(cartRef, {
@@ -101,10 +163,34 @@ export async function POST(req) {
             updatedAt: new Date(),
           });
 
-          console.log(`Order created and cart cleared for user: ${userId}`);
+          // Update user's order history (optional - you can add this to user document)
+          try {
+            const userOrderHistory = userData.orderHistory || [];
+            await updateDoc(userRef, {
+              orderHistory: [
+                ...userOrderHistory,
+                {
+                  orderId: orderRef.id,
+                  orderNumber,
+                  totalAmount: orderData.totalAmount,
+                  status: orderData.status,
+                  createdAt: orderData.createdAt,
+                }
+              ],
+              lastOrderAt: new Date(),
+              updatedAt: new Date(),
+            });
+          } catch (userUpdateError) {
+            console.error("Failed to update user order history:", userUpdateError);
+            // Don't fail the webhook for this
+          }
+
+          console.log(`Order ${orderNumber} created and cart cleared for user: ${userId}`);
           return Response.json({
             success: true,
             message: "Order created successfully",
+            orderNumber,
+            orderId: orderRef.id,
           });
         } catch (error) {
           console.error(`Error processing cart purchase: ${error.message}`);
@@ -116,7 +202,7 @@ export async function POST(req) {
         }
       }
 
-      // Handle plan upgrade
+      // Handle plan upgrade (keep existing logic)
       if (userId && planName) {
         try {
           // Validate planName
@@ -148,7 +234,7 @@ export async function POST(req) {
           await updateDoc(userRef, {
             plan: planName,
             planUpdatedAt: new Date(),
-            stripeSessionId: session.id,
+            stripePaymentIntentId: paymentIntent.id,
           });
 
           console.log(`Updated plan to ${planName} for user: ${userId}`);
@@ -180,6 +266,157 @@ export async function POST(req) {
       }, { status: 500 });
     }
   } else {
+    // Handle checkout.session.completed for legacy compatibility
+    if (event.type === "checkout.session.completed") {
+      const session = event.data.object;
+
+      try {
+        const metadata = session.metadata || {};
+        const { userId, cartId, planName } = metadata;
+
+        console.log("Webhook metadata:", metadata);
+
+        // If metadata contains cartId, process cart purchase
+        if (cartId && userId) {
+          try {
+            // Get user document
+            const userRef = doc(db, "users", userId);
+            const userSnap = await getDoc(userRef);
+
+            // Get cart document
+            const cartRef = doc(db, "carts", cartId);
+            const cartSnap = await getDoc(cartRef);
+
+            if (!userSnap.exists() || !cartSnap.exists()) {
+              console.error("User or cart not found");
+              return Response.json({
+                success: false,
+                message: "User or cart not found",
+              }, { status: 404 });
+            }
+
+            const cartData = cartSnap.data();
+            const userData = userSnap.data();
+
+            // Generate order number for legacy checkout
+            const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
+            // Create order document for legacy checkout
+            const orderData = {
+              orderNumber,
+              userId,
+              products: cartData.products || [],
+              totalAmount: session.amount_total / 100, // Convert from cents
+              currency: session.currency.toUpperCase(),
+              status: "confirmed",
+              fulfillmentStatus: "pending",
+              customerInfo: {
+                name: session.customer_details?.name || userData.displayName || "",
+                email: session.customer_details?.email || userData.email || "",
+                phone: session.customer_details?.phone || "",
+              },
+              billingAddress: session.customer_details?.address || {},
+              shippingAddress: session.shipping_details?.address || session.customer_details?.address || {},
+              paymentInfo: {
+                stripeSessionId: session.id,
+                stripePaymentIntentId: session.payment_intent,
+                paymentStatus: "paid",
+              },
+              createdAt: new Date(),
+              updatedAt: new Date(),
+              paidAt: new Date(),
+              orderSource: "website_legacy",
+            };
+
+            // Add order to Firestore
+            const orderRef = await addDoc(collection(db, "orders"), orderData);
+
+            // Clear the cart
+            await updateDoc(cartRef, {
+              products: [],
+              totalPrice: 0,
+              updatedAt: new Date(),
+            });
+
+            console.log(`Legacy order ${orderNumber} created and cart cleared for user: ${userId}`);
+            return Response.json({
+              success: true,
+              message: "Order created successfully",
+              orderNumber,
+              orderId: orderRef.id,
+            });
+          } catch (error) {
+            console.error(`Error processing cart purchase: ${error.message}`);
+            return Response.json({
+              success: false,
+              message: "Error processing cart purchase",
+              error: error.message,
+            }, { status: 500 });
+          }
+        }
+
+        // ...existing plan upgrade code...
+        if (userId && planName) {
+          try {
+            const validPlans = [
+              "Veritas Glow",
+              "Veritas Sculpt",
+              "Veritas Prestige",
+            ];
+            if (!validPlans.includes(planName)) {
+              console.error(`Invalid plan name: ${planName}`);
+              return Response.json({
+                success: false,
+                message: "Invalid plan name",
+              }, { status: 400 });
+            }
+
+            const userRef = doc(db, "users", userId);
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+              console.error(`User not found: ${userId}`);
+              return Response.json({
+                success: false,
+                message: "User not found",
+              }, { status: 404 });
+            }
+
+            await updateDoc(userRef, {
+              plan: planName,
+              planUpdatedAt: new Date(),
+              stripeSessionId: session.id,
+            });
+
+            console.log(`Updated plan to ${planName} for user: ${userId}`);
+            return Response.json({
+              success: true,
+              message: "Plan upgrade processed successfully",
+            });
+          } catch (error) {
+            console.error(`Error processing plan upgrade: ${error.message}`);
+            return Response.json({
+              success: false,
+              message: "Error processing plan upgrade",
+              error: error.message,
+            }, { status: 500 });
+          }
+        }
+
+        console.log("No valid metadata found in webhook, acknowledging event");
+        return Response.json({
+          success: true,
+          message: "Event acknowledged (no action required)",
+        });
+      } catch (error) {
+        console.error(`Error processing webhook: ${error.message}`);
+        return Response.json({
+          success: false,
+          message: `Webhook processing failed: ${error.message}`,
+        }, { status: 500 });
+        }
+    }
+    
     // Acknowledge other events
     return Response.json({
       success: true,

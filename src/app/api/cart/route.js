@@ -1,25 +1,8 @@
 import { db } from "../../../config/db.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth } from "firebase-admin";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-// Helper function to verify Firebase token
-async function verifyToken(request) {
-  try {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('No valid authorization header');
-    }
-    
-    const token = authHeader.substring(7);
-    const decodedToken = await auth().verifyIdToken(token);
-    return decodedToken;
-  } catch (error) {
-    throw new Error('Invalid token');
-  }
-}
 
 // Helper function to calculate total price
 async function calculateTotalPrice(products) {
@@ -38,77 +21,84 @@ async function calculateTotalPrice(products) {
   return totalPrice;
 }
 
-// GET - Get user's cart
-export async function GET(request) {
+// POST - Get user's cart or Add item to cart
+export async function POST(request) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
+    const body = await request.json();
+    const { userId, productId, quantity } = body;
 
-    const cartRef = doc(db, "carts", userId);
-    const cartSnap = await getDoc(cartRef);
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
 
-    if (!cartSnap.exists()) {
+    // If no productId, this is a GET cart request
+    if (!productId) {
+      const cartRef = doc(db, "carts", userId);
+      const cartSnap = await getDoc(cartRef);
+
+      if (!cartSnap.exists()) {
+        return Response.json({
+          success: true,
+          cart: {
+            products: [],
+            totalPrice: 0
+          }
+        });
+      }
+
+      const cartData = cartSnap.data();
+      
+      // Populate product details with full product data
+      const populatedProducts = await Promise.all(
+        cartData.products.map(async (item) => {
+          const productRef = doc(db, "products", item.productId);
+          const productSnap = await getDoc(productRef);
+          
+          if (productSnap.exists()) {
+            const productData = productSnap.data();
+            return {
+              productId: item.productId,
+              quantity: item.quantity,
+              addedAt: item.addedAt,
+              productDetails: {
+                id: item.productId,
+                name: productData.name,
+                description: productData.description,
+                price: productData.price,
+                images: productData.images,
+                category: productData.category,
+                stockQuantity: productData.stockQuantity,
+                ...productData // Include all other product fields
+              }
+            };
+          }
+          // Return item without productDetails if product not found
+          return {
+            productId: item.productId,
+            quantity: item.quantity,
+            addedAt: item.addedAt,
+            productDetails: null
+          };
+        })
+      );
+
       return Response.json({
         success: true,
         cart: {
-          products: [],
-          totalPrice: 0
+          userId: cartData.userId,
+          products: populatedProducts,
+          totalPrice: cartData.totalPrice,
+          createdAt: cartData.createdAt,
+          updatedAt: cartData.updatedAt
         }
       });
     }
 
-    const cartData = cartSnap.data();
-    
-    // Populate product details
-    const populatedProducts = await Promise.all(
-      cartData.products.map(async (item) => {
-        const productRef = doc(db, "products", item.productId);
-        const productSnap = await getDoc(productRef);
-        
-        if (productSnap.exists()) {
-          return {
-            ...item,
-            productDetails: {
-              id: item.productId,
-              ...productSnap.data()
-            }
-          };
-        }
-        return item;
-      })
-    );
-
-    return Response.json({
-      success: true,
-      cart: {
-        ...cartData,
-        products: populatedProducts
-      }
-    });
-
-  } catch (error) {
-    console.error("Error getting cart:", error);
-    return Response.json({
-      success: false,
-      message: error.message || "Failed to get cart"
-    }, { status: 401 });
-  }
-}
-
-// POST - Add item to cart
-export async function POST(request) {
-  try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
-    
-    const { productId, quantity = 1 } = await request.json();
-
-    if (!productId) {
-      return Response.json({
-        success: false,
-        message: "Product ID is required"
-      }, { status: 400 });
-    }
+    // Add item to cart logic
+    const quantityToAdd = quantity || 1;
 
     // Verify product exists
     const productRef = doc(db, "products", productId);
@@ -145,12 +135,12 @@ export async function POST(request) {
 
     if (existingProductIndex > -1) {
       // Update quantity
-      cartData.products[existingProductIndex].quantity += quantity;
+      cartData.products[existingProductIndex].quantity += quantityToAdd;
     } else {
       // Add new product
       cartData.products.push({
         productId,
-        quantity,
+        quantity: quantityToAdd,
         addedAt: new Date()
       });
     }
@@ -169,10 +159,10 @@ export async function POST(request) {
     });
 
   } catch (error) {
-    console.error("Error adding to cart:", error);
+    console.error("Error with cart operation:", error);
     return Response.json({
       success: false,
-      message: error.message || "Failed to add item to cart"
+      message: error.message || "Failed to process cart operation"
     }, { status: 500 });
   }
 }
