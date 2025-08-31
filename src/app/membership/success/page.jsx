@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, User, ArrowRight, Home, Crown } from "lucide-react";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
