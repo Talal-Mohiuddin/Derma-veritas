@@ -92,15 +92,22 @@ export const useAddToCart = () => {
           // Add new product
           updatedProducts = [
             ...old.cart.products,
-            { productId, quantity, addedAt: new Date() }
+            { productId, quantity, addedAt: new Date(), productDetails: null }
           ];
         }
+
+        // Recalculate total price
+        const newTotalPrice = updatedProducts.reduce((total, item) => {
+          const price = item.productDetails?.price || 0;
+          return total + (price * item.quantity);
+        }, 0);
 
         return {
           ...old,
           cart: {
             ...old.cart,
             products: updatedProducts,
+            totalPrice: newTotalPrice,
           }
         };
       });
@@ -176,11 +183,18 @@ export const useRemoveFromCart = () => {
           );
         }
 
+        // Recalculate total price
+        const newTotalPrice = updatedProducts.reduce((total, item) => {
+          const price = item.productDetails?.price || 0;
+          return total + (price * item.quantity);
+        }, 0);
+
         return {
           ...old,
           cart: {
             ...old.cart,
             products: updatedProducts,
+            totalPrice: newTotalPrice,
           }
         };
       });
@@ -298,15 +312,22 @@ export const useUpdateCartQuantity = () => {
           // Add new product
           updatedProducts = [
             ...old.cart.products,
-            { productId, quantity, addedAt: new Date() }
+            { productId, quantity, addedAt: new Date(), productDetails: null }
           ];
         }
+
+        // Recalculate total price
+        const newTotalPrice = updatedProducts.reduce((total, item) => {
+          const price = item.productDetails?.price || 0;
+          return total + (price * item.quantity);
+        }, 0);
 
         return {
           ...old,
           cart: {
             ...old.cart,
             products: updatedProducts,
+            totalPrice: newTotalPrice,
           }
         };
       });

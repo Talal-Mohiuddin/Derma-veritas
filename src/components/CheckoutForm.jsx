@@ -116,16 +116,7 @@ export default function CheckoutForm({ cartData, clientSecret }) {
               <span className="font-medium">Back to Cart</span>
             </Link>
 
-            <Link href="/">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">AL</span>
-                </div>
-                <div className="hidden sm:block">
-                  <h1 className="text-lg font-semibold text-gray-900">Aesthetic Lounge</h1>
-                </div>
-              </div>
-            </Link>
+         
 
             <div className="w-24"></div>
           </div>
