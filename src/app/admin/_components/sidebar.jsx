@@ -125,7 +125,7 @@ const navigation = [
 
 export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
-  const { user } = useStore();
+  const { user, handleLogout } = useStore();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const router = useRouter();
@@ -152,17 +152,6 @@ export default function Sidebar({ isOpen, onClose }) {
 
   const userEmail = user?.email || "admin@dermaveritas.com";
   const userInitials = getInitials(user);
-
-  // Handle logout
-  const handleLogout = async () => {
-    try {
-      const auth = getAuth();
-      await signOut(auth);
-      router.push("/login");
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
 
   // Close dropdown when clicking outside
   useEffect(() => {

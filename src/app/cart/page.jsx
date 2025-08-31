@@ -16,7 +16,13 @@ export default function CartPage() {
 
   const updateQuantity = async (productId, newQuantity) => {
     try {
-      await updateQuantityMutation.mutateAsync({ productId, quantity: newQuantity });
+      if (newQuantity <= 0) {
+        // Remove item if quantity is 0 or less
+        await removeItemMutation.mutateAsync({ productId, quantity: 999 }); // Remove all
+        toast.success("Item removed from cart");
+      } else {
+        await updateQuantityMutation.mutateAsync({ productId, quantity: newQuantity });
+      }
     } catch (error) {
       toast.error("Failed to update quantity");
     }
@@ -172,7 +178,7 @@ export default function CartPage() {
                         <div className="flex items-center border rounded-xl overflow-hidden">
                           <button
                             onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                            disabled={updateQuantityMutation.isPending || item.quantity <= 1}
+                            disabled={updateQuantityMutation.isPending || removeItemMutation.isPending}
                             className="px-3 py-2 hover:bg-gray-100 transition-colors disabled:opacity-50"
                           >
                             <Minus className="w-4 h-4" />
@@ -182,7 +188,7 @@ export default function CartPage() {
                           </span>
                           <button
                             onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                            disabled={updateQuantityMutation.isPending}
+                            disabled={updateQuantityMutation.isPending || removeItemMutation.isPending}
                             className="px-3 py-2 hover:bg-gray-100 transition-colors"
                           >
                             <Plus className="w-4 h-4" />

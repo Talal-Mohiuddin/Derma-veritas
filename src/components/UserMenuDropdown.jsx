@@ -2,16 +2,27 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Settings, LogOut, Shield, ShoppingCart, LogIn } from "lucide-react";
+import {
+  User,
+  Settings,
+  LogOut,
+  Shield,
+  ShoppingCart,
+  LogIn,
+} from "lucide-react";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useCartItemCount } from "@/hooks/useCart";
 import Link from "next/link";
+import { useStore } from "@/store/zustand";
+import { useRouter } from "next/navigation";
 
 export default function UserMenuDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout, isAdmin } = useAuth();
+  const { user } = useAuth();
+  const { userRole, handleLogout } = useStore();
   const { data: cartCount } = useCartItemCount();
   const dropdownRef = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -24,9 +35,9 @@ export default function UserMenuDropdown() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = async () => {
+  const handleLogoutClick = async () => {
     try {
-      await logout();
+      await handleLogout(router);
       setIsOpen(false);
     } catch (error) {
       console.error("Logout error:", error);
@@ -77,27 +88,29 @@ export default function UserMenuDropdown() {
                 </Link>
 
                 {/* Admin Dashboard (only for admins) */}
-                {isAdmin && (
-                  <Link href="/admin/dashboard" onClick={() => setIsOpen(false)}>
+                {userRole === "admin" ? (
+                  <Link
+                    href="/admin/dashboard"
+                    onClick={() => setIsOpen(false)}
+                  >
                     <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
                       <Shield className="w-4 h-4 mr-3" />
                       <span>Admin Dashboard</span>
                     </div>
                   </Link>
+                ) : (
+                  <Link href="/profile" onClick={() => setIsOpen(false)}>
+                    <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+                      <Settings className="w-4 h-4 mr-3" />
+                      <span>Profile Settings</span>
+                    </div>
+                  </Link>
                 )}
-
-                {/* Profile Settings */}
-                <Link href="/profile" onClick={() => setIsOpen(false)}>
-                  <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
-                    <Settings className="w-4 h-4 mr-3" />
-                    <span>Profile Settings</span>
-                  </div>
-                </Link>
 
                 {/* Logout */}
                 <div className="border-t border-gray-100 mt-1 pt-1">
                   <button
-                    onClick={handleLogout}
+                    onClick={handleLogoutClick}
                     className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                   >
                     <LogOut className="w-4 h-4 mr-3" />
@@ -110,11 +123,13 @@ export default function UserMenuDropdown() {
                 {/* Not Logged In */}
                 <div className="px-4 py-3 border-b border-gray-100">
                   <p className="text-sm font-medium text-gray-900">Welcome!</p>
-                  <p className="text-xs text-gray-500">Sign in to access your account</p>
+                  <p className="text-xs text-gray-500">
+                    Sign in to access your account
+                  </p>
                 </div>
 
                 {/* Login Link */}
-                <Link href="/auth/login" onClick={() => setIsOpen(false)}>
+                <Link href="/login" onClick={() => setIsOpen(false)}>
                   <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
                     <LogIn className="w-4 h-4 mr-3" />
                     <span>Sign In</span>
@@ -122,7 +137,7 @@ export default function UserMenuDropdown() {
                 </Link>
 
                 {/* Register Link */}
-                <Link href="/auth/register" onClick={() => setIsOpen(false)}>
+                <Link href="/login" onClick={() => setIsOpen(false)}>
                   <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
                     <User className="w-4 h-4 mr-3" />
                     <span>Create Account</span>

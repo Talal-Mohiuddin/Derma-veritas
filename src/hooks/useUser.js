@@ -171,3 +171,53 @@ export const useUserReferralData = (userId) => {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
+
+// Get Current User Profile
+export const useCurrentUserProfile = (userId) => {
+  return useQuery({
+    queryKey: ["currentUser", userId],
+    queryFn: async () => {
+      if (!userId) throw new Error("User ID is required");
+      
+      const response = await fetch(`/api/user/${userId}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch user profile");
+      }
+      return response.json();
+    },
+    enabled: !!userId,
+    refetchOnWindowFocus: false,
+    gcTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+};
+
+// Update Current User Profile
+export const useUpdateCurrentUserProfile = () => {
+  return useMutation({
+    mutationFn: async ({ userId, profileData }) => {
+      const response = await fetch(`/api/user/profile/${userId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(profileData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to update profile");
+      }
+
+      return response.json();
+    },
+    onSuccess: (data, variables) => {
+      const { userId } = variables;
+
+      // Update current user cache
+      queryClient.invalidateQueries({ queryKey: ["currentUser", userId] });
+      
+      // Update single user cache
+      queryClient.invalidateQueries({ queryKey: ["user", userId] });
+    },
+  });
+};

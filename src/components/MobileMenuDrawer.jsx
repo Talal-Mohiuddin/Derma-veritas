@@ -1,7 +1,16 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronDown, User, ShoppingCart, Shield, Settings, LogOut, LogIn } from "lucide-react";
+import {
+  X,
+  ChevronDown,
+  User,
+  ShoppingCart,
+  Shield,
+  Settings,
+  LogOut,
+  LogIn,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import Link from "next/link";
@@ -10,6 +19,8 @@ import { BookingModal } from "./booking-modal";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useCartItemCount } from "@/hooks/useCart";
+import { useStore } from "@/store/zustand";
+import { useRouter } from "next/navigation";
 
 export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const [expandedSections, setExpandedSections] = useState({});
@@ -19,10 +30,12 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const [bookingOpen, setBookingOpen] = useState(false);
   const hideTimeoutRef = useRef(null);
   const pathname = usePathname();
-  
+
   // Auth and Cart
-  const { user, logout, isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const { data: cartCount } = useCartItemCount();
+  const { userRole, handleLogout } = useStore();
+  const router = useRouter();
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -31,9 +44,9 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     }));
   };
 
-  const handleLogout = async () => {
+  const handleLogoutClick = async () => {
     try {
-      await logout();
+      await handleLogout(router);
       setIsOpen(false);
     } catch (error) {
       console.error("Logout error:", error);
@@ -79,43 +92,45 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   // Function to determine treatment based on current page
   const getCurrentTreatment = () => {
     // Handle injectable treatments
-    if (pathname.includes('/menu/injectables/')) {
-      const treatmentSlug = pathname.split('/menu/injectables/')[1];
+    if (pathname.includes("/menu/injectables/")) {
+      const treatmentSlug = pathname.split("/menu/injectables/")[1];
       const treatmentMap = {
-        'anti-wrinkle-treatment': 'anti-wrinkle-treatment',
-        'non-surgical-rhinoplasty': 'non-surgical-rhinoplasty',
-        '8-point-facelift': '8-point-facelift',
-        'nctf-skin-revitalisation': 'nctf-skin-revitalisation-skincare',
-        'harmonyca-dermal-filler': 'harmonyca-dermal-filler',
-        'dermal-fillers': 'dermal-fillers',
-        'lip-fillers': 'lip-fillers',
-        'chin-fillers': 'chin-fillers',
-        'tear-trough-filler': 'tear-trough-filler',
-        'cheek-fillers': 'cheek-fillers',
-        'profhilo': 'profhilo',
-        'fat-dissolving-injections': 'fat-dissolving-injections',
-        'hand-rejuvenation': 'hand-rejuvenation',
-        'polynucleotides-hair-loss-treatment': 'polynucleotides-hair-loss-treatment',
-        'polynucleotides-skin-rejuvenation-treatment': 'polynucleotides-skin-rejuvenation-treatment'
+        "anti-wrinkle-treatment": "anti-wrinkle-treatment",
+        "non-surgical-rhinoplasty": "non-surgical-rhinoplasty",
+        "8-point-facelift": "8-point-facelift",
+        "nctf-skin-revitalisation": "nctf-skin-revitalisation-skincare",
+        "harmonyca-dermal-filler": "harmonyca-dermal-filler",
+        "dermal-fillers": "dermal-fillers",
+        "lip-fillers": "lip-fillers",
+        "chin-fillers": "chin-fillers",
+        "tear-trough-filler": "tear-trough-filler",
+        "cheek-fillers": "cheek-fillers",
+        profhilo: "profhilo",
+        "fat-dissolving-injections": "fat-dissolving-injections",
+        "hand-rejuvenation": "hand-rejuvenation",
+        "polynucleotides-hair-loss-treatment":
+          "polynucleotides-hair-loss-treatment",
+        "polynucleotides-skin-rejuvenation-treatment":
+          "polynucleotides-skin-rejuvenation-treatment",
       };
-      return treatmentMap[treatmentSlug] || '';
-    }
-    
-    // Handle other treatment types
-    if (pathname.includes('/treatments/')) {
-      const treatmentSlug = pathname.split('/treatments/')[1];
-      const treatmentMap = {
-        'chemical-peels': 'chemical-peel',
-        'microneedling': 'skinpen-microneedling',
-        'rf-microneedling': 'skinpen-microneedling',
-        'mole-removal': 'mole-removal',
-        'skin-tag-removal': 'skin-tag-removal',
-        'exosome-therapy': 'iv-drips'
-      };
-      return treatmentMap[treatmentSlug] || '';
+      return treatmentMap[treatmentSlug] || "";
     }
 
-    return '';
+    // Handle other treatment types
+    if (pathname.includes("/treatments/")) {
+      const treatmentSlug = pathname.split("/treatments/")[1];
+      const treatmentMap = {
+        "chemical-peels": "chemical-peel",
+        microneedling: "skinpen-microneedling",
+        "rf-microneedling": "skinpen-microneedling",
+        "mole-removal": "mole-removal",
+        "skin-tag-removal": "skin-tag-removal",
+        "exosome-therapy": "iv-drips",
+      };
+      return treatmentMap[treatmentSlug] || "";
+    }
+
+    return "";
   };
 
   // Menu data
@@ -346,30 +361,27 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       </Link>
 
                       {/* Admin Dashboard (only for admins) */}
-                      {isAdmin && (
+                      {userRole === "admin" ? (
                         <Link
                           href="/admin/dashboard"
-                          className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
                           onClick={() => setIsOpen(false)}
                         >
-                          <Shield className="w-5 h-5" />
-                          <span>Admin Dashboard</span>
+                          <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+                            <Shield className="w-4 h-4 mr-3" />
+                            <span>Admin Dashboard</span>
+                          </div>
+                        </Link>
+                      ) : (
+                        <Link href="/profile" onClick={() => setIsOpen(false)}>
+                          <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+                            <Settings className="w-4 h-4 mr-3" />
+                            <span>Profile Settings</span>
+                          </div>
                         </Link>
                       )}
-
-                      {/* Profile Settings */}
-                      <Link
-                        href="/profile"
-                        className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <Settings className="w-5 h-5" />
-                        <span>Profile Settings</span>
-                      </Link>
-
                       {/* Logout */}
                       <button
-                        onClick={handleLogout}
+                        onClick={handleLogoutClick}
                         className="flex items-center gap-3 py-2 text-red-600 hover:text-red-700"
                       >
                         <LogOut className="w-5 h-5" />
@@ -379,12 +391,16 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   ) : (
                     <>
                       <div className="mb-4">
-                        <p className="text-sm font-medium text-gray-900">Welcome!</p>
-                        <p className="text-xs text-gray-500">Sign in to access your account</p>
+                        <p className="text-sm font-medium text-gray-900">
+                          Welcome!
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          Sign in to access your account
+                        </p>
                       </div>
 
                       <Link
-                        href="/auth/login"
+                        href="/login"
                         className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
                         onClick={() => setIsOpen(false)}
                       >
@@ -393,7 +409,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       </Link>
 
                       <Link
-                        href="/auth/register"
+                        href="/login"
                         className="flex items-center gap-3 py-2 text-muted-foreground hover:text-foreground"
                         onClick={() => setIsOpen(false)}
                       >
@@ -667,9 +683,9 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         />
       )}
 
-      <BookingModal 
-        open={bookingOpen} 
-        onOpenChange={setBookingOpen} 
+      <BookingModal
+        open={bookingOpen}
+        onOpenChange={setBookingOpen}
         selectedTreatment={getCurrentTreatment()}
       />
     </>

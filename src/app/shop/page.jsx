@@ -33,7 +33,7 @@ function ProductCard({ product }) {
   };
 
   const updateCartQuantity = (change) => {
-    const newQuantity = Math.max(1, cartQuantity + change);
+    const newQuantity = Math.max(0, cartQuantity + change); // Allow 0 for removal
     handleUpdateCart(newQuantity);
   };
 
@@ -62,11 +62,20 @@ function ProductCard({ product }) {
     }
 
     try {
-      await updateQuantityMutation.mutateAsync({
-        productId: product.id,
-        quantity: newQuantity,
-      });
-      toast.success("Cart updated!");
+      if (newQuantity <= 0) {
+        // Remove item from cart if quantity is 0 or less
+        await updateQuantityMutation.mutateAsync({
+          productId: product.id,
+          quantity: 0, // This will trigger removal in the hook
+        });
+        toast.success("Item removed from cart!");
+      } else {
+        await updateQuantityMutation.mutateAsync({
+          productId: product.id,
+          quantity: newQuantity,
+        });
+        toast.success("Cart updated!");
+      }
     } catch (error) {
       toast.error("Failed to update cart");
     }
@@ -142,7 +151,7 @@ function ProductCard({ product }) {
                   <button
                     onClick={() => updateCartQuantity(-1)}
                     className="px-4 py-2 hover:bg-gray-100 transition-colors"
-                    disabled={updateQuantityMutation.isPending || cartQuantity <= 1}
+                    disabled={updateQuantityMutation.isPending}
                   >
                     <Minus className="w-4 h-4" />
                   </button>
