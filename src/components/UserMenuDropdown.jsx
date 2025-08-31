@@ -90,7 +90,7 @@ export default function UserMenuDropdown() {
                 {/* Admin Dashboard (only for admins) */}
                 {userRole === "admin" ? (
                   <Link
-                    href="/admin/dashboard"
+                    href="/admin"
                     onClick={() => setIsOpen(false)}
                   >
                     <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
