@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown, Gift, Star, Sparkles, Heart } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -18,6 +18,23 @@ export default function Navbar() {
   const { user } = useAuth();
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const pathname = usePathname();
+
+  const bannerMessages = [
+    {
+      icon: <Gift className="w-4 h-4 text-white" />,
+      title: "Refer & Earn",
+      content: "Get 10% off your first appointment when you refer a friend",
+      cta: "Learn More",
+      link: "/refer-a-friend",
+    },
+    {
+      icon: <Sparkles className="w-4 h-4 text-white" />,
+      title: "Limited Time Offer",
+      content: "Free skin analysis with any treatment package this month",
+      cta: "Get Started",
+      link: "/treatments",
+    },
+  ];
 
   // Function to determine treatment based on current page
   const getCurrentTreatment = () => {
@@ -66,31 +83,63 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Header */}
-      <header className="bg-gray-100 px-4 py-2">
-        <div className="flex justify-between items-center max-w-7xl mx-auto text-xs sm:text-sm">
-          {/* Left - Call Us */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 font-medium cursor-pointer"
-          >
-            CALL US
-            <ChevronDown className="w-4 h-4" />
-          </div>
-
-          {/* Right - Find a Clinic */}
-          <div
-            onClick={() => setIsClinicsOpen(true)}
-            className="flex items-center gap-1 text-gray-600 font-medium cursor-pointer"
-          >
-            FIND A CLINIC
-            <ChevronDown className="w-4 h-4" />
-          </div>
+      {/* Animated Referral Program Banner */}
+      <header className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden relative">
+        <div className="flex animate-scroll whitespace-nowrap">
+          {/* Repeat messages for seamless scrolling */}
+          {[...bannerMessages, ...bannerMessages].map((message, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-center min-w-fit mx-8 sm:mx-12"
+            >
+              <div className="flex items-center gap-2">
+                {message.icon}
+                <span className="text-white font-bold text-xs uppercase tracking-wide">
+                  {message.title}
+                </span>
+              </div>
+              <div className="hidden sm:block ml-3">
+                <span className="text-white text-xs font-medium">
+                  {message.content}
+                </span>
+              </div>
+              <Link
+                href={message.link}
+                className="ml-3 bg-white text-gray-800 px-3 py-1 rounded-full text-xs font-bold uppercase hover:bg-gray-100 transition-colors shadow-sm"
+              >
+                {message.cta}
+              </Link>
+              <div className="mx-4 sm:mx-6 w-px h-4 bg-white/30"></div>
+            </div>
+          ))}
         </div>
+
+        {/* Gradient overlays for smooth edges */}
+        <div className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-gray-700 to-transparent pointer-events-none"></div>
+        <div className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
       </header>
 
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-scroll {
+          animation: scroll 60s linear infinite;
+        }
+
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       {/* Main Navbar */}
-      <nav className="bg-white px-4 py-3 border-b sticky top-0 z-40 shadow-sm">
+      <nav className="bg-transparent backdrop-blur-sm px-4 py-3 border-b border-white/20 sticky top-0 z-40">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Logo */}
           <div

@@ -50,9 +50,9 @@ export default function ReferAFriendPage() {
 
   const faqs = [
     {
-      question: "How do I get paid for referrals?",
+      question: "How do I get my discount for referrals?",
       answer:
-        "Once your referred client completes their first treatment, your reward will be processed within 7-14 business days. You can track all pending and completed referrals in your dashboard.",
+        "Once your referred client completes their first treatment, your 10% discount will be automatically applied to your account and can be used on your next appointment.",
     },
     {
       question: "Is there a limit to how many people I can refer?",
@@ -62,7 +62,7 @@ export default function ReferAFriendPage() {
     {
       question: "What happens if someone books but doesn't show up?",
       answer:
-        "Rewards are only paid after the referred client completes their treatment. Cancelled or no-show appointments don't qualify for rewards.",
+        "Discounts are only awarded after the referred client completes their treatment. Cancelled or no-show appointments don't qualify for referral rewards.",
     },
     {
       question: "Can I refer family members?",
@@ -122,20 +122,22 @@ export default function ReferAFriendPage() {
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Share the beauty and wellness experience you love. Earn rewards
-              for every successful referral while helping your friends discover
-              our premium aesthetic treatments.
+              Share the beauty and wellness experience you love. Get 10% off
+              your first appointment when you refer friends to discover our
+              premium aesthetic treatments.
             </p>
 
             <div className="flex flex-wrap justify-center items-center gap-6 mb-8">
               <div className="flex items-center gap-2">
                 <Gift className="w-5 h-5 text-orange-600" />
-                <span className="text-gray-700 font-medium">£50 For You</span>
+                <span className="text-gray-700 font-medium">
+                  10% Off For You
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <Gift className="w-5 h-5 text-blue-600" />
                 <span className="text-gray-700 font-medium">
-                  £25 For Your Friend
+                  Special Offer For Your Friend
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -175,14 +177,14 @@ export default function ReferAFriendPage() {
                   icon: Users,
                   title: "Friend Books Treatment",
                   description:
-                    "When your friend books their first consultation using your link, they get £25 off their treatment.",
+                    "When your friend books their first consultation using your link, they get a special welcome offer on their treatment.",
                 },
                 {
                   step: "3",
                   icon: Gift,
                   title: "You Get Rewarded",
                   description:
-                    "After your friend completes their treatment, you receive £50 as a thank you for the referral.",
+                    "After your friend completes their treatment, you receive 10% off your next appointment as a thank you for the referral.",
                 },
               ].map((item, index) => (
                 <Card
@@ -290,14 +292,15 @@ export default function ReferAFriendPage() {
               {[
                 {
                   icon: DollarSign,
-                  title: "Earn Money",
+                  title: "Save Money",
                   description:
-                    "£50 for every completed referral - no limits on earnings",
+                    "10% off your first appointment after each successful referral",
                 },
                 {
                   icon: Users,
                   title: "Help Friends",
-                  description: "Your friends save £25 on their first treatment",
+                  description:
+                    "Your friends get special welcome offers on their treatments",
                 },
                 {
                   icon: Shield,
@@ -360,7 +363,7 @@ export default function ReferAFriendPage() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-900">
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
                   Recent Referrals
                 </h3>
                 <div className="space-y-3">
@@ -369,19 +372,19 @@ export default function ReferAFriendPage() {
                       name: "Sarah Johnson",
                       status: "Completed",
                       date: "Dec 15, 2024",
-                      amount: "£50",
+                      amount: "10% off",
                     },
                     {
                       name: "Mike Chen",
                       status: "Pending",
                       date: "Dec 12, 2024",
-                      amount: "£50",
+                      amount: "10% off",
                     },
                     {
                       name: "Emma Wilson",
                       status: "Booked",
                       date: "Dec 10, 2024",
-                      amount: "£50",
+                      amount: "10% off",
                     },
                   ].map((referral, index) => (
                     <div
@@ -465,8 +468,9 @@ export default function ReferAFriendPage() {
               Ready to Start Earning?
             </h2>
             <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of satisfied clients who are earning rewards by
-              sharing their positive experiences.
+              Join thousands of satisfied clients who are saving money by
+              sharing their positive experiences and earning 10% off their
+              treatments.
             </p>
             <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-3 text-lg font-medium">
               START REFERRING TODAY
