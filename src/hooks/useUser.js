@@ -221,3 +221,78 @@ export const useUpdateCurrentUserProfile = () => {
     },
   });
 };
+
+// Create Membership Checkout Session
+export const useCreateMembershipCheckout = () => {
+  return useMutation({
+    mutationFn: async ({ planName, userId, successUrl, cancelUrl }) => {
+      const response = await fetch("/api/user/membership", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ planName, userId, successUrl, cancelUrl }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create checkout session");
+      }
+
+      return response.json();
+    },
+  });
+};
+
+// Update Membership Plan (Admin only)
+export const useUpdateMembershipPlan = () => {
+  return useMutation({
+    mutationFn: async ({ userId, planName, isAdmin }) => {
+      const response = await fetch("/api/user/membership", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId, planName, isAdmin }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to update membership plan");
+      }
+
+      return response.json();
+    },
+    onSuccess: (data, variables) => {
+      const { userId } = variables;
+
+      // Invalidate user caches
+      queryClient.invalidateQueries({ queryKey: ["user", userId] });
+      queryClient.invalidateQueries({ queryKey: ["currentUser", userId] });
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+  });
+};
+
+// Get User Membership Details
+export const useUserMembership = (userId) => {
+  return useQuery({
+    queryKey: ["user", "membership", userId],
+    queryFn: async () => {
+      if (!userId) throw new Error("User ID is required");
+      
+      const response = await fetch(`/api/user/${userId}`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch membership details");
+      }
+      
+      const data = await response.json();
+      return {
+        membershipPlan: data.user.membershipPlan || null,
+        membershipStatus: data.user.membershipStatus || "inactive",
+        planUpdatedAt: data.user.planUpdatedAt || null,
+      };
+    },
+    enabled: !!userId,
+    refetchOnWindowFocus: false,
+    gcTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
+};

@@ -3,11 +3,47 @@
 import { BookingModal } from "@/components/booking-modal";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/store/zustand";
+import { useCreateMembershipCheckout } from "@/hooks/useUser";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useAuth } from "@/store/FirebaseAuthProvider";
 
 export default function ClubMembershipPage() {
   const { setBookingOpen } = useStore();
+  const { user } = useAuth();
+  console.log("User in Membership Page:", user);
+  const router = useRouter();
+  const [loadingPlan, setLoadingPlan] = useState(null);
+  const createCheckout = useCreateMembershipCheckout();
+
+  const handlePlanSelection = async (planName) => {
+    if (!user?.uid) {
+      toast.error("Please log in to select a membership plan");
+      router.push("/login");
+      return;
+    }
+
+    setLoadingPlan(planName);
+
+    try {
+      const result = await createCheckout.mutateAsync({
+        planName,
+        userId: user.uid,
+        successUrl: `${window.location.origin}/membership/success?plan=${encodeURIComponent(planName)}`,
+        cancelUrl: `${window.location.origin}/membership/cancel`,
+      });
+
+      // Redirect to Stripe checkout
+      window.location.href = result.url;
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      toast.error(error.message || "Failed to create checkout session");
+      setLoadingPlan(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -144,7 +180,7 @@ export default function ClubMembershipPage() {
                   <div className="text-3xl font-light text-gray-800 mb-2">
                     £80<span className="text-lg text-gray-500">/month</span>
                   </div>
-                  <div className="text-gray-600">+ £300 upfront</div>
+                  <div className="text-sm text-gray-500 mt-1">Billed monthly</div>
                 </div>
 
                 <ul className="space-y-4 text-gray-700 mb-8">
@@ -162,8 +198,14 @@ export default function ClubMembershipPage() {
                   ))}
                 </ul>
 
-                <button className="w-full bg-gray-800 text-white px-6 py-3 text-sm font-medium tracking-wider hover:bg-gray-700 transition-colors">
-                  SELECT GLOW TIER
+                <button
+                  onClick={() => handlePlanSelection("Veritas Glow")}
+                  disabled={loadingPlan === "Veritas Glow"}
+                  className="w-full bg-gray-800 text-white px-6 py-3 text-sm font-medium tracking-wider hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loadingPlan === "Veritas Glow"
+                    ? "PROCESSING..."
+                    : "SELECT GLOW TIER"}
                 </button>
               </div>
             </motion.div>
@@ -196,7 +238,7 @@ export default function ClubMembershipPage() {
                   <div className="text-3xl font-light text-gray-800 mb-2">
                     £160<span className="text-lg text-gray-500">/month</span>
                   </div>
-                  <div className="text-gray-600">+ £350 upfront</div>
+                  <div className="text-sm text-gray-500 mt-1">Billed monthly</div>
                 </div>
 
                 <ul className="space-y-4 text-gray-700 mb-8">
@@ -216,8 +258,14 @@ export default function ClubMembershipPage() {
                   ))}
                 </ul>
 
-                <button className="w-full bg-blue-600 text-white px-6 py-3 text-sm font-medium tracking-wider hover:bg-blue-700 transition-colors">
-                  SELECT SCULPT TIER
+                <button
+                  onClick={() => handlePlanSelection("Veritas Sculpt")}
+                  disabled={loadingPlan === "Veritas Sculpt"}
+                  className="w-full bg-blue-600 text-white px-6 py-3 text-sm font-medium tracking-wider hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loadingPlan === "Veritas Sculpt"
+                    ? "PROCESSING..."
+                    : "SELECT SCULPT TIER"}
                 </button>
               </div>
             </motion.div>
@@ -244,7 +292,7 @@ export default function ClubMembershipPage() {
                   <div className="text-3xl font-light text-gray-800 mb-2">
                     £299<span className="text-lg text-gray-500">/month</span>
                   </div>
-                  <div className="text-gray-600">+ £500 upfront</div>
+                  <div className="text-sm text-gray-500 mt-1">Billed monthly</div>
                 </div>
 
                 <ul className="space-y-4 text-gray-700 mb-8">
@@ -265,8 +313,14 @@ export default function ClubMembershipPage() {
                   ))}
                 </ul>
 
-                <button className="w-full bg-gray-800 text-white px-6 py-3 text-sm font-medium tracking-wider hover:bg-gray-700 transition-colors">
-                  SELECT PRESTIGE TIER
+                <button
+                  onClick={() => handlePlanSelection("Veritas Prestige")}
+                  disabled={loadingPlan === "Veritas Prestige"}
+                  className="w-full bg-gray-800 text-white px-6 py-3 text-sm font-medium tracking-wider hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loadingPlan === "Veritas Prestige"
+                    ? "PROCESSING..."
+                    : "SELECT PRESTIGE TIER"}
                 </button>
               </div>
             </motion.div>

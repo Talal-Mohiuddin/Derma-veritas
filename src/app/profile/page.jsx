@@ -379,11 +379,27 @@ export default function ProfilePage() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Plan</span>
+                    <span className="text-sm text-gray-600">Membership</span>
                     <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                      {profileData?.plan || "Free"}
+                      {profileData?.membershipPlan || "None"}
                     </span>
                   </div>
+                  {profileData?.membershipStatus && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-600">Status</span>
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          profileData.membershipStatus === "active"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {profileData.membershipStatus === "active"
+                          ? "Active"
+                          : "Inactive"}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </Card>
 
