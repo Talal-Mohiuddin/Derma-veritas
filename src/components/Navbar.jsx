@@ -160,7 +160,7 @@ export default function Navbar() {
             <div className="hidden md:block">
               <Button
                 onClick={() => setBookingOpen(true)}
-                className="relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide"
+                className="relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide !border-0"
               >
                 <span>BOOK A CONSULTATION</span>
                 <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -170,7 +170,7 @@ export default function Navbar() {
             {/* MENU Button (always visible) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 border border-gray-300 bg-white rounded-none"
+              className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-white rounded-none"
             >
               <span className="text-sm font-medium text-gray-800 mr-2 sm:mr-3">
                 MENU
