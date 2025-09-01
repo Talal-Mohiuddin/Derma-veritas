@@ -1,264 +1,167 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { Instagram, Facebook, MapPin, Phone } from "lucide-react"
-import { useState } from "react"
-
-// ✅ Clinics data
-const clinics = {
-  London: {
-    name: "AL Aesthetics – London",
-    address: "10 Harley St, Marylebone",
-    postcode: "London, W1G 7JA",
-    phone: "0203 6085 241",
-    image: "/images/sample_image.jpg",
-  },
-  Birmingham: {
-    name: "AL Aesthetics – Birmingham",
-    address: "15 Frederick Rd, Edgbaston",
-    postcode: "Birmingham, B15 1JD",
-    phone: "0121 798 1234",
-    image: "/images/sample_image.jpg",
-  },
-  Wolverhampton: {
-    name: "AL Aesthetics – Wolverhampton",
-    address: "45 Tettenhall Rd",
-    postcode: "Wolverhampton, WV3 9NB",
-    phone: "01902 654 321",
-    image: "/images/sample_image.jpg",
-  },
-  Chelsea: {
-    name: "AL Aesthetics – Chelsea",
-    address: "221 King's Rd",
-    postcode: "London, SW3 5EJ",
-    phone: "0207 123 4567",
-    image: "/images/sample_image.jpg",
-  },
-}
-
-// ✅ Only 13 popular treatments
-const treatments = [
-  "Anti-Wrinkle Treatment",
-  "Non Surgical Rhinoplasty",
-  "Dermal Fillers",
-  "Lip Fillers",
-  "Tear Trough Filler",
-  "Cheek Fillers",
-  "Chin Fillers",
-  "8 Point Facelift",
-  "Profhilo",
-  "Fat Dissolving Injections",
-  "HArmonyCa Dermal Filler",
-  "Polynucleotides Skin Rejuvenation Treatment",
-  "Microneedling",
-]
-
-const skincareLinks = [
-  { name: "Chemical Peels", slug: "chemical-peels" },
-  { name: "RF Microneedling", slug: "rf-microneedling" },
-]
-
-const wellnessLinks = [
-  { name: "Exosome Therapy", path: "/treatments/exosome-therapy" },
-]
-
-const facialConcernsLinks = [
-  { name: "Gummy Smile", path: "/menu/conditions/gummy-smile" },
-  { name: "Jowls Treatments", path: "/menu/conditions/jowls-treatments" },
-  { name: "Under Eye", path: "/menu/conditions/under-eye" },
-]
-
-// ✅ helper
-const slugify = (str) =>
-  str.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Clock, 
+  Facebook, 
+  Instagram, 
+  MessageCircle, 
+  MessageSquare, 
+  ThumbsUp 
+} from "lucide-react"
 
 export default function Footer() {
-  const [activeTab, setActiveTab] = useState("London")
-  const clinic = clinics[activeTab]
-
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-          {/* Popular Conditions */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Popular Conditions</h3>
-            <ul className="space-y-3">
-              {facialConcernsLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.path}
-                    className="text-gray-300 hover:text-white transition-colors relative group"
-                  >
-                    {item.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+    <footer className="bg-gray-900 text-gray-300">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Brand & Contact */}
+        <div className="space-y-4">
+          <h3 className="text-white text-xl font-bold">Derma Veritas</h3>
+          <div className="flex items-start space-x-2">
+            <Mail className="w-5 h-5 mt-1 flex-shrink-0" />
+            <p>info@dermaveritas.com</p>
+          </div>
+          <div className="flex items-start space-x-2">
+            <Phone className="w-5 h-5 mt-1 flex-shrink-0" />
+            <p>+92-7741-340615</p>
           </div>
 
-          {/* Popular Treatments */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Popular Treatments</h3>
-            <ul className="space-y-3">
-              {treatments.map((item) => (
-                <li key={item}>
-                  <Link
-                    href={`/menu/injectables/${slugify(item)}`}
-                    className="text-gray-300 hover:text-white transition-colors relative group"
-                  >
-                    {item}
-                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                  </Link>
-                </li>
-              ))}
-
-              {skincareLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={`/treatments/${item.slug}`}
-                    className="text-gray-300 hover:text-white transition-colors relative group"
-                  >
-                    {item.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                  </Link>
-                </li>
-              ))}
-
-              {wellnessLinks.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.path}
-                    className="text-gray-300 hover:text-white transition-colors relative group"
-                  >
-                    {item.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Misc */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Misc</h3>
-            <ul className="space-y-3">
-              {[
-                { name: "About Us", href: "/about" },
-                { name: "Meet The Team", href: "/team" },
-                { name: "AL Training Academy", href: "/training" },
-                { name: "Contact Us", href: "/contact" },
-              ].map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors relative group"
-                  >
-                    {item.name}
-                    <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Socials */}
-            <div className="flex space-x-4 mt-6">
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors relative group">
-                <Instagram size={24} />
-                <span className="absolute left-1/2 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white transition-colors relative group">
-                <Facebook size={24} />
-                <span className="absolute left-1/2 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-              </Link>
-            </div>
-          </div>
-
-          {/* Clinics */}
-          <div>
-            <h3 className="text-lg font-semibold mb-6">Our Clinics</h3>
-            <div className="bg-gray-800 rounded-lg overflow-hidden">
-              <Image
-                src={clinic.image}
-                alt={clinic.name}
-                width={300}
-                height={200}
-                className="w-full h-48 object-cover"
+          {/* Newsletter */}
+          <div className="pt-4">
+            <h4 className="text-white font-medium mb-2">Subscribe to our Newsletter</h4>
+            <div className="flex items-center bg-gray-800 rounded-md overflow-hidden">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="bg-transparent px-4 py-2 flex-1 focus:outline-none text-sm"
               />
-
-              <div className="p-4">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {Object.keys(clinics).map((tab) => (
-                    <button
-                      key={tab}
-                      onClick={() => setActiveTab(tab)}
-                      className={`px-3 py-1 rounded text-sm font-medium transition-colors relative group ${
-                        activeTab === tab
-                          ? "bg-white text-gray-900"
-                          : "text-gray-300 hover:text-white"
-                      }`}
-                    >
-                      {tab}
-                      {activeTab !== tab && (
-                        <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                      )}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="text-sm text-gray-300 space-y-1">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    <p>{clinic.address}</p>
-                  </div>
-                  <p>{clinic.postcode}</p>
-                  <div className="flex items-center gap-2 mt-2">
-                    <Phone className="w-4 h-4" />
-                    <p>{clinic.phone}</p>
-                  </div>
-                </div>
-              </div>
+              <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 text-white transition-colors">
+                Subscribe
+              </button>
             </div>
+          </div>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-white font-semibold mb-4 text-lg">Quick Links</h3>
+          <ul className="space-y-3">
+            <li>
+              <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-white transition-colors">Our Services</Link>
+            </li>
+            <li>
+              <Link href="/pricing" className="hover:text-white transition-colors">Pricing Plans</Link>
+            </li>
+            <li>
+              <Link href="/membership" className="hover:text-white transition-colors">Membership</Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Business Hours & Location */}
+        <div>
+          <h3 className="text-white font-semibold mb-4 text-lg">Business Hours</h3>
+          <div className="flex items-start space-x-2 mb-4">
+            <Clock className="w-5 h-5 mt-1 flex-shrink-0" />
+            <div>
+              <p>Monday - Friday: 11:00 - 19:00</p>
+              <p>Saturday: 8:00 - 18:00</p>
+              <p>Sunday: Closed</p>
+            </div>
+          </div>
+          
+          <h3 className="text-white font-semibold mb-2 text-lg mt-6">Location</h3>
+          <div className="flex items-start space-x-2">
+            <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
+            <div>
+              <p>Unit 2 Oak Tree House</p>
+              <p>Oak Tree Rise, Codsall</p>
+              <p>Wolverhampton, WV8 1DT</p>
+              <p>United Kingdom</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Social Media */}
+        <div>
+          <h3 className="text-white font-semibold mb-4 text-lg">Follow Us</h3>
+          <p className="mb-4">Stay connected with us on social media</p>
+          
+          <div className="flex space-x-3">
+            <Link 
+              href="https://www.facebook.com/share/1L27aEP3Fj/" 
+              target="_blank"
+              className="bg-blue-600 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-5 h-5" />
+            </Link>
+            
+            <Link 
+              href="https://www.instagram.com/derma_veritas?igsh=MTNtcmFjY254bWN4dw==" 
+              target="_blank"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-5 h-5" />
+            </Link>
+            
+            <Link 
+              href="https://www.tiktok.com/@derma.veritas?_t=ZS-8xw9tsrJMEJ&_r=1" 
+              target="_blank"
+              className="bg-black hover:bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              aria-label="TikTok"
+            >
+              <MessageCircle className="w-5 h-5" />
+            </Link>
+            
+            <Link 
+              href="https://www.snapchat.com/add/dermaveritas?share_id=XRGq8aGebuM&locale=en-US" 
+              target="_blank"
+              className="bg-yellow-400 hover:bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              aria-label="Snapchat"
+            >
+              <MessageSquare className="w-5 h-5 text-gray-900" />
+            </Link>
+            
+            <Link 
+              href="https://www.reddit.com/user/Derma-Veritas" 
+              target="_blank"
+              className="bg-orange-500 hover:bg-orange-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+              aria-label="Reddit"
+            >
+              <ThumbsUp className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </div>
 
-      {/* Bottom footer */}
-      <div className="border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
-          <div className="flex items-center space-x-6">
-            <div className="bg-white text-black px-3 py-2 font-bold text-xl">AL</div>
-            <div className="text-sm text-gray-400">
-              <p>
-                © Copyright 2025 - AL Aesthetics. All Rights Reserved • CPD
-                Certification | Complaint Procedure | Web Design & SEO by
-                Creative Ideaz
-              </p>
-              <div className="flex space-x-4 mt-2">
-                <Link href="#" className="hover:text-white transition-colors relative group">
-                  Terms & Conditions
-                  <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                </Link>
-                <Link href="#" className="hover:text-white transition-colors relative group">
-                  Cookie Policy
-                  <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                </Link>
-                <Link href="#" className="hover:text-white transition-colors relative group">
-                  Privacy Policy
-                  <span className="absolute left-0 bottom-0 w-0 h-px bg-white transition-all duration-300 group-hover:w-full group-hover:left-1/2 group-hover:-translate-x-1/2"></span>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-shrink-0">
-            <div className="bg-purple-600 text-white px-4 py-2 rounded text-sm font-medium text-center">
-              Regulated by
-              <br />
-              <span className="font-bold">Care Quality Commission</span>
-            </div>
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-800 py-6">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-500 mb-4 md:mb-0">
+            © {new Date().getFullYear()} Derma Veritas. All rights reserved.
+          </p>
+          
+          <div className="flex space-x-6 text-sm">
+            <Link href="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-of-service" className="text-gray-500 hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/cookie-policy" className="text-gray-500 hover:text-white transition-colors">
+              Cookie Policy
+            </Link>
           </div>
         </div>
       </div>

@@ -120,12 +120,22 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     if (pathname.includes("/treatments/")) {
       const treatmentSlug = pathname.split("/treatments/")[1];
       const treatmentMap = {
+        "botox-treatment": "botox-treatment",
+        "cheek-fillers": "cheek-fillers",
+        "co2": "co2-laser",
+        "dermal-fillers": "dermal-fillers",
+        "endolift": "endolift",
+        "exosome-therapy": "exosome-therapy",
+        "lip-fillers": "lip-fillers",
+        "microneedling": "microneedling",
+        "polynucleotide": "polynucleotide",
+        "prp-therapy": "prp-therapy",
+        "quad-laser-hair-removal": "quad-laser-hair-removal",
+        "rf-microneedling": "rf-microneedling",
+        "skin-boosters": "skin-boosters",
         "chemical-peels": "chemical-peel",
-        microneedling: "skinpen-microneedling",
-        "rf-microneedling": "skinpen-microneedling",
         "mole-removal": "mole-removal",
         "skin-tag-removal": "skin-tag-removal",
-        "exosome-therapy": "iv-drips",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -133,7 +143,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     return "";
   };
 
-  // Menu data
+  // Menu data - Updated with your treatments
   const injectablesLinks = [
     "Anti-Wrinkle Treatment",
     "Non Surgical Rhinoplasty",
@@ -150,21 +160,31 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     "Hand Rejuvenation",
     "Polynucleotides Hair Loss Treatment",
     "Polynucleotides Skin Rejuvenation Treatment",
+    "Botox Treatment",
+    "Skin Boosters",
   ];
 
   const skincareLinks = [
-    { name: "Chemical Peels", slug: "chemical-peels" },
+    { name: "Chemical Peels", slug: "co2" },
     { name: "Microneedling", slug: "microneedling" },
-    { name: "RF Microneedling", slug: "rf-microneedling" },
+    { name: "RF Microneedling", slug: "RF-Microneedling" },
+    { name: "Co2 Laser", slug: "co2" },
+    { name: "Polynucleotide", slug: "Polynucleotide" },
+    { name: "Endolift", slug: "endolift" },
   ];
 
   const wellnessLinks = [
-    { name: "Exosome Therapy", path: "/treatments/exosome-therapy" },
+    { name: "Exosome Therapy", slug: "exosome-therapy" },
+    { name: "PRP Therapy", slug: "prp-therapy" },
   ];
 
   const minorOpsLinks = [
-    { name: "Mole Removal", path: "/treatments/mole-removal" },
-    { name: "Skin Tag Removal", path: "/treatments/skin-tag-removal" },
+    { name: "Mole Removal", slug: "mole-removal" },
+    { name: "Skin Tag Removal", slug: "skin-boosters" },
+  ];
+
+  const laserLinks = [
+    { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
   ];
 
   const facialConcernsLinks = [
@@ -444,6 +464,12 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     type="wellness"
                   />
                   <MobileDropdown
+                    label="Laser Treatments"
+                    section="Laser"
+                    links={laserLinks}
+                    type="laser"
+                  />
+                  <MobileDropdown
                     label="Minor Ops"
                     section="MinorOps"
                     links={minorOpsLinks}
@@ -633,13 +659,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                           />
 
                           <DesktopDropdown
-                            label="Minor Ops"
-                            section="MinorOps"
-                            links={minorOpsLinks}
-                            type="minor-ops"
-                          />
-
-                          <DesktopDropdown
                             label="Skincare"
                             section="Skincare"
                             links={skincareLinks}
@@ -651,6 +670,20 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                             section="Wellness"
                             links={wellnessLinks}
                             type="wellness"
+                          />
+
+                          <DesktopDropdown
+                            label="Laser Treatments"
+                            section="Laser"
+                            links={laserLinks}
+                            type="laser"
+                          />
+
+                          <DesktopDropdown
+                            label="Minor Ops"
+                            section="MinorOps"
+                            links={minorOpsLinks}
+                            type="minor-ops"
                           />
                         </>
                       )}

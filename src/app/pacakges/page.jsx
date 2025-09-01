@@ -16,7 +16,7 @@ export default function PackagesPage() {
       description:
         "Ultimate skin rejuvenation using state-of-the-art ProFusion devices",
       image: "/images/hydrafacial.jpg",
-      href: "/packages/hydrafacial",
+      href: "/pacakges/profusion",
       treatments: "4 Treatment Options",
       duration: "40-75 minutes",
       priceRange: "£150 - £250",
@@ -26,7 +26,7 @@ export default function PackagesPage() {
       description:
         "Comprehensive treatment programs designed for specific skin concerns",
       image: "/images/signature.jpg",
-      href: "/packages/signature",
+      href: "/pacakges/signature",
       treatments: "4 Complete Programs",
       duration: "8-18 weeks",
       priceRange: "£1,100 - £2,500",
@@ -36,7 +36,7 @@ export default function PackagesPage() {
       description:
         "Exclusive membership tiers with ongoing treatments and benefits",
       image: "/images/membership.jpg",
-      href: "/packages/membership",
+      href: "/pacakges/membership",
       treatments: "3 Membership Tiers",
       duration: "Monthly Plans",
       priceRange: "£80 - £299/month",
@@ -109,7 +109,7 @@ export default function PackagesPage() {
                 viewport={{ once: true }}
                 className="group"
               >
-                <Link href={category.href}>
+                <Link href={category.href} className="block">
                   <div className="bg-white border border-gray-200 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200">
                       {/* Placeholder for image */}

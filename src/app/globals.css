@@ -2,8 +2,13 @@
 @import 'tw-animate-css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* Set Poppins as the default font for all elements */
+* {
+  font-family: 'Poppins';
+}
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
 }
 
 @custom-variant dark (&:is(.dark *));

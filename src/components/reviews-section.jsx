@@ -70,8 +70,12 @@ const reviews = [
 
 export default function ReviewsSection() {
   const [currentReview, setCurrentReview] = useState(0)
-  const sectionRef = useRef(null) // ✅ fixed (no TS types)
-  const sliderRef = useRef(null)  // ✅ fixed (no TS types)
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true)
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+  const sectionRef = useRef(null)
+  const sliderRef = useRef(null)
+  const autoScrollRef = useRef(null)
 
   const nextReview = () => {
     setCurrentReview((prev) => (prev + 1) % reviews.length)
@@ -92,6 +96,65 @@ export default function ReviewsSection() {
     }
   }, [currentReview])
 
+  // Auto-scroll functionality - reduced to 3 seconds
+  useEffect(() => {
+    if (!autoScrollEnabled) return
+    
+    autoScrollRef.current = setInterval(() => {
+      nextReview()
+    }, 3000) // Changed to 3 seconds
+    
+    return () => {
+      if (autoScrollRef.current) {
+        clearInterval(autoScrollRef.current)
+      }
+    }
+  }, [autoScrollEnabled, currentReview]) // Added currentReview to dependencies
+
+  // Pause auto-scroll when user interacts with the carousel
+  const pauseAutoScroll = () => {
+    setAutoScrollEnabled(false)
+    if (autoScrollRef.current) {
+      clearInterval(autoScrollRef.current)
+    }
+  }
+
+  // Resume auto-scroll after a period of inactivity
+  const resumeAutoScroll = () => {
+    setAutoScrollEnabled(true)
+  }
+
+  // Touch swipe handlers
+  const handleTouchStart = (e) => {
+    pauseAutoScroll()
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > 50
+    const isRightSwipe = distance < -50
+
+    if (isLeftSwipe) {
+      nextReview()
+    } else if (isRightSwipe) {
+      prevReview()
+    }
+    
+    // Reset values
+    setTouchStart(null)
+    setTouchEnd(null)
+    
+    // Resume auto-scroll after 5 seconds
+    setTimeout(resumeAutoScroll, 5000)
+  }
+
   const scrollToTop = () => {
     if (sectionRef.current) {
       sectionRef.current.scrollIntoView({
@@ -102,12 +165,22 @@ export default function ReviewsSection() {
   }
 
   return (
-    <section ref={sectionRef} className="py-20">
+    <section 
+      ref={sectionRef} 
+      className="py-20"
+      onMouseEnter={pauseAutoScroll}
+      onMouseLeave={resumeAutoScroll}
+    >
       <h2 className="text-4xl font-light text-gray-900 mb-16 text-left tracking-wide px-12">
         What our clients have to say...
       </h2>
 
-      <div className="relative overflow-hidden">
+      <div 
+        className="relative overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
           ref={sliderRef}
           className="flex transition-transform duration-500 ease-in-out"
@@ -171,7 +244,11 @@ export default function ReviewsSection() {
         {reviews.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToReview(index)}
+            onClick={() => {
+              goToReview(index)
+              pauseAutoScroll()
+              setTimeout(resumeAutoScroll, 5000) // Resume after 5 seconds
+            }}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentReview
                 ? "bg-gray-800"
@@ -202,7 +279,11 @@ export default function ReviewsSection() {
 
         <div className="flex items-center gap-2">
           <Button
-            onClick={prevReview}
+            onClick={() => {
+              prevReview()
+              pauseAutoScroll()
+              setTimeout(resumeAutoScroll, 5000) // Resume after 5 seconds
+            }}
             variant="ghost"
             size="icon"
             className="w-10 h-10 rounded-full bg-gray-400 hover:bg-gray-500 text-white shadow-md transition-all duration-300 hover:scale-105"
@@ -211,7 +292,11 @@ export default function ReviewsSection() {
           </Button>
 
           <Button
-            onClick={nextReview}
+            onClick={() => {
+              nextReview()
+              pauseAutoScroll()
+              setTimeout(resumeAutoScroll, 5000) // Resume after 5 seconds
+            }}
             variant="ghost"
             size="icon"
             className="w-10 h-10 rounded-full bg-gray-500 hover:bg-gray-600 text-white shadow-md transition-all duration-300 hover:scale-105"
