@@ -1,13 +1,12 @@
 "use client";
 
 import { Menu, ChevronDown, Gift, Star, Sparkles, Heart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 import ClinicsModal from "./ClinicsModal"; // import your modal
 import { BookingModal } from "./booking-modal";
-import { Button } from "@/components/ui/button";
 import { useStore } from "@/store/zustand";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import UserMenuDropdown from "./UserMenuDropdown";
@@ -17,7 +16,38 @@ export default function Navbar() {
   const { bookingOpen, setBookingOpen, userRole } = useStore();
   const { user } = useAuth();
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
+
+  // Add scroll listener to detect scroll direction
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY === 0) {
+        // At top of page
+        setIsScrolled(false);
+        setIsScrollingUp(true);
+      } else {
+        setIsScrolled(true);
+        // Determine scroll direction
+        if (currentScrollY < lastScrollY) {
+          // Scrolling up
+          setIsScrollingUp(true);
+        } else if (currentScrollY > lastScrollY) {
+          // Scrolling down
+          setIsScrollingUp(false);
+        }
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const bannerMessages = [
     {
@@ -84,7 +114,7 @@ export default function Navbar() {
   return (
     <>
       {/* Animated Referral Program Banner */}
-      <header className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden relative">
+      <header className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden relative fixed top-0 left-0 right-0 z-50">
         <div className="flex animate-scroll whitespace-nowrap">
           {/* Repeat messages for seamless scrolling */}
           {[...bannerMessages, ...bannerMessages].map((message, index) => (
@@ -139,7 +169,11 @@ export default function Navbar() {
       `}</style>
 
       {/* Main Navbar */}
-      <nav className="bg-transparent backdrop-blur-sm px-4 py-3 border-b border-white/20 sticky top-0 z-40">
+      <nav className={`px-4 py-3 border-b fixed left-0 right-0 z-40 transition-all duration-300 ${
+        isScrolled 
+          ? `bg-black/80 backdrop-blur-sm border-gray-700 ${isScrollingUp ? 'top-0' : '-top-20'}` 
+          : 'bg-transparent border-white/20 top-[42px]'
+      }`}>
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Logo */}
           <div
@@ -149,33 +183,32 @@ export default function Navbar() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black flex items-center justify-center">
               <span className="text-white font-bold text-lg">AL</span>
             </div>
-            <span className="text-xl sm:text-2xl font-light text-black">
+            <span className="text-xl sm:text-2xl font-light text-white transition-colors duration-300">
               Aesthetics
             </span>
           </div>
 
           {/* Right - Buttons */}
           <div className="flex items-center gap-3 sm:gap-4">
-            {/* Gradient Book Consultation - hidden on mobile */}
+            {/* Book Consultation Button - hidden on mobile */}
             <div className="hidden md:block">
-              <Button
+              <button
                 onClick={() => setBookingOpen(true)}
-                className="relative !px-8 !py-6 text-xs font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide !border-0"
+                className="px-6 py-3 text-xs font-bold uppercase text-white bg-transparent border-0 rounded-none tracking-wide hover:bg-white/10 transition-colors duration-200"
               >
-                <span>BOOK A CONSULTATION</span>
-                <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-              </Button>
+                BOOK A CONSULTATION
+              </button>
             </div>
 
             {/* MENU Button (always visible) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-white rounded-none"
+              className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-transparent border-0 rounded-none hover:bg-white/10 transition-colors duration-200"
             >
-              <span className="text-sm font-medium text-gray-800 mr-2 sm:mr-3">
+              <span className="text-sm font-medium text-white mr-2 sm:mr-3">
                 MENU
               </span>
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </button>
 
             {/* User Menu Dropdown - visible on larger screens */}
