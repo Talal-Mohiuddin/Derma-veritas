@@ -169,7 +169,7 @@ export default function BeforeAfterSection() {
         videoUrl={selectedVideo} 
       />
       
-      <div className="w-full">
+      <div className="max-w-7xl mx-auto ">
         {/* Header */}
         <div className="text-center mb-12 px-4">
           <div className="flex items-center justify-center mb-4">
@@ -177,7 +177,7 @@ export default function BeforeAfterSection() {
             <span className="px-4 text-sm text-gray-500 tracking-wide">Before & After Results</span>
             <div className="h-px bg-gray-300 flex-1 max-w-20"></div>
           </div>
-          <h2 className="text-4xl md:text-5xl font-thin text-gray-900 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-thin text-gray-900 tracking-tight mx-auto">
             Up-lifting your confidence.
           </h2>
         </div>

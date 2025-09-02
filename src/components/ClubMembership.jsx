@@ -6,7 +6,7 @@ export default function ClubMembership() {
       className="py-10 px-6 md:px-12 lg:px-20"
       style={{ backgroundColor: "#f1e9df" }}
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-10">
 
           {/* Logo and Title */}
