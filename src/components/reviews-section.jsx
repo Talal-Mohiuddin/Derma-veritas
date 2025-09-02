@@ -192,7 +192,7 @@ export default function ReviewsSection() {
               style={{ width: "90%" }}
             >
               <Card
-                className={`p-12 bg-white border border-gray-200 shadow-sm rounded-none min-h-[400px] flex flex-col justify-between w-full transition-all duration-300 ${
+                className={`p-12  border border-gray-200 shadow-sm  min-h-[400px] flex flex-col bg-gray-100 justify-between w-full transition-all rounded-2xl duration-300 ${
                   index === currentReview
                     ? "scale-100 opacity-100"
                     : "scale-95 opacity-70"
