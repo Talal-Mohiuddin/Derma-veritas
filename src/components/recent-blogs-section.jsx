@@ -33,7 +33,9 @@ export default function RecentBlogsSection() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-light text-gray-900">Recent Blogs</h2>
+          <h2 className="text-3xl md:text-4xl font-light text-gray-900">
+            Recent Blogs
+          </h2>
 
           {/* Updated Button with shine effect */}
           <Link
@@ -51,11 +53,8 @@ export default function RecentBlogsSection() {
             <Link
               key={post.id}
               href="/blogs"
-              className="bg-white border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow duration-300 rounded-none"
-              style={{
-                boxShadow:
-                  "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset",
-              }}
+              className="bg-[#F8FAFC] rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow duration-300 shadow-md"
+              
             >
               {/* Blog Image */}
               <div className="aspect-[4/3] overflow-hidden rounded-none">
@@ -103,5 +102,5 @@ export default function RecentBlogsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

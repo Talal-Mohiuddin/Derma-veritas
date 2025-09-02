@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 const ChildLayout = ({ children }) => {
   const pathname = usePathname();
   const ShowNavbar = pathname === "/login" || pathname.includes("/admin");
+  const addPadding = pathname === "/" ? "calc(100vh - 4rem)" : "";
 
   return (
     <AuthProvider>
@@ -43,7 +44,12 @@ const ChildLayout = ({ children }) => {
           }}
         />
         {!ShowNavbar && <Navbar />}
-        {children}
+        <div
+          className={`  
+             ${addPadding ? "" : "pt-20"}`}
+        >
+          {children}
+        </div>
         {!ShowNavbar && <Footer />}
       </QueryClientProvider>
     </AuthProvider>

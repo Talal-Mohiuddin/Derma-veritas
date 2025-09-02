@@ -21,6 +21,11 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
 
+  // Determine if we're on home page
+  const isHomePage = pathname === "/";
+  const textColor = isHomePage ? "text-white" : "text-black";
+  const iconColor = isHomePage ? "white" : "black";
+
   // Add scroll listener to detect scroll direction
   useEffect(() => {
     const handleScroll = () => {
@@ -169,10 +174,12 @@ export default function Navbar() {
       `}</style>
 
       {/* Main Navbar */}
-      <nav className={`px-4 py-3 border-b fixed left-0 right-0 z-40 transition-all duration-300 ${
+      <nav className={`px-4  py-3 border-b fixed left-0 right-0 z-40 transition-all duration-300  ${
         isScrolled 
           ? `bg-black/80 backdrop-blur-sm border-gray-700 ${isScrollingUp ? 'top-0' : '-top-20'}` 
-          : 'bg-transparent border-white/20 top-[42px]'
+          : isHomePage 
+            ? 'bg-transparent border-white/20 top-[42px]'
+            : 'bg-white border-gray-200 top-[42px]'
       }`}>
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Logo */}
@@ -183,7 +190,9 @@ export default function Navbar() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black flex items-center justify-center">
               <span className="text-white font-bold text-lg">AL</span>
             </div>
-            <span className="text-xl sm:text-2xl font-light text-white transition-colors duration-300">
+            <span className={`text-xl sm:text-2xl font-light transition-colors duration-300 ${
+              isScrolled ? "text-white" : textColor
+            }`}>
               Aesthetics
             </span>
           </div>
@@ -194,7 +203,9 @@ export default function Navbar() {
             <div className="hidden md:block">
               <button
                 onClick={() => setBookingOpen(true)}
-                className="px-6 py-3 text-xs font-bold uppercase text-white bg-transparent border-0 rounded-none tracking-wide hover:bg-white/10 transition-colors duration-200"
+                className={`px-6 py-3 text-xs font-bold uppercase border-0 rounded-none tracking-wide hover:bg-white/10 transition-colors duration-200 ${
+                  isScrolled ? "text-white bg-transparent" : `${textColor} bg-transparent`
+                }`}
               >
                 BOOK A CONSULTATION
               </button>
@@ -205,15 +216,19 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(true)}
               className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-transparent border-0 rounded-none hover:bg-white/10 transition-colors duration-200"
             >
-              <span className="text-sm font-medium text-white mr-2 sm:mr-3">
+              <span className={`text-sm font-medium mr-2 sm:mr-3 ${
+                isScrolled ? "text-white" : textColor
+              }`}>
                 MENU
               </span>
-              <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <Menu className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                isScrolled ? "text-white" : textColor
+              }`} />
             </button>
 
             {/* User Menu Dropdown - visible on larger screens */}
             <div className="hidden sm:block">
-              <UserMenuDropdown />
+              <UserMenuDropdown iconColor={isScrolled ? "white" : iconColor} />
             </div>
           </div>
         </div>
