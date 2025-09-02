@@ -14,13 +14,18 @@ import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import Chatwindow from "@/components/Chatwindow";
 import { useRouter } from "next/navigation";
+
 import { useStore } from "@/store/zustand";
+
+
 import { BookingModal } from "@/components/booking-modal";
 
 export default function Home() {
   const [expandedSections, setExpandedSections] = useState({});
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
+
+
   const { bookingOpen, setBookingOpen } = useStore();
 
   // get router instance for navigation

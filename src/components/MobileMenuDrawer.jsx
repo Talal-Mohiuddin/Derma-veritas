@@ -108,10 +108,10 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         profhilo: "profhilo",
         "fat-dissolving-injections": "fat-dissolving-injections",
         "hand-rejuvenation": "hand-rejuvenation",
-        "polynucleotides-hair-loss-treatment":
-          "polynucleotides-hair-loss-treatment",
-        "polynucleotides-skin-rejuvenation-treatment":
-          "polynucleotides-skin-rejuvenation-treatment",
+        "polynucleotides-hair-loss-treatment": "polynucleotides-hair-loss-treatment",
+        "polynucleotides-skin-rejuvenation-treatment": "polynucleotides-skin-rejuvenation-treatment",
+        "botox-treatment": "anti-wrinkle-treatment",
+        "skin-boosters": "profhilo",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -120,20 +120,15 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     if (pathname.includes("/treatments/")) {
       const treatmentSlug = pathname.split("/treatments/")[1];
       const treatmentMap = {
-        "botox-treatment": "botox-treatment",
-        "cheek-fillers": "cheek-fillers",
+        "chemical-peels": "chemical-peel",
+        "microneedling": "skinpen-microneedling",
+        "rf-microneedling": "skinpen-microneedling",
         "co2": "co2-laser",
-        "dermal-fillers": "dermal-fillers",
+        "polynucleotide": "polynucleotides-skin-rejuvenation-treatment",
         "endolift": "endolift",
         "exosome-therapy": "exosome-therapy",
-        "lip-fillers": "lip-fillers",
-        "microneedling": "microneedling",
-        "polynucleotide": "polynucleotide",
-        "prp-therapy": "prp-therapy",
+        "prp-therapy": "iv-drips",
         "quad-laser-hair-removal": "quad-laser-hair-removal",
-        "rf-microneedling": "rf-microneedling",
-        "skin-boosters": "skin-boosters",
-        "chemical-peels": "chemical-peel",
         "mole-removal": "mole-removal",
         "skin-tag-removal": "skin-tag-removal",
       };

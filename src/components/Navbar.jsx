@@ -30,7 +30,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       if (currentScrollY === 0) {
         // At top of page
         setIsScrolled(false);
@@ -46,12 +46,12 @@ export default function Navbar() {
           setIsScrollingUp(false);
         }
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
   const bannerMessages = [
@@ -95,6 +95,8 @@ export default function Navbar() {
           "polynucleotides-hair-loss-treatment",
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
+        "botox-treatment": "anti-wrinkle-treatment",
+        "skin-boosters": "profhilo",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -109,6 +111,11 @@ export default function Navbar() {
         "mole-removal": "mole-removal",
         "skin-tag-removal": "skin-tag-removal",
         "exosome-therapy": "iv-drips",
+        co2: "co2-laser",
+        polynucleotide: "polynucleotides-skin-rejuvenation-treatment",
+        endolift: "endolift",
+        "prp-therapy": "iv-drips",
+        "quad-laser-hair-removal": "quad-laser-hair-removal",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -174,13 +181,17 @@ export default function Navbar() {
       `}</style>
 
       {/* Main Navbar */}
-      <nav className={`px-4  py-3 border-b fixed left-0 right-0 z-40 transition-all duration-300  ${
-        isScrolled 
-          ? `bg-black/80 backdrop-blur-sm border-gray-700 ${isScrollingUp ? 'top-0' : '-top-20'}` 
-          : isHomePage 
-            ? 'bg-transparent border-white/20 top-[42px]'
-            : 'bg-white border-gray-200 top-[42px]'
-      }`}>
+      <nav
+        className={`px-4  py-3 border-b fixed left-0 right-0 z-40 transition-all duration-300  ${
+          isScrolled
+            ? `bg-black/80 backdrop-blur-sm border-gray-700 ${
+                isScrollingUp ? "top-0" : "-top-20"
+              }`
+            : isHomePage
+            ? "bg-transparent border-white/20 top-[42px]"
+            : "bg-white border-gray-200 top-[42px]"
+        }`}
+      >
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           {/* Logo */}
           <div
@@ -190,9 +201,11 @@ export default function Navbar() {
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black flex items-center justify-center">
               <span className="text-white font-bold text-lg">AL</span>
             </div>
-            <span className={`text-xl sm:text-2xl font-light transition-colors duration-300 ${
-              isScrolled ? "text-white" : textColor
-            }`}>
+            <span
+              className={`text-xl sm:text-2xl font-light transition-colors duration-300 ${
+                isScrolled ? "text-white" : textColor
+              }`}
+            >
               Aesthetics
             </span>
           </div>
@@ -204,7 +217,9 @@ export default function Navbar() {
               <button
                 onClick={() => setBookingOpen(true)}
                 className={`px-6 py-3 text-xs font-bold uppercase border-0 rounded-none tracking-wide hover:bg-white/10 transition-colors duration-200 ${
-                  isScrolled ? "text-white bg-transparent" : `${textColor} bg-transparent`
+                  isScrolled
+                    ? "text-white bg-transparent"
+                    : `${textColor} bg-transparent`
                 }`}
               >
                 BOOK A CONSULTATION
@@ -216,14 +231,18 @@ export default function Navbar() {
               onClick={() => setIsMobileMenuOpen(true)}
               className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-transparent border-0 rounded-none hover:bg-white/10 transition-colors duration-200"
             >
-              <span className={`text-sm font-medium mr-2 sm:mr-3 ${
-                isScrolled ? "text-white" : textColor
-              }`}>
+              <span
+                className={`text-sm font-medium mr-2 sm:mr-3 ${
+                  isScrolled ? "text-white" : textColor
+                }`}
+              >
                 MENU
               </span>
-              <Menu className={`w-5 h-5 sm:w-6 sm:h-6 ${
-                isScrolled ? "text-white" : textColor
-              }`} />
+              <Menu
+                className={`w-5 h-5 sm:w-6 sm:h-6 ${
+                  isScrolled ? "text-white" : textColor
+                }`}
+              />
             </button>
 
             {/* User Menu Dropdown - visible on larger screens */}

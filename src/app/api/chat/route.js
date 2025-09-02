@@ -35,14 +35,23 @@ INJECTABLE TREATMENTS:
 - Hand Rejuvenation
 - Polynucleotides Hair Loss Treatment
 - Polynucleotides Skin Rejuvenation Treatment
+- Botox Treatment
+- Skin Boosters
 
 SKINCARE TREATMENTS:
 - Chemical Peels
 - Microneedling
 - RF Microneedling
+- Co2 Laser
+- Polynucleotide
+- Endolift
 
-WELLNESS:
+WELLNESS TREATMENTS:
 - Exosome Therapy
+- PRP Therapy
+
+LASER TREATMENTS:
+- Quad Laser Hair Removal
 
 MINOR OPERATIONS:
 - Mole Removal
@@ -59,8 +68,9 @@ OTHER SERVICES:
 - Refer a Friend program
 
 Key Website Pages:
-- Treatment pages: /menu/injectables/[treatment-name]
-- General treatments: /treatments/[treatment-name]
+- Injectable treatment pages: /menu/injectables/[treatment-name]
+- General treatment pages: /treatments/[treatment-name]
+- Condition pages: /menu/conditions/[condition-name]
 - Packages: /packages
 - Membership: /packages/membership
 - About Us: /about
