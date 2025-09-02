@@ -1,6 +1,8 @@
 "use client";
 
+import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
+
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -45,6 +47,8 @@ export default function ProfhiloSkinBoosterSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen }= useStore();
+  
 
   const cardData = [
     {
@@ -532,7 +536,9 @@ export default function ProfhiloSkinBoosterSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Profhilo® Treatments
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={()=> setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>
@@ -567,7 +573,9 @@ export default function ProfhiloSkinBoosterSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Treatment Areas
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={()=> setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>

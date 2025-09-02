@@ -36,7 +36,7 @@ export default function Simplicity() {
           <div className="relative flex flex-col items-center lg:items-end">
             <div className="aspect-[4/3] overflow-hidden rounded-lg w-full max-w-md lg:max-w-none">
               <img
-                src="https://cdn.prod.website-files.com/648c2acfda39b2e310f95983/64a28c0e9af1f6039eec23cc_60ffcd69b035c873544bdc3d_17%203.jpg"
+                src="https://plus.unsplash.com/premium_photo-1661281397737-9b5d75b52beb?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="AL Aesthetics Team"
                 className="w-full h-full object-cover"
               />

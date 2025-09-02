@@ -1,5 +1,6 @@
 "use client";
 
+import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -13,6 +14,8 @@ import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 import BotoxSection from "@/components/BotoxSection";
+
+
 import {
   Eye,
   CheckCircle,
@@ -32,8 +35,10 @@ export default function DermalFillersSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-  const pricingSectionRef = useRef(null);
-
+    const pricingSectionRef = useRef(null);
+  
+ 
+  const { bookingOpen, setBookingOpen }= useStore();
   const cardData = [
     {
       heading: "Results Seen",
@@ -370,7 +375,10 @@ export default function DermalFillersSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Botox Pricing (Midlands)
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                   
+                   onClick={()=> setBookingOpen(true)}
+                   >
                     BOOK
                   </button>
                 </div>
@@ -403,7 +411,10 @@ export default function DermalFillersSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Botox Pricing (London)
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                   
+                   onClick={()=> setBookingOpen(true)}
+                   >
                     BOOK
                   </button>
                 </div>
@@ -450,18 +461,16 @@ export default function DermalFillersSection() {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                }`}
+                  }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

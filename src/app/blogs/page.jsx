@@ -124,7 +124,6 @@ export default function BlogsPage() {
 
   return (
     <>
-     
       {/* Blogs Section */}
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-16">
@@ -138,13 +137,20 @@ export default function BlogsPage() {
             {blogPosts.map((post) => (
               <div
                 key={post.id}
-                className="bg-white border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow duration-300 rounded-none"
+                className="bg-white border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow duration-300 rounded-2xl relative"
                 style={{
                   boxShadow:
                     "rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset",
                 }}
               >
-                <div className="aspect-[4/3] overflow-hidden">
+                {/* Wrap entire card content with Link */}
+                <Link 
+                  href={`/blogs/${post.slug}`} 
+                  className="absolute inset-0 z-10"
+                  aria-label={`Read more about ${post.title}`}
+                />
+                
+                <div className="aspect-[4/3] overflow-hidden rounded-t-2xl relative z-0">
                   <img
                     src={post.image || "/images/placeholder.svg"}
                     alt={post.title}
@@ -152,7 +158,7 @@ export default function BlogsPage() {
                   />
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 relative z-0">
                   <div className="flex items-center text-gray-500 text-sm mb-4">
                     <Calendar className="w-4 h-4 mr-2" />
                     {post.date}
@@ -166,13 +172,10 @@ export default function BlogsPage() {
                     {post.excerpt}
                   </p>
 
-                  <div className="flex justify-between items-center">
-                    <Link
-                      href={`/blogs/${post.slug}`}
-                      className="flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors"
-                    >
+                  <div className="flex justify-between items-center relative z-20">
+                    <span className="flex items-center text-gray-600 text-sm font-medium">
                       Read more →
-                    </Link>
+                    </span>
 
                     <div className="flex gap-2">
                       {post.tags.map((tag, index) => (

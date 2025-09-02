@@ -1,16 +1,16 @@
 "use client"
 
 import Link from "next/link"
-import { 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Facebook, 
-  Instagram, 
-  MessageCircle, 
-  MessageSquare, 
-  ThumbsUp 
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Facebook,
+  Instagram,
+  MessageCircle,
+  MessageSquare,
+  ThumbsUp
 } from "lucide-react"
 
 export default function Footer() {
@@ -64,6 +64,9 @@ export default function Footer() {
             <li>
               <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
             </li>
+            <li>
+              <Link href="/team" className="hover:text-white transition-colors">Meet Our Team</Link>
+            </li>
           </ul>
         </div>
 
@@ -78,7 +81,7 @@ export default function Footer() {
               <p>Sunday: Closed</p>
             </div>
           </div>
-          
+
           <h3 className="text-white font-semibold mb-2 text-lg mt-6">Location</h3>
           <div className="flex items-start space-x-2">
             <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
@@ -95,46 +98,46 @@ export default function Footer() {
         <div>
           <h3 className="text-white font-semibold mb-4 text-lg">Follow Us</h3>
           <p className="mb-4">Stay connected with us on social media</p>
-          
+
           <div className="flex space-x-3">
-            <Link 
-              href="https://www.facebook.com/share/1L27aEP3Fj/" 
+            <Link
+              href="https://www.facebook.com/share/1L27aEP3Fj/"
               target="_blank"
               className="bg-blue-600 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="Facebook"
             >
               <Facebook className="w-5 h-5" />
             </Link>
-            
-            <Link 
-              href="https://www.instagram.com/derma_veritas?igsh=MTNtcmFjY254bWN4dw==" 
+
+            <Link
+              href="https://www.instagram.com/derma_veritas?igsh=MTNtcmFjY254bWN4dw=="
               target="_blank"
               className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="Instagram"
             >
               <Instagram className="w-5 h-5" />
             </Link>
-            
-            <Link 
-              href="https://www.tiktok.com/@derma.veritas?_t=ZS-8xw9tsrJMEJ&_r=1" 
+
+            <Link
+              href="https://www.tiktok.com/@derma.veritas?_t=ZS-8xw9tsrJMEJ&_r=1"
               target="_blank"
               className="bg-black hover:bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="TikTok"
             >
               <MessageCircle className="w-5 h-5" />
             </Link>
-            
-            <Link 
-              href="https://www.snapchat.com/add/dermaveritas?share_id=XRGq8aGebuM&locale=en-US" 
+
+            <Link
+              href="https://www.snapchat.com/add/dermaveritas?share_id=XRGq8aGebuM&locale=en-US"
               target="_blank"
               className="bg-yellow-400 hover:bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="Snapchat"
             >
               <MessageSquare className="w-5 h-5 text-gray-900" />
             </Link>
-            
-            <Link 
-              href="https://www.reddit.com/user/Derma-Veritas" 
+
+            <Link
+              href="https://www.reddit.com/user/Derma-Veritas"
               target="_blank"
               className="bg-orange-500 hover:bg-orange-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="Reddit"
@@ -151,7 +154,7 @@ export default function Footer() {
           <p className="text-sm text-gray-500 mb-4 md:mb-0">
             © {new Date().getFullYear()} Derma Veritas. All rights reserved.
           </p>
-          
+
           <div className="flex space-x-6 text-sm">
             <Link href="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
               Privacy Policy

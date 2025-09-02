@@ -1,6 +1,8 @@
 "use client";
 
+import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
+
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -40,6 +42,8 @@ export default function LipFillersSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen }= useStore();
+  
 
   const cardData = [
     {

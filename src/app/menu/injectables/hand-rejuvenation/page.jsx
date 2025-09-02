@@ -1,5 +1,6 @@
 "use client";
 
+import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -39,7 +40,9 @@ export default function HandRejuvenationSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-  const pricingSectionRef = useRef(null);
+    const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen }= useStore();
+ 
 
   const cardData = [
     {

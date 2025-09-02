@@ -1,6 +1,8 @@
 "use client";
 
+import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
+
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";

@@ -489,10 +489,11 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 {[
                   { name: "Packages", href: "/pacakges" },
                   { name: "Club AL Membership", href: "/pacakges/membership" },
-                  { name: "About Us", href: "/about" },
                   { name: "Meet The Team", href: "/team" },
-                  { name: "Refer a Friend", href: "/refer-a-friend" },
+                  { name: "Shop Now", href: "/shop" },
+                  { name: "About Us", href: "/about" },
                   { name: "Contact Us", href: "/contact" },
+                  { name: "Refer a Friend", href: "/refer-a-friend" },
                 ].map((item) => (
                   <div
                     key={item.name}

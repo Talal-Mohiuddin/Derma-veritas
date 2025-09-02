@@ -10,6 +10,7 @@ const blogPosts = [
     date: "August 14, 2025",
     title: "How to Prepare Your Skin for a Special Event",
     tags: ["Face", "Aesthetics"],
+    slug: "prepare-skin-special-event"
   },
   {
     id: 2,
@@ -17,6 +18,7 @@ const blogPosts = [
     date: "July 22, 2025",
     title: "Why is Sun Protection So Important After Aesthetic Procedures?",
     tags: ["Face", "Aesthetics"],
+    slug: "sun-protection-after-procedures"
   },
   {
     id: 3,
@@ -24,6 +26,7 @@ const blogPosts = [
     date: "July 10, 2025",
     title: "The Benefits of Aesthetic Treatments for Brides-to-Be",
     tags: ["Face", "Aesthetics"],
+    slug: "aesthetic-treatments-brides"
   },
 ]
 
@@ -50,54 +53,55 @@ export default function RecentBlogsSection() {
         {/* Blog Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
-            <Link
+            <div
               key={post.id}
-              href="/blogs"
               className="bg-[#F8FAFC] rounded-2xl border border-gray-200 overflow-hidden group hover:shadow-lg transition-shadow duration-300 shadow-md"
-              
             >
-              {/* Blog Image */}
-              <div className="aspect-[4/3] overflow-hidden rounded-none">
-                <img
-                  src={post.image || "/placeholder.svg"}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              {/* Blog Content */}
-              <div className="p-6">
-                {/* Date */}
-                <div className="flex items-center text-gray-500 text-sm mb-4">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  {post.date}
+              {/* Wrap entire card content with Link */}
+              <Link href={`/blogs/${post.slug}`} className="block">
+                {/* Blog Image */}
+                <div className="aspect-[4/3] overflow-hidden rounded-none">
+                  <img
+                    src={post.image || "/placeholder.svg"}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-lg font-medium text-gray-900 mb-6 leading-tight">
-                  {post.title}
-                </h3>
+                {/* Blog Content */}
+                <div className="p-6">
+                  {/* Date */}
+                  <div className="flex items-center text-gray-500 text-sm mb-4">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    {post.date}
+                  </div>
 
-                {/* Footer with Read More and Tags */}
-                <div className="flex justify-between items-center">
-                  <span className="flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors">
-                    Read more
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </span>
+                  {/* Title */}
+                  <h3 className="text-lg font-medium text-gray-900 mb-6 leading-tight">
+                    {post.title}
+                  </h3>
 
-                  <div className="flex gap-2">
-                    {post.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  {/* Footer with Read More and Tags */}
+                  <div className="flex justify-between items-center">
+                    <span className="flex items-center text-gray-600 text-sm font-medium">
+                      Read more
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </span>
+
+                    <div className="flex gap-2">
+                      {post.tags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-full"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
