@@ -190,7 +190,7 @@ export default function LoginForm({ csrfToken }) {
             onClick={() => setIsSignup(false)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               !isSignup
-                ? "bg-white text-blue-600 shadow-sm"
+                ? "bg-white text-black shadow-sm"
                 : "text-gray-500 hover:text-gray-700"
             }`}
           >
@@ -201,7 +201,7 @@ export default function LoginForm({ csrfToken }) {
             onClick={() => setIsSignup(true)}
             className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
               isSignup
-                ? "bg-white text-blue-600 shadow-sm"
+                ? "bg-white text-black shadow-sm"
                 : "text-gray-500 hover:text-gray-700"
             }`}
           >
@@ -224,7 +224,7 @@ export default function LoginForm({ csrfToken }) {
                 type="text"
                 autoComplete="name"
                 required
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
                 placeholder="Full name"
                 value={inputValue.name}
                 onChange={handleInputChange}
@@ -242,7 +242,7 @@ export default function LoginForm({ csrfToken }) {
               type="email"
               autoComplete="email"
               required
-              className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+              className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
               placeholder="Email address"
               value={inputValue.email}
               onChange={handleInputChange}
@@ -259,7 +259,7 @@ export default function LoginForm({ csrfToken }) {
               type={showPassword ? "text" : "password"}
               autoComplete={isSignup ? "new-password" : "current-password"}
               required
-              className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm pr-10"
+              className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm pr-10"
               placeholder={
                 isSignup ? "Password (min. 6 characters)" : "Password"
               }
@@ -292,7 +292,7 @@ export default function LoginForm({ csrfToken }) {
                 type={showConfirmPassword ? "text" : "password"}
                 autoComplete="new-password"
                 required
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm pr-10"
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm pr-10"
                 placeholder="Confirm password"
                 value={inputValue.confirmPassword}
                 onChange={handleInputChange}
@@ -317,7 +317,7 @@ export default function LoginForm({ csrfToken }) {
         <div>
           <Button
             type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#0042af] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
             disabled={loading || googleLoading}
           >
             {loading ? (
@@ -345,7 +345,7 @@ export default function LoginForm({ csrfToken }) {
           <Button
             type="button"
             variant="outline"
-            className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
             onClick={handleGoogleLogin}
             disabled={loading || googleLoading}
           >
