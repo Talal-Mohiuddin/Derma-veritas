@@ -104,7 +104,7 @@ export default function ClinicsModal({ isOpen, onClose }) {
 
             {/* Footer */}
             <div className="border-t p-6 flex justify-center bg-white">
-              <Button className="bg-gray-800 hover:bg-gray-900 text-white px-8 py-3 rounded-none uppercase tracking-wide font-medium">
+              <Button className="bg-gray-800 hover:bg-gray-900 text-white px-8 py-3 rounded-lg uppercase tracking-wide font-medium">
                 Book Your Consultation
               </Button>
             </div>
