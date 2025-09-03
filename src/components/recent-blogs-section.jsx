@@ -43,7 +43,7 @@ export default function RecentBlogsSection() {
           {/* Updated Button with shine effect */}
           <Link
             href="/blogs"
-            className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide"
+            className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wide"
           >
             VIEW ALL
             <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
