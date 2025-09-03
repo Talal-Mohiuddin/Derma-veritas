@@ -60,6 +60,12 @@ export const useCreateAppointment = () => {
     onSuccess: (data) => {
       // Invalidate appointments lists
       queryClient.invalidateQueries({ queryKey: ["appointments"] });
+      
+      // If this was a first appointment, also invalidate referral data
+      if (data.isFirstAppointment) {
+        queryClient.invalidateQueries({ queryKey: ["referralData"] });
+        queryClient.invalidateQueries({ queryKey: ["users"] });
+      }
     },
   });
 };

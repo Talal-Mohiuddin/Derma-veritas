@@ -104,7 +104,7 @@ export async function GET(request) {
 export async function PUT(request) {
   try {
     const body = await request.json();
-    const { id, userData, isBanned, isAdmin } = body;
+    const { id, userData, isBanned, isAdmin, rewardAction } = body;
 
     // Verify admin access
     if (!isAdmin) {
@@ -149,6 +149,17 @@ export async function PUT(request) {
     // Handle ban/unban
     if (isBanned !== undefined) {
       updateData.isBanned = isBanned;
+    }
+
+    // Handle reward status updates
+    if (rewardAction && rewardAction.type && rewardAction.rewardIndex !== undefined) {
+      const rewards = currentUserData.rewards || [];
+      if (rewards[rewardAction.rewardIndex]) {
+        rewards[rewardAction.rewardIndex].status = rewardAction.type; // 'approved' or 'rejected'
+        rewards[rewardAction.rewardIndex].processedAt = new Date();
+        rewards[rewardAction.rewardIndex].processedBy = rewardAction.adminId;
+        updateData.rewards = rewards;
+      }
     }
 
     // Handle other user data updates

@@ -9,12 +9,10 @@ import {
   Users,
   Copy,
   Check,
- 
   ChevronDown,
   LoaderCircle,
   Building2,
   Star,
-  
 } from "lucide-react";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useUserReferralData } from "@/hooks/useUser";
@@ -426,7 +424,9 @@ export default function ReferAFriendPage() {
                     <div className="bg-blue-50 p-4 rounded-lg">
                       <p className="text-sm text-blue-800">
                         <strong>Tip:</strong> Share this link on social media,
-                        send it via WhatsApp, or email it to friends. You earn 10% of every treatment cost when they complete their booking!
+                        send it via WhatsApp, or email it to friends. You earn
+                        10% of every treatment cost when they complete their
+                        booking!
                       </p>
                     </div>
                   </div>
