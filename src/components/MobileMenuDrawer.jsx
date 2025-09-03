@@ -175,11 +175,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     { name: "PRP Therapy", slug: "prp-therapy" },
   ];
 
-  const minorOpsLinks = [
-    { name: "Mole Removal", slug: "mole-removal" },
-    { name: "Skin Tag Removal", slug: "skin-boosters" },
-  ];
-
   const laserLinks = [
     { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
   ];
@@ -311,8 +306,8 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
           >
             {/* Header */}
             <header className="bg-[#e1e1e1] px-4 py-2">
-              <div className="flex justify-between items-center max-w-7xl mx-auto">
-                {/* Left - Call Us */}
+              <div className="flex justify-center items-center max-w-7xl mx-auto">
+                {/* Center - Call Us */}
                 <div
                   onClick={() => setIsClinicsOpen(true)}
                   className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
@@ -454,12 +449,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     section="Laser"
                     links={laserLinks}
                     type="laser"
-                  />
-                  <MobileDropdown
-                    label="Minor Ops"
-                    section="MinorOps"
-                    links={minorOpsLinks}
-                    type="minor-ops"
                   />
                 </div>
 
@@ -603,6 +592,16 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                   <div className="py-4">
                     <Link
+                      href="/shop"
+                      className="block text-lg font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Shop
+                    </Link>
+                  </div>
+
+                  <div className="py-4">
+                    <Link
                       href="/refer-a-friend"
                       className="block text-lg font-light text-gray-800 hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
@@ -664,13 +663,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                             section="Laser"
                             links={laserLinks}
                             type="laser"
-                          />
-
-                          <DesktopDropdown
-                            label="Minor Ops"
-                            section="MinorOps"
-                            links={minorOpsLinks}
-                            type="minor-ops"
                           />
                         </>
                       )}

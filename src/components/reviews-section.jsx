@@ -192,13 +192,17 @@ export default function ReviewsSection() {
               style={{ width: "90%" }}
             >
               <Card
-                className={`p-12  border border-gray-200 shadow-sm  min-h-[400px] flex flex-col bg-gray-100 justify-between w-full transition-all rounded-2xl duration-300 ${
+                className={`p-12  border border-gray-200  min-h-[400px] flex flex-col bg-gray-100 justify-between w-full transition-all rounded-2xl duration-300 ${
                   index === currentReview
                     ? "scale-100 opacity-100"
                     : "scale-95 opacity-70"
                 }`}
                 style={{
                   boxShadow: "rgba(0, 0, 0, 0.1) -6px 8px 0px 0px",
+                  backgroundImage: "url('/review2.jpeg')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                 }}
               >
                 <div>
@@ -206,30 +210,30 @@ export default function ReviewsSection() {
                     {[...Array(review.rating)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-4 h-4 text-orange-400 stroke-1"
+                        className="w-5 h-5 text-orange-400 stroke-1"
                         fill="currentColor"
                       />
                     ))}
                   </div>
 
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">
+                  <h3 className="text-2xl font-bold text-white mb-6">
                     {review.name}
                   </h3>
 
-                  <p className="text-gray-700 text-base leading-relaxed">
+                  <p className="text-white text-lg leading-relaxed font-medium">
                     {review.text}
                   </p>
                 </div>
 
                 <div className="mt-8">
                   <div className="flex items-center">
-                    <div className="flex items-center text-lg font-medium">
-                      <span className="text-blue-500">G</span>
-                      <span className="text-red-500">o</span>
-                      <span className="text-yellow-500">o</span>
-                      <span className="text-blue-500">g</span>
-                      <span className="text-green-500">l</span>
-                      <span className="text-red-500">e</span>
+                    <div className="flex items-center text-3xl font-extrabold">
+                      <span className="text-blue-400">G</span>
+                      <span className="text-red-400">o</span>
+                      <span className="text-yellow-400">o</span>
+                      <span className="text-blue-400">g</span>
+                      <span className="text-green-400">l</span>
+                      <span className="text-red-400">e</span>
                     </div>
                   </div>
                 </div>

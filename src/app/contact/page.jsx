@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -14,17 +14,17 @@ export default function ContactPage() {
     message: "",
     newsletter: false,
     ageConfirm: false,
-  })
+  });
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission here
-    console.log("Form submitted:", formData)
-  }
+    console.log("Form submitted:", formData);
+  };
 
   const handleInputChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,12 +33,17 @@ export default function ContactPage() {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-muted-foreground/30 flex-1 max-w-20"></div>
-            <span className="text-sm text-muted-foreground font-medium">Contact AL Aesthetics</span>
+            <span className="text-sm text-muted-foreground font-medium">
+              Contact AL Aesthetics
+            </span>
             <div className="h-px bg-muted-foreground/30 flex-1 max-w-20"></div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">Contact Us</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+            Contact Us
+          </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            See below for how to contact AL Aesthetics to start your journey in enhancing your natural beauty.
+            See below for how to contact AL Aesthetics to start your journey in
+            enhancing your natural beauty.
           </p>
         </div>
 
@@ -49,7 +54,9 @@ export default function ContactPage() {
             <div>
               <div className="flex items-center gap-4 mb-4">
                 <div className="h-px bg-muted-foreground/30 flex-1 max-w-12"></div>
-                <span className="text-sm text-muted-foreground font-medium">Contact Us</span>
+                <span className="text-sm text-muted-foreground font-medium">
+                  Contact Us
+                </span>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-balance">
                 Get in touch with our team today
@@ -68,7 +75,10 @@ export default function ContactPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div className="space-y-2">
-                <label htmlFor="name" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="name"
+                  className="text-sm font-medium text-foreground"
+                >
                   Your Name*
                 </label>
                 <Input
@@ -84,7 +94,10 @@ export default function ContactPage() {
 
               {/* Email Field */}
               <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="email"
+                  className="text-sm font-medium text-foreground"
+                >
                   Email Address*
                 </label>
                 <Input
@@ -100,7 +113,10 @@ export default function ContactPage() {
 
               {/* Phone Field */}
               <div className="space-y-2">
-                <label htmlFor="phone" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="phone"
+                  className="text-sm font-medium text-foreground"
+                >
                   Phone No*
                 </label>
                 <Input
@@ -116,7 +132,10 @@ export default function ContactPage() {
 
               {/* Message Field */}
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium text-foreground"
+                >
                   Message
                 </label>
                 <Textarea
@@ -135,39 +154,17 @@ export default function ContactPage() {
                   <Checkbox
                     id="newsletter"
                     checked={formData.newsletter}
-                    onCheckedChange={(checked) => handleInputChange("newsletter", checked)}
+                    onCheckedChange={(checked) =>
+                      handleInputChange("newsletter", checked)
+                    }
                   />
-                  <label htmlFor="newsletter" className="text-sm text-muted-foreground leading-relaxed">
-                    I would like to occasionally receive news & offers from AL Aesthetics.
+                  <label
+                    htmlFor="newsletter"
+                    className="text-sm text-muted-foreground leading-relaxed"
+                  >
+                    I would like to occasionally receive news & offers from AL
+                    Aesthetics.
                   </label>
-                </div>
-
-                <div className="flex items-start space-x-3">
-                  <Checkbox
-                    id="ageConfirm"
-                    checked={formData.ageConfirm}
-                    onCheckedChange={(checked) => handleInputChange("ageConfirm", checked)}
-                    required
-                  />
-                  <div className="space-y-1">
-                    <label htmlFor="ageConfirm" className="text-sm text-muted-foreground leading-relaxed">
-                      I confirm I am over 18 years old.
-                    </label>
-                    <p className="text-xs text-muted-foreground">
-                      *AL Aesthetics does not offer treatments to individuals under 18 years of age.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* reCAPTCHA Placeholder */}
-              <div className="bg-muted/30 border border-border rounded-md p-4 flex items-center justify-center">
-                <div className="flex items-center space-x-3">
-                  <div className="w-6 h-6 border-2 border-primary rounded-sm"></div>
-                  <span className="text-sm text-muted-foreground">I'm not a robot</span>
-                  <div className="ml-auto">
-                    <div className="text-xs text-muted-foreground">reCAPTCHA</div>
-                  </div>
                 </div>
               </div>
 
@@ -184,5 +181,5 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

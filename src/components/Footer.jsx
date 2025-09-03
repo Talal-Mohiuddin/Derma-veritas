@@ -1,17 +1,8 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Facebook,
-  Instagram,
-  MessageCircle,
-  MessageSquare,
-  ThumbsUp
-} from "lucide-react"
+import Link from "next/link";
+import { Mail, Phone, MapPin, Clock, Facebook, Instagram } from "lucide-react";
+import { FaTiktok, FaSnapchat, FaReddit } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -31,7 +22,9 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div className="pt-4">
-            <h4 className="text-white font-medium mb-2">Subscribe to our Newsletter</h4>
+            <h4 className="text-white font-medium mb-2">
+              Subscribe to our Newsletter
+            </h4>
             <div className="flex items-center bg-gray-800 rounded-md overflow-hidden">
               <input
                 type="email"
@@ -50,29 +43,58 @@ export default function Footer() {
           <h3 className="text-white font-semibold mb-4 text-lg">Quick Links</h3>
           <ul className="space-y-3">
             <li>
-              <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
+              <Link
+                href="/about"
+                className="hover:text-white transition-colors"
+              >
+                About Us
+              </Link>
             </li>
             <li>
-              <Link href="/services" className="hover:text-white transition-colors">Our Services</Link>
+              <Link
+                href="/services"
+                className="hover:text-white transition-colors"
+              >
+                Our Services
+              </Link>
             </li>
             <li>
-              <Link href="/pricing" className="hover:text-white transition-colors">Pricing Plans</Link>
+              <Link
+                href="/pricing"
+                className="hover:text-white transition-colors"
+              >
+                Pricing Plans
+              </Link>
             </li>
             <li>
-              <Link href="/membership" className="hover:text-white transition-colors">Membership</Link>
+              <Link
+                href="/membership"
+                className="hover:text-white transition-colors"
+              >
+                Membership
+              </Link>
             </li>
             <li>
-              <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
+              <Link
+                href="/contact"
+                className="hover:text-white transition-colors"
+              >
+                Contact Us
+              </Link>
             </li>
             <li>
-              <Link href="/team" className="hover:text-white transition-colors">Meet Our Team</Link>
+              <Link href="/team" className="hover:text-white transition-colors">
+                Meet Our Team
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* Business Hours & Location */}
         <div>
-          <h3 className="text-white font-semibold mb-4 text-lg">Business Hours</h3>
+          <h3 className="text-white font-semibold mb-4 text-lg">
+            Business Hours
+          </h3>
           <div className="flex items-start space-x-2 mb-4">
             <Clock className="w-5 h-5 mt-1 flex-shrink-0" />
             <div>
@@ -82,7 +104,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <h3 className="text-white font-semibold mb-2 text-lg mt-6">Location</h3>
+          <h3 className="text-white font-semibold mb-2 text-lg mt-6">
+            Location
+          </h3>
           <div className="flex items-start space-x-2">
             <MapPin className="w-5 h-5 mt-1 flex-shrink-0" />
             <div>
@@ -124,7 +148,7 @@ export default function Footer() {
               className="bg-black hover:bg-gray-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="TikTok"
             >
-              <MessageCircle className="w-5 h-5" />
+              <FaTiktok className="w-5 h-5" />
             </Link>
 
             <Link
@@ -133,7 +157,7 @@ export default function Footer() {
               className="bg-yellow-400 hover:bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="Snapchat"
             >
-              <MessageSquare className="w-5 h-5 text-gray-900" />
+              <FaSnapchat className="w-5 h-5 text-gray-900" />
             </Link>
 
             <Link
@@ -142,7 +166,7 @@ export default function Footer() {
               className="bg-orange-500 hover:bg-orange-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               aria-label="Reddit"
             >
-              <ThumbsUp className="w-5 h-5" />
+              <FaReddit className="w-5 h-5" />
             </Link>
           </div>
         </div>
@@ -156,18 +180,27 @@ export default function Footer() {
           </p>
 
           <div className="flex space-x-6 text-sm">
-            <Link href="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
+            <Link
+              href="/privacy-policy"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms-of-service" className="text-gray-500 hover:text-white transition-colors">
+            <Link
+              href="/terms-of-service"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
               Terms of Service
             </Link>
-            <Link href="/cookie-policy" className="text-gray-500 hover:text-white transition-colors">
+            <Link
+              href="/cookie-policy"
+              className="text-gray-500 hover:text-white transition-colors"
+            >
               Cookie Policy
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

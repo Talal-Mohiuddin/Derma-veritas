@@ -126,7 +126,15 @@ export default function Navbar() {
   return (
     <>
       {/* Animated Referral Program Banner */}
-      <header className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden relative fixed top-0 left-0 right-0 z-50">
+      <header
+        className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden  fixed top-0 left-0 right-0 z-50"
+        style={{
+          backgroundImage: "url('/review2.jpeg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="flex animate-scroll whitespace-nowrap">
           {/* Repeat messages for seamless scrolling */}
           {[...bannerMessages, ...bannerMessages].map((message, index) => (
