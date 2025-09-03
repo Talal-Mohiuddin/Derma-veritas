@@ -232,71 +232,46 @@ export default function TreatmentsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Custom cursor styles */}
-      <style jsx global>{`
-        .category-button {
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .category-button:hover {
-          cursor: pointer;
-        }
-        .treatment-card {
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        .treatment-card:hover {
-          cursor: pointer;
-          transform: translateY(-5px);
-        }
-      `}</style>
-
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <motion.section 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="relative py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white"
-      >
-        <div className="container mx-auto px-4 text-center">
-          <motion.h1 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-bold mb-4"
-          >
-            Our Treatments
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-xl max-w-2xl mx-auto"
-          >
-            Discover our range of aesthetic treatments designed to enhance your natural beauty
-          </motion.p>
+      <div className="relative bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="flex flex-col items-center justify-center text-center">
+            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mb-12">
+              <span className="text-white text-3xl font-bold">DV</span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
+              <span className="text-black">Our</span>{" "}
+              <span className="text-gray-400">Treatments</span>
+            </h1>
+
+            <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
+              Discover our comprehensive range of aesthetic treatments designed to enhance 
+              your natural beauty and help you achieve your aesthetic goals.
+            </p>
+          </div>
         </div>
-      </motion.section>
+      </div>
 
       {/* Filters Section */}
       <motion.section 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.4 }}
-        className="py-8 bg-section-bg sticky top-0 z-10 shadow-sm"
+        transition={{ duration: 0.7 }}
+        className="py-8 bg-gray-50 sticky top-0 z-10 shadow-sm"
       >
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             {/* Search Input */}
             <div className="relative w-full md:w-1/3">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
                 placeholder="Search treatments..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary cursor-text"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-gray-800 cursor-text"
               />
             </div>
 
@@ -305,9 +280,7 @@ export default function TreatmentsPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className="md:hidden flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md category-button"
-              onMouseEnter={() => setHoveredCategory("filter")}
-              onMouseLeave={() => setHoveredCategory(null)}
+              className="md:hidden flex items-center gap-2 px-4 py-2 bg-gray-800 text-white rounded-md"
             >
               <Filter className="w-5 h-5" />
               Filters
@@ -336,12 +309,10 @@ export default function TreatmentsPage() {
                     whileHover="hover"
                     whileTap="tap"
                     onClick={() => setSelectedCategory("all")}
-                    className={`px-3 py-1 rounded-full text-sm category-button ${selectedCategory === "all"
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-secondary text-secondary-foreground'
+                    className={`px-3 py-1 rounded-full text-sm ${selectedCategory === "all"
+                      ? 'bg-gray-800 text-white'
+                      : 'bg-gray-200 text-gray-800'
                       }`}
-                    onMouseEnter={() => setHoveredCategory("all")}
-                    onMouseLeave={() => setHoveredCategory(null)}
                   >
                     All
                   </motion.button>
@@ -352,12 +323,10 @@ export default function TreatmentsPage() {
                       whileHover="hover"
                       whileTap="tap"
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`px-3 py-1 rounded-full text-sm category-button ${selectedCategory === category.id
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-secondary text-secondary-foreground'
+                      className={`px-3 py-1 rounded-full text-sm ${selectedCategory === category.id
+                        ? 'bg-gray-800 text-white'
+                        : 'bg-gray-200 text-gray-800'
                         }`}
-                      onMouseEnter={() => setHoveredCategory(category.id)}
-                      onMouseLeave={() => setHoveredCategory(null)}
                     >
                       {category.name}
                     </motion.button>
@@ -379,12 +348,10 @@ export default function TreatmentsPage() {
               whileHover="hover"
               whileTap="tap"
               onClick={() => setSelectedCategory("all")}
-              className={`px-4 py-2 rounded-md category-button ${selectedCategory === "all"
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-secondary text-secondary-foreground hover:bg-accent'
+              className={`px-4 py-2 rounded-md ${selectedCategory === "all"
+                ? 'bg-gray-800 text-white'
+                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                 }`}
-              onMouseEnter={() => setHoveredCategory("all")}
-              onMouseLeave={() => setHoveredCategory(null)}
             >
               All
             </motion.button>
@@ -395,12 +362,10 @@ export default function TreatmentsPage() {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-md category-button ${selectedCategory === category.id
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-accent'
+                className={`px-4 py-2 rounded-md ${selectedCategory === category.id
+                  ? 'bg-gray-800 text-white'
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                   }`}
-                onMouseEnter={() => setHoveredCategory(category.id)}
-                onMouseLeave={() => setHoveredCategory(null)}
               >
                 {category.name}
               </motion.button>
@@ -410,8 +375,8 @@ export default function TreatmentsPage() {
       </motion.section>
 
       {/* Treatments Grid */}
-      <section className="py-12">
-        <div className="container mx-auto px-4">
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredTreatments.length === 0 ? (
             <motion.div 
               initial={{ opacity: 0 }}
@@ -419,8 +384,8 @@ export default function TreatmentsPage() {
               transition={{ duration: 0.5 }}
               className="text-center py-12"
             >
-              <h3 className="text-2xl font-medium mb-4">No treatments found</h3>
-              <p className="text-muted-foreground mb-6">
+              <h3 className="text-2xl font-medium mb-4 text-gray-800">No treatments found</h3>
+              <p className="text-gray-600 mb-6">
                 Try adjusting your search or filter criteria
               </p>
               <motion.button
@@ -430,7 +395,7 @@ export default function TreatmentsPage() {
                   setSearchQuery("");
                   setSelectedCategory("all");
                 }}
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 category-button"
+                className="px-6 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700"
               >
                 Clear Filters
               </motion.button>
@@ -443,10 +408,10 @@ export default function TreatmentsPage() {
                 transition={{ duration: 0.5 }}
                 className="flex justify-between items-center mb-8"
               >
-                <h2 className="text-2xl font-bold">
+                <h2 className="text-2xl font-light text-gray-800">
                   {selectedCategory === "all" ? "All Treatments" : treatmentCategories.find(c => c.id === selectedCategory)?.name}
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-gray-600">
                   {filteredTreatments.length} {filteredTreatments.length === 1 ? "treatment" : "treatments"} found
                 </p>
               </motion.div>
@@ -465,7 +430,7 @@ export default function TreatmentsPage() {
                       y: -5,
                       transition: { duration: 0.2 }
                     }}
-                    className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 treatment-card"
+                    className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     <div className="relative overflow-hidden">
                       <motion.img
@@ -481,19 +446,19 @@ export default function TreatmentsPage() {
                     </div>
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold">{treatment.name}</h3>
+                        <h3 className="text-xl font-light text-gray-800">{treatment.name}</h3>
                       </div>
-                      <p className="text-muted-foreground mb-4">
+                      <p className="text-gray-600 mb-4">
                         {treatment.description}
                       </p>
                       <div className="flex justify-between items-center">
-                        <span className="text-sm text-muted-foreground">
+                        <span className="text-sm text-gray-500">
                           {treatment.category}
                         </span>
                         <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
                           <Link
                             href={`/menu/injectables/${generateSlug(treatment.name)}`}
-                            className="flex items-center text-primary hover:text-primary/80 font-medium"
+                            className="flex items-center text-gray-800 hover:text-gray-600 font-medium"
                           >
                             Learn more
                             <ArrowRight className="w-4 h-4 ml-1" />
@@ -515,11 +480,11 @@ export default function TreatmentsPage() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        className="py-16 bg-section-bg"
+        className="py-16 bg-gray-50"
       >
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-light text-gray-800 mb-4">Ready to get started?</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
             Book a consultation with our experts to find the perfect treatment for you
           </p>
           <motion.button
@@ -528,7 +493,7 @@ export default function TreatmentsPage() {
               transition: { duration: 0.2 }
             }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-md text-lg font-medium hover:bg-primary/90 transition-colors category-button"
+            className="px-8 py-3 bg-gray-800 text-white rounded-md text-lg font-medium hover:bg-gray-700 transition-colors"
           >
             Book a Consultation
           </motion.button>

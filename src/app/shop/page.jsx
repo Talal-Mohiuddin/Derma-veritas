@@ -16,6 +16,7 @@ import {
   Check,
 } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 // Product Card Component
 function ProductCard({ product }) {
@@ -33,7 +34,7 @@ function ProductCard({ product }) {
   };
 
   const updateCartQuantity = (change) => {
-    const newQuantity = Math.max(0, cartQuantity + change); // Allow 0 for removal
+    const newQuantity = Math.max(0, cartQuantity + change);
     handleUpdateCart(newQuantity);
   };
 
@@ -63,10 +64,9 @@ function ProductCard({ product }) {
 
     try {
       if (newQuantity <= 0) {
-        // Remove item from cart if quantity is 0 or less
         await updateQuantityMutation.mutateAsync({
           productId: product.id,
-          quantity: 0, // This will trigger removal in the hook
+          quantity: 0,
         });
         toast.success("Item removed from cart!");
       } else {
@@ -82,7 +82,13 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group"
+    >
       <div className="h-80 relative bg-gray-100 overflow-hidden">
         {product.images && product.images.length > 0 ? (
           <Image
@@ -223,7 +229,7 @@ function ProductCard({ product }) {
           </button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -242,49 +248,135 @@ export default function ProductListing() {
   const categories = ["All", "Skincare", "Supplements", "Tools", "Sets"];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-light text-gray-900 mb-4">
-              Premium <span className="font-semibold">Skincare</span>
+      <div className="relative bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="flex flex-col items-center justify-center text-center">
+            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mb-12">
+              <span className="text-white text-3xl font-bold">DV</span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
+              <span className="text-black">Premium</span>{" "}
+              <span className="text-gray-400">Skincare</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+
+            <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
               Discover our curated collection of professional-grade skincare
-              products and treatments
+              products and treatments designed to elevate your skincare routine
+              to the next level.
             </p>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Category Filter */}
-      <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap justify-center gap-3">
+      {/* Product Overview */}
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="bg-white px-6 sm:px-8 lg:px-12 py-12 lg:py-16 flex flex-col justify-center">
+          <div className="text-sm text-gray-500 mb-6 tracking-wide uppercase">
+            Exclusive Collection
+          </div>
+
+          <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-8 leading-tight">
+            Professional Skincare Solutions
+          </h2>
+
+          <p className="text-gray-600 text-lg leading-relaxed mb-6">
+            Our carefully curated collection features the highest quality skincare
+            products, supplements, and tools from trusted brands. Each product is
+            selected by our team of medical professionals to ensure efficacy and
+            safety.
+          </p>
+
+          <p className="text-gray-600 text-lg leading-relaxed">
+            From advanced serums to specialized tools, our product range is designed
+            to complement our clinical treatments and help you maintain optimal skin
+            health between visits.
+          </p>
+        </div>
+
+        <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-6 sm:px-8 lg:px-12 py-12 lg:py-16 flex flex-col justify-center">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center">
+              <span className="text-white text-lg font-bold">DV</span>
+            </div>
+            <div>
+              <span className="text-3xl font-light text-black">Premium</span>
+              <br />
+              <span className="text-3xl font-light text-gray-400">
+                Skincare
+              </span>
+            </div>
+          </div>
+
+          <h3 className="text-2xl lg:text-3xl font-light text-gray-800 mb-8 leading-tight">
+            Why Choose Our Products:
+          </h3>
+
+          <ul className="space-y-5 text-gray-700">
+            {[
+              "Medical-grade formulations with proven results",
+              "Selected by skincare professionals",
+              "Complementary to clinical treatments",
+              "Free consultations with product specialists",
+              "Fast shipping and easy returns",
+              "Automatic replenishment options available",
+            ].map((benefit, index) => (
+              <li key={index} className="flex items-start gap-4">
+                <div className="w-2 h-2 bg-gray-800 rounded-full mt-3 flex-shrink-0"></div>
+                <span className="text-lg">{benefit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Products Section */}
+      <section className="py-16 lg:py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-6">
+              Explore Our Collection
+            </h2>
+            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+              Browse our complete range of skincare products, supplements, and tools
+            </p>
+          </motion.div>
+
+          {/* Category Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-3 mb-12"
+          >
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() =>
                   setSelectedCategory(category === "All" ? "" : category)
                 }
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                   (category === "All" && selectedCategory === "") ||
                   selectedCategory === category
                     ? "bg-black text-white shadow-lg transform scale-105"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105"
+                    : "bg-white text-gray-700 hover:bg-gray-100 hover:scale-105"
                 }`}
               >
                 {category}
               </button>
             ))}
-          </div>
-        </div>
-      </section>
+          </motion.div>
 
-      {/* Product Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Product Grid */}
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {[...Array(8)].map((_, i) => (
@@ -305,14 +397,26 @@ export default function ProductListing() {
               ))}
             </div>
           ) : error ? (
-            <div className="text-center py-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center py-16"
+            >
               <div className="bg-white rounded-2xl p-8 max-w-md mx-auto">
                 <p className="text-red-600 text-lg">Error loading products</p>
                 <p className="text-gray-600 mt-2">Please try again later</p>
               </div>
-            </div>
+            </motion.div>
           ) : data?.products?.length === 0 ? (
-            <div className="text-center py-16">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center py-16"
+            >
               <div className="bg-white rounded-2xl p-8 max-w-md mx-auto">
                 <p className="text-gray-900 text-lg font-medium">
                   No products found
@@ -321,7 +425,7 @@ export default function ProductListing() {
                   Try selecting a different category
                 </p>
               </div>
-            </div>
+            </motion.div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {data?.products?.map((product) => (
@@ -331,6 +435,46 @@ export default function ProductListing() {
           )}
         </div>
       </section>
+
+      {/* Consultation Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div className="bg-white px-6 sm:px-8 lg:px-12 py-12 lg:py-16 flex flex-col justify-center">
+          <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-8 leading-tight">
+            Need Help Choosing Products?
+          </h2>
+
+          <p className="text-gray-600 text-lg leading-relaxed mb-6">
+            Our skincare specialists are available to help you select the perfect
+            products for your skin type and concerns. Book a complimentary virtual
+            consultation to create a personalized skincare regimen.
+          </p>
+
+          <p className="text-gray-600 text-lg leading-relaxed mb-12">
+            We'll analyze your skin, discuss your goals, and recommend products
+            that will deliver visible results and complement any ongoing treatments.
+          </p>
+
+          <button className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors w-fit">
+            <span>BOOK CONSULTATION</span>
+            <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+          </button>
+        </div>
+
+        <div className="bg-gray-50 relative flex items-center justify-center min-h-[400px] lg:min-h-[70vh]">
+          <div className="relative w-full h-full">
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-24 h-24 bg-gray-400 rounded-full mx-auto mb-4"></div>
+                <div className="text-gray-600">Skincare Consultation Image</div>
+              </div>
+            </div>
+            <div className="absolute top-6 right-6 bg-white bg-opacity-95 px-6 py-4 rounded-lg shadow-lg">
+              <div className="text-lg font-light text-gray-800">Skincare Expert</div>
+              <div className="text-sm text-gray-600">Product Specialist</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
