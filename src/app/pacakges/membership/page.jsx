@@ -13,7 +13,6 @@ import { useAuth } from "@/store/FirebaseAuthProvider";
 export default function ClubMembershipPage() {
   const { setBookingOpen } = useStore();
   const { user } = useAuth();
-  console.log("User in Membership Page:", user);
   const router = useRouter();
   const [loadingPlan, setLoadingPlan] = useState(null);
   const createCheckout = useCreateMembershipCheckout();

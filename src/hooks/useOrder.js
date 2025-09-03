@@ -1,35 +1,22 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { queryClient } from "@/config/tanstack";
-import { useAuth } from "@/store/FirebaseAuthProvider";
-import { getAuth } from "firebase/auth";
-
-// Helper function to get auth token
-const getAuthToken = async () => {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  if (!user) throw new Error("User not authenticated");
-  return await user.getIdToken();
-};
+import { useStore } from "@/store/zustand";
 
 // Get All Orders (Admin) or User Orders
 export const useOrdersData = (getAllOrders = false) => {
-  const { user } = useAuth();
+  const { user } = useStore();
   
   return useQuery({
     queryKey: ["orders", getAllOrders ? "all" : "user", user?.uid],
     queryFn: async () => {
-      const token = await getAuthToken();
       const params = new URLSearchParams();
+      params.append('userId', user.uid);
       
       if (getAllOrders) {
         params.append('all', 'true');
       }
 
-      const response = await fetch(`/api/orders?${params}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(`/api/orders?${params}`);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -47,17 +34,15 @@ export const useOrdersData = (getAllOrders = false) => {
 
 // Get Single Order by ID
 export const useOrderById = (id) => {
-  const { user } = useAuth();
+  const { user } = useStore();
   
   return useQuery({
     queryKey: ["order", id],
     queryFn: async () => {
-      const token = await getAuthToken();
-      const response = await fetch(`/api/orders/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const params = new URLSearchParams();
+      params.append('userId', user.uid);
+      
+      const response = await fetch(`/api/orders/${id}?${params}`);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -75,17 +60,19 @@ export const useOrderById = (id) => {
 
 // Create Order (Admin only)
 export const useCreateOrder = () => {
+  const { user } = useStore();
+  
   return useMutation({
     mutationFn: async (orderData) => {
-      const token = await getAuthToken();
-      
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify({
+          ...orderData,
+          adminUserId: user.uid
+        }),
       });
 
       if (!response.ok) {
@@ -121,17 +108,19 @@ export const useCreateOrder = () => {
 
 // Update Order Status (Admin only)
 export const useUpdateOrderStatus = () => {
+  const { user } = useStore();
+  
   return useMutation({
-    mutationFn: async ({ id, status }) => {
-      const token = await getAuthToken();
-      
-      const response = await fetch(`/api/orders/${id}`, {
+    mutationFn: async ({ orderId, status }) => {
+      const response = await fetch(`/api/orders/${orderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ 
+          status,
+          userId: user.uid
+        }),
       });
 
       if (!response.ok) {
@@ -142,10 +131,10 @@ export const useUpdateOrderStatus = () => {
       return response.json();
     },
     onSuccess: (data, variables) => {
-      const { id } = variables;
+      const { orderId } = variables;
       
       // Update single order cache
-      queryClient.setQueryData(["order", id], (oldData) => {
+      queryClient.setQueryData(["order", orderId], (oldData) => {
         if (!oldData) return oldData;
         return {
           ...oldData,
@@ -164,7 +153,7 @@ export const useUpdateOrderStatus = () => {
           if (!oldData?.orders) return oldData;
 
           const updatedOrders = oldData.orders.map(order =>
-            order.id === id ? data.order : order
+            order.id === orderId ? data.order : order
           );
 
           return {
@@ -179,15 +168,18 @@ export const useUpdateOrderStatus = () => {
 
 // Delete Order (Admin only)
 export const useDeleteOrder = () => {
+  const { user } = useStore();
+  
   return useMutation({
-    mutationFn: async ({ id }) => {
-      const token = await getAuthToken();
-      
-      const response = await fetch(`/api/orders/${id}`, {
+    mutationFn: async ({ orderId }) => {
+      const response = await fetch(`/api/orders/${orderId}`, {
         method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          userId: user.uid
+        }),
       });
       
       if (!response.ok) {
@@ -195,7 +187,7 @@ export const useDeleteOrder = () => {
         throw new Error(errorData.message || "Failed to delete order");
       }
       
-      return { id, ...await response.json() };
+      return { id: orderId, ...await response.json() };
     },
     onSuccess: (data) => {
       // Remove from single order cache
@@ -227,17 +219,15 @@ export const useDeleteOrder = () => {
 
 // Get User's Order History
 export const useUserOrderHistory = () => {
-  const { user } = useAuth();
+  const { user } = useStore();
   
   return useQuery({
     queryKey: ["orders", "user", user?.uid],
     queryFn: async () => {
-      const token = await getAuthToken();
-      const response = await fetch(`/api/orders`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const params = new URLSearchParams();
+      params.append('userId', user.uid);
+      
+      const response = await fetch(`/api/orders?${params}`);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -255,17 +245,16 @@ export const useUserOrderHistory = () => {
 
 // Get Orders by Status (Admin only)
 export const useOrdersByStatus = (status) => {
-  const { user } = useAuth();
+  const { user } = useStore();
   
   return useQuery({
     queryKey: ["orders", "status", status],
     queryFn: async () => {
-      const token = await getAuthToken();
-      const response = await fetch(`/api/orders?all=true`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const params = new URLSearchParams();
+      params.append('userId', user.uid);
+      params.append('all', 'true');
+      
+      const response = await fetch(`/api/orders?${params}`);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -291,17 +280,16 @@ export const useOrdersByStatus = (status) => {
 
 // Get Recent Orders (Admin dashboard)
 export const useRecentOrders = (limit = 10) => {
-  const { user } = useAuth();
+  const { user } = useStore();
   
   return useQuery({
     queryKey: ["orders", "recent", limit],
     queryFn: async () => {
-      const token = await getAuthToken();
-      const response = await fetch(`/api/orders?all=true`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const params = new URLSearchParams();
+      params.append('userId', user.uid);
+      params.append('all', 'true');
+      
+      const response = await fetch(`/api/orders?${params}`);
       
       if (!response.ok) {
         const errorData = await response.json();
@@ -327,18 +315,20 @@ export const useRecentOrders = (limit = 10) => {
 
 // Bulk Update Order Status (Admin only)
 export const useBulkUpdateOrderStatus = () => {
+  const { user } = useStore();
+  
   return useMutation({
     mutationFn: async ({ ids, status }) => {
-      const token = await getAuthToken();
-      
       const updatePromises = ids.map((id) =>
         fetch(`/api/orders/${id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`,
           },
-          body: JSON.stringify({ status }),
+          body: JSON.stringify({ 
+            status,
+            userId: user.uid
+          }),
         }).then(res => {
           if (!res.ok) throw new Error(`Failed to update order ${id}`);
           return res.json();
@@ -370,17 +360,16 @@ export const useBulkUpdateOrderStatus = () => {
 
 // Get Order Statistics (Admin dashboard)
 export const useOrderStatistics = () => {
-  const { user } = useAuth();
+  const { user } = useStore();
   
   return useQuery({
     queryKey: ["orders", "statistics"],
     queryFn: async () => {
-      const token = await getAuthToken();
-      const response = await fetch(`/api/orders?all=true`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      const params = new URLSearchParams();
+      params.append('userId', user.uid);
+      params.append('all', 'true');
+      
+      const response = await fetch(`/api/orders?${params}`);
       
       if (!response.ok) {
         const errorData = await response.json();

@@ -128,8 +128,12 @@ export default function UsersPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="text-xl font-semibold text-gray-700 mb-2">Loading Users...</div>
+          <div className="text-gray-500">Please wait while we fetch the data</div>
+        </div>
       </div>
     );
   }

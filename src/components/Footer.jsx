@@ -40,7 +40,7 @@ export default function Footer() {
                 placeholder="Enter your email"
                 className="bg-transparent px-4 py-2 flex-1 focus:outline-none text-sm"
               />
-              <button className="bg-gray-800 hover:bg-gray-900 px-4 py-2 text-white transition-colors">
+              <button className="bg-gray-700 hover:bg-gray-600 px-4 py-2 text-white transition-colors">
                 Subscribe
               </button>
             </div>

@@ -173,7 +173,10 @@ export default function Sidebar({ isOpen, onClose }) {
       <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
         <div className="flex-1 flex flex-col min-h-0 bg-gradient-to-b from-gray-900 to-gray-800 shadow-xl">
           {/* Logo */}
-          <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+          <Link
+            href="/"
+            className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900"
+          >
             <div className="flex items-center">
               <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">DV</span>
@@ -182,7 +185,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 DermaVeritas
               </span>
             </div>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="mt-8 flex-1 px-2 pb-4 space-y-1">

@@ -25,6 +25,7 @@ import {
 
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
+import { useStore } from "@/store/zustand";
 
 export default function PolynucleotidesHairLossSection() {
   const [expandedSections, setExpandedSections] = useState({});

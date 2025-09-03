@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import {
-  useAllOrders,
+  useOrdersData,
   useUpdateOrderStatus,
   useDeleteOrder,
-} from "@/hooks/useOrders";
+} from "@/hooks/useOrder";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -45,7 +45,7 @@ export default function OrdersPage() {
     isLoading,
     error,
     refetch,
-  } = useAllOrders();
+  } = useOrdersData(true); // Pass true to get all orders (admin view)
 
   const updateStatusMutation = useUpdateOrderStatus();
   const deleteOrderMutation = useDeleteOrder();
@@ -116,16 +116,20 @@ export default function OrdersPage() {
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("en-GB", {
       style: "currency",
-      currency: "USD",
+      currency: "GBP",
     }).format(amount || 0);
   };
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="text-xl font-semibold text-gray-700 mb-2">Loading Orders...</div>
+          <div className="text-gray-500">Please wait while we fetch the data</div>
+        </div>
       </div>
     );
   }

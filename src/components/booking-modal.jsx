@@ -82,6 +82,8 @@ export function BookingModal({
         createdAt: new Date().toISOString(),
       };
 
+      console.log("Submitting appointment data:", appointmentData); // Debug log
+
       await createAppointment.mutateAsync(appointmentData);
 
       toast.success(

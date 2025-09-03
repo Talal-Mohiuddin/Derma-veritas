@@ -1,4 +1,3 @@
-import { useOrder } from "@/hooks/useOrders";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -34,9 +33,9 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("en-GB", {
       style: "currency",
-      currency: "USD",
+      currency: "GBP",
     }).format(amount || 0);
   };
 

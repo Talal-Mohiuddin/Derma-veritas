@@ -5,13 +5,14 @@ import {
   useUpdateAppointmentStatus,
   useDeleteAppointment,
 } from "../../../hooks/useappointment";
-import LoadingSpinner from "../blogs/_components/LoadingSpinner";
 import { toast } from "sonner";
 
 export default function AppointmentsPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [appointmentToDelete, setAppointmentToDelete] = useState(null);
 
   // Fetch appointments
   const {
@@ -20,6 +21,7 @@ export default function AppointmentsPage() {
     error,
     refetch,
   } = useAllAppointments();
+  console.log("Appointments data:", appointmentsData);
 
   const updateStatusMutation = useUpdateAppointmentStatus();
   const deleteAppointmentMutation = useDeleteAppointment();
@@ -43,17 +45,20 @@ export default function AppointmentsPage() {
   };
 
   const handleDeleteAppointment = async (appointmentId) => {
-    if (!confirm("Are you sure you want to delete this appointment? This action cannot be undone.")) {
-      return;
-    }
-    
     try {
       await deleteAppointmentMutation.mutateAsync({ id: appointmentId });
       toast.success("Appointment deleted successfully! 🗑️");
+      setShowDeleteModal(false);
+      setAppointmentToDelete(null);
     } catch (error) {
       console.error("Delete error:", error);
       toast.error(error.message || "Failed to delete appointment.");
     }
+  };
+
+  const openDeleteModal = (appointment) => {
+    setAppointmentToDelete(appointment);
+    setShowDeleteModal(true);
   };
 
   const getStatusColor = (status) => {
@@ -99,7 +104,15 @@ export default function AppointmentsPage() {
   };
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="text-xl font-semibold text-gray-700 mb-2">Loading Appointments...</div>
+          <div className="text-gray-500">Please wait while we fetch the data</div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
@@ -122,7 +135,7 @@ export default function AppointmentsPage() {
       <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Appointments Management 📅</h1>
+            <h1 className="text-3xl font-bold mb-2">Appointments Management</h1>
             <p className="text-blue-100 text-lg">
               Manage and track all client appointments
             </p>
@@ -175,7 +188,6 @@ export default function AppointmentsPage() {
       {/* Appointments List */}
       {filteredAppointments.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
-          <div className="text-6xl mb-4">📅</div>
           <h3 className="text-xl font-semibold text-gray-800 mb-2">No appointments found</h3>
           <p className="text-gray-600">
             {statusFilter === "all" 
@@ -304,7 +316,7 @@ export default function AppointmentsPage() {
                       View Details
                     </button>
                     <button
-                      onClick={() => handleDeleteAppointment(appointment.id)}
+                      onClick={() => openDeleteModal(appointment)}
                       disabled={deleteAppointmentMutation.isPending}
                       className="bg-red-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
                     >
@@ -315,6 +327,63 @@ export default function AppointmentsPage() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && appointmentToDelete && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-md w-full">
+            <div className="p-6">
+              <div className="text-center">
+                <div className="text-6xl mb-4">⚠️</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Delete Appointment</h3>
+                <p className="text-gray-600 mb-6">
+                  Are you sure you want to delete the appointment for{" "}
+                  <span className="font-semibold">{appointmentToDelete.name}</span>?
+                  <br />
+                  <span className="text-sm text-red-600 mt-2 block">
+                    This action cannot be undone.
+                  </span>
+                </p>
+                
+                <div className="bg-gray-50 rounded-lg p-3 mb-6 text-left">
+                  <div className="text-sm text-gray-600">
+                    <div><strong>Client:</strong> {appointmentToDelete.name}</div>
+                    <div><strong>Treatment:</strong> {appointmentToDelete.treatment}</div>
+                    <div><strong>Status:</strong> {appointmentToDelete.status}</div>
+                  </div>
+                </div>
+                
+                <div className="flex space-x-3">
+                  <button
+                    onClick={() => {
+                      setShowDeleteModal(false);
+                      setAppointmentToDelete(null);
+                    }}
+                    className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-400 transition-colors"
+                    disabled={deleteAppointmentMutation.isPending}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => handleDeleteAppointment(appointmentToDelete.id)}
+                    disabled={deleteAppointmentMutation.isPending}
+                    className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
+                  >
+                    {deleteAppointmentMutation.isPending ? (
+                      <div className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        Deleting...
+                      </div>
+                    ) : (
+                      "Delete Appointment"
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
