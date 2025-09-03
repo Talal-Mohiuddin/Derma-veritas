@@ -42,6 +42,9 @@ export default function Home() {
     router.push("/treatments");
   };
 
+  const handleProductClick = () => {
+    router.push("/shop");
+  };
   const handleVideoLoad = () => {
     setVideoLoaded(true);
   };
@@ -93,7 +96,11 @@ export default function Home() {
           {/* Button Container */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             {/* Our Products Button */}
-            <button className="relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg text-white font-medium tracking-wide overflow-hidden group transition-all duration-300 hover:bg-white/15 hover:shadow-2xl hover:border-white/40">
+             
+            
+            <button className="relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg text-white font-medium tracking-wide overflow-hidden group transition-all duration-300 hover:bg-white/15 hover:shadow-2xl hover:border-white/40"
+             onClick={handleProductClick}
+            >
               <span className="relative z-10">Our Products</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-gray-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-white/60 to-gray-200/80 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-bottom-left"></div>
