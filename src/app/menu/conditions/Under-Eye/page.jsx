@@ -515,7 +515,7 @@ export default function UnderEyeTreatments() {
                     Under Eye Treatments
                   </h3>
                   <button
-                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
                     onClick={() => setBookingOpen(true)}
                   >
                     BOOK
