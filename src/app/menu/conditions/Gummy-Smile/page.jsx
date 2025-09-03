@@ -3,24 +3,12 @@
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
-import ClinicsModal from "@/components/ClinicsModal";
-import PriceCard from "@/components/pricecard/price-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Play } from "lucide-react";
+
 import BeforeAfterSection from "@/components/before-after-section";
-import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
@@ -41,9 +29,8 @@ export default function GummySmileTreatmentSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-    const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
- 
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -159,9 +146,10 @@ export default function GummySmileTreatmentSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                A gummy smile occurs when too much gum tissue shows when smiling. 
-                This can potentially be improved through strategic anti-wrinkle 
-                injections to relax specific facial muscles at Derma Veritas.
+                A gummy smile occurs when too much gum tissue shows when
+                smiling. This can potentially be improved through strategic
+                anti-wrinkle injections to relax specific facial muscles at
+                Derma Veritas.
               </p>
 
               {/* Buttons */}
@@ -328,7 +316,7 @@ export default function GummySmileTreatmentSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -348,10 +336,11 @@ export default function GummySmileTreatmentSection() {
               What is Gummy Smile Treatment?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              While not specifically detailed in our current treatment menu, gummy smile concerns can 
-              potentially be addressed through our anti-wrinkle injection treatments. A gummy smile 
-              occurs when too much gum tissue shows when smiling, which can sometimes be improved by 
-              relaxing specific facial muscles.
+              While not specifically detailed in our current treatment menu,
+              gummy smile concerns can potentially be addressed through our
+              anti-wrinkle injection treatments. A gummy smile occurs when too
+              much gum tissue shows when smiling, which can sometimes be
+              improved by relaxing specific facial muscles.
             </p>
           </div>
 
@@ -363,7 +352,8 @@ export default function GummySmileTreatmentSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Strategic anti-wrinkle injections to relax muscles that cause excessive gum exposure
+                  Strategic anti-wrinkle injections to relax muscles that cause
+                  excessive gum exposure
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -391,11 +381,13 @@ export default function GummySmileTreatmentSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Treatments performed exclusively by expert physicians and clinical pharmacy leads
+                  Treatments performed exclusively by expert physicians and
+                  clinical pharmacy leads
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Industry-leading trainers with extensive experience in facial anatomy
+                  Industry-leading trainers with extensive experience in facial
+                  anatomy
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -410,13 +402,16 @@ export default function GummySmileTreatmentSection() {
                   Customized treatment based on your individual case
                 </li>
               </ul>
-              
+
               <div className="bg-amber-50 border border-amber-200 p-4 mt-6">
-                <h4 className="font-semibold text-amber-800 mb-2">Important Note:</h4>
+                <h4 className="font-semibold text-amber-800 mb-2">
+                  Important Note:
+                </h4>
                 <p className="text-amber-700 text-sm">
-                  Consultation required to assess suitability for gummy smile treatment. 
-                  Treatment approach will be customized based on individual case. Results may vary 
-                  depending on the cause of gummy smile.
+                  Consultation required to assess suitability for gummy smile
+                  treatment. Treatment approach will be customized based on
+                  individual case. Results may vary depending on the cause of
+                  gummy smile.
                 </p>
               </div>
             </div>
@@ -452,16 +447,18 @@ export default function GummySmileTreatmentSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are performed exclusively by our expert physicians and clinical 
-                  pharmacy leads who are industry-leading trainers with extensive experience in 
-                  facial anatomy.
+                  All treatments are performed exclusively by our expert
+                  physicians and clinical pharmacy leads who are
+                  industry-leading trainers with extensive experience in facial
+                  anatomy.
                 </p>
                 <p className="font-semibold">
-                  Consultation is required to assess suitability for gummy smile treatment as 
-                  results may vary depending on individual cases.
+                  Consultation is required to assess suitability for gummy smile
+                  treatment as results may vary depending on individual cases.
                 </p>
                 <p>
-                  If you would like to discuss this treatment, please feel free to{" "}
+                  If you would like to discuss this treatment, please feel free
+                  to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -478,10 +475,10 @@ export default function GummySmileTreatmentSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Anti-Wrinkle Treatments
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>
@@ -504,15 +501,23 @@ export default function GummySmileTreatmentSection() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="mt-4 pt-4 border-t border-gray-200">
-                  <h4 className="text-sm font-medium text-gray-900 mb-2">Visible Results:</h4>
-                  <p className="text-sm text-gray-600">Reduced gum exposure when smiling (results may vary)</p>
-                  
-                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">Duration:</h4>
+                  <h4 className="text-sm font-medium text-gray-900 mb-2">
+                    Visible Results:
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Reduced gum exposure when smiling (results may vary)
+                  </p>
+
+                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">
+                    Duration:
+                  </h4>
                   <p className="text-sm text-gray-600">3–6 months</p>
-                  
-                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">Procedure Time:</h4>
+
+                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">
+                    Procedure Time:
+                  </h4>
                   <p className="text-sm text-gray-600">15–30 minutes</p>
                 </div>
               </div>
@@ -523,10 +528,10 @@ export default function GummySmileTreatmentSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Consultation & Assessment
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>

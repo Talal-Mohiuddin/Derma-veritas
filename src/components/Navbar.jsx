@@ -127,7 +127,7 @@ export default function Navbar() {
     <>
       {/* Animated Referral Program Banner */}
       <header
-        className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden  fixed top-0 left-0 right-0 z-50"
+        className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden fixed top-0 left-0 right-0 z-50"
         style={{
           backgroundImage: "url('/review2.jpeg')",
           backgroundSize: "cover",
@@ -190,10 +190,10 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <nav
-        className={`px-4  py-3  fixed left-0 right-0 z-40 transition-all duration-300  ${
+        className={`px-4 py-3 fixed left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? `bg-black/80 backdrop-blur-sm border-gray-700 ${
-                isScrollingUp ? "top-0" : "-top-20"
+                isScrollingUp ? "top-[42px]" : "-top-20"
               }`
             : isHomePage
             ? "bg-transparent border-white/20 top-[42px]"

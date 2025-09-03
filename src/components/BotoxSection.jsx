@@ -96,8 +96,6 @@ export default function BotoxSection() {
                   </p>
                 </div>
 
-               
-
                 <div className="pt-6">
                   <div className="pt-6">
                     <button
@@ -121,12 +119,12 @@ export default function BotoxSection() {
                 <div className="rounded-2xl overflow-hidden bg-gray-200 aspect-[4/3]">
                   <img
                     src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                    alt="Dr. Ash Labib explaining Botox treatments"
+                    alt="Dr Mofashir Nawaz explaining Botox treatments"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 right-4 bg-white rounded-lg px-3 py-2 shadow-lg">
                     <div className="text-xs text-gray-600 font-medium">
-                      Dr. Ash Labib
+                      Dr Mofashir Nawaz
                     </div>
                     <div className="text-xs text-gray-500">Owner & Founder</div>
                   </div>

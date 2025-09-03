@@ -215,12 +215,8 @@ export default function Home() {
             className="bg-black hover:bg-gray-800 text-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg transition-colors"
             onClick={() => setIsChatOpen(true)}
           >
-            <MessageCircle className="w-5 h-5" />
-            <span className="text-sm font-medium">Make an Enquiry</span>
+            <MessageCircle className="w-10 h-10" />
           </Button>
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-xs font-bold">1</span>
-          </div>
         </div>
       </div>
 
@@ -239,7 +235,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 lg:order-2">
             <h2 className="text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
-              Prestigious clinics led by renowned specialist Dr. Ash Labib
+              Prestigious clinics led by renowned specialist Dr Mofashir Nawaz
             </h2>
             <p className="text-gray-600 leading-relaxed">
               Derma Veritas offers medically-led skin and dermatology clinic in
@@ -262,11 +258,11 @@ export default function Home() {
           <div className="relative lg:order-1">
             <img
               src="/owner.png"
-              alt="Dr. Ash Labib"
+              alt="Dr Mofashir Nawaz"
               className="w-full h-auto rounded-lg"
             />
             <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg">
-              <h3 className="font-semibold text-gray-900">Dr. Ash Labib</h3>
+              <h3 className="font-semibold text-gray-900">Dr Mofashir Nawaz</h3>
               <p className="text-sm text-gray-600">Owner & Founder</p>
             </div>
           </div>
