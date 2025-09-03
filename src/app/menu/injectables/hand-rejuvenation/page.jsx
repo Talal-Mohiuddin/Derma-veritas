@@ -40,9 +40,8 @@ export default function HandRejuvenationSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-    const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
- 
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -205,7 +204,7 @@ export default function HandRejuvenationSection() {
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -213,7 +212,7 @@ export default function HandRejuvenationSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />

@@ -41,9 +41,8 @@ export default function SaggingJowlsTreatmentsSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-    const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
- 
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -162,14 +161,15 @@ export default function SaggingJowlsTreatmentsSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced non-surgical treatments designed to lift and tighten sagging jowls, 
-                restore jawline definition, and improve facial contour without surgery at Derma Veritas.
+                Advanced non-surgical treatments designed to lift and tighten
+                sagging jowls, restore jawline definition, and improve facial
+                contour without surgery at Derma Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -177,7 +177,7 @@ export default function SaggingJowlsTreatmentsSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -330,7 +330,7 @@ export default function SaggingJowlsTreatmentsSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -350,10 +350,10 @@ export default function SaggingJowlsTreatmentsSection() {
               What are Sagging Jowls Treatments?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Advanced non-surgical treatments designed to lift and tighten sagging jowls, 
-              restore jawline definition, and improve facial contour. Using cutting-edge 
-              technology and specialized techniques to achieve a more youthful, defined 
-              jawline without surgery.
+              Advanced non-surgical treatments designed to lift and tighten
+              sagging jowls, restore jawline definition, and improve facial
+              contour. Using cutting-edge technology and specialized techniques
+              to achieve a more youthful, defined jawline without surgery.
             </p>
           </div>
 
@@ -393,7 +393,8 @@ export default function SaggingJowlsTreatmentsSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Uses advanced fiber laser technology and expert injection techniques
+                  Uses advanced fiber laser technology and expert injection
+                  techniques
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -409,7 +410,8 @@ export default function SaggingJowlsTreatmentsSection() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized consultation to create treatment plan tailored to your goals
+                  Personalized consultation to create treatment plan tailored to
+                  your goals
                 </li>
               </ul>
             </div>
@@ -445,9 +447,10 @@ export default function SaggingJowlsTreatmentsSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are performed by our expert clinicians who use 
-                  advanced fiber laser technology and expert injection techniques. 
-                  Our pricing reflects the expertise and premium service you receive.
+                  All treatments are performed by our expert clinicians who use
+                  advanced fiber laser technology and expert injection
+                  techniques. Our pricing reflects the expertise and premium
+                  service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -468,27 +471,23 @@ export default function SaggingJowlsTreatmentsSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Sagging Jowls Treatments
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Endolift Full Face:
-                    </span>
+                    <span className="text-gray-700">Endolift Full Face:</span>
                     <span className="text-lg font-bold text-gray-900">
                       £1,600 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Endolift One Area:
-                    </span>
+                    <span className="text-gray-700">Endolift One Area:</span>
                     <span className="text-lg font-bold text-gray-900">
                       £800 + VAT
                     </span>
@@ -502,16 +501,30 @@ export default function SaggingJowlsTreatmentsSection() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="mt-4 pt-4 border-t border-gray-200">
-                  <h4 className="text-sm font-medium text-gray-900 mb-2">Visible Results:</h4>
-                  <p className="text-sm text-gray-600">Immediate lifting and contouring; sharper, sculpted jawline; progressive improvement over 6–10 months</p>
-                  
-                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">Duration:</h4>
-                  <p className="text-sm text-gray-600">6–12 months (fillers) or long-lasting progressive improvement (Endolift)</p>
-                  
-                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">Procedure Time:</h4>
-                  <p className="text-sm text-gray-600">30–60 minutes depending on treatment</p>
+                  <h4 className="text-sm font-medium text-gray-900 mb-2">
+                    Visible Results:
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    Immediate lifting and contouring; sharper, sculpted jawline;
+                    progressive improvement over 6–10 months
+                  </p>
+
+                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">
+                    Duration:
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    6–12 months (fillers) or long-lasting progressive
+                    improvement (Endolift)
+                  </p>
+
+                  <h4 className="text-sm font-medium text-gray-900 mt-4 mb-2">
+                    Procedure Time:
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    30–60 minutes depending on treatment
+                  </p>
                 </div>
               </div>
 
@@ -521,10 +534,10 @@ export default function SaggingJowlsTreatmentsSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Jawline Definition Packages
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>

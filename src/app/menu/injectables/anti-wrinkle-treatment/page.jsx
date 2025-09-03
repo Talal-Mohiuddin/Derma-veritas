@@ -15,7 +15,6 @@ import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 import BotoxSection from "@/components/BotoxSection";
 
-
 import {
   Eye,
   CheckCircle,
@@ -35,10 +34,9 @@ export default function DermalFillersSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-    const pricingSectionRef = useRef(null);
-  
- 
-  const { bookingOpen, setBookingOpen }= useStore();
+  const pricingSectionRef = useRef(null);
+
+  const { bookingOpen, setBookingOpen } = useStore();
   const cardData = [
     {
       heading: "Results Seen",
@@ -158,7 +156,7 @@ export default function DermalFillersSection() {
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -166,7 +164,7 @@ export default function DermalFillersSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -375,10 +373,10 @@ export default function DermalFillersSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Botox Pricing (Midlands)
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>
@@ -411,10 +409,10 @@ export default function DermalFillersSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Botox Pricing (London)
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>
@@ -461,16 +459,18 @@ export default function DermalFillersSection() {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                  }`}
+                }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

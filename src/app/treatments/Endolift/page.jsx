@@ -43,8 +43,7 @@ export default function EndoliftSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -159,21 +158,21 @@ export default function EndoliftSection() {
                 Endolift® Laser
                 <br />
                 Non-Surgical Face Lift
-                <br />
-                & Body Contouring
+                <br />& Body Contouring
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Achieve a non-surgical facelift, body contouring, and fat reduction 
-                with Endolift®, an exclusive fiber laser technology that delivers 
-                precise lifting, tightening, and rejuvenation without surgery.
+                Achieve a non-surgical facelift, body contouring, and fat
+                reduction with Endolift®, an exclusive fiber laser technology
+                that delivers precise lifting, tightening, and rejuvenation
+                without surgery.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -181,7 +180,7 @@ export default function EndoliftSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -343,7 +342,7 @@ export default function EndoliftSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -363,10 +362,11 @@ export default function EndoliftSection() {
               What is Endolift®?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Endolift® is an exclusive fiber laser technology that delivers precise lifting, 
-              tightening, and rejuvenation. This cutting-edge treatment targets deep tissue 
-              and fat layers to stimulate collagen and elastin production, giving your skin 
-              a firmer, smoother, and more youthful appearance without surgery.
+              Endolift® is an exclusive fiber laser technology that delivers
+              precise lifting, tightening, and rejuvenation. This cutting-edge
+              treatment targets deep tissue and fat layers to stimulate collagen
+              and elastin production, giving your skin a firmer, smoother, and
+              more youthful appearance without surgery.
             </p>
           </div>
 
@@ -378,11 +378,13 @@ export default function EndoliftSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Break down localized fat deposits and promote natural fat dissolving
+                  Break down localized fat deposits and promote natural fat
+                  dissolving
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Tighten and lift sagging skin by stimulating collagen and elastin production
+                  Tighten and lift sagging skin by stimulating collagen and
+                  elastin production
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -459,9 +461,9 @@ export default function EndoliftSection() {
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
                   All treatments are performed exclusively by our expert
-                  physicians and clinical specialists who are
-                  industry-leading professionals. Our pricing reflects the expertise
-                  and premium service you receive.
+                  physicians and clinical specialists who are industry-leading
+                  professionals. Our pricing reflects the expertise and premium
+                  service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -482,8 +484,9 @@ export default function EndoliftSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Endolift® Treatments
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -491,9 +494,7 @@ export default function EndoliftSection() {
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      One Area:
-                    </span>
+                    <span className="text-gray-700">One Area:</span>
                     <span className="text-lg font-bold text-gray-900">
                       £800 + VAT
                     </span>
@@ -505,15 +506,15 @@ export default function EndoliftSection() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Upper Face / Malar Bags (Under Eyes):</span>
+                    <span className="text-gray-700">
+                      Upper Face / Malar Bags (Under Eyes):
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £1,500 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Upper Arms:
-                    </span>
+                    <span className="text-gray-700">Upper Arms:</span>
                     <span className="text-lg font-bold text-gray-900">
                       £1,800 + VAT
                     </span>
@@ -525,7 +526,9 @@ export default function EndoliftSection() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Thighs / Other Body Areas:</span>
+                    <span className="text-gray-700">
+                      Thighs / Other Body Areas:
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £2,000 + VAT
                     </span>
@@ -539,8 +542,9 @@ export default function EndoliftSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Additional Options
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>

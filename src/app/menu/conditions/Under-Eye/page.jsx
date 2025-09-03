@@ -47,9 +47,8 @@ export default function UnderEyeTreatments() {
   const [activeTab, setActiveTab] = useState("overview");
 
   // Create a ref for the pricing section
-    const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
- 
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -127,42 +126,42 @@ export default function UnderEyeTreatments() {
       name: "Tear Trough Fillers",
       price: "£450",
       description: "Specialized dermal fillers for under-eye hollows",
-      details: "Restores volume and reduces dark circles caused by shadows"
+      details: "Restores volume and reduces dark circles caused by shadows",
     },
     {
       name: "PRP Under-Eye Area",
       price: "£300",
       sessions: "(3 Sessions)",
       description: "Platelet-rich plasma therapy using your own blood",
-      details: "Stimulates collagen production and tissue regeneration"
+      details: "Stimulates collagen production and tissue regeneration",
     },
     {
       name: "Polynucleotide Eye Area",
       price: "£220",
       sessions: "(1 Session)",
       description: "Advanced regenerative treatment for eye area",
-      details: "Improves skin quality, hydration, and elasticity"
+      details: "Improves skin quality, hydration, and elasticity",
     },
     {
       name: "Polynucleotide Eye Area",
       price: "£400",
       sessions: "(2 Sessions)",
       description: "Package deal for enhanced results",
-      details: "Best for moderate under-eye concerns"
+      details: "Best for moderate under-eye concerns",
     },
     {
       name: "Polynucleotide Eye Area",
       price: "£550",
       sessions: "(3 Sessions)",
       description: "Complete treatment course for optimal results",
-      details: "Ideal for significant rejuvenation and long-lasting effects"
+      details: "Ideal for significant rejuvenation and long-lasting effects",
     },
     {
       name: "Endolift Upper Face/Malar Bags",
       price: "£1,500 + VAT",
       description: "Laser treatment for under-eye bags and puffiness",
-      details: "Non-surgical laser solution for under-eye bags and tightening"
-    }
+      details: "Non-surgical laser solution for under-eye bags and tightening",
+    },
   ];
 
   const faqs = [
@@ -242,15 +241,16 @@ export default function UnderEyeTreatments() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced treatments designed to address dark circles, hollows, 
-                fine lines, and tired appearance. Restore brightness and youthful 
-                vitality to your delicate under-eye area at Derma Veritas.
+                Advanced treatments designed to address dark circles, hollows,
+                fine lines, and tired appearance. Restore brightness and
+                youthful vitality to your delicate under-eye area at Derma
+                Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -258,7 +258,7 @@ export default function UnderEyeTreatments() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -362,10 +362,12 @@ export default function UnderEyeTreatments() {
               What are Under Eye Treatments?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Under eye treatments are specialized procedures designed to address various concerns 
-              including dark circles, hollows, fine lines, and tired appearance. We offer multiple 
-              advanced treatment options to restore brightness and youthful vitality to the delicate 
-              under-eye area, tailored to your specific needs and goals.
+              Under eye treatments are specialized procedures designed to
+              address various concerns including dark circles, hollows, fine
+              lines, and tired appearance. We offer multiple advanced treatment
+              options to restore brightness and youthful vitality to the
+              delicate under-eye area, tailored to your specific needs and
+              goals.
             </p>
           </div>
 
@@ -405,23 +407,28 @@ export default function UnderEyeTreatments() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Tear Trough Fillers:</span> For volume restoration
+                  <span className="font-medium">Tear Trough Fillers:</span> For
+                  volume restoration
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">PRP Therapy:</span> Natural rejuvenation
+                  <span className="font-medium">PRP Therapy:</span> Natural
+                  rejuvenation
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Polynucleotide:</span> Skin quality improvement
+                  <span className="font-medium">Polynucleotide:</span> Skin
+                  quality improvement
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Endolift:</span> Laser treatment for bags
+                  <span className="font-medium">Endolift:</span> Laser treatment
+                  for bags
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Combination Treatments:</span> Enhanced results
+                  <span className="font-medium">Combination Treatments:</span>{" "}
+                  Enhanced results
                 </li>
               </ul>
             </div>
@@ -442,7 +449,10 @@ export default function UnderEyeTreatments() {
             {benefits.map((benefit, index) => {
               const IconComponent = benefit.icon;
               return (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
+                <div
+                  key={index}
+                  className="bg-white p-6 rounded-lg shadow-md text-center"
+                >
                   <div className="flex justify-center mb-4">
                     <div className="p-3 bg-blue-50 rounded-full">
                       <IconComponent className="w-8 h-8 text-blue-600" />
@@ -451,9 +461,7 @@ export default function UnderEyeTreatments() {
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     {benefit.title}
                   </h3>
-                  <p className="text-gray-600 text-sm">
-                    {benefit.description}
-                  </p>
+                  <p className="text-gray-600 text-sm">{benefit.description}</p>
                 </div>
               );
             })}
@@ -486,13 +494,14 @@ export default function UnderEyeTreatments() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  We offer multiple treatment options to address various under-eye concerns. 
-                  All treatments are performed exclusively by our expert physicians and 
-                  clinical pharmacy leads who are industry-leading trainers.
+                  We offer multiple treatment options to address various
+                  under-eye concerns. All treatments are performed exclusively
+                  by our expert physicians and clinical pharmacy leads who are
+                  industry-leading trainers.
                 </p>
                 <p>
-                  During your consultation, we'll recommend the most suitable treatment 
-                  based on your specific concerns and goals.
+                  During your consultation, we'll recommend the most suitable
+                  treatment based on your specific concerns and goals.
                 </p>
               </div>
             </div>
@@ -505,10 +514,10 @@ export default function UnderEyeTreatments() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Under Eye Treatments
                   </h3>
-                  <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                   
-                   onClick={()=> setBookingOpen(true)}
-                   >
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
+                  >
                     BOOK
                   </button>
                 </div>
@@ -550,7 +559,8 @@ export default function UnderEyeTreatments() {
                 <ul className="space-y-3 text-sm text-gray-600">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    Treatments performed exclusively by expert physicians and clinical pharmacy leads
+                    Treatments performed exclusively by expert physicians and
+                    clinical pharmacy leads
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
@@ -558,7 +568,8 @@ export default function UnderEyeTreatments() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    Multiple treatment options to suit individual needs and goals
+                    Multiple treatment options to suit individual needs and
+                    goals
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
@@ -566,7 +577,8 @@ export default function UnderEyeTreatments() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                    Personalized consultation to design treatment plan specific to your concerns
+                    Personalized consultation to design treatment plan specific
+                    to your concerns
                   </li>
                 </ul>
               </div>

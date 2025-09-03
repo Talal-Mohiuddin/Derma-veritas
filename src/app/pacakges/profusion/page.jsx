@@ -19,8 +19,8 @@ export default function ProFusionHydraFacialPage() {
         "Deep cleansing and exfoliation",
         "Gentle extraction of impurities",
         "Hydration infusion",
-        "RF tightening for firmer skin"
-      ]
+        "RF tightening for firmer skin",
+      ],
     },
     {
       name: "Deluxe + RF",
@@ -32,8 +32,8 @@ export default function ProFusionHydraFacialPage() {
         "All Signature treatment benefits",
         "Custom booster serum for specific concerns",
         "LED light therapy for skin rejuvenation",
-        "Enhanced RF technology"
-      ]
+        "Enhanced RF technology",
+      ],
     },
     {
       name: "Platinum + RF",
@@ -45,8 +45,8 @@ export default function ProFusionHydraFacialPage() {
         "All Deluxe treatment benefits",
         "Lymphatic drainage massage",
         "Advanced RF lifting technology",
-        "Comprehensive skin rejuvenation"
-      ]
+        "Comprehensive skin rejuvenation",
+      ],
     },
     {
       name: "Elite – Cellular Repair & Lift",
@@ -58,32 +58,37 @@ export default function ProFusionHydraFacialPage() {
         "All Platinum treatment benefits",
         "Enhanced specialized serums",
         "Deep RF collagen stimulation",
-        "Cellular repair and lifting"
-      ]
-    }
+        "Cellular repair and lifting",
+      ],
+    },
   ];
 
   const faqs = [
     {
       question: "What is ProFusion HydraFacial?",
-      answer: "ProFusion HydraFacial is an advanced skin rejuvenation treatment using state-of-the-art devices that combine cutting-edge technology with clinical expertise. It uses specialized serums, creams, and boosters to target unique skin concerns with remarkable results."
+      answer:
+        "ProFusion HydraFacial is an advanced skin rejuvenation treatment using state-of-the-art devices that combine cutting-edge technology with clinical expertise. It uses specialized serums, creams, and boosters to target unique skin concerns with remarkable results.",
     },
     {
       question: "How often should I get a ProFusion HydraFacial?",
-      answer: "For optimal results, we recommend starting with a series of treatments spaced 4-6 weeks apart. Many clients then transition to maintenance treatments every 8-12 weeks depending on their skin goals and concerns."
+      answer:
+        "For optimal results, we recommend starting with a series of treatments spaced 4-6 weeks apart. Many clients then transition to maintenance treatments every 8-12 weeks depending on their skin goals and concerns.",
     },
     {
       question: "Is there any downtime after the treatment?",
-      answer: "There is minimal to no downtime with ProFusion HydraFacial. You may experience slight redness immediately after the treatment, but this typically subsides within a few hours. You can resume normal activities immediately after your session."
+      answer:
+        "There is minimal to no downtime with ProFusion HydraFacial. You may experience slight redness immediately after the treatment, but this typically subsides within a few hours. You can resume normal activities immediately after your session.",
     },
     {
       question: "Who is a good candidate for ProFusion HydraFacial?",
-      answer: "Almost anyone can benefit from ProFusion HydraFacial treatments. They are suitable for all skin types and address various concerns including fine lines, wrinkles, hyperpigmentation, congested pores, oily skin, and dull complexion."
+      answer:
+        "Almost anyone can benefit from ProFusion HydraFacial treatments. They are suitable for all skin types and address various concerns including fine lines, wrinkles, hyperpigmentation, congested pores, oily skin, and dull complexion.",
     },
     {
       question: "Can I combine ProFusion HydraFacial with other treatments?",
-      answer: "Yes, ProFusion HydraFacial can be effectively combined with other treatments for enhanced results. Our experts will create a customized treatment plan based on your skin goals during your consultation."
-    }
+      answer:
+        "Yes, ProFusion HydraFacial can be effectively combined with other treatments for enhanced results. Our experts will create a customized treatment plan based on your skin goals during your consultation.",
+    },
   ];
 
   const scrollToPricing = () => {
@@ -120,7 +125,9 @@ export default function ProFusionHydraFacialPage() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Ultimate skin rejuvenation using state-of-the-art ProFusion devices that combine cutting-edge technology with clinical expertise.
+                Ultimate skin rejuvenation using state-of-the-art ProFusion
+                devices that combine cutting-edge technology with clinical
+                expertise.
               </p>
 
               {/* Buttons */}
@@ -134,7 +141,7 @@ export default function ProFusionHydraFacialPage() {
                 {/* VIEW PACKAGES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PACKAGES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -182,10 +189,11 @@ export default function ProFusionHydraFacialPage() {
               What is ProFusion HydraFacial?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              ProFusion HydraFacial represents the pinnacle of skin rejuvenation technology. 
-              Our state-of-the-art devices combine cutting-edge technology with clinical expertise, 
-              using specialized serums, creams, and boosters that target your unique skin concerns 
-              for remarkable results.
+              ProFusion HydraFacial represents the pinnacle of skin rejuvenation
+              technology. Our state-of-the-art devices combine cutting-edge
+              technology with clinical expertise, using specialized serums,
+              creams, and boosters that target your unique skin concerns for
+              remarkable results.
             </p>
           </div>
 
@@ -261,24 +269,34 @@ export default function ProFusionHydraFacialPage() {
               ProFusion HydraFacial Packages
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Choose from our range of specialized treatments designed to address 
-              various skin concerns with our advanced ProFusion technology.
+              Choose from our range of specialized treatments designed to
+              address various skin concerns with our advanced ProFusion
+              technology.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {treatmentDetails.map((treatment, index) => (
-              <div key={index} className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)] h-full flex flex-col">
+              <div
+                key={index}
+                className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)] h-full flex flex-col"
+              >
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{treatment.name}</h3>
-                    <p className="text-gray-500 text-sm">{treatment.duration}</p>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {treatment.name}
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      {treatment.duration}
+                    </p>
                   </div>
                 </div>
-                
+
                 <div className="mb-4 flex-grow">
-                  <p className="text-gray-700 text-sm mb-4">{treatment.description}</p>
-                  
+                  <p className="text-gray-700 text-sm mb-4">
+                    {treatment.description}
+                  </p>
+
                   <ul className="space-y-2 mb-4">
                     {treatment.benefits.map((benefit, i) => (
                       <li key={i} className="flex items-start">
@@ -288,17 +306,21 @@ export default function ProFusionHydraFacialPage() {
                     ))}
                   </ul>
                 </div>
-                
+
                 <div className="mt-auto">
                   <div className="flex justify-between items-center mb-4">
                     <span className="text-gray-700">Single Session:</span>
-                    <span className="text-lg font-bold text-gray-900">{treatment.price}</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      {treatment.price}
+                    </span>
                   </div>
                   <div className="flex justify-between items-center mb-6">
                     <span className="text-gray-700">Package of 6:</span>
-                    <span className="text-lg font-bold text-gray-900">{treatment.packagePrice}</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      {treatment.packagePrice}
+                    </span>
                   </div>
-                  
+
                   <button className="w-full px-4 py-2 bg-[#272728] text-white text-sm font-medium hover:bg-[#404041] transition">
                     BOOK NOW
                   </button>

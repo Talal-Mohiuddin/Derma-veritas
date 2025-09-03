@@ -42,8 +42,7 @@ export default function LaserHairRemovalSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -165,14 +164,15 @@ export default function LaserHairRemovalSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                The most advanced hair removal system combining four laser technologies 
-                for maximum effectiveness on all hair and skin types at Derma Veritas.
+                The most advanced hair removal system combining four laser
+                technologies for maximum effectiveness on all hair and skin
+                types at Derma Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -180,7 +180,7 @@ export default function LaserHairRemovalSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -333,7 +333,7 @@ export default function LaserHairRemovalSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -353,10 +353,11 @@ export default function LaserHairRemovalSection() {
               What is Quad Laser Hair Removal?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Quad Laser Hair Removal is the most advanced hair removal system combining 
-              four laser technologies - Alexandrite, Diode, YAG, and Near-Infrared (NIR). 
-              This multi-wavelength approach ensures maximum effectiveness for all hair types 
-              and skin tones, providing superior results compared to single-laser systems.
+              Quad Laser Hair Removal is the most advanced hair removal system
+              combining four laser technologies - Alexandrite, Diode, YAG, and
+              Near-Infrared (NIR). This multi-wavelength approach ensures
+              maximum effectiveness for all hair types and skin tones, providing
+              superior results compared to single-laser systems.
             </p>
           </div>
 
@@ -368,27 +369,31 @@ export default function LaserHairRemovalSection() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Alexandrite (755nm):</span> Penetrates upper dermis, ideal for fine to medium hair on lighter skin
+                  <span className="font-medium">Alexandrite (755nm):</span>{" "}
+                  Penetrates upper dermis, ideal for fine to medium hair on
+                  lighter skin
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Diode (808nm):</span> Reaches mid-dermis, effective for coarser hair on all skin types
+                  <span className="font-medium">Diode (808nm):</span> Reaches
+                  mid-dermis, effective for coarser hair on all skin types
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Nd: YAG (1064nm):</span> Deep penetration, perfect for thick or dark hair and darker skin tones
+                  <span className="font-medium">Nd: YAG (1064nm):</span> Deep
+                  penetration, perfect for thick or dark hair and darker skin
+                  tones
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="font-medium">Near-Infrared (904nm):</span> Targets deep follicles and stimulates heat reservoirs
+                  <span className="font-medium">Near-Infrared (904nm):</span>{" "}
+                  Targets deep follicles and stimulates heat reservoirs
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Benefits:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -433,8 +438,9 @@ export default function LaserHairRemovalSection() {
               Laser Hair Removal Pricing
             </h2>
             <p className="text-gray-600 mt-4 max-w-3xl mx-auto">
-              We offer competitive pricing for all treatment areas. Course packages 
-              provide the best value for achieving permanent hair reduction.
+              We offer competitive pricing for all treatment areas. Course
+              packages provide the best value for achieving permanent hair
+              reduction.
             </p>
           </div>
 
@@ -442,9 +448,7 @@ export default function LaserHairRemovalSection() {
             {/* Face Pricing */}
             <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-base font-semibold text-gray-900">
-                  Face
-                </h3>
+                <h3 className="text-base font-semibold text-gray-900">Face</h3>
                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
                   BOOK
                 </button>
@@ -454,36 +458,56 @@ export default function LaserHairRemovalSection() {
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Upper Lip</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£45</span>
-                    <span className="block text-sm text-gray-600">£225 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £45
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £225 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Chin</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£50</span>
-                    <span className="block text-sm text-gray-600">£250 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £50
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £250 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Lip & Chin</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£75</span>
-                    <span className="block text-sm text-gray-600">£375 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £75
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £375 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Sides of Face</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£60</span>
-                    <span className="block text-sm text-gray-600">£300 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £60
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £300 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Full Face</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£120</span>
-                    <span className="block text-sm text-gray-600">£600 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £120
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £600 for 6
+                    </span>
                   </div>
                 </div>
               </div>
@@ -504,36 +528,56 @@ export default function LaserHairRemovalSection() {
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Beard Line (Cheeks)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£70</span>
-                    <span className="block text-sm text-gray-600">£350 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £70
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £350 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Beard (Full)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£120</span>
-                    <span className="block text-sm text-gray-600">£600 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £120
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £600 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Neck (Front)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£60</span>
-                    <span className="block text-sm text-gray-600">£300 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £60
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £300 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Neck (Back)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£60</span>
-                    <span className="block text-sm text-gray-600">£300 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £60
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £300 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Beard & Neck Combined</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£160</span>
-                    <span className="block text-sm text-gray-600">£800 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £160
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £800 for 6
+                    </span>
                   </div>
                 </div>
               </div>
@@ -554,36 +598,56 @@ export default function LaserHairRemovalSection() {
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Underarms</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£60</span>
-                    <span className="block text-sm text-gray-600">£300 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £60
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £300 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Half Arms</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£100</span>
-                    <span className="block text-sm text-gray-600">£500 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £100
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £500 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Full Arms</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£150</span>
-                    <span className="block text-sm text-gray-600">£750 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £150
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £750 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Chest</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£100</span>
-                    <span className="block text-sm text-gray-600">£500 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £100
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £500 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Full Legs</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£220</span>
-                    <span className="block text-sm text-gray-600">£1,100 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £220
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £1,100 for 6
+                    </span>
                   </div>
                 </div>
               </div>
@@ -604,29 +668,45 @@ export default function LaserHairRemovalSection() {
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Bikini Line</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£70</span>
-                    <span className="block text-sm text-gray-600">£350 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £70
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £350 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Extended Bikini</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£90</span>
-                    <span className="block text-sm text-gray-600">£450 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £90
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £450 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Brazilian</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£120</span>
-                    <span className="block text-sm text-gray-600">£600 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £120
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £600 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Hollywood</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£140</span>
-                    <span className="block text-sm text-gray-600">£700 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £140
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £700 for 6
+                    </span>
                   </div>
                 </div>
               </div>
@@ -647,22 +727,34 @@ export default function LaserHairRemovalSection() {
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Half Body (Upper/Lower)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£280</span>
-                    <span className="block text-sm text-gray-600">£1,100 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £280
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £1,100 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Full Body (Female)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£450</span>
-                    <span className="block text-sm text-gray-600">£1,600 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £450
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £1,600 for 6
+                    </span>
                   </div>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Full Body (Male)</span>
                   <div className="text-right">
-                    <span className="block text-lg font-bold text-gray-900">£500</span>
-                    <span className="block text-sm text-gray-600">£1,700 for 6</span>
+                    <span className="block text-lg font-bold text-gray-900">
+                      £500
+                    </span>
+                    <span className="block text-sm text-gray-600">
+                      £1,700 for 6
+                    </span>
                   </div>
                 </div>
               </div>

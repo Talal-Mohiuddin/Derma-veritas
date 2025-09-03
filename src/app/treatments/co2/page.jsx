@@ -43,8 +43,7 @@ export default function CO2LaserTreatmentSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -158,19 +157,19 @@ export default function CO2LaserTreatmentSection() {
                 CO₂ Fractional Laser
                 <br />
                 for skin rejuvenation
-                <br />
-                & scar reduction
+                <br />& scar reduction
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Achieve remarkable skin transformation with our state-of-the-art CO₂ Fractional Laser technology at Derma Veritas.
+                Achieve remarkable skin transformation with our state-of-the-art
+                CO₂ Fractional Laser technology at Derma Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -178,7 +177,7 @@ export default function CO2LaserTreatmentSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -340,7 +339,7 @@ export default function CO2LaserTreatmentSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -360,15 +359,17 @@ export default function CO2LaserTreatmentSection() {
               What is CO₂ Fractional Laser?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              CO₂ Fractional Laser is an advanced skin resurfacing treatment that delivers precise laser energy to improve skin texture, reduce fine lines, diminish acne and surgical scars, and stimulate collagen production for a smoother, firmer, and more youthful appearance.
+              CO₂ Fractional Laser is an advanced skin resurfacing treatment
+              that delivers precise laser energy to improve skin texture, reduce
+              fine lines, diminish acne and surgical scars, and stimulate
+              collagen production for a smoother, firmer, and more youthful
+              appearance.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Benefits:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -376,15 +377,18 @@ export default function CO2LaserTreatmentSection() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Reduce acne scars, surgical scars, pigmentation, and uneven skin texture
+                  Reduce acne scars, surgical scars, pigmentation, and uneven
+                  skin texture
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Stimulate natural collagen and elastin production for firmer skin
+                  Stimulate natural collagen and elastin production for firmer
+                  skin
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Treat face, body, and specific problem areas safely and effectively
+                  Treat face, body, and specific problem areas safely and
+                  effectively
                 </li>
               </ul>
             </div>
@@ -400,11 +404,13 @@ export default function CO2LaserTreatmentSection() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  State-of-the-art CO₂ Fractional Laser technology for safe, precise, and effective results
+                  State-of-the-art CO₂ Fractional Laser technology for safe,
+                  precise, and effective results
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized consultation to create a tailored treatment plan for your skin goals
+                  Personalized consultation to create a tailored treatment plan
+                  for your skin goals
                 </li>
               </ul>
             </div>
@@ -439,8 +445,9 @@ export default function CO2LaserTreatmentSection() {
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
                   All treatments are performed exclusively by our expert
-                  physician team using state-of-the-art CO₂ Fractional Laser technology. 
-                  Our pricing reflects the expertise and premium service you receive.
+                  physician team using state-of-the-art CO₂ Fractional Laser
+                  technology. Our pricing reflects the expertise and premium
+                  service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -461,8 +468,9 @@ export default function CO2LaserTreatmentSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     CO₂ Fractional Laser Treatments
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -471,24 +479,28 @@ export default function CO2LaserTreatmentSection() {
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Patch Test:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £50
-                    </span>
+                    <span className="text-lg font-bold text-gray-900">£50</span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Single – One Area Upper Face:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £700 + VAT
+                    <span className="text-gray-700">
+                      Single – One Area Upper Face:
                     </span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Single – One Area Lower Face:</span>
                     <span className="text-lg font-bold text-gray-900">
                       £700 + VAT
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Single – Body (per limb):</span>
+                    <span className="text-gray-700">
+                      Single – One Area Lower Face:
+                    </span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £700 + VAT
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-gray-700">
+                      Single – Body (per limb):
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £700 + VAT
                     </span>
@@ -500,7 +512,9 @@ export default function CO2LaserTreatmentSection() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">3 Sessions – Full Face:</span>
+                    <span className="text-gray-700">
+                      3 Sessions – Full Face:
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £2,500 + VAT
                     </span>

@@ -43,8 +43,7 @@ export default function PRPTherapySection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -156,21 +155,20 @@ export default function PRPTherapySection() {
                 PRP Therapy for
                 <br />
                 Skin Rejuvenation
-                <br />
-                & Hair Restoration
+                <br />& Hair Restoration
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Harness your body's natural healing power with PRP Therapy. 
-                This innovative treatment uses your own platelets to stimulate 
-                tissue repair, restore vitality, and improve skin and hair health.
+                Harness your body's natural healing power with PRP Therapy. This
+                innovative treatment uses your own platelets to stimulate tissue
+                repair, restore vitality, and improve skin and hair health.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -178,7 +176,7 @@ export default function PRPTherapySection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -331,7 +329,7 @@ export default function PRPTherapySection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -351,10 +349,11 @@ export default function PRPTherapySection() {
               What is PRP Therapy?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              PRP (Platelet-Rich Plasma) Therapy is a natural, non-surgical treatment 
-              that uses concentrated platelets from your own blood to enhance tissue repair, 
-              restore vitality, and improve skin and hair health. This innovative approach 
-              harnesses your body's natural healing processes for rejuvenation.
+              PRP (Platelet-Rich Plasma) Therapy is a natural, non-surgical
+              treatment that uses concentrated platelets from your own blood to
+              enhance tissue repair, restore vitality, and improve skin and hair
+              health. This innovative approach harnesses your body's natural
+              healing processes for rejuvenation.
             </p>
           </div>
 
@@ -447,9 +446,9 @@ export default function PRPTherapySection() {
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
                   All treatments are performed exclusively by our expert
-                  physicians and clinical specialists who are
-                  industry-leading professionals. Our pricing reflects the expertise
-                  and premium service you receive.
+                  physicians and clinical specialists who are industry-leading
+                  professionals. Our pricing reflects the expertise and premium
+                  service you receive.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -470,8 +469,9 @@ export default function PRPTherapySection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     PRP Therapy Packages
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -487,7 +487,9 @@ export default function PRPTherapySection() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Under-Eye Area (3 Sessions):</span>
+                    <span className="text-gray-700">
+                      Under-Eye Area (3 Sessions):
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £300
                     </span>
@@ -507,8 +509,9 @@ export default function PRPTherapySection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Additional Options
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>

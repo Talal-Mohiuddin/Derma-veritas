@@ -34,7 +34,7 @@ import {
   KeyRound as Pound,
   FlaskRound,
   Atom,
-  Leaf
+  Leaf,
 } from "lucide-react";
 
 import ReviewsSection from "@/components/reviews-section";
@@ -46,52 +46,51 @@ export default function ExosomeTherapySection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Visible Results",
       value: "Rejuvenated, firmer, radiant skin",
       description: "Maximum results with 5 sessions",
-      icon: <Eye className="w-5 h-5 text-gray-600" />
+      icon: <Eye className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "Results Last",
       value: "Several Months",
-      icon: <CheckCircle className="w-5 h-5 text-gray-600" />
+      icon: <CheckCircle className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "No. of Sessions",
       value: "3-5 Sessions",
       description: "5 recommended for optimal results",
-      icon: <RotateCcw className="w-5 h-5 text-gray-600" />
+      icon: <RotateCcw className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "Procedure Time",
       value: "30–45 Minutes",
-      icon: <Clock className="w-5 h-5 text-gray-600" />
+      icon: <Clock className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "Discomfort",
       value: "Mild",
-      icon: <Frown className="w-5 h-5 text-gray-600" />
+      icon: <Frown className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "Downtime",
       value: "Minimal",
-      icon: <TrendingDown className="w-5 h-5 text-gray-600" />
+      icon: <TrendingDown className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "Side Effects",
       value: "Temporary redness or mild swelling",
-      icon: <AlertTriangle className="w-5 h-5 text-gray-600" />
+      icon: <AlertTriangle className="w-5 h-5 text-gray-600" />,
     },
     {
       heading: "Our Pricing",
       value: "From £500",
       description: "View all",
-      icon: <Pound className="w-5 h-5 text-gray-600" />
+      icon: <Pound className="w-5 h-5 text-gray-600" />,
     },
   ];
 
@@ -172,13 +171,15 @@ export default function ExosomeTherapySection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced regenerative treatment using nano-sized vesicles derived from stem cells and peptides to promote cell regeneration and skin rejuvenation.
+                Advanced regenerative treatment using nano-sized vesicles
+                derived from stem cells and peptides to promote cell
+                regeneration and skin rejuvenation.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -186,7 +187,7 @@ export default function ExosomeTherapySection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -351,7 +352,7 @@ export default function ExosomeTherapySection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -371,7 +372,11 @@ export default function ExosomeTherapySection() {
               What is Exosome Therapy?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Exosome Therapy uses nano-sized vesicles derived from stem cells and peptides to promote cell regeneration. Our advanced formula combines high molecular weight polynucleotides, synthetic exosomes, oligopeptides-20, acetyl decapeptide-3, and vegetable stem cells for optimal skin rejuvenation and regeneration.
+              Exosome Therapy uses nano-sized vesicles derived from stem cells
+              and peptides to promote cell regeneration. Our advanced formula
+              combines high molecular weight polynucleotides, synthetic
+              exosomes, oligopeptides-20, acetyl decapeptide-3, and vegetable
+              stem cells for optimal skin rejuvenation and regeneration.
             </p>
           </div>
 
@@ -485,8 +490,9 @@ export default function ExosomeTherapySection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Exosome Therapy Packages
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -506,7 +512,7 @@ export default function ExosomeTherapySection() {
                     </span>
                   </div>
                 </div>
-                
+
                 <div className="mt-4 p-3 bg-blue-50 border border-blue-100">
                   <p className="text-sm text-blue-700">
                     <strong>Recommended:</strong> 5 sessions for optimal results
@@ -519,15 +525,19 @@ export default function ExosomeTherapySection() {
                 <h3 className="text-base font-semibold text-gray-900 mb-4">
                   Treatment Details
                 </h3>
-                
+
                 <div className="space-y-3 text-sm text-gray-600">
                   <div className="flex justify-between">
                     <span>Visible Results:</span>
-                    <span className="font-medium">Rejuvenated, firmer, radiant skin</span>
+                    <span className="font-medium">
+                      Rejuvenated, firmer, radiant skin
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Duration:</span>
-                    <span className="font-medium">Results improve over several weeks and last months</span>
+                    <span className="font-medium">
+                      Results improve over several weeks and last months
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span>Procedure Time:</span>
@@ -543,7 +553,9 @@ export default function ExosomeTherapySection() {
                   </div>
                   <div className="flex justify-between">
                     <span>Side Effects:</span>
-                    <span className="font-medium">Temporary redness or mild swelling</span>
+                    <span className="font-medium">
+                      Temporary redness or mild swelling
+                    </span>
                   </div>
                 </div>
               </div>

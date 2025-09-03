@@ -43,8 +43,7 @@ export default function RFMicroneedlingSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -163,13 +162,15 @@ export default function RFMicroneedlingSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced procedure combining microneedling with radiofrequency energy to stimulate collagen production for skin tightening, scar reduction, and stretch mark improvement.
+                Advanced procedure combining microneedling with radiofrequency
+                energy to stimulate collagen production for skin tightening,
+                scar reduction, and stretch mark improvement.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -177,7 +178,7 @@ export default function RFMicroneedlingSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -330,7 +331,7 @@ export default function RFMicroneedlingSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -350,7 +351,12 @@ export default function RFMicroneedlingSection() {
               What is RF Microneedling?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              RF Microneedling is an advanced procedure that uses tiny needles to create controlled micro-injuries in the skin, stimulating collagen and elastin production for smoother, firmer, and rejuvenated skin. By combining microneedling with radiofrequency (RF) energy, we deliver heat into deeper skin layers, enhancing skin tightening, scar reduction, and stretch mark improvement.
+              RF Microneedling is an advanced procedure that uses tiny needles
+              to create controlled micro-injuries in the skin, stimulating
+              collagen and elastin production for smoother, firmer, and
+              rejuvenated skin. By combining microneedling with radiofrequency
+              (RF) energy, we deliver heat into deeper skin layers, enhancing
+              skin tightening, scar reduction, and stretch mark improvement.
             </p>
           </div>
 
@@ -366,7 +372,8 @@ export default function RFMicroneedlingSection() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Improves skin texture, elasticity, and appearance of fine lines
+                  Improves skin texture, elasticity, and appearance of fine
+                  lines
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -440,12 +447,13 @@ export default function RFMicroneedlingSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All RF Microneedling treatments are performed exclusively by our expert
-                  physicians who combine microneedling with RF energy for enhanced skin tightening and rejuvenation.
+                  All RF Microneedling treatments are performed exclusively by
+                  our expert physicians who combine microneedling with RF energy
+                  for enhanced skin tightening and rejuvenation.
                 </p>
                 <p>
-                  If you would like to discuss RF Microneedling or any of our other treatments, please
-                  feel free to{" "}
+                  If you would like to discuss RF Microneedling or any of our
+                  other treatments, please feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -462,8 +470,9 @@ export default function RFMicroneedlingSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     RF Microneedling Treatments
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -479,7 +488,9 @@ export default function RFMicroneedlingSection() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Single Treatment - Scars & Stretch Marks (One Area)</span>
+                    <span className="text-gray-700">
+                      Single Treatment - Scars & Stretch Marks (One Area)
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £350 + VAT
                     </span>
@@ -493,8 +504,9 @@ export default function RFMicroneedlingSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Treatment Packages
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -511,7 +523,8 @@ export default function RFMicroneedlingSection() {
                       </span>
                     </div>
                     <p className="text-sm text-gray-600">
-                      Optimal package for best results with progressive improvement
+                      Optimal package for best results with progressive
+                      improvement
                     </p>
                   </div>
                   <div className="py-3">

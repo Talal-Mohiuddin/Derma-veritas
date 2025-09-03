@@ -43,8 +43,7 @@ export default function PolynucleotideTreatmentsSection() {
 
   // Create a ref for the pricing section
   const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen }= useStore();
-  
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -162,13 +161,15 @@ export default function PolynucleotideTreatmentsSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Powerful regenerative molecules that revitalize and repair skin at a cellular level, improving elasticity, reducing fine lines, and restoring a youthful glow.
+                Powerful regenerative molecules that revitalize and repair skin
+                at a cellular level, improving elasticity, reducing fine lines,
+                and restoring a youthful glow.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
+                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -176,7 +177,7 @@ export default function PolynucleotideTreatmentsSection() {
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
                   VIEW PRICES
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
@@ -341,7 +342,7 @@ export default function PolynucleotideTreatmentsSection() {
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p 
+                <p
                   onClick={scrollToPricing}
                   className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                 >
@@ -361,7 +362,12 @@ export default function PolynucleotideTreatmentsSection() {
               What are Polynucleotide Treatments?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Polynucleotide treatments are powerful, regenerative molecules derived from natural sources that help revitalize and repair skin at a cellular level. These advanced treatments improve skin elasticity, reduce fine lines, and restore a youthful glow. They are also highly effective for hair restoration, promoting thicker, fuller hair growth.
+              Polynucleotide treatments are powerful, regenerative molecules
+              derived from natural sources that help revitalize and repair skin
+              at a cellular level. These advanced treatments improve skin
+              elasticity, reduce fine lines, and restore a youthful glow. They
+              are also highly effective for hair restoration, promoting thicker,
+              fuller hair growth.
             </p>
           </div>
 
@@ -475,8 +481,9 @@ export default function PolynucleotideTreatmentsSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Face Treatments
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -510,8 +517,9 @@ export default function PolynucleotideTreatmentsSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Hair Restoration
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
@@ -545,8 +553,9 @@ export default function PolynucleotideTreatmentsSection() {
                   <h3 className="text-base font-semibold text-gray-900">
                     Eye Area Treatments
                   </h3>
-                 <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
-                    onClick={()=> setBookingOpen(true)}
+                  <button
+                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                    onClick={() => setBookingOpen(true)}
                   >
                     BOOK
                   </button>
