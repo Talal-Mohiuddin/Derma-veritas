@@ -10,13 +10,15 @@ export default function LoginPage() {
     <div className="flex flex-col w-full items-center min-h-screen gap-8 justify-center bg-gradient-to-b from-gray-50 to-white">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-xl border border-gray-100">
         <div className="text-center">
-          <Image
-            src="/logo.svg"
-            alt="Logo"
-            width={60}
-            height={60}
-            className="mx-auto"
-          />
+          <Link href="/" >
+            <Image
+              src="/logo.svg"
+              alt="Logo"
+              width={60}
+              height={60}
+              className="mx-auto"
+            />
+          </Link>
           <h2 className="mt-6 text-3xl font-light text-gray-900">
             Welcome to DermaVeritas
           </h2>
