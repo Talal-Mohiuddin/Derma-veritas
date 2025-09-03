@@ -5,9 +5,12 @@ export const useStore = create((set) => ({
   user: null,
   userRole: null,
   bookingOpen: false,
+  pendingBooking: null, // Store pending booking data
   setUser: (user) => set({ user }),
   setUserRole: (role) => set({ userRole: role }),
   setBookingOpen: (isOpen) => set({ bookingOpen: isOpen }),
+  setPendingBooking: (bookingData) => set({ pendingBooking: bookingData }),
+  clearPendingBooking: () => set({ pendingBooking: null }),
   handleLogout: async (router) => {
     try {
       const auth = getAuth();
@@ -20,7 +23,7 @@ export const useStore = create((set) => ({
     } catch (error) {
       console.error("Error signing out:", error);
     } finally {
-      set({ user: null, userRole: null });
+      set({ user: null, userRole: null, pendingBooking: null });
     }
   },
 }));

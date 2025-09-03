@@ -91,7 +91,14 @@ export default function LoginForm({ csrfToken }) {
         toast.success("Logged in successfully!");
       }
 
-      router.push("/");
+      // Check for redirect URL
+      const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
+      if (redirectUrl) {
+        sessionStorage.removeItem('redirectAfterLogin');
+        router.push(redirectUrl);
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       console.error("Authentication error:", error);
       toast.error(error.message || "Authentication failed. Please try again.");
@@ -141,7 +148,14 @@ export default function LoginForm({ csrfToken }) {
           : "Logged in successfully!"
       );
 
-      router.push("/");
+      // Check for redirect URL
+      const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
+      if (redirectUrl) {
+        sessionStorage.removeItem('redirectAfterLogin');
+        router.push(redirectUrl);
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       console.error("Google authentication error:", error);
       toast.error(

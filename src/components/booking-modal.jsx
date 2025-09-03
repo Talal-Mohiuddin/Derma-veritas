@@ -7,36 +7,85 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useAuth } from "@/store/FirebaseAuthProvider"
+import { useRouter } from "next/navigation"
+import { useCreateAppointment } from "@/hooks/useappointment"
+import { toast } from "sonner"
 
 export function BookingModal({ open, onOpenChange, children, selectedTreatment = "" }) {
+  const { user } = useAuth();
+  const router = useRouter();
+  const createAppointment = useCreateAppointment();
+  
   const [formData, setFormData] = useState({
     treatment: "",
     clientType: "new",
     name: "",
     phone: "",
     email: "",
-    clinic: "",
     callbackTime: "",
     ageConfirm: false,
     newsletter: false,
   })
 
-  // Auto-select treatment when modal opens or selectedTreatment changes
+  // Auto-fill user info when logged in
   useEffect(() => {
-    if (selectedTreatment && open) {
+    if (user && open) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.displayName || "",
+        email: user.email || "",
+        treatment: selectedTreatment || prev.treatment
+      }));
+    } else if (selectedTreatment && open) {
       setFormData(prev => ({
         ...prev,
         treatment: selectedTreatment
-      }))
+      }));
     }
-  }, [selectedTreatment, open])
+  }, [user, selectedTreatment, open]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Handle form submission here
-    onOpenChange(false)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // Check if user is logged in - redirect to login if not
+    if (!user) {
+      const currentUrl = window.location.pathname + window.location.search;
+      sessionStorage.setItem('redirectAfterLogin', currentUrl);
+      router.push('/login');
+      return;
+    }
+
+    try {
+      const appointmentData = {
+        ...formData,
+        clinic: "main", // Default to main clinic since there's only one
+        userId: user.uid,
+        status: "pending",
+        createdAt: new Date().toISOString(),
+      };
+
+      await createAppointment.mutateAsync(appointmentData);
+      
+      toast.success("Appointment request submitted successfully! We'll contact you soon.");
+      onOpenChange(false);
+      
+      // Reset form
+      setFormData({
+        treatment: "",
+        clientType: "new",
+        name: "",
+        phone: "",
+        email: "",
+        callbackTime: "",
+        ageConfirm: false,
+        newsletter: false,
+      });
+    } catch (error) {
+      console.error("Error submitting appointment:", error);
+      toast.error(error.message || "Failed to submit appointment. Please try again.");
+    }
+  };
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -197,28 +246,6 @@ export function BookingModal({ open, onOpenChange, children, selectedTreatment =
                     />
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Appointment Preferences */}
-            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm space-y-4">
-              <h3 className="font-semibold text-gray-800 text-lg mb-4">Appointment Preferences</h3>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-3">
-                  <Label className="text-sm font-semibold text-gray-700">Preferred Clinic</Label>
-                  <Select value={formData.clinic} onValueChange={(value) => setFormData({ ...formData, clinic: value })}>
-                    <SelectTrigger className="h-12 border-gray-200 hover:border-gray-300 transition-colors">
-                      <SelectValue placeholder="Select a clinic" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="london">📍 London Clinic</SelectItem>
-                      <SelectItem value="manchester">📍 Manchester Clinic</SelectItem>
-                      <SelectItem value="birmingham">📍 Birmingham Clinic</SelectItem>
-                      <SelectItem value="leeds">📍 Leeds Clinic</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
 
                 <div className="space-y-3">
                   <Label className="text-sm font-semibold text-gray-700">Best Time for Callback</Label>
@@ -296,9 +323,9 @@ export function BookingModal({ open, onOpenChange, children, selectedTreatment =
               <Button
                 type="submit"
                 className="w-full bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 text-white py-4 h-14 text-base font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-                disabled={!formData.ageConfirm}
+                disabled={!formData.ageConfirm || createAppointment.isPending}
               >
-                SUBMIT CONSULTATION REQUEST
+                {createAppointment.isPending ? "SUBMITTING..." : "SUBMIT CONSULTATION REQUEST"}
               </Button>
             </div>
           </form>
