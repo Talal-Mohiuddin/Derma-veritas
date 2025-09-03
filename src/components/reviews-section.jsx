@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const reviews = [
   {
@@ -22,7 +22,7 @@ const reviews = [
     id: 3,
     name: "Emma Thompson",
     rating: 5,
-    text: "Highly recommend AL Aesthetics. The consultation was thorough and the treatment was painless. Great aftercare support too.",
+    text: "Highly recommend Derma Veritas. The consultation was thorough and the treatment was painless. Great aftercare support too.",
   },
   {
     id: 4,
@@ -66,107 +66,107 @@ const reviews = [
     rating: 5,
     text: "Five stars isn't enough! The transformation has boosted my confidence tremendously. I can't thank the team enough for their expertise.",
   },
-]
+];
 
 export default function ReviewsSection() {
-  const [currentReview, setCurrentReview] = useState(0)
-  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true)
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
-  const sectionRef = useRef(null)
-  const sliderRef = useRef(null)
-  const autoScrollRef = useRef(null)
+  const [currentReview, setCurrentReview] = useState(0);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(true);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const sectionRef = useRef(null);
+  const sliderRef = useRef(null);
+  const autoScrollRef = useRef(null);
 
   const nextReview = () => {
-    setCurrentReview((prev) => (prev + 1) % reviews.length)
-  }
+    setCurrentReview((prev) => (prev + 1) % reviews.length);
+  };
 
   const prevReview = () => {
-    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
-  }
+    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
 
   const goToReview = (index) => {
-    setCurrentReview(index)
-  }
+    setCurrentReview(index);
+  };
 
   useEffect(() => {
     if (sliderRef.current) {
-      const translateX = -currentReview * 90 + 5 // 90% spacing between cards, 5% left margin
-      sliderRef.current.style.transform = `translateX(${translateX}%)`
+      const translateX = -currentReview * 90 + 5; // 90% spacing between cards, 5% left margin
+      sliderRef.current.style.transform = `translateX(${translateX}%)`;
     }
-  }, [currentReview])
+  }, [currentReview]);
 
   // Auto-scroll functionality - reduced to 3 seconds
   useEffect(() => {
-    if (!autoScrollEnabled) return
-    
+    if (!autoScrollEnabled) return;
+
     autoScrollRef.current = setInterval(() => {
-      nextReview()
-    }, 3000) // Changed to 3 seconds
-    
+      nextReview();
+    }, 3000); // Changed to 3 seconds
+
     return () => {
       if (autoScrollRef.current) {
-        clearInterval(autoScrollRef.current)
+        clearInterval(autoScrollRef.current);
       }
-    }
-  }, [autoScrollEnabled, currentReview]) // Added currentReview to dependencies
+    };
+  }, [autoScrollEnabled, currentReview]); // Added currentReview to dependencies
 
   // Pause auto-scroll when user interacts with the carousel
   const pauseAutoScroll = () => {
-    setAutoScrollEnabled(false)
+    setAutoScrollEnabled(false);
     if (autoScrollRef.current) {
-      clearInterval(autoScrollRef.current)
+      clearInterval(autoScrollRef.current);
     }
-  }
+  };
 
   // Resume auto-scroll after a period of inactivity
   const resumeAutoScroll = () => {
-    setAutoScrollEnabled(true)
-  }
+    setAutoScrollEnabled(true);
+  };
 
   // Touch swipe handlers
   const handleTouchStart = (e) => {
-    pauseAutoScroll()
-    setTouchStart(e.targetTouches[0].clientX)
-  }
+    pauseAutoScroll();
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
   const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-    
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
 
     if (isLeftSwipe) {
-      nextReview()
+      nextReview();
     } else if (isRightSwipe) {
-      prevReview()
+      prevReview();
     }
-    
+
     // Reset values
-    setTouchStart(null)
-    setTouchEnd(null)
-    
+    setTouchStart(null);
+    setTouchEnd(null);
+
     // Resume auto-scroll after 5 seconds
-    setTimeout(resumeAutoScroll, 5000)
-  }
+    setTimeout(resumeAutoScroll, 5000);
+  };
 
   const scrollToTop = () => {
     if (sectionRef.current) {
       sectionRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
-      })
+      });
     }
-  }
+  };
 
   return (
-    <section 
-      ref={sectionRef} 
+    <section
+      ref={sectionRef}
       className="py-20"
       onMouseEnter={pauseAutoScroll}
       onMouseLeave={resumeAutoScroll}
@@ -175,7 +175,7 @@ export default function ReviewsSection() {
         What our clients have to say...
       </h2>
 
-      <div 
+      <div
         className="relative overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -249,9 +249,9 @@ export default function ReviewsSection() {
           <button
             key={index}
             onClick={() => {
-              goToReview(index)
-              pauseAutoScroll()
-              setTimeout(resumeAutoScroll, 5000) // Resume after 5 seconds
+              goToReview(index);
+              pauseAutoScroll();
+              setTimeout(resumeAutoScroll, 5000); // Resume after 5 seconds
             }}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentReview
@@ -284,9 +284,9 @@ export default function ReviewsSection() {
         <div className="flex items-center gap-2">
           <Button
             onClick={() => {
-              prevReview()
-              pauseAutoScroll()
-              setTimeout(resumeAutoScroll, 5000) // Resume after 5 seconds
+              prevReview();
+              pauseAutoScroll();
+              setTimeout(resumeAutoScroll, 5000); // Resume after 5 seconds
             }}
             variant="ghost"
             size="icon"
@@ -297,9 +297,9 @@ export default function ReviewsSection() {
 
           <Button
             onClick={() => {
-              nextReview()
-              pauseAutoScroll()
-              setTimeout(resumeAutoScroll, 5000) // Resume after 5 seconds
+              nextReview();
+              pauseAutoScroll();
+              setTimeout(resumeAutoScroll, 5000); // Resume after 5 seconds
             }}
             variant="ghost"
             size="icon"
@@ -310,5 +310,5 @@ export default function ReviewsSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

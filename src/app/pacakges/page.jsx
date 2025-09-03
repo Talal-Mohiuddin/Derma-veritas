@@ -66,7 +66,7 @@ export default function PackagesPage() {
             <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mx-auto mb-12">
               Discover our comprehensive treatment packages designed to address
               your unique skin concerns and aesthetic goals with the latest in
-              medical aesthetics technology.
+              medicDerma Veritas technology.
             </p>
 
             <Button

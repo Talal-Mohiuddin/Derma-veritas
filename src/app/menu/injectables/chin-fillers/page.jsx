@@ -94,7 +94,7 @@ export default function ChinFillerSection() {
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
                 Enhance your facial profile with precise chin filler treatments
-                at AL Aesthetics, creating natural definition and harmony.
+                at Derma Veritas, creating natural definition and harmony.
               </p>
 
               {/* Buttons */}

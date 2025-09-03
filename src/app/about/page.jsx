@@ -9,7 +9,7 @@ export default function AboutPage() {
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="h-px bg-muted-foreground/30 flex-1 max-w-20"></div>
             <span className="text-sm text-muted-foreground font-medium">
-              About AL Aesthetics
+              About Derma Veritas
             </span>
             <div className="h-px bg-muted-foreground/30 flex-1 max-w-20"></div>
           </div>
@@ -18,7 +18,7 @@ export default function AboutPage() {
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
             Dr Mofashir Nawaz is a leading cosmetic specialist, and the owner
-            and founder of AL Aesthetics.
+            and founder of Derma Veritas.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
                 skills in the area of advanced aesthetic techniques.
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                At AL Aesthetics, all injectors are meticulously trained by Dr
+                At Derma Veritas, all injectors are meticulously trained by Dr
                 Ash Labib to ensure the highest level of quality and precision
                 in our treatments. Dr Ash Labib, with over{" "}
                 <strong>27 years</strong> of experience in the aesthetics
@@ -78,7 +78,7 @@ export default function AboutPage() {
             </h3>
             <p className="text-muted-foreground leading-relaxed">
               As an International Ambassador for Allergan, Dr Labib imparts
-              advanced facial aesthetics training on a national and global
+              advanced faciDerma Veritas training on a national and global
               scale. He participates in clinical research and audits,
               contributing to the advancement of the field. Dr Labib's passion
               extends beyond patient care as he serves as a trainer and educator
@@ -94,11 +94,11 @@ export default function AboutPage() {
             </h3>
             <p className="text-muted-foreground leading-relaxed">
               With Dr Ash Labib's vast experience and unwavering commitment to
-              enhancing natural beauty, AL Aesthetics stands at the forefront of
+              enhancing natural beauty, Derma Veritas stands at the forefront of
               the field. Our impressive track record includes{" "}
               <strong>over 6500 completed non-surgical rhinoplasties</strong>{" "}
               and the training of <strong>over 2000 injectors worldwide</strong>
-              . You can trust AL Aesthetics to deliver unparalleled expertise
+              . You can trust Derma Veritas to deliver unparalleled expertise
               and help boost your confidence by utilising dermal fillers, anti-
             </p>
           </div>
