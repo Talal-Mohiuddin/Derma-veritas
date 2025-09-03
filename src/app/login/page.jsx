@@ -12,7 +12,7 @@ export default function LoginPage() {
         <div className="text-center">
           <Link href="/">
             <Image
-              src="/logo_black.svg"
+              src="/logo_white (1).png"
               alt="Logo"
               width={120}
               height={120}

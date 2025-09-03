@@ -53,9 +53,6 @@ WELLNESS TREATMENTS:
 LASER TREATMENTS:
 - Quad Laser Hair Removal
 
-MINOR OPERATIONS:
-- Mole Removal
-- Skin Tag Removal
 
 FACIAL CONCERNS WE TREAT:
 - Gummy Smile

@@ -4,7 +4,7 @@ import {
   useAllAppointments,
   useUpdateAppointmentStatus,
   useDeleteAppointment,
-} from "../../../hooks/useappointment";
+} from "@/hooks/useAppointment";
 import { toast } from "sonner";
 
 export default function AppointmentsPage() {
@@ -21,7 +21,6 @@ export default function AppointmentsPage() {
     error,
     refetch,
   } = useAllAppointments();
-  console.log("Appointments data:", appointmentsData);
 
   const updateStatusMutation = useUpdateAppointmentStatus();
   const deleteAppointmentMutation = useDeleteAppointment();
@@ -29,15 +28,20 @@ export default function AppointmentsPage() {
   const appointments = appointmentsData?.appointments || [];
 
   // Filter appointments based on status
-  const filteredAppointments = appointments.filter(appointment => {
+  const filteredAppointments = appointments.filter((appointment) => {
     if (statusFilter === "all") return true;
     return appointment.status === statusFilter;
   });
 
   const handleStatusChange = async (appointmentId, newStatus) => {
     try {
-      await updateStatusMutation.mutateAsync({ id: appointmentId, status: newStatus });
-      toast.success(`Appointment ${newStatus} successfully! ${getStatusEmoji(newStatus)}`);
+      await updateStatusMutation.mutateAsync({
+        id: appointmentId,
+        status: newStatus,
+      });
+      toast.success(
+        `Appointment ${newStatus} successfully! ${getStatusEmoji(newStatus)}`
+      );
     } catch (error) {
       console.error("Status update error:", error);
       toast.error(error.message || "Failed to update appointment status.");
@@ -63,21 +67,31 @@ export default function AppointmentsPage() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "confirmed": return "bg-green-100 text-green-800";
-      case "pending": return "bg-yellow-100 text-yellow-800";
-      case "completed": return "bg-blue-100 text-blue-800";
-      case "cancelled": return "bg-red-100 text-red-800";
-      default: return "bg-gray-100 text-gray-800";
+      case "confirmed":
+        return "bg-green-100 text-green-800";
+      case "pending":
+        return "bg-yellow-100 text-yellow-800";
+      case "completed":
+        return "bg-blue-100 text-blue-800";
+      case "cancelled":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
   };
 
   const getStatusEmoji = (status) => {
     switch (status) {
-      case "confirmed": return "✅";
-      case "pending": return "⏳";
-      case "completed": return "🎉";
-      case "cancelled": return "❌";
-      default: return "📅";
+      case "confirmed":
+        return "✅";
+      case "pending":
+        return "⏳";
+      case "completed":
+        return "🎉";
+      case "cancelled":
+        return "❌";
+      default:
+        return "📅";
     }
   };
 
@@ -89,17 +103,22 @@ export default function AppointmentsPage() {
       month: "short",
       year: "numeric",
       hour: "2-digit",
-      minute: "2-digit"
+      minute: "2-digit",
     });
   };
 
   const getCallbackTimeEmoji = (time) => {
     switch (time) {
-      case "morning": return "🌅";
-      case "afternoon": return "☀️";
-      case "evening": return "🌆";
-      case "anytime": return "🕐";
-      default: return "📞";
+      case "morning":
+        return "🌅";
+      case "afternoon":
+        return "☀️";
+      case "evening":
+        return "🌆";
+      case "anytime":
+        return "🕐";
+      default:
+        return "📞";
     }
   };
 
@@ -108,8 +127,12 @@ export default function AppointmentsPage() {
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <div className="text-xl font-semibold text-gray-700 mb-2">Loading Appointments...</div>
-          <div className="text-gray-500">Please wait while we fetch the data</div>
+          <div className="text-xl font-semibold text-gray-700 mb-2">
+            Loading Appointments...
+          </div>
+          <div className="text-gray-500">
+            Please wait while we fetch the data
+          </div>
         </div>
       </div>
     );
@@ -118,7 +141,9 @@ export default function AppointmentsPage() {
   if (error) {
     return (
       <div className="text-center py-12">
-        <div className="text-red-500 text-lg mb-4">Error loading appointments</div>
+        <div className="text-red-500 text-lg mb-4">
+          Error loading appointments
+        </div>
         <button
           onClick={() => refetch()}
           className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
@@ -152,7 +177,9 @@ export default function AppointmentsPage() {
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Status:</label>
+              <label className="text-sm font-medium text-gray-700">
+                Status:
+              </label>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
@@ -172,15 +199,23 @@ export default function AppointmentsPage() {
 
           {/* Quick Stats */}
           <div className="flex space-x-6">
-            {["pending", "confirmed", "completed", "cancelled"].map((status) => {
-              const count = appointments.filter(apt => apt.status === status).length;
-              return (
-                <div key={status} className="text-center">
-                  <div className="text-lg font-bold text-gray-800">{count}</div>
-                  <div className="text-xs text-gray-500 capitalize">{status}</div>
-                </div>
-              );
-            })}
+            {["pending", "confirmed", "completed", "cancelled"].map(
+              (status) => {
+                const count = appointments.filter(
+                  (apt) => apt.status === status
+                ).length;
+                return (
+                  <div key={status} className="text-center">
+                    <div className="text-lg font-bold text-gray-800">
+                      {count}
+                    </div>
+                    <div className="text-xs text-gray-500 capitalize">
+                      {status}
+                    </div>
+                  </div>
+                );
+              }
+            )}
           </div>
         </div>
       </div>
@@ -188,12 +223,13 @@ export default function AppointmentsPage() {
       {/* Appointments List */}
       {filteredAppointments.length === 0 ? (
         <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">No appointments found</h3>
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            No appointments found
+          </h3>
           <p className="text-gray-600">
-            {statusFilter === "all" 
+            {statusFilter === "all"
               ? "No appointments have been created yet."
-              : `No ${statusFilter} appointments found.`
-            }
+              : `No ${statusFilter} appointments found.`}
           </p>
         </div>
       ) : (
@@ -211,18 +247,45 @@ export default function AppointmentsPage() {
                       {appointment.name}
                     </h3>
                     <div className="text-sm text-gray-500">
-                      #{appointment.appointmentNumber || appointment.id.slice(0, 8)}
+                      #
+                      {appointment.appointmentNumber ||
+                        appointment.id.slice(0, 8)}
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(appointment.status)}`}>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                      appointment.status
+                    )}`}
+                  >
                     {getStatusEmoji(appointment.status)} {appointment.status}
                   </span>
                 </div>
 
                 {/* Treatment Info */}
                 <div className="bg-gray-50 rounded-lg p-3 mb-3">
-                  <div className="text-sm font-medium text-gray-700 mb-1">Treatment:</div>
-                  <div className="text-sm text-gray-600">{appointment.treatment || "Not specified"}</div>
+                  <div className="text-sm font-medium text-gray-700 mb-1">
+                    Treatment:
+                  </div>
+                  <div className="text-sm text-gray-600 space-y-1">
+                    <div className="font-medium">
+                      {appointment.treatmentDetails?.treatmentName || appointment.treatment || "Not specified"}
+                    </div>
+                    {appointment.treatmentDetails?.optionName && (
+                      <div className="text-xs text-gray-500">
+                        <strong>Option:</strong> {appointment.treatmentDetails.optionName}
+                      </div>
+                    )}
+                    {appointment.treatmentDetails?.optionPrice && (
+                      <div className="text-xs font-semibold text-green-600">
+                        💰 {appointment.treatmentDetails.optionPrice}
+                      </div>
+                    )}
+                    {appointment.treatmentDetails?.optionDescription && (
+                      <div className="text-xs text-gray-500 italic">
+                        {appointment.treatmentDetails.optionDescription}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Client Type */}
@@ -248,7 +311,7 @@ export default function AppointmentsPage() {
                     {appointment.email}
                   </a>
                 </div>
-                
+
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">📱</span>
                   <a
@@ -262,7 +325,9 @@ export default function AppointmentsPage() {
 
                 {appointment.callbackTime && (
                   <div className="flex items-center space-x-3">
-                    <span className="text-gray-400">{getCallbackTimeEmoji(appointment.callbackTime)}</span>
+                    <span className="text-gray-400">
+                      {getCallbackTimeEmoji(appointment.callbackTime)}
+                    </span>
                     <span className="text-sm text-gray-600 capitalize">
                       Best time: {appointment.callbackTime}
                     </span>
@@ -276,11 +341,13 @@ export default function AppointmentsPage() {
                 <div className="text-sm text-gray-700 font-medium">
                   {formatDate(appointment.createdAt)}
                 </div>
-                
+
                 {appointment.newsletter && (
                   <div className="mt-2 flex items-center space-x-2">
                     <span className="text-xs">📰</span>
-                    <span className="text-xs text-gray-600">Subscribed to newsletter</span>
+                    <span className="text-xs text-gray-600">
+                      Subscribed to newsletter
+                    </span>
                   </div>
                 )}
               </div>
@@ -290,10 +357,14 @@ export default function AppointmentsPage() {
                 <div className="flex flex-col space-y-3">
                   {/* Status Update */}
                   <div>
-                    <label className="text-xs text-gray-500 mb-1 block">Update Status:</label>
+                    <label className="text-xs text-gray-500 mb-1 block">
+                      Update Status:
+                    </label>
                     <select
                       value={appointment.status}
-                      onChange={(e) => handleStatusChange(appointment.id, e.target.value)}
+                      onChange={(e) =>
+                        handleStatusChange(appointment.id, e.target.value)
+                      }
                       disabled={updateStatusMutation.isPending}
                       className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
@@ -337,24 +408,36 @@ export default function AppointmentsPage() {
             <div className="p-6">
               <div className="text-center">
                 <div className="text-6xl mb-4">⚠️</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Delete Appointment</h3>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  Delete Appointment
+                </h3>
                 <p className="text-gray-600 mb-6">
                   Are you sure you want to delete the appointment for{" "}
-                  <span className="font-semibold">{appointmentToDelete.name}</span>?
+                  <span className="font-semibold">
+                    {appointmentToDelete.name}
+                  </span>
+                  ?
                   <br />
                   <span className="text-sm text-red-600 mt-2 block">
                     This action cannot be undone.
                   </span>
                 </p>
-                
+
                 <div className="bg-gray-50 rounded-lg p-3 mb-6 text-left">
                   <div className="text-sm text-gray-600">
-                    <div><strong>Client:</strong> {appointmentToDelete.name}</div>
-                    <div><strong>Treatment:</strong> {appointmentToDelete.treatment}</div>
-                    <div><strong>Status:</strong> {appointmentToDelete.status}</div>
+                    <div>
+                      <strong>Client:</strong> {appointmentToDelete.name}
+                    </div>
+                    <div>
+                      <strong>Treatment:</strong>{" "}
+                      {appointmentToDelete.treatment}
+                    </div>
+                    <div>
+                      <strong>Status:</strong> {appointmentToDelete.status}
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="flex space-x-3">
                   <button
                     onClick={() => {
@@ -367,7 +450,9 @@ export default function AppointmentsPage() {
                     Cancel
                   </button>
                   <button
-                    onClick={() => handleDeleteAppointment(appointmentToDelete.id)}
+                    onClick={() =>
+                      handleDeleteAppointment(appointmentToDelete.id)
+                    }
                     disabled={deleteAppointmentMutation.isPending}
                     className="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50"
                   >
@@ -393,7 +478,9 @@ export default function AppointmentsPage() {
           <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-gray-200">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800">Appointment Details</h2>
+                <h2 className="text-2xl font-bold text-gray-800">
+                  Appointment Details
+                </h2>
                 <button
                   onClick={() => setShowDetails(false)}
                   className="text-gray-400 hover:text-gray-600 text-2xl"
@@ -402,20 +489,29 @@ export default function AppointmentsPage() {
                 </button>
               </div>
             </div>
-            
+
             <div className="p-6 space-y-6">
               {/* Client Information */}
               <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-3">👤 Client Information</h3>
+                <h3 className="font-semibold text-gray-800 mb-3">
+                  👤 Client Information
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm text-gray-500">Name:</label>
-                    <div className="font-medium">{selectedAppointment.name}</div>
+                    <div className="font-medium">
+                      {selectedAppointment.name}
+                    </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-500">Client Type:</label>
+                    <label className="text-sm text-gray-500">
+                      Client Type:
+                    </label>
                     <div className="font-medium capitalize">
-                      {selectedAppointment.clientType === "new" ? "🆕 New" : "🔄 Returning"} Client
+                      {selectedAppointment.clientType === "new"
+                        ? "🆕 New"
+                        : "🔄 Returning"}{" "}
+                      Client
                     </div>
                   </div>
                   <div>
@@ -441,28 +537,67 @@ export default function AppointmentsPage() {
 
               {/* Appointment Information */}
               <div className="bg-blue-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-3">📅 Appointment Information</h3>
+                <h3 className="font-semibold text-gray-800 mb-3">
+                  📅 Appointment Information
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
+                  <div className="md:col-span-2">
                     <label className="text-sm text-gray-500">Treatment:</label>
-                    <div className="font-medium">{selectedAppointment.treatment}</div>
-                  </div>
-                  <div>
-                    <label className="text-sm text-gray-500">Status:</label>
-                    <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(selectedAppointment.status)}`}>
-                      {getStatusEmoji(selectedAppointment.status)} {selectedAppointment.status}
-                    </span>
-                  </div>
-                  <div>
-                    <label className="text-sm text-gray-500">Preferred Callback Time:</label>
-                    <div className="font-medium capitalize">
-                      {getCallbackTimeEmoji(selectedAppointment.callbackTime)} {selectedAppointment.callbackTime}
+                    <div className="font-medium space-y-2">
+                      <div className="text-lg">
+                        {selectedAppointment.treatmentDetails?.treatmentName || selectedAppointment.treatment}
+                      </div>
+                      {selectedAppointment.treatmentDetails?.optionName && (
+                        <div className="bg-white rounded-lg p-3 border">
+                          <div className="flex justify-between items-start">
+                            <div className="flex-1">
+                              <div className="font-medium text-gray-800">
+                                {selectedAppointment.treatmentDetails.optionName}
+                              </div>
+                              {selectedAppointment.treatmentDetails.optionDescription && (
+                                <div className="text-sm text-gray-600 mt-1">
+                                  {selectedAppointment.treatmentDetails.optionDescription}
+                                </div>
+                              )}
+                            </div>
+                            {selectedAppointment.treatmentDetails.optionPrice && (
+                              <div className="ml-3 font-bold text-green-600 text-lg">
+                                {selectedAppointment.treatmentDetails.optionPrice}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div>
-                    <label className="text-sm text-gray-500">Appointment Number:</label>
+                    <label className="text-sm text-gray-500">Status:</label>
+                    <span
+                      className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
+                        selectedAppointment.status
+                      )}`}
+                    >
+                      {getStatusEmoji(selectedAppointment.status)}{" "}
+                      {selectedAppointment.status}
+                    </span>
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-500">
+                      Preferred Callback Time:
+                    </label>
+                    <div className="font-medium capitalize">
+                      {getCallbackTimeEmoji(selectedAppointment.callbackTime)}{" "}
+                      {selectedAppointment.callbackTime}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-sm text-gray-500">
+                      Appointment Number:
+                    </label>
                     <div className="font-medium font-mono">
-                      #{selectedAppointment.appointmentNumber || selectedAppointment.id.slice(0, 8)}
+                      #
+                      {selectedAppointment.appointmentNumber ||
+                        selectedAppointment.id.slice(0, 8)}
                     </div>
                   </div>
                 </div>
@@ -470,22 +605,32 @@ export default function AppointmentsPage() {
 
               {/* Additional Details */}
               <div className="bg-green-50 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-800 mb-3">ℹ️ Additional Details</h3>
+                <h3 className="font-semibold text-gray-800 mb-3">
+                  ℹ️ Additional Details
+                </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-500">Submitted:</span>
-                    <span className="font-medium">{formatDate(selectedAppointment.createdAt)}</span>
+                    <span className="font-medium">
+                      {formatDate(selectedAppointment.createdAt)}
+                    </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500">Newsletter Subscription:</span>
+                    <span className="text-sm text-gray-500">
+                      Newsletter Subscription:
+                    </span>
                     <span className="font-medium">
                       {selectedAppointment.newsletter ? "✅ Yes" : "❌ No"}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-500">Age Confirmation:</span>
+                    <span className="text-sm text-gray-500">
+                      Age Confirmation:
+                    </span>
                     <span className="font-medium">
-                      {selectedAppointment.ageConfirm ? "✅ Confirmed 18+" : "❌ Not confirmed"}
+                      {selectedAppointment.ageConfirm
+                        ? "✅ Confirmed 18+"
+                        : "❌ Not confirmed"}
                     </span>
                   </div>
                 </div>
@@ -494,7 +639,7 @@ export default function AppointmentsPage() {
               {/* Quick Actions */}
               <div className="flex space-x-3">
                 <a
-                  href={`mailto:${selectedAppointment.email}?subject=Regarding your appointment - ${selectedAppointment.treatment}`}
+                  href={`mailto:${selectedAppointment.email}?subject=Regarding your appointment - ${selectedAppointment.treatmentDetails?.treatmentName || selectedAppointment.treatment}&body=Hello ${selectedAppointment.name},%0D%0A%0D%0AThank you for booking a consultation with us.%0D%0A%0D%0AAppointment Details:%0D%0A- Treatment: ${selectedAppointment.treatmentDetails?.treatmentName || selectedAppointment.treatment}%0D%0A${selectedAppointment.treatmentDetails?.optionName ? `- Option: ${selectedAppointment.treatmentDetails.optionName}%0D%0A` : ''}${selectedAppointment.treatmentDetails?.optionPrice ? `- Price: ${selectedAppointment.treatmentDetails.optionPrice}%0D%0A` : ''}- Status: ${selectedAppointment.status}%0D%0A%0D%0ABest regards,%0D%0ADerma Veritas Team`}
                   className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors"
                 >
                   📧 Send Email

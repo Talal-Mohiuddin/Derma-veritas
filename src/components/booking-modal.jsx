@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useRouter } from "next/navigation";
-import { useCreateAppointment } from "@/hooks/useappointment";
+import { useCreateAppointment } from "@/hooks/useAppointment";
 import { toast } from "sonner";
 
 export function BookingModal({
@@ -36,6 +36,7 @@ export function BookingModal({
 
   const [formData, setFormData] = useState({
     treatment: "",
+    treatmentOption: "",
     clientType: "new",
     name: "",
     phone: "",
@@ -44,6 +45,201 @@ export function BookingModal({
     ageConfirm: false,
     newsletter: false,
   });
+
+  // Treatment options mapping
+  const treatmentOptions = {
+    "8-point-facelift": {
+      name: "8 Point Facelift - Dermal Filler Treatments & Packages",
+      options: [
+        { id: "lip-cheek-chin", name: "Lip, Cheek, Chin (0.5-1.0ml)", price: "£250" },
+        { id: "jawline", name: "Jawline (3.0ml)", price: "£450" },
+        { id: "tear-trough", name: "Tear Trough", price: "£450" },
+        { id: "russian-lip", name: "Russian Lip Technique", price: "£350" },
+        { id: "additional-1ml", name: "Additional 1.0ml", price: "£110" },
+        { id: "lift-reshape", name: "Lift & Reshape Package", price: "£1,950", description: "Includes Endolift + RF Microneedling + Profhilo + 2ml Dermal Filler" },
+        { id: "custom-plan", name: "Custom Treatment Plan", price: "Consultation", description: "Tailored to your specific needs and goals" },
+      ]
+    },
+    "cheek-fillers": {
+      name: "Cheek Fillers - Dermal Filler Treatments & Packages",
+      options: [
+        { id: "lip-cheek-chin", name: "Lip, Cheek, Chin (0.5-1.0ml)", price: "£250" },
+        { id: "jawline", name: "Jawline (3.0ml)", price: "£450" },
+        { id: "tear-trough", name: "Tear Trough", price: "£450" },
+        { id: "russian-lip", name: "Russian Lip Technique", price: "£350" },
+        { id: "additional-1ml", name: "Additional 1.0ml", price: "£110" },
+        { id: "lift-reshape", name: "Lift & Reshape Package", price: "£1,950", description: "Includes Endolift + RF Microneedling + Profhilo + 2ml Dermal Filler" },
+      ]
+    },
+    "chin-fillers": {
+      name: "Chin Filler Treatments",
+      options: [
+        { id: "chin-filler", name: "Chin (0.5–1.0 ml)", price: "£250", description: "Perfect for enhancing chin definition and creating facial balance" },
+        { id: "additional-1ml", name: "Additional 1.0 ml", price: "£110" },
+        { id: "jawline-related", name: "Jawline (3.0 ml)", price: "£450" },
+        { id: "lip-cheek-chin", name: "Lip, Cheek, Chin", price: "£250" },
+      ]
+    },
+    "fat-dissolving-injections": {
+      name: "Fat Dissolving Injections",
+      options: [
+        { id: "small-area", name: "Small Area (chin/jawline)", price: "£250 per session" },
+        { id: "medium-area", name: "Medium Area (arms, small belly)", price: "£350 per session" },
+        { id: "large-area", name: "Large Area (abdomen, thighs)", price: "£500 per session" },
+      ]
+    },
+    "hand-rejuvenation": {
+      name: "Hand Rejuvenation Treatments",
+      options: [
+        { id: "dermal-fillers", name: "Dermal Fillers (1–2 ml)", price: "£300 – £450", description: "Immediate restoration of volume and smoother appearance. Duration: 6–12 months" },
+        { id: "prp-therapy", name: "PRP Therapy (3 Sessions)", price: "£500", description: "Gradual improvement in skin quality, texture, and glow. Results last several months" },
+        { id: "pn-therapy", name: "Polynucleotide (PN) Therapy (2–3 Sessions)", price: "£350 – £500", description: "Increased hydration, elasticity, and tissue regeneration. Duration: 3–6 months" },
+        { id: "laser-therapy", name: "Laser / Light Therapy (CO₂ / Phototherapy)", price: "From £200 per session", description: "Reduction in pigmentation, age spots, and wrinkles. Progressive results over weeks" },
+      ]
+    },
+    "harmonyca-dermal-filler": {
+      name: "HarmonyCA™ Hybrid Filler",
+      options: [
+        { id: "per-syringe", name: "Per Syringe", price: "£450", description: "Instant + Progressive results. Immediate lift with improvement over 3-6 months. Duration: Up to 18 Months" },
+      ]
+    },
+    "lip-fillers": {
+      name: "Lip Filler Treatments",
+      options: [
+        { id: "standard-lip", name: "Standard Lip Filler (0.5–1.0 ml)", price: "£250" },
+        { id: "russian-lip", name: "Russian Lip Technique", price: "£350" },
+        { id: "add-on", name: "Add-On (extra 1.0 ml)", price: "£110" },
+      ]
+    },
+    "nctf-skin-revitalisation": {
+      name: "NCTF® Skin Revitalisation",
+      options: [
+        { id: "single-session", name: "1 Session", price: "£180" },
+        { id: "three-sessions", name: "3 Sessions (recommended)", price: "£450" },
+        { id: "five-sessions", name: "5 Sessions (full course)", price: "£700" },
+      ]
+    },
+    "tear-trough-filler": {
+      name: "Tear Trough & Dermal Filler Treatments",
+      options: [
+        { id: "tear-trough", name: "Tear Trough Treatment", price: "£450" },
+        { id: "lip-cheek-chin", name: "Lip, Cheek, Chin (0.5-1.0ml)", price: "£250" },
+        { id: "jawline", name: "Jawline (3.0ml)", price: "£450" },
+        { id: "russian-lip", name: "Russian Lip Technique", price: "£350" },
+        { id: "additional-1ml", name: "Additional 1.0ml", price: "£110" },
+      ]
+    },
+    "anti-wrinkle-treatment": {
+      name: "Botox (Advanced Anti-Wrinkle Treatment)",
+      options: [
+        { id: "one-area", name: "Precision Wrinkle Smoothing – One Area", price: "£125" },
+        { id: "three-areas", name: "Precision Wrinkle Smoothing – Three Areas", price: "£250" },
+        { id: "masseter", name: "Masseter Muscle Treatment", price: "£300" },
+        { id: "neckbands", name: "Neckbands Treatment", price: "£300" },
+        { id: "hyperhidrosis", name: "Hyperhidrosis (Excessive Sweating)", price: "£350" },
+      ]
+    },
+    "dermal-fillers": {
+      name: "Dermal Fillers",
+      options: [
+        { id: "lip-cheek-chin", name: "Lip, Cheek, Chin (0.5–1 ml)", price: "£250" },
+        { id: "add-on", name: "Add-On (Additional 1.0 ml)", price: "£110" },
+        { id: "jawline", name: "Jawline (3.0 ml)", price: "£450" },
+        { id: "tear-trough", name: "Tear Trough", price: "£450" },
+        { id: "russian-lip", name: "Russian Lip Technique", price: "£350" },
+      ]
+    },
+    "non-surgical-rhinoplasty": {
+      name: "Non-Surgical Rhinoplasty",
+      options: [
+        { id: "rhinoplasty", name: "Non-Surgical Rhinoplasty", price: "£450" },
+      ]
+    },
+    "polynucleotides-skin-rejuvenation-treatment": {
+      name: "Polynucleotide (PN) Treatments - Face",
+      options: [
+        { id: "face-1", name: "Face - 1 Session", price: "£190" },
+        { id: "face-2", name: "Face - 2 Sessions", price: "£350" },
+        { id: "face-3", name: "Face - 3 Sessions", price: "£500" },
+      ]
+    },
+    "polynucleotides-hair-loss-treatment": {
+      name: "Polynucleotide (PN) Treatments - Hair",
+      options: [
+        { id: "hair-1", name: "Hair Restoration - 1 Session", price: "£250" },
+        { id: "hair-2", name: "Hair Restoration - 2 Sessions", price: "£450" },
+        { id: "hair-3", name: "Hair Restoration - 3 Sessions", price: "£600" },
+      ]
+    },
+    "iv-drips": {
+      name: "PRP Therapy & Exosome Therapy",
+      options: [
+        { id: "prp-face", name: "PRP Full Face (3 Sessions)", price: "£500" },
+        { id: "prp-eyes", name: "PRP Under-Eye Area (3 Sessions)", price: "£300" },
+        { id: "prp-hair", name: "PRP Hair (3 Sessions)", price: "£500" },
+        { id: "exosome-3", name: "Exosome Therapy (3 Sessions)", price: "£500" },
+        { id: "exosome-5", name: "Exosome Therapy (5 Sessions)", price: "£700" },
+      ]
+    },
+    "profhilo": {
+      name: "Profhilo® Skin Booster",
+      options: [
+        { id: "profhilo-1", name: "1 Session", price: "£300" },
+        { id: "profhilo-2", name: "2 Sessions", price: "£550" },
+        { id: "profhilo-3", name: "3 Sessions", price: "£700" },
+      ]
+    },
+    "endolift": {
+      name: "Endolift® (Skin & Tissue Rejuvenation)",
+      options: [
+        { id: "one-area", name: "One Area", price: "£800" },
+        { id: "full-face", name: "Full Face", price: "£1,600" },
+        { id: "upper-face", name: "Upper Face / Malar Bags (Under Eyes)", price: "£1,500" },
+        { id: "upper-arms", name: "Upper Arms", price: "£1,800" },
+        { id: "abdomen", name: "Abdomen / Tummy", price: "£2,000" },
+        { id: "thighs", name: "Thighs / Other Body Areas", price: "£2,000" },
+      ]
+    },
+    "co2-laser": {
+      name: "CO₂ Fractional Laser",
+      options: [
+        { id: "patch-test", name: "Patch Test", price: "£50" },
+        { id: "upper-face", name: "Single – One Area Upper Face", price: "£700" },
+        { id: "lower-face", name: "Single – One Area Lower Face", price: "£700" },
+        { id: "body-limb", name: "Single – Body (per limb)", price: "£700" },
+        { id: "full-face-single", name: "Single – Full Face", price: "£1,250" },
+        { id: "full-face-3", name: "3 Sessions – Full Face", price: "£2,500" },
+      ]
+    },
+    "microneedling": {
+      name: "Microneedling",
+      options: [
+        { id: "full-face", name: "Single Treatment – Full Face", price: "£350" },
+        { id: "scars-stretch", name: "Single Treatment – Scars & Stretch Marks (One Area)", price: "£300" },
+        { id: "full-face-3", name: "3 Sessions – Full Face", price: "£950" },
+      ]
+    },
+    "skinpen-microneedling": {
+      name: "RF Microneedling",
+      options: [
+        { id: "full-face", name: "Single Treatment – Full Face", price: "£450" },
+        { id: "scars-stretch", name: "Single Treatment – Scars & Stretch Marks (One Area)", price: "£350" },
+        { id: "full-face-3", name: "3 Sessions – Full Face", price: "£1,250" },
+      ]
+    },
+    "quad-laser-hair-removal": {
+      name: "Quad Laser Hair Removal - Face",
+      options: [
+        { id: "upper-lip", name: "Upper Lip", price: "£45 (6 for £225)" },
+        { id: "chin", name: "Chin", price: "£50 (6 for £250)" },
+        { id: "lip-chin", name: "Lip & Chin", price: "£75 (6 for £375)" },
+        { id: "sides-face", name: "Sides of Face", price: "£60 (6 for £300)" },
+        { id: "full-face", name: "Full Face", price: "£120 (6 for £600)" },
+        { id: "neck", name: "Neck (Front/Back)", price: "£60 (6 for £300)" },
+        { id: "face-neck", name: "Full Face & Neck", price: "£160 (6 for £800)" },
+      ]
+    },
+  };
 
   // Auto-fill user info when logged in
   useEffect(() => {
@@ -62,6 +258,16 @@ export function BookingModal({
     }
   }, [user, selectedTreatment, open]);
 
+  // Reset treatmentOption when treatment changes
+  useEffect(() => {
+    if (formData.treatment) {
+      setFormData((prev) => ({
+        ...prev,
+        treatmentOption: "",
+      }));
+    }
+  }, [formData.treatment]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -74,8 +280,22 @@ export function BookingModal({
     }
 
     try {
+      // Get selected treatment details
+      const selectedOption = selectedTreatmentData?.options.find(
+        opt => opt.id === formData.treatmentOption
+      );
+
       const appointmentData = {
         ...formData,
+        // Enhanced treatment information
+        treatmentDetails: {
+          treatmentId: formData.treatment,
+          treatmentName: selectedTreatmentData?.name || formData.treatment,
+          optionId: formData.treatmentOption,
+          optionName: selectedOption?.name || null,
+          optionPrice: selectedOption?.price || null,
+          optionDescription: selectedOption?.description || null,
+        },
         clinic: "main", // Default to main clinic since there's only one
         userId: user.uid,
         status: "pending",
@@ -94,6 +314,7 @@ export function BookingModal({
       // Reset form
       setFormData({
         treatment: "",
+        treatmentOption: "",
         clientType: "new",
         name: "",
         phone: "",
@@ -109,6 +330,8 @@ export function BookingModal({
       );
     }
   };
+
+  const selectedTreatmentData = treatmentOptions[formData.treatment];
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -223,33 +446,6 @@ export function BookingModal({
                       Tear Trough Filler
                     </SelectItem>
 
-                    {/* Minor Ops */}
-                    <SelectItem
-                      value="header-minor-ops"
-                      disabled
-                      className="font-bold text-gray-800 bg-gray-50 mt-2"
-                    >
-                      🩺 Minor Ops
-                    </SelectItem>
-                    <SelectItem value="cyst-removal" className="pl-6">
-                      Cyst Removal
-                    </SelectItem>
-                    <SelectItem
-                      value="minor-surgical-procedures"
-                      className="pl-6"
-                    >
-                      Minor Surgical Procedures
-                    </SelectItem>
-                    <SelectItem value="mole-removal" className="pl-6">
-                      Mole Removal
-                    </SelectItem>
-                    <SelectItem value="skin-tag-removal" className="pl-6">
-                      Skin Tag Removal
-                    </SelectItem>
-                    <SelectItem value="wart-removal" className="pl-6">
-                      Wart Removal
-                    </SelectItem>
-
                     {/* Skin Care */}
                     <SelectItem
                       value="header-skin-care"
@@ -258,50 +454,23 @@ export function BookingModal({
                     >
                       ✨ Skin Care
                     </SelectItem>
-                    <SelectItem value="acufirm-facelift" className="pl-6">
-                      Acufirm Facelift
-                    </SelectItem>
                     <SelectItem value="chemical-peel" className="pl-6">
                       Chemical Peel
                     </SelectItem>
-                    <SelectItem
-                      value="dermalux-led-light-therapy"
-                      className="pl-6"
-                    >
-                      Dermalux LED Light Therapy
-                    </SelectItem>
-                    <SelectItem value="medical-hydrafacial" className="pl-6">
-                      Medical Hydrafacial
-                    </SelectItem>
-                    <SelectItem value="milia-removal" className="pl-6">
-                      Milia Removal
-                    </SelectItem>
-                    <SelectItem
-                      value="nctf-skin-revitalisation-skincare"
-                      className="pl-6"
-                    >
-                      NCTF Skin Revitalisation
-                    </SelectItem>
-                    <SelectItem
-                      value="obagi-blue-radiance-peel"
-                      className="pl-6"
-                    >
-                      Obagi Blue Radiance Peel
-                    </SelectItem>
-                    <SelectItem value="prx-therapy" className="pl-6">
-                      PRX Therapy
-                    </SelectItem>
-                    <SelectItem value="skin-assessment" className="pl-6">
-                      Skin Assessment
-                    </SelectItem>
-                    <SelectItem value="skin-sculptor-facial" className="pl-6">
-                      Skin Sculptor Facial
+                    <SelectItem value="microneedling" className="pl-6">
+                      Microneedling
                     </SelectItem>
                     <SelectItem value="skinpen-microneedling" className="pl-6">
-                      SkinPen Microneedling
+                      RF Microneedling
                     </SelectItem>
-                    <SelectItem value="zo-skin-health-facial" className="pl-6">
-                      ZO Skin Health Facial
+                    <SelectItem value="co2-laser" className="pl-6">
+                      Co2 Laser
+                    </SelectItem>
+                    <SelectItem value="polynucleotides-skin-rejuvenation-treatment" className="pl-6">
+                      Polynucleotide
+                    </SelectItem>
+                    <SelectItem value="endolift" className="pl-6">
+                      Endolift
                     </SelectItem>
 
                     {/* Wellness */}
@@ -312,16 +481,89 @@ export function BookingModal({
                     >
                       🌿 Wellness
                     </SelectItem>
-                    <SelectItem value="blood-tests" className="pl-6">
-                      Blood Tests
+                    <SelectItem value="iv-drips" className="pl-6">
+                      Exosome Therapy
                     </SelectItem>
                     <SelectItem value="iv-drips" className="pl-6">
-                      IV Drips
+                      PRP Therapy
+                    </SelectItem>
+
+                    {/* Laser Treatments */}
+                    <SelectItem
+                      value="header-laser"
+                      disabled
+                      className="font-bold text-gray-800 bg-gray-50 mt-2"
+                    >
+                      🔥 Laser Treatments
+                    </SelectItem>
+                    <SelectItem value="quad-laser-hair-removal" className="pl-6">
+                      Quad Laser Hair Removal
                     </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
+              {/* Treatment Options - Show when treatment is selected */}
+              {selectedTreatmentData && (
+                <div className="space-y-3">
+                  <Label className="text-sm font-semibold text-gray-700">
+                    {selectedTreatmentData.name} - Select Option
+                  </Label>
+                  <Select
+                    value={formData.treatmentOption}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, treatmentOption: value })
+                    }
+                  >
+                    <SelectTrigger className="h-12 border-gray-200 hover:border-gray-300 transition-colors">
+                      <SelectValue placeholder="Choose specific treatment option" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-80">
+                      {selectedTreatmentData.options.map((option) => (
+                        <SelectItem key={option.id} value={option.id}>
+                          <div className="flex flex-col">
+                            <div className="flex items-center justify-between w-full">
+                              <span className="font-medium">{option.name}</span>
+                              <span className="ml-4 font-semibold text-green-600">
+                                {option.price}
+                              </span>
+                            </div>
+                            {option.description && (
+                              <span className="text-xs text-gray-500 mt-1">
+                                {option.description}
+                              </span>
+                            )}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Show selected option details */}
+                  {formData.treatmentOption && selectedTreatmentData.options.find(opt => opt.id === formData.treatmentOption) && (
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-green-800">Selected Treatment:</h4>
+                          <p className="text-sm text-green-700">
+                            {selectedTreatmentData.options.find(opt => opt.id === formData.treatmentOption)?.name}
+                          </p>
+                          {selectedTreatmentData.options.find(opt => opt.id === formData.treatmentOption)?.description && (
+                            <p className="text-xs text-green-600 mt-2">
+                              {selectedTreatmentData.options.find(opt => opt.id === formData.treatmentOption)?.description}
+                            </p>
+                          )}
+                        </div>
+                        <div className="text-right">
+                          <p className="text-lg font-bold text-green-800">
+                            {selectedTreatmentData.options.find(opt => opt.id === formData.treatmentOption)?.price}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
               <div className="space-y-3">
                 <Label className="text-sm font-semibold text-gray-700">
                   Client Status

@@ -135,6 +135,8 @@ export async function POST(request) {
     const newAppointment = {
       userId: body.userId,
       treatment: body.treatment,
+      treatmentOption: body.treatmentOption || null,
+      treatmentDetails: body.treatmentDetails || null,
       clientType: body.clientType,
       name: body.name,
       phone: body.phone,
@@ -216,4 +218,5 @@ export async function DELETE(request) {
       { status: 500 }
     );
   }
+
 }
