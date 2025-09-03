@@ -182,7 +182,7 @@ export default function Navbar() {
 
       {/* Main Navbar */}
       <nav
-        className={`px-4  py-3 border-b fixed left-0 right-0 z-40 transition-all duration-300  ${
+        className={`px-4  py-3  fixed left-0 right-0 z-40 transition-all duration-300  ${
           isScrolled
             ? `bg-black/80 backdrop-blur-sm border-gray-700 ${
                 isScrollingUp ? "top-0" : "-top-20"

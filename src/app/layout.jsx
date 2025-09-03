@@ -5,7 +5,7 @@ import ChildLayout from ".";
 import { gtmId, headSnippet, bodySnippet } from "@/config/gtm";
 
 export const metadata = {
-  title: "DermaVaritas",
+  title: "DermaVeritas",
   description: "Skin Clinic & Wellness",
 };
 

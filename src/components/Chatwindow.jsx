@@ -95,7 +95,7 @@ export default function Chatwindow({ isOpen, onClose }) {
               <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
             </div>
             <div>
-              <h3 className="font-semibold text-lg">Derma Varitas Assistant</h3>
+              <h3 className="font-semibold text-lg">Derma Veritas Assistant</h3>
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                 <p className="text-xs text-gray-300">
@@ -122,7 +122,7 @@ export default function Chatwindow({ isOpen, onClose }) {
                 <MessageCircle className="w-8 h-8 text-gray-400" />
               </div>
               <p className="text-sm text-center">
-                👋 Hello! I'm your Derma Varitas Assistant.
+                👋 Hello! I'm your Derma Veritas Assistant.
                 <br />
                 How can I help you today?
               </p>

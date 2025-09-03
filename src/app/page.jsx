@@ -17,14 +17,12 @@ import { useRouter } from "next/navigation";
 
 import { useStore } from "@/store/zustand";
 
-
 import { BookingModal } from "@/components/booking-modal";
 
 export default function Home() {
   const [expandedSections, setExpandedSections] = useState({});
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-
 
   const { bookingOpen, setBookingOpen } = useStore();
 
@@ -86,32 +84,28 @@ export default function Home() {
         </div>
         <div className="absolute inset-0 bg-black/40 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 pt-40">
-          <p className="text-white/80 text-lg mb-6 font-light">
-            Doctor led clinic
-          </p>
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-12 max-w-4xl">
-            Derma Varitas <br /> Doctor <br /> Led Clinic
+            Derma Veritas <br /> Doctor <br /> Led Clinic
           </h1>
 
           {/* Button Container */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
-            {/* Our Products Button */}
-             
-            
-            <button className="relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg text-white font-medium tracking-wide overflow-hidden group transition-all duration-300 hover:bg-white/15 hover:shadow-2xl hover:border-white/40"
-             onClick={handleProductClick}
-            >
-              <span className="relative z-10">Our Products</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-gray-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-white/60 to-gray-200/80 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-bottom-left"></div>
-            </button>
-
             {/* Our Treatments Button - Now with onClick handler */}
             <button
               onClick={handleTreatmentsClick}
               className="relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg text-white font-medium tracking-wide overflow-hidden group transition-all duration-300 hover:bg-white/15 hover:shadow-2xl hover:border-white/40 cursor-pointer"
             >
               <span className="relative z-10">Our Treatments</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-gray-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-white/60 to-gray-200/80 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-bottom-left"></div>
+            </button>
+            {/* Our Products Button */}
+
+            <button
+              className="relative px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 rounded-lg text-white font-medium tracking-wide overflow-hidden group transition-all duration-300 hover:bg-white/15 hover:shadow-2xl hover:border-white/40"
+              onClick={handleProductClick}
+            >
+              <span className="relative z-10">Our Products</span>
               <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-gray-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-white/60 to-gray-200/80 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-bottom-left"></div>
             </button>
@@ -183,11 +177,11 @@ export default function Home() {
                       Ready to Begin Your Transformation?
                     </h3>
                     <p className="text-gray-300 leading-relaxed">
-                      Schedule your complimentary consultation with our specialists
-                      and discover the right treatment for you.
+                      Schedule your complimentary consultation with our
+                      specialists and discover the right treatment for you.
                     </p>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <Button
                       onClick={() => setBookingOpen(true)}
@@ -195,8 +189,8 @@ export default function Home() {
                     >
                       BOOK A CONSULTATION
                     </Button>
-                    
-                    <div className="flex items-center justify-center gap-6 text-sm text-gray-400">
+
+                    <div className="flex items-center justify-center gap-6 text-sm text-black">
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4" />
                         <span>No hidden fees</span>
@@ -380,14 +374,17 @@ export default function Home() {
       </section>
 
       {/* Treatments Section */}
-      <section id="treatments" className="bg-black py-20 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section
+        id="treatments"
+        className="bg-[var(--section-bg)] text-[var(--section-fg)] py-20 px-4"
+      >
+        <div className="max-w-7xl mx-auto text-black">
           {/* Header */}
           <div className="text-center mb-16">
-            <p className="text-gray-400 text-sm uppercase tracking-wider mb-4">
-              — Choose a Treatment
+            <p className="text-black text-sm uppercase tracking-wider mb-4 ">
+              Choose a Treatment
             </p>
-            <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
+            <h2 className="text-black text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
               Relax, Rejuvenate,
               <br />
               Refresh, Renew.
@@ -401,7 +398,7 @@ export default function Home() {
 
           {/* Common Conditions */}
           <div className="text-center">
-            <h3 className="text-white text-lg mb-8">
+            <h3 className="text-black text-lg mb-8">
               Common Conditions we treat...
             </h3>
             <div className="flex flex-wrap justify-center gap-3">

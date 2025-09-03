@@ -108,8 +108,10 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         profhilo: "profhilo",
         "fat-dissolving-injections": "fat-dissolving-injections",
         "hand-rejuvenation": "hand-rejuvenation",
-        "polynucleotides-hair-loss-treatment": "polynucleotides-hair-loss-treatment",
-        "polynucleotides-skin-rejuvenation-treatment": "polynucleotides-skin-rejuvenation-treatment",
+        "polynucleotides-hair-loss-treatment":
+          "polynucleotides-hair-loss-treatment",
+        "polynucleotides-skin-rejuvenation-treatment":
+          "polynucleotides-skin-rejuvenation-treatment",
         "botox-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
       };
@@ -121,11 +123,11 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
       const treatmentSlug = pathname.split("/treatments/")[1];
       const treatmentMap = {
         "chemical-peels": "chemical-peel",
-        "microneedling": "skinpen-microneedling",
+        microneedling: "skinpen-microneedling",
         "rf-microneedling": "skinpen-microneedling",
-        "co2": "co2-laser",
-        "polynucleotide": "polynucleotides-skin-rejuvenation-treatment",
-        "endolift": "endolift",
+        co2: "co2-laser",
+        polynucleotide: "polynucleotides-skin-rejuvenation-treatment",
+        endolift: "endolift",
         "exosome-therapy": "exosome-therapy",
         "prp-therapy": "iv-drips",
         "quad-laser-hair-removal": "quad-laser-hair-removal",
@@ -318,14 +320,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   CALL US
                   <ChevronDown className="w-4 h-4" />
                 </div>
-                {/* Right - Find a Clinic */}
-                <div
-                  onClick={() => setIsClinicsOpen(true)}
-                  className="flex items-center gap-1 text-gray-600 text-sm font-medium cursor-pointer"
-                >
-                  FIND A CLINIC
-                  <ChevronDown className="w-4 h-4" />
-                </div>
               </div>
             </header>
 
@@ -377,10 +371,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                       {/* Admin Dashboard (only for admins) */}
                       {userRole === "admin" ? (
-                        <Link
-                          href="/admin"
-                          onClick={() => setIsOpen(false)}
-                        >
+                        <Link href="/admin" onClick={() => setIsOpen(false)}>
                           <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
                             <Shield className="w-4 h-4 mr-3" />
                             <span>Admin Dashboard</span>
