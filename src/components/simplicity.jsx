@@ -52,22 +52,12 @@ export default function Simplicity() {
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* Primary CTA - Refer a Friend */}
-              <button
-                onClick={handleReferralRedirect}
-                className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] tracking-wide overflow-hidden rounded-lg"
-              >
-                START REFERRING
-                {/* subtle top white shine */}
-                <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-              </button>
-
               {/* Secondary CTA - Book Consultation */}
               <button
-                onClick={() => setBookingOpen(!bookingOpen)}
+                onClick={handleReferralRedirect}
                 className="px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-transparent border-2 border-[#272728] tracking-wide rounded-lg hover:bg-[#272728] hover:text-white transition-colors"
               >
-                BOOK CONSULTATION
+                START REFERRING{" "}
               </button>
             </div>
           </div>
