@@ -58,7 +58,7 @@ export default function Navbar() {
     {
       icon: <Gift className="w-4 h-4 text-white" />,
       title: "Refer & Earn",
-      content: "Get 10% off your first appointment when you refer a friend",
+      content: "Earn 10% cash reward when your friend completes their treatment",
       cta: "Learn More",
       link: "/refer-a-friend",
     },
