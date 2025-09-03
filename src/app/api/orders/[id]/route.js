@@ -1,21 +1,5 @@
 import { db } from "../../../../config/db.js";
 import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { auth } from "firebase-admin";
-
-async function verifyToken(request) {
-  try {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('No valid authorization header');
-    }
-    
-    const token = authHeader.substring(7);
-    const decodedToken = await auth().verifyIdToken(token);
-    return decodedToken;
-  } catch (error) {
-    throw new Error('Invalid token');
-  }
-}
 
 async function isAdmin(userId) {
   const userRef = doc(db, "users", userId);
@@ -81,9 +65,16 @@ async function populateOrder(orderData, orderId) {
 // GET - Get order by ID
 export async function GET(request, { params }) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
+    const { searchParams } = new URL(request.url);
+    const userId = searchParams.get('userId');
     const orderId = params.id;
+
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
 
     const orderRef = doc(db, "orders", orderId);
     const orderSnap = await getDoc(orderRef);
@@ -125,9 +116,16 @@ export async function GET(request, { params }) {
 // PUT - Update order status
 export async function PUT(request, { params }) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
     const orderId = params.id;
+    const body = await request.json();
+    const { userId, status } = body;
+
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
 
     // Check if user is admin
     const userIsAdmin = await isAdmin(userId);
@@ -137,8 +135,6 @@ export async function PUT(request, { params }) {
         message: "Access denied. Admin privileges required."
       }, { status: 403 });
     }
-
-    const { status } = await request.json();
 
     if (!status) {
       return Response.json({
@@ -199,9 +195,16 @@ export async function PUT(request, { params }) {
 // DELETE - Delete order
 export async function DELETE(request, { params }) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
     const orderId = params.id;
+    const body = await request.json();
+    const { userId } = body;
+
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
 
     // Check if user is admin
     const userIsAdmin = await isAdmin(userId);

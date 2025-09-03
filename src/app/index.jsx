@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 const ChildLayout = ({ children }) => {
   const pathname = usePathname();
   const ShowNavbar = pathname === "/login" || pathname.includes("/admin");
-  const addPadding = pathname === "/" ? "calc(100vh - 4rem)" : "";
+  const addPadding = pathname === "/" || pathname.includes('/admin') ? "calc(100vh - 4rem)" : "";
 
   return (
     <AuthProvider>

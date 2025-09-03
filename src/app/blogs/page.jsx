@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Calendar, ChevronDown, Menu, X } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ClinicsModal from "@/components/ClinicsModal";
+import { useBlogsData } from "@/hooks/useBlog";
+import { slugify } from "@/utils/slugify";
 
-const blogPosts = [
+// Static blog posts with generated slugs
+const staticBlogPosts = [
   {
-    id: 1,
-    slug: "prepare-skin-special-event",
+    id: "static-1",
     title: "How to Prepare Your Skin for a Special Event",
     date: "August 14, 2025",
     image: "/images/woman-at-vanity-mirror-applying-skincare.png",
@@ -19,8 +21,7 @@ const blogPosts = [
       "Get your skin glowing and camera-ready for your special day with these expert tips.",
   },
   {
-    id: 2,
-    slug: "sun-protection-after-procedures",
+    id: "static-2",
     title: "Why is Sun Protection So Important After Aesthetic Procedures?",
     date: "July 22, 2025",
     image: "/images/woman-wearing-sun-hat-smiling-outdoors.png",
@@ -29,8 +30,7 @@ const blogPosts = [
       "Learn why proper sun protection is crucial for optimal healing and results.",
   },
   {
-    id: 3,
-    slug: "aesthetic-treatments-brides",
+    id: "static-3",
     title: "The Benefits of Aesthetic Treatments for Brides-to-Be",
     date: "July 10, 2025",
     image: "/images/elegant-bride-in-white-dress-natural-lighting.png",
@@ -39,8 +39,7 @@ const blogPosts = [
       "Discover the perfect aesthetic treatments to help you look radiant on your wedding day.",
   },
   {
-    id: 4,
-    slug: "anti-aging-skincare-routine",
+    id: "static-4",
     title: "Building an Effective Anti-Aging Skincare Routine",
     date: "June 28, 2025",
     image: "/images/luxury-skincare-products-on-marble-surface.png",
@@ -49,8 +48,7 @@ const blogPosts = [
       "Create a comprehensive anti-aging routine that delivers visible results.",
   },
   {
-    id: 5,
-    slug: "botox-myths-facts",
+    id: "static-5",
     title: "Botox: Separating Myths from Facts",
     date: "June 15, 2025",
     image: "/images/professional-aesthetic-consultation-modern-clinic.png",
@@ -59,8 +57,7 @@ const blogPosts = [
       "Get the truth about Botox treatments and what to expect from the procedure.",
   },
   {
-    id: 6,
-    slug: "summer-skincare-tips",
+    id: "static-6",
     title: "Essential Summer Skincare Tips for Healthy Skin",
     date: "June 5, 2025",
     image: "/images/woman-applying-sunscreen-at-beach-summer-vibes.png",
@@ -69,8 +66,7 @@ const blogPosts = [
       "Protect and nourish your skin during the hot summer months with these expert tips.",
   },
   {
-    id: 7,
-    slug: "chemical-peels-guide",
+    id: "static-7",
     title: "The Complete Guide to Chemical Peels",
     date: "May 20, 2025",
     image: "/images/aesthetic-treatment-room-professional-equipment.png",
@@ -79,8 +75,7 @@ const blogPosts = [
       "Everything you need to know about chemical peels and their transformative benefits.",
   },
   {
-    id: 8,
-    slug: "hydration-healthy-skin",
+    id: "static-8",
     title: "The Role of Hydration in Maintaining Healthy Skin",
     date: "May 8, 2025",
     image: "/images/woman-drinking-water-glowing-skin-wellness.png",
@@ -89,8 +84,7 @@ const blogPosts = [
       "Discover how proper hydration impacts your skin health and appearance.",
   },
   {
-    id: 9,
-    slug: "dermal-fillers-explained",
+    id: "static-9",
     title: "Dermal Fillers Explained: What You Need to Know",
     date: "April 25, 2025",
     image: "/images/before-after-aesthetic-treatment-natural-results.png",
@@ -99,8 +93,7 @@ const blogPosts = [
       "Learn about different types of dermal fillers and their applications.",
   },
   {
-    id: 10,
-    slug: "post-treatment-care",
+    id: "static-10",
     title: "Post-Treatment Care: Maximizing Your Results",
     date: "April 12, 2025",
     image: "/images/serene-spa-environment-recovery-skincare.png",
@@ -108,12 +101,39 @@ const blogPosts = [
     excerpt:
       "Follow these essential aftercare tips to ensure the best possible treatment outcomes.",
   },
-];
+].map((post) => ({
+  ...post,
+  slug: slugify(post.title), // Add slug to static posts
+}));
 
 export default function BlogsPage() {
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
+
+  // Fetch dynamic blog posts (only published)
+  const { data, isLoading, error } = useBlogsData("", "published");
+
+  // Combine static and dynamic posts
+  const dynamicBlogPosts =
+    data?.blogs?.map((blog) => ({
+      id: blog.id,
+      slug: slugify(blog.title), // Generate slug for dynamic posts
+      title: blog.title,
+      date: new Date(blog.createdAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+      image: blog.coverImage || "/images/placeholder.svg",
+      tags: blog.tags || [],
+      excerpt: blog.content.substring(0, 100) + "...", // Generate excerpt from content
+    })) || [];
+
+  // Merge static and dynamic posts, sort by date (newest first)
+  const allBlogPosts = [...staticBlogPosts, ...dynamicBlogPosts].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -138,8 +158,9 @@ export default function BlogsPage() {
             </h1>
 
             <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
-              Stay updated with the latest insights, tips, and news from Derma Veritas. 
-              Discover expert advice on skincare, aesthetic treatments, and wellness.
+              Stay updated with the latest insights, tips, and news from Derma
+              Veritas. Discover expert advice on skincare, aesthetic treatments,
+              and wellness.
             </p>
           </div>
         </div>
@@ -157,13 +178,15 @@ export default function BlogsPage() {
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            Our blog features carefully curated articles written by our team of medical professionals 
-            to help you make informed decisions about your skincare and aesthetic treatments.
+            Our blog features carefully curated articles written by our team of
+            medical professionals to help you make informed decisions about your
+            skincare and aesthetic treatments.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            From preparation tips for special events to in-depth explanations of various procedures, 
-            we're committed to providing valuable information that supports your aesthetic goals.
+            From preparation tips for special events to in-depth explanations of
+            various procedures, we're committed to providing valuable
+            information that supports your aesthetic goals.
           </p>
         </div>
 
@@ -217,12 +240,22 @@ export default function BlogsPage() {
               Latest Articles
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Explore our collection of expert-written articles on skincare and aesthetics
+              Explore our collection of expert-written articles on skincare and
+              aesthetics
             </p>
           </motion.div>
 
+          {isLoading && (
+            <p className="text-center text-gray-600">Loading blogs...</p>
+          )}
+          {error && (
+            <p className="text-center text-red-600">
+              Error loading blogs: {error.message}
+            </p>
+          )}
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {allBlogPosts.map((post, index) => (
               <motion.div
                 key={post.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -232,12 +265,12 @@ export default function BlogsPage() {
                 className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300"
               >
                 {/* Wrap entire card content with Link */}
-                <Link 
-                  href={`/blogs/${post.slug}`} 
+                <Link
+                  href={`/blogs/${post.slug}`}
                   className="absolute inset-0 z-10"
                   aria-label={`Read more about ${post.title}`}
                 />
-                
+
                 <div className="aspect-[4/3] overflow-hidden rounded-t-lg relative z-0">
                   <img
                     src={post.image || "/images/placeholder.svg"}
@@ -291,14 +324,15 @@ export default function BlogsPage() {
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            Our blog is regularly updated with new content to keep you informed about the latest 
-            developments in skincare and aesthetic treatments. Bookmark this page and check back 
-            often for new articles.
+            Our blog is regularly updated with new content to keep you informed
+            about the latest developments in skincare and aesthetic treatments.
+            Bookmark this page and check back often for new articles.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-12">
-            Have a topic you'd like us to cover? Visit our clinic for a consultation and let us know 
-            what information would be most valuable to you.
+            Have a topic you'd like us to cover? Visit our clinic for a
+            consultation and let us know what information would be most valuable
+            to you.
           </p>
 
           <Button
@@ -327,9 +361,9 @@ export default function BlogsPage() {
       </div>
 
       {/* Clinics Modal */}
-      <ClinicsModal 
-        isOpen={isClinicsOpen} 
-        onClose={() => setIsClinicsOpen(false)} 
+      <ClinicsModal
+        isOpen={isClinicsOpen}
+        onClose={() => setIsClinicsOpen(false)}
       />
     </div>
   );

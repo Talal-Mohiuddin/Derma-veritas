@@ -1,22 +1,5 @@
 import { db } from "../../../config/db.js";
 import { collection, getDocs, doc, getDoc, addDoc, updateDoc, deleteDoc, query, orderBy, where } from "firebase/firestore";
-import { auth } from "firebase-admin";
-
-// Helper function to verify Firebase token
-async function verifyToken(request) {
-  try {
-    const authHeader = request.headers.get('authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('No valid authorization header');
-    }
-    
-    const token = authHeader.substring(7);
-    const decodedToken = await auth().verifyIdToken(token);
-    return decodedToken;
-  } catch (error) {
-    throw new Error('Invalid token');
-  }
-}
 
 // Helper function to check if user is admin
 async function isAdmin(userId) {
@@ -84,11 +67,16 @@ async function populateOrder(orderData, orderId) {
 // GET - Get all orders (admin only) or user's orders
 export async function GET(request) {
   try {
-    const decodedToken = await verifyToken(request);
-    const userId = decodedToken.uid;
+    const { searchParams } = new URL(request.url);
+    const getAllOrders = searchParams.get('all') === 'true';
+    const userId = searchParams.get('userId');
     
-    const url = new URL(request.url);
-    const getAllOrders = url.searchParams.get('all') === 'true';
+    if (!userId) {
+      return Response.json({
+        success: false,
+        message: "User ID is required"
+      }, { status: 400 });
+    }
     
     let ordersQuery;
     
@@ -139,8 +127,15 @@ export async function GET(request) {
 // POST - Create order (usually from webhook, but can be manual)
 export async function POST(request) {
   try {
-    const decodedToken = await verifyToken(request);
-    const adminUserId = decodedToken.uid;
+    const body = await request.json();
+    const { adminUserId, ...orderData } = body;
+    
+    if (!adminUserId) {
+      return Response.json({
+        success: false,
+        message: "Admin user ID is required"
+      }, { status: 400 });
+    }
     
     // Check if user is admin
     const userIsAdmin = await isAdmin(adminUserId);
@@ -150,8 +145,6 @@ export async function POST(request) {
         message: "Access denied. Admin privileges required."
       }, { status: 403 });
     }
-
-    const orderData = await request.json();
     
     // Validate required fields
     if (!orderData.userId || !orderData.products || !orderData.totalAmount) {
