@@ -99,7 +99,7 @@ export default function BotoxSection() {
                 <div className="pt-6">
                   <div className="pt-6">
                     <button
-                      className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide"
+                      className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] tracking-wide rounded-lg"
                       onClick={() => setBookingOpen(true)}
                     >
                       BOOK A CONSULTATION

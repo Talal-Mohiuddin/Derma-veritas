@@ -63,7 +63,7 @@ export default function ContactPage() {
               </h2>
               <Button
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 font-medium"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 font-medium rounded-lg"
               >
                 BOOK A CONSULTATION
               </Button>

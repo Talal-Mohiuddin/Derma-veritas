@@ -247,15 +247,16 @@ export default function TreatmentsPage() {
             </h1>
 
             <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
-              Discover our comprehensive range of aesthetic treatments designed to enhance 
-              your natural beauty and help you achieve your aesthetic goals.
+              Discover our comprehensive range of aesthetic treatments designed
+              to enhance your natural beauty and help you achieve your aesthetic
+              goals.
             </p>
           </div>
         </div>
       </div>
 
       {/* Filters Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -309,10 +310,11 @@ export default function TreatmentsPage() {
                     whileHover="hover"
                     whileTap="tap"
                     onClick={() => setSelectedCategory("all")}
-                    className={`px-3 py-1 rounded-full text-sm ${selectedCategory === "all"
-                      ? 'bg-gray-800 text-white'
-                      : 'bg-gray-200 text-gray-800'
-                      }`}
+                    className={`px-3 py-1 rounded-full text-sm ${
+                      selectedCategory === "all"
+                        ? "bg-gray-800 text-white"
+                        : "bg-gray-200 text-gray-800"
+                    }`}
                   >
                     All
                   </motion.button>
@@ -323,10 +325,11 @@ export default function TreatmentsPage() {
                       whileHover="hover"
                       whileTap="tap"
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`px-3 py-1 rounded-full text-sm ${selectedCategory === category.id
-                        ? 'bg-gray-800 text-white'
-                        : 'bg-gray-200 text-gray-800'
-                        }`}
+                      className={`px-3 py-1 rounded-full text-sm ${
+                        selectedCategory === category.id
+                          ? "bg-gray-800 text-white"
+                          : "bg-gray-200 text-gray-800"
+                      }`}
                     >
                       {category.name}
                     </motion.button>
@@ -337,7 +340,7 @@ export default function TreatmentsPage() {
           </AnimatePresence>
 
           {/* Category Filters (Desktop) */}
-          <motion.div 
+          <motion.div
             className="hidden md:flex flex-wrap gap-2 mt-4"
             variants={containerVariants}
             initial="hidden"
@@ -348,10 +351,11 @@ export default function TreatmentsPage() {
               whileHover="hover"
               whileTap="tap"
               onClick={() => setSelectedCategory("all")}
-              className={`px-4 py-2 rounded-md ${selectedCategory === "all"
-                ? 'bg-gray-800 text-white'
-                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                }`}
+              className={`px-4 py-2 rounded-md ${
+                selectedCategory === "all"
+                  ? "bg-gray-800 text-white"
+                  : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+              }`}
             >
               All
             </motion.button>
@@ -362,10 +366,11 @@ export default function TreatmentsPage() {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-md ${selectedCategory === category.id
-                  ? 'bg-gray-800 text-white'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-                  }`}
+                className={`px-4 py-2 rounded-md ${
+                  selectedCategory === category.id
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+                }`}
               >
                 {category.name}
               </motion.button>
@@ -378,13 +383,15 @@ export default function TreatmentsPage() {
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredTreatments.length === 0 ? (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
               className="text-center py-12"
             >
-              <h3 className="text-2xl font-medium mb-4 text-gray-800">No treatments found</h3>
+              <h3 className="text-2xl font-medium mb-4 text-gray-800">
+                No treatments found
+              </h3>
               <p className="text-gray-600 mb-6">
                 Try adjusting your search or filter criteria
               </p>
@@ -402,21 +409,26 @@ export default function TreatmentsPage() {
             </motion.div>
           ) : (
             <>
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
                 className="flex justify-between items-center mb-8"
               >
                 <h2 className="text-2xl font-light text-gray-800">
-                  {selectedCategory === "all" ? "All Treatments" : treatmentCategories.find(c => c.id === selectedCategory)?.name}
+                  {selectedCategory === "all"
+                    ? "All Treatments"
+                    : treatmentCategories.find((c) => c.id === selectedCategory)
+                        ?.name}
                 </h2>
                 <p className="text-gray-600">
-                  {filteredTreatments.length} {filteredTreatments.length === 1 ? "treatment" : "treatments"} found
+                  {filteredTreatments.length}{" "}
+                  {filteredTreatments.length === 1 ? "treatment" : "treatments"}{" "}
+                  found
                 </p>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -426,9 +438,9 @@ export default function TreatmentsPage() {
                   <motion.div
                     key={treatment.id}
                     variants={itemVariants}
-                    whileHover={{ 
+                    whileHover={{
                       y: -5,
-                      transition: { duration: 0.2 }
+                      transition: { duration: 0.2 },
                     }}
                     className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
                   >
@@ -438,7 +450,8 @@ export default function TreatmentsPage() {
                         alt={treatment.name}
                         className="w-full h-48 object-cover"
                         onError={(e) => {
-                          e.target.src = "https://via.placeholder.com/300x200?text=Treatment+Image";
+                          e.target.src =
+                            "https://via.placeholder.com/300x200?text=Treatment+Image";
                         }}
                         whileHover={{ scale: 1.05 }}
                         transition={{ duration: 0.3 }}
@@ -446,7 +459,9 @@ export default function TreatmentsPage() {
                     </div>
                     <div className="p-6">
                       <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-light text-gray-800">{treatment.name}</h3>
+                        <h3 className="text-xl font-light text-gray-800">
+                          {treatment.name}
+                        </h3>
                       </div>
                       <p className="text-gray-600 mb-4">
                         {treatment.description}
@@ -455,9 +470,14 @@ export default function TreatmentsPage() {
                         <span className="text-sm text-gray-500">
                           {treatment.category}
                         </span>
-                        <motion.div whileHover={{ x: 5 }} transition={{ duration: 0.2 }}>
+                        <motion.div
+                          whileHover={{ x: 5 }}
+                          transition={{ duration: 0.2 }}
+                        >
                           <Link
-                            href={`/menu/injectables/${generateSlug(treatment.name)}`}
+                            href={`/menu/injectables/${generateSlug(
+                              treatment.name
+                            )}`}
                             className="flex items-center text-gray-800 hover:text-gray-600 font-medium"
                           >
                             Learn more
@@ -475,7 +495,7 @@ export default function TreatmentsPage() {
       </section>
 
       {/* CTA Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
@@ -483,17 +503,20 @@ export default function TreatmentsPage() {
         className="py-16 bg-gray-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-light text-gray-800 mb-4">Ready to get started?</h2>
+          <h2 className="text-3xl font-light text-gray-800 mb-4">
+            Ready to get started?
+          </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-            Book a consultation with our experts to find the perfect treatment for you
+            Book a consultation with our experts to find the perfect treatment
+            for you
           </p>
           <motion.button
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
-              transition: { duration: 0.2 }
+              transition: { duration: 0.2 },
             }}
             whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-gray-800 text-white rounded-md text-lg font-medium hover:bg-gray-700 transition-colors"
+            className="px-8 py-3 bg-gray-800 text-white  text-lg font-medium hover:bg-gray-700 transition-colors rounded-lg"
           >
             Book a Consultation
           </motion.button>

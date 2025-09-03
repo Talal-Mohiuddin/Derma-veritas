@@ -185,7 +185,7 @@ export default function Home() {
                   <div className="space-y-4">
                     <Button
                       onClick={() => setBookingOpen(true)}
-                      className="w-full bg-white text-black hover:bg-gray-100 font-semibold py-4 px-8 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl"
+                      className="w-full bg-white text-black hover:bg-gray-100 font-semibold py-4 px-8 transition-all duration-200 shadow-lg hover:shadow-xl rounded-lg"
                     >
                       BOOK A CONSULTATION
                     </Button>

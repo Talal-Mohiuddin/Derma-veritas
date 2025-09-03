@@ -71,7 +71,7 @@ export default function PackagesPage() {
 
             <Button
               onClick={() => setBookingOpen(true)}
-              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
+              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728]  tracking-wide hover:bg-gray-700 transition-colors rounded-lg"
             >
               <span>BOOK A CONSULTATION</span>
               <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />

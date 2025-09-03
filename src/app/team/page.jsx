@@ -90,7 +90,9 @@ export default function MeetTheTeamPage() {
             </h1>
 
             <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
-              Get to know the dedicated professionals behind Derma Veritas who are committed to helping you look and feel your best through expert care and personalized treatment approaches.
+              Get to know the dedicated professionals behind Derma Veritas who
+              are committed to helping you look and feel your best through
+              expert care and personalized treatment approaches.
             </p>
 
             <button
@@ -115,11 +117,15 @@ export default function MeetTheTeamPage() {
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
-            At Derma Veritas, our team consists of highly trained medical professionals, licensed estheticians, and skincare specialists who bring years of experience and a passion for aesthetic medicine.
+            At Derma Veritas, our team consists of highly trained medical
+            professionals, licensed estheticians, and skincare specialists who
+            bring years of experience and a passion for aesthetic medicine.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            We believe in a collaborative approach to skincare, where our diverse expertise comes together to create comprehensive treatment plans tailored to your unique needs and goals.
+            We believe in a collaborative approach to skincare, where our
+            diverse expertise comes together to create comprehensive treatment
+            plans tailored to your unique needs and goals.
           </p>
         </div>
 
@@ -147,7 +153,7 @@ export default function MeetTheTeamPage() {
               "Our treatments enhance your natural beauty, not mask it",
               "We believe in education and transparency throughout your journey",
               "Continuous training ensures we offer the most advanced techniques",
-              "We create a welcoming environment where you feel comfortable"
+              "We create a welcoming environment where you feel comfortable",
             ].map((benefit, index) => (
               <li key={index} className="flex items-start gap-4">
                 <div className="w-2 h-2 bg-gray-800 rounded-full mt-3 flex-shrink-0"></div>
@@ -172,7 +178,8 @@ export default function MeetTheTeamPage() {
               Our Medical Team
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Meet the skilled professionals dedicated to providing exceptional aesthetic care
+              Meet the skilled professionals dedicated to providing exceptional
+              aesthetic care
             </p>
           </motion.div>
 
@@ -200,7 +207,9 @@ export default function MeetTheTeamPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-medium text-gray-800 mb-1">{member.name}</h3>
+                  <h3 className="text-xl font-medium text-gray-800 mb-1">
+                    {member.name}
+                  </h3>
                   <p className="text-gray-600 mb-4">{member.role}</p>
                   <div className="flex space-x-4">
                     <button className="text-xs text-gray-500 hover:text-gray-800 transition-colors">
@@ -249,9 +258,13 @@ export default function MeetTheTeamPage() {
                 className="text-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-300"
               >
                 <div className="w-16 h-16 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <span className="text-white font-bold text-xl">{index + 1}</span>
+                  <span className="text-white font-bold text-xl">
+                    {index + 1}
+                  </span>
                 </div>
-                <h3 className="text-xl font-medium text-gray-800 mb-4">{value.title}</h3>
+                <h3 className="text-xl font-medium text-gray-800 mb-4">
+                  {value.title}
+                </h3>
                 <p className="text-gray-600">{value.description}</p>
               </motion.div>
             ))}
@@ -272,11 +285,12 @@ export default function MeetTheTeamPage() {
               Ready to Meet Our Team in Person?
             </h2>
             <p className="text-gray-300 text-xl max-w-3xl mx-auto mb-12">
-              Schedule a consultation with one of our specialists to discuss your aesthetic goals and develop a personalized treatment plan.
+              Schedule a consultation with one of our specialists to discuss
+              your aesthetic goals and develop a personalized treatment plan.
             </p>
             <button
               onClick={() => setBookingOpen(true)}
-              className="bg-white text-gray-800 px-8 py-4 text-sm font-medium tracking-wider hover:bg-gray-100 transition-colors"
+              className="bg-white text-gray-800 px-8 py-4 text-sm font-medium tracking-wider hover:bg-gray-100 transition-colors rounded-lg"
             >
               BOOK A CONSULTATION
             </button>

@@ -24,7 +24,7 @@ export default function Simplicity() {
             {/* Custom Styled Button */}
             <button
               onClick={() => setBookingOpen(!bookingOpen)}
-              className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide overflow-hidden"
+              className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728]  tracking-wide overflow-hidden rounded-lg"
             >
               BOOK A CONSULTATION
               {/* subtle top white shine */}
