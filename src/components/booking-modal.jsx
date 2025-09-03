@@ -41,7 +41,7 @@ export function BookingModal({
     name: "",
     phone: "",
     email: "",
-    callbackTime: "",
+    callbackTime: "anytime", // Set default to "anytime"
     ageConfirm: false,
     newsletter: false,
   });
@@ -466,7 +466,7 @@ export function BookingModal({
         name: "",
         phone: "",
         email: "",
-        callbackTime: "",
+        callbackTime: "anytime", // Set default to "anytime" here too
         ageConfirm: false,
         newsletter: false,
       });
