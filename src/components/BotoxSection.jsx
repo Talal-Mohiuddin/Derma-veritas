@@ -96,11 +96,7 @@ export default function BotoxSection() {
                   </p>
                 </div>
 
-                <div className="pt-4">
-                  <Button className="text-sm text-gray-600 hover:text-gray-900 p-0 h-auto font-normal underline bg-transparent hover:bg-transparent">
-                    Read more
-                  </Button>
-                </div>
+               
 
                 <div className="pt-6">
                   <div className="pt-6">
