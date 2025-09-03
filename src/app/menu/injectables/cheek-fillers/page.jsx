@@ -595,7 +595,10 @@ export default function CheekFillersSection() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <button className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
+          <button
+            className="relative px-6 py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wide"
+            onClick={() => (window.location = "/contact")}
+          >
             ASK A QUESTION
             <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
           </button>
