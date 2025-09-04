@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ClinicsModal from "@/components/ClinicsModal";
 import PriceCard from "@/components/pricecard/price-card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -27,6 +27,14 @@ import ConsultationSection from "@/components/consultation-section";
 export default function ChinFillerSection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
+  const beforeAfterSectionRef = useRef(null);
+
+  const scrollToBeforeAfter = () => {
+    beforeAfterSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
 
   const faqs = [
     {
