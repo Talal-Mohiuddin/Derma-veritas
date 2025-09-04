@@ -103,6 +103,10 @@ export default function Navbar() {
           "polynucleotides-skin-rejuvenation-treatment",
         "botox-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
+        
+        "skinfill-bacio": "skinfill-bacio",
+        "sglt-inhibitor-injections": "sglt",
+        "sglt-12-inhibitor-injections": "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -122,6 +126,12 @@ export default function Navbar() {
         endolift: "endolift",
         "prp-therapy": "iv-drips",
         "quad-laser-hair-removal": "quad-laser-hair-removal",
+
+        "exo-nad": "exo",
+        "v-hacker": "v-hacker",
+        "hair-revitalizing": "revitalizing",
+        exosignal: "exosignal",
+        sglt: "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }

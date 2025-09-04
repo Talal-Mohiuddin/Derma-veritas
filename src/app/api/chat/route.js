@@ -37,6 +37,8 @@ INJECTABLE TREATMENTS:
 - Polynucleotides Skin Rejuvenation Treatment
 - Botox Treatment
 - Skin Boosters
+- Skinfill™ Bacio (Professional lip booster with Vitamin B12 and HA)
+- SGLT 1/2 Inhibitor Injections (Metabolic therapy for weight management)
 
 SKINCARE TREATMENTS:
 - Chemical Peels
@@ -50,9 +52,14 @@ WELLNESS TREATMENTS:
 - Exosome Therapy
 - PRP Therapy
 
+ADVANCED TREATMENTS:
+- V-Hacker (Advanced biohacking treatment with peptides and exosomal delivery)
+- EXO–NAD Skin Longevity Peeling (Multi-step peel with synthetic exosome technology)
+- Hair+ Revitalizing (Professional scalp treatment for hair strengthening)
+- ExoSignal™ Hair (Synthetic exosome technology for hair restoration)
+
 LASER TREATMENTS:
 - Quad Laser Hair Removal
-
 
 FACIAL CONCERNS WE TREAT:
 - Gummy Smile
@@ -74,6 +81,14 @@ Key Website Pages:
 - Meet the Team: /team
 - Contact: /contact
 - Refer a Friend: /refer-a-friend
+
+New Treatment Pages:
+- V-Hacker: /treatments/v-hacker
+- Hair+ Revitalizing: /treatments/hair-revitalizing
+- ExoSignal™ Hair: /treatments/exosignal
+- EXO–NAD Skin Longevity Peeling: /treatments/exo-nad
+- Skinfill™ Bacio: /menu/injectables/skinfill-bacio
+- SGLT 1/2 Inhibitor: /menu/injectables/sglt-12-inhibitor-injections
 
 Instructions:
 1. Be warm, friendly, and professional

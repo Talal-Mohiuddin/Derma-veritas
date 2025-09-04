@@ -421,6 +421,156 @@ export function BookingModal({
         },
       ],
     },
+    "v-hacker": {
+      name: "V-Hacker Biohacking Treatment",
+      options: [
+        {
+          id: "single-session",
+          name: "1 Session",
+          price: "£300",
+          description: "Advanced biohacking treatment with peptides and exosomal delivery"
+        },
+        {
+          id: "two-sessions",
+          name: "2 Sessions",
+          price: "£500",
+          description: "Recommended course for enhanced results"
+        },
+        {
+          id: "three-sessions",
+          name: "3 Sessions",
+          price: "£700",
+          description: "Complete course for optimal cellular-level results"
+        }
+      ]
+    },
+    "revitalizing": {
+      name: "Hair+ Revitalizing Treatment",
+      options: [
+        {
+          id: "four-session-package",
+          name: "4-Session Package",
+          price: "£600",
+          description: "Complete treatment course for optimal hair restoration"
+        },
+        {
+          id: "single-session",
+          name: "Single Session",
+          price: "£180",
+          description: "Individual treatment session"
+        },
+        {
+          id: "maintenance-session",
+          name: "Maintenance Session",
+          price: "£150",
+          description: "After initial package completion"
+        },
+        {
+          id: "with-prp",
+          name: "With PRP Enhancement",
+          price: "+£200",
+          description: "Enhanced results with PRP therapy"
+        },
+        {
+          id: "with-light-therapy",
+          name: "With Light Therapy",
+          price: "+£100",
+          description: "Additional light therapy for better results"
+        }
+      ]
+    },
+    "exosignal": {
+      name: "ExoSignal™ Hair Treatment",
+      options: [
+        {
+          id: "complete-course",
+          name: "Complete Course (4 sessions)",
+          price: "£700",
+          description: "Full treatment course using synthetic exosome technology"
+        },
+        {
+          id: "single-session",
+          name: "Single Session",
+          price: "£200",
+          description: "Individual treatment session"
+        },
+        {
+          id: "maintenance-session",
+          name: "Maintenance Session",
+          price: "£180",
+          description: "After initial course completion"
+        }
+      ]
+    },
+    "exo": {
+      name: "EXO–NAD Skin Longevity Peeling",
+      options: [
+        {
+          id: "single-session",
+          name: "Single Session",
+          price: "£380",
+          description: "Multi-step peel with synthetic exosome technology"
+        },
+        {
+          id: "three-sessions",
+          name: "Course of 3 Sessions",
+          price: "£1,000",
+          description: "Recommended course for optimal results"
+        },
+        {
+          id: "six-sessions",
+          name: "Course of 6 Sessions",
+          price: "£1,900",
+          description: "Complete rejuvenation program"
+        }
+      ]
+    },
+    "skinfill-bacio": {
+      name: "Skinfill™ Bacio Lip Enhancement",
+      options: [
+        {
+          id: "single-session",
+          name: "Single Session",
+          price: "£230",
+          description: "Professional lip booster with Vitamin B12 and HA"
+        },
+        {
+          id: "three-sessions",
+          name: "Course of 3 Sessions",
+          price: "£600",
+          description: "Complete treatment course (Save £90)"
+        }
+      ]
+    },
+    "sglt": {
+      name: "SGLT 1/2 Inhibitor Therapy",
+      options: [
+        {
+          id: "consultation",
+          name: "Initial Consultation",
+          price: "Consultation Required",
+          description: "Professional assessment for metabolic therapy"
+        },
+        {
+          id: "single-injection",
+          name: "Single Injection Session",
+          price: "Price on Consultation",
+          description: "Individual treatment session"
+        },
+        {
+          id: "four-sessions",
+          name: "Package of 4 Sessions",
+          price: "Price on Consultation",
+          description: "Structured treatment course"
+        },
+        {
+          id: "eight-sessions",
+          name: "Package of 8 Sessions",
+          price: "Price on Consultation",
+          description: "Complete metabolic therapy program"
+        }
+      ]
+    }
   };
 
   // Auto-fill user info when logged in
@@ -672,6 +822,33 @@ export function BookingModal({
                     </SelectItem>
                     <SelectItem value="iv-drips" className="pl-6">
                       PRP Therapy
+                    </SelectItem>
+                    <SelectItem value="sglt" className="pl-6">
+                      SGLT 1/2 Inhibitor Therapy
+                    </SelectItem>
+
+                    {/* Advanced Treatments */}
+                    <SelectItem
+                      value="header-advanced"
+                      disabled
+                      className="font-bold text-gray-800 bg-gray-50 mt-2"
+                    >
+                      🔬 Advanced Treatments
+                    </SelectItem>
+                    <SelectItem value="v-hacker" className="pl-6">
+                      V-Hacker Biohacking
+                    </SelectItem>
+                    <SelectItem value="exo" className="pl-6">
+                      EXO–NAD Skin Longevity Peeling
+                    </SelectItem>
+                    <SelectItem value="skinfill-bacio" className="pl-6">
+                      Skinfill™ Bacio
+                    </SelectItem>
+                    <SelectItem value="revitalizing" className="pl-6">
+                      Hair+ Revitalizing
+                    </SelectItem>
+                    <SelectItem value="exosignal" className="pl-6">
+                      ExoSignal™ Hair
                     </SelectItem>
 
                     {/* Laser Treatments */}
