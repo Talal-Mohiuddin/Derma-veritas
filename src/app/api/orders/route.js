@@ -25,33 +25,42 @@ async function populateOrder(orderData, orderId) {
       const userData = userSnap.data();
       userDetails = {
         id: orderData.userId,
-        name: userData.name,
+        name: userData.displayName || userData.name,
         email: userData.email
       };
     }
   }
 
-  // Get product details
+  // Get product details from products collection
   const populatedProducts = await Promise.all(
-    orderData.products.map(async (product) => {
+    (orderData.products || []).map(async (product) => {
       let productDetails = null;
       if (product.productId) {
-        const productRef = doc(db, "products", product.productId);
-        const productSnap = await getDoc(productRef);
-        if (productSnap.exists()) {
-          const productData = productSnap.data();
-          productDetails = {
-            id: product.productId,
-            name: productData.name,
-            images: productData.images,
-            description: productData.description
-          };
+        try {
+          const productRef = doc(db, "products", product.productId);
+          const productSnap = await getDoc(productRef);
+          if (productSnap.exists()) {
+            const productData = productSnap.data();
+            productDetails = {
+              id: product.productId,
+              name: productData.name,
+              images: productData.images,
+              description: productData.description,
+              price: productData.price, // Current price
+              category: productData.category,
+              brand: productData.brand
+            };
+          }
+        } catch (error) {
+          console.error(`Error fetching product ${product.productId}:`, error);
         }
       }
       
       return {
-        ...product,
-        productDetails
+        productId: product.productId,
+        quantity: product.quantity,
+        price: product.price, // Price at time of purchase
+        productDetails // Current product information
       };
     })
   );

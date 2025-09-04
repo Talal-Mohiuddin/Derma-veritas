@@ -201,9 +201,9 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                 {order.products?.map((product, index) => (
                   <div key={index} className="bg-white rounded-lg p-3 flex items-center space-x-3">
                     <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
-                      {product.productDetails?.images?.[0] ? (
+                      {product.productDetails?.images?.[0]?.url ? (
                         <img
-                          src={product.productDetails.images[0]}
+                          src={product.productDetails.images[0].url}
                           alt={product.productDetails.name}
                           className="w-full h-full object-cover rounded-lg"
                         />
@@ -218,6 +218,11 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                       <div className="text-sm text-gray-600">
                         Quantity: {product.quantity} × {formatCurrency(product.price)}
                       </div>
+                      {product.productDetails?.price !== product.price && (
+                        <div className="text-xs text-gray-500">
+                          Current price: {formatCurrency(product.productDetails?.price)}
+                        </div>
+                      )}
                     </div>
                     <div className="text-right">
                       <div className="font-semibold text-gray-900">

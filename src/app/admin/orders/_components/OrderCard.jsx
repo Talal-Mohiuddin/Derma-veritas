@@ -193,7 +193,7 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
                 {product.productDetails?.name || `Product ${index + 1}`} × {product.quantity}
               </span>
               <span className="text-gray-900 font-medium">
-                {formatCurrency((product.productDetails?.price || product.price || 0) * product.quantity)}
+                {formatCurrency(product.price * product.quantity)}
               </span>
             </div>
           ))}

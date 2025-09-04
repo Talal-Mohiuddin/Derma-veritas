@@ -6,7 +6,6 @@ import {
   updateDoc,
   addDoc,
   collection,
-  deleteDoc,
   Timestamp,
 } from "firebase/firestore";
 
@@ -131,7 +130,12 @@ export async function POST(req) {
           const orderData = {
             userId: userId,
             orderNumber: `ORD-${Date.now()}`,
-            products: cartData.products,
+            // Simplify products to only store essential order data
+            products: cartData.products.map(product => ({
+              productId: product.productId,
+              quantity: product.quantity,
+              price: product.productDetails?.price || 0, // Store price at time of purchase
+            })),
             totalAmount: paymentIntent.amount / 100, // Convert from cents
             subtotal: cartData.totalPrice || paymentIntent.amount / 100,
             status: "processing",
