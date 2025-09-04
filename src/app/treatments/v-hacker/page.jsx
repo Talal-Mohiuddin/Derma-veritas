@@ -13,8 +13,9 @@ import MediaCoverage from "@/components/MediaCoverage";
 
 export default function VHackerTreatmentSection() {
   const [openIndex, setOpenIndex] = useState(null);
- const pricingSectionRef = useRef(null);
-   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const pricingSectionRef = useRef(null);
+  const beforeAfterSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -95,7 +96,7 @@ export default function VHackerTreatmentSection() {
     }
   };
 
-const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -131,13 +132,15 @@ const scrollToBeforeAfter = () => {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Biohack your skin's health with our advanced peptide and growth factor treatment that works at the cellular level for lasting vitality and rejuvenation.
+                Biohack your skin's health with our advanced peptide and growth
+                factor treatment that works at the cellular level for lasting
+                vitality and rejuvenation.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -202,7 +205,7 @@ const scrollToBeforeAfter = () => {
                     {card.heading}
                   </span>
                   {card.description && (
-                    <p 
+                    <p
                       onClick={scrollToPricing}
                       className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700 mt-1"
                     >
@@ -224,41 +227,56 @@ const scrollToBeforeAfter = () => {
               What is V-Hacker Biohacking Treatment?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              V-Hacker is an advanced biohacking treatment that works at the cellular level to boost skin health, longevity, and vitality. Using a powerful combination of peptides, growth factors, and exosomal delivery technology, it optimizes your skin's function for lasting rejuvenation.
+              V-Hacker is an advanced biohacking treatment that works at the
+              cellular level to boost skin health, longevity, and vitality.
+              Using a powerful combination of peptides, growth factors, and
+              exosomal delivery technology, it optimizes your skin's function
+              for lasting rejuvenation.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Key Ingredients:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Epithalon:</span> Protects DNA and supports cell lifespan
+                  <span className="font-medium">Epithalon:</span> Protects DNA
+                  and supports cell lifespan
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">GHK-Cu (Copper Peptide):</span> Improves blood flow and skin vitality
+                  <span className="font-medium">GHK-Cu (Copper Peptide):</span>{" "}
+                  Improves blood flow and skin vitality
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">NAD+:</span> Boosts energy, DNA repair, and skin elasticity
+                  <span className="font-medium">NAD+:</span> Boosts energy, DNA
+                  repair, and skin elasticity
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Exosomal delivery tech:</span> Ensures deeper absorption
+                  <span className="font-medium">Exosomal delivery tech:</span>{" "}
+                  Ensures deeper absorption
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Peptides & Growth Factors:</span> EGF, IGF, VEGF, FGF for skin regeneration
+                  <span className="font-medium">
+                    Peptides & Growth Factors:
+                  </span>{" "}
+                  EGF, IGF, VEGF, FGF for skin regeneration
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Hyaluronic Acid:</span> Hydrates and plumps
+                  <span className="font-medium">Hyaluronic Acid:</span> Hydrates
+                  and plumps
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Buffered Succinate:</span> Balances skin energy
+                  <span className="font-medium">Buffered Succinate:</span>{" "}
+                  Balances skin energy
                 </li>
               </ul>
             </div>
@@ -296,10 +314,10 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
-    <div ref={beforeAfterSectionRef}>
+      <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
+
       <ConsultationSection />
 
       {/* Pricing Section with ref */}
@@ -323,13 +341,15 @@ const scrollToBeforeAfter = () => {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  V-Hacker is an advanced biohacking treatment that uses cutting-edge technology
-                  including exosomal delivery for optimal results. Our pricing reflects the premium
-                  ingredients and expertise required for this innovative treatment.
+                  V-Hacker is an advanced biohacking treatment that uses
+                  cutting-edge technology including exosomal delivery for
+                  optimal results. Our pricing reflects the premium ingredients
+                  and expertise required for this innovative treatment.
                 </p>
                 <p>
-                  We recommend a course of 3 sessions for optimal cellular-level results. 
-                  If you would like to discuss this treatment, please feel free to{" "}
+                  We recommend a course of 3 sessions for optimal cellular-level
+                  results. If you would like to discuss this treatment, please
+                  feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>

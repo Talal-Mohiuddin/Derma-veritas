@@ -2,7 +2,19 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star, ChevronDown, Play, CheckCircle, Clock, RotateCcw, Frown, TrendingDown, AlertTriangle, KeyRound as Pound, Eye } from "lucide-react";
+import {
+  Star,
+  ChevronDown,
+  Play,
+  CheckCircle,
+  Clock,
+  RotateCcw,
+  Frown,
+  TrendingDown,
+  AlertTriangle,
+  KeyRound as Pound,
+  Eye,
+} from "lucide-react";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
@@ -14,49 +26,50 @@ import MediaCoverage from "@/components/MediaCoverage";
 export default function SkinfillBacioPage() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const beforeAfterSectionRef = useRef(null);
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Visible Results",
       value: "Immediate smoother, plumper lips",
-      icon: Eye
+      icon: Eye,
     },
     {
       heading: "Results Last",
       value: "6–12 Months",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "No. of Sessions",
       value: "3 Sessions Recommended",
-      icon: RotateCcw
+      icon: RotateCcw,
     },
     {
       heading: "Procedure Time",
       value: "15–30 Minutes",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "Discomfort",
       value: "Mild",
-      icon: Frown
+      icon: Frown,
     },
     {
       heading: "Downtime",
       value: "Minimal",
-      icon: TrendingDown
+      icon: TrendingDown,
     },
     {
       heading: "Side Effects",
       value: "Temporary redness, slight swelling or bruising",
-      icon: AlertTriangle
+      icon: AlertTriangle,
     },
     {
       heading: "Our Pricing",
       value: "£230 Per Session",
-      icon: Pound
+      icon: Pound,
     },
   ];
 
@@ -102,7 +115,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -145,13 +158,15 @@ const beforeAfterSectionRef = useRef(null);
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Achieve softer, fuller lips with our professional lip booster treatment featuring Vitamin B12 and non-crosslinked hyaluronic acid.
+                Achieve softer, fuller lips with our professional lip booster
+                treatment featuring Vitamin B12 and non-crosslinked hyaluronic
+                acid.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -241,27 +256,40 @@ const beforeAfterSectionRef = useRef(null);
               What is Skinfill™ Bacio?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Skinfill™ Bacio is a professional lip booster designed to hydrate, refine, and naturally
-              enhance lip volume. With Vitamin B12 and non-crosslinked hyaluronic acid, it delivers soft,
-              plump lips while keeping a natural look.
+              Skinfill™ Bacio is a professional lip booster designed to hydrate,
+              refine, and naturally enhance lip volume. With Vitamin B12 and
+              non-crosslinked hyaluronic acid, it delivers soft, plump lips
+              while keeping a natural look.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Key Ingredients:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span><strong>Hyaluronic Acid (HA)</strong> – Multiphasic formula for deep hydration, subtle volume, and lip tissue restoration</span>
+                  <span>
+                    <strong>Hyaluronic Acid (HA)</strong> – Multiphasic formula
+                    for deep hydration, subtle volume, and lip tissue
+                    restoration
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span><strong>Vitamin B12</strong> – Boosts collagen and elastin, improving lip firmness, smoothness, and reducing early signs of aging</span>
+                  <span>
+                    <strong>Vitamin B12</strong> – Boosts collagen and elastin,
+                    improving lip firmness, smoothness, and reducing early signs
+                    of aging
+                  </span>
                 </li>
               </ul>
-              
-              <h3 className="text-xl font-semibold text-gray-900 mt-8">Benefits:</h3>
+
+              <h3 className="text-xl font-semibold text-gray-900 mt-8">
+                Benefits:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -283,24 +311,33 @@ const beforeAfterSectionRef = useRef(null);
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Treatment Protocol:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Treatment Protocol:
+              </h3>
               <p className="text-gray-600">
-                Recommended: 3 sessions spaced 2–4 weeks apart for optimal results.
+                Recommended: 3 sessions spaced 2–4 weeks apart for optimal
+                results.
               </p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 mt-8">Results & Duration:</h3>
+
+              <h3 className="text-xl font-semibold text-gray-900 mt-8">
+                Results & Duration:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Immediate effect: Lips feel smoother and plumper right after treatment
+                  Immediate effect: Lips feel smoother and plumper right after
+                  treatment
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Long-lasting: Results last 6–12 months, depending on the individual
+                  Long-lasting: Results last 6–12 months, depending on the
+                  individual
                 </li>
               </ul>
-              
-              <h3 className="text-xl font-semibold text-gray-900 mt-8">Recovery:</h3>
+
+              <h3 className="text-xl font-semibold text-gray-900 mt-8">
+                Recovery:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -308,7 +345,8 @@ const beforeAfterSectionRef = useRef(null);
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Temporary redness, swelling, or bruising may occur but usually fades within days
+                  Temporary redness, swelling, or bruising may occur but usually
+                  fades within days
                 </li>
               </ul>
             </div>
@@ -322,7 +360,6 @@ const beforeAfterSectionRef = useRef(null);
       </div>
 
       {/* Reviews Section */}
-      <ReviewsSection />
 
       {/* Consultation Section */}
       <ConsultationSection />

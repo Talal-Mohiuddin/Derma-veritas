@@ -100,7 +100,7 @@ export default function ChinFillerSection() {
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -279,7 +279,7 @@ export default function ChinFillerSection() {
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
+
       <ConsultationSection />
 
       {/* Pricing Section */}

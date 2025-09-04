@@ -461,7 +461,6 @@ export default function HandRejuvenationSection() {
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
 
       <ConsultationSection />
 

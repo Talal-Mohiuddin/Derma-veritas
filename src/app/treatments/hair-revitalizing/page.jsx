@@ -43,8 +43,9 @@ export default function HairRevitalizingTreatmentSection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
   // Create a ref for the pricing section
- const pricingSectionRef = useRef(null);
-   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const pricingSectionRef = useRef(null);
+  const beforeAfterSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -133,7 +134,7 @@ export default function HairRevitalizingTreatmentSection() {
     }
   };
 
-const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -176,13 +177,14 @@ const scrollToBeforeAfter = () => {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Combat hair thinning and promote natural growth with our advanced scalp treatment at Derma Veritas.
+                Combat hair thinning and promote natural growth with our
+                advanced scalp treatment at Derma Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -300,48 +302,55 @@ const scrollToBeforeAfter = () => {
               What is Hair+ Revitalizing Treatment?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Hair+ Revitalizing is a professional scalp treatment designed to strengthen hair, reduce
-              thinning, and support natural growth. Delivered through mesotherapy or microneedling, it
-              helps with a wide range of hair concerns from male and female pattern loss to postpartum
-              and menopausal shedding.
+              Hair+ Revitalizing is a professional scalp treatment designed to
+              strengthen hair, reduce thinning, and support natural growth.
+              Delivered through mesotherapy or microneedling, it helps with a
+              wide range of hair concerns from male and female pattern loss to
+              postpartum and menopausal shedding.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Key Ingredients:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <Droplets className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Phosphatidic Acid</span> – Stimulates hair bulbs and prolongs the growth phase
+                    <span className="font-medium">Phosphatidic Acid</span> –
+                    Stimulates hair bulbs and prolongs the growth phase
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Activity className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Vitamin B2 (Riboflavin)</span> – Supports follicle energy and protection
+                    <span className="font-medium">Vitamin B2 (Riboflavin)</span>{" "}
+                    – Supports follicle energy and protection
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Shield className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Superoxide Dismutase (SOD)</span> – A strong antioxidant that combats scalp stress
+                    <span className="font-medium">
+                      Superoxide Dismutase (SOD)
+                    </span>{" "}
+                    – A strong antioxidant that combats scalp stress
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Leaf className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Amino Acid Complex</span> – Provides building blocks for stronger hair and scalp health
+                    <span className="font-medium">Amino Acid Complex</span> –
+                    Provides building blocks for stronger hair and scalp health
                   </div>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Benefits:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -357,7 +366,8 @@ const scrollToBeforeAfter = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Can be combined with PRP, light therapy, or threads for enhanced results
+                  Can be combined with PRP, light therapy, or threads for
+                  enhanced results
                 </li>
               </ul>
             </div>
@@ -373,37 +383,49 @@ const scrollToBeforeAfter = () => {
               Treatment Protocol
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              For optimal results, we recommend a structured treatment plan tailored to your specific hair concerns.
+              For optimal results, we recommend a structured treatment plan
+              tailored to your specific hair concerns.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Recommended Plan</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Recommended Plan
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
                     <span className="text-blue-600 text-sm font-bold">1</span>
                   </div>
-                  <span><strong>4+ sessions</strong> for optimal results</span>
+                  <span>
+                    <strong>4+ sessions</strong> for optimal results
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
                     <span className="text-blue-600 text-sm font-bold">2</span>
                   </div>
-                  <span>Sessions spaced <strong>about 2 weeks apart</strong></span>
+                  <span>
+                    Sessions spaced <strong>about 2 weeks apart</strong>
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
                     <span className="text-blue-600 text-sm font-bold">3</span>
                   </div>
-                  <span>Each session takes approximately <strong>30-45 minutes</strong></span>
+                  <span>
+                    Each session takes approximately{" "}
+                    <strong>30-45 minutes</strong>
+                  </span>
                 </li>
               </ul>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Expected Results</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Expected Results
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -427,10 +449,9 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
-    <div ref={beforeAfterSectionRef}>
+      <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
 
       <ConsultationSection />
 
@@ -457,12 +478,12 @@ const scrollToBeforeAfter = () => {
                 <p>
                   All treatments are performed exclusively by our expert
                   physicians and clinical specialists who are trained in
-                  advanced hair restoration techniques. Our pricing reflects
-                  the expertise and premium service you receive.
+                  advanced hair restoration techniques. Our pricing reflects the
+                  expertise and premium service you receive.
                 </p>
                 <p>
-                  For optimal results, we recommend a course of 4 sessions
-                  as part of a structured treatment plan.
+                  For optimal results, we recommend a course of 4 sessions as
+                  part of a structured treatment plan.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -521,7 +542,8 @@ const scrollToBeforeAfter = () => {
                   Enhanced Combination Treatments
                 </h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  For even better results, Hair+ Revitalizing can be combined with:
+                  For even better results, Hair+ Revitalizing can be combined
+                  with:
                 </p>
 
                 <div className="divide-y divide-gray-200">

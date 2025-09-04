@@ -149,7 +149,7 @@ export default function DermalFillersSection() {
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -370,10 +370,10 @@ export default function DermalFillersSection() {
         </div>
       </section>
 
-    <div ref={beforeAfterSectionRef}>
+      <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
+
       <ConsultationSection />
 
       {/* Comprehensive Pricing Section */}

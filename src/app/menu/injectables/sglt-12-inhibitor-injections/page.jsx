@@ -15,7 +15,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Play, CheckCircle, Clock, TrendingDown, AlertTriangle, KeyRound as Pound } from "lucide-react";
+import {
+  Play,
+  CheckCircle,
+  Clock,
+  TrendingDown,
+  AlertTriangle,
+  KeyRound as Pound,
+} from "lucide-react";
 import BeforeAfterSection from "@/components/before-after-section";
 import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
@@ -27,8 +34,9 @@ import ConsultationSection from "@/components/consultation-section";
 export default function SGLTInhibitorPage() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const beforeAfterSectionRef = useRef(null);
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -116,7 +124,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -159,7 +167,9 @@ const beforeAfterSectionRef = useRef(null);
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced therapy to support glucose control, weight management, and overall metabolic balance through targeted sodium-glucose transport inhibition.
+                Advanced therapy to support glucose control, weight management,
+                and overall metabolic balance through targeted sodium-glucose
+                transport inhibition.
               </p>
 
               {/* Buttons */}
@@ -222,7 +232,9 @@ const beforeAfterSectionRef = useRef(null);
               {cardData.slice(0, 4).map((card, index) => (
                 <div key={index} className="text-center md:text-left">
                   <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                    {card.icon && <card.icon className="w-5 h-5 text-gray-600" />}
+                    {card.icon && (
+                      <card.icon className="w-5 h-5 text-gray-600" />
+                    )}
                     <span className="text-gray-600 text-sm font-light">
                       {card.heading}
                     </span>
@@ -244,7 +256,9 @@ const beforeAfterSectionRef = useRef(null);
               {cardData.slice(4, 8).map((card, index) => (
                 <div key={index} className="text-center md:text-left">
                   <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                    {card.icon && <card.icon className="w-5 h-5 text-gray-600" />}
+                    {card.icon && (
+                      <card.icon className="w-5 h-5 text-gray-600" />
+                    )}
                     <span className="text-gray-600 text-sm font-light">
                       {card.heading}
                     </span>
@@ -275,13 +289,20 @@ const beforeAfterSectionRef = useRef(null);
               What are SGLT 1/2 Inhibitor Injections?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              SGLT 1/2 Inhibitor injections are a professional therapy designed to support weight management, metabolic balance, and improved glucose control. By targeting sodium-glucose transporters in the kidneys and intestines, these injections help regulate blood sugar levels, promote fat metabolism, and support overall metabolic health.
+              SGLT 1/2 Inhibitor injections are a professional therapy designed
+              to support weight management, metabolic balance, and improved
+              glucose control. By targeting sodium-glucose transporters in the
+              kidneys and intestines, these injections help regulate blood sugar
+              levels, promote fat metabolism, and support overall metabolic
+              health.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Mechanism of Action:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Mechanism of Action:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -341,36 +362,52 @@ const beforeAfterSectionRef = useRef(null);
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-600 font-bold text-xl">1</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Consultation</h3>
-              <p className="text-gray-600">Professional assessment to determine suitability and create a personalized treatment plan</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Consultation
+              </h3>
+              <p className="text-gray-600">
+                Professional assessment to determine suitability and create a
+                personalized treatment plan
+              </p>
             </div>
 
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-600 font-bold text-xl">2</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Treatment</h3>
-              <p className="text-gray-600">Subcutaneous injection administered weekly or bi-weekly by our medical professionals</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Treatment
+              </h3>
+              <p className="text-gray-600">
+                Subcutaneous injection administered weekly or bi-weekly by our
+                medical professionals
+              </p>
             </div>
 
             <div className="text-center p-6 bg-white rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-600 font-bold text-xl">3</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Follow-up</h3>
-              <p className="text-gray-600">Regular monitoring and adjustment of treatment plan for optimal results</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                Follow-up
+              </h3>
+              <p className="text-gray-600">
+                Regular monitoring and adjustment of treatment plan for optimal
+                results
+              </p>
             </div>
           </div>
 
           <div className="mt-12 text-center">
             <p className="text-gray-600">
-              Optimal results are typically achieved through a structured course of 4-8 sessions, combined with appropriate lifestyle modifications.
+              Optimal results are typically achieved through a structured course
+              of 4-8 sessions, combined with appropriate lifestyle
+              modifications.
             </p>
           </div>
         </div>
       </section>
 
-      <ReviewsSection />
       <ConsultationSection />
 
       {/* Pricing Section with ref */}
@@ -394,14 +431,18 @@ const beforeAfterSectionRef = useRef(null);
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  SGLT 1/2 Inhibitor injections are available by prescription only after a professional consultation. Our pricing reflects the customized nature of this metabolic therapy.
+                  SGLT 1/2 Inhibitor injections are available by prescription
+                  only after a professional consultation. Our pricing reflects
+                  the customized nature of this metabolic therapy.
                 </p>
                 <p>
-                  Pricing is provided following assessment to tailor the treatment plan to your specific needs and goals.
+                  Pricing is provided following assessment to tailor the
+                  treatment plan to your specific needs and goals.
                 </p>
                 <p>
-                  If you would like to discuss this treatment, please feel free to{" "}
-                  <button 
+                  If you would like to discuss this treatment, please feel free
+                  to{" "}
+                  <button
                     onClick={() => setBookingOpen(true)}
                     className="underline hover:text-gray-900 transition-colors"
                   >
@@ -430,29 +471,25 @@ const beforeAfterSectionRef = useRef(null);
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Initial Consultation:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £XX
-                    </span>
+                    <span className="text-lg font-bold text-gray-900">£XX</span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Single Injection Session:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £XX
+                    <span className="text-gray-700">
+                      Single Injection Session:
                     </span>
+                    <span className="text-lg font-bold text-gray-900">£XX</span>
                   </div>
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">
                       Package of 4 Sessions:
                     </span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £XX
-                    </span>
+                    <span className="text-lg font-bold text-gray-900">£XX</span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Package of 8 Sessions:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £XX
+                    <span className="text-gray-700">
+                      Package of 8 Sessions:
                     </span>
+                    <span className="text-lg font-bold text-gray-900">£XX</span>
                   </div>
                 </div>
               </div>

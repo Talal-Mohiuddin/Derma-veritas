@@ -44,7 +44,6 @@ export default function BotoxTreatmentSection() {
   const pricingSectionRef = useRef(null);
   const beforeAfterSectionRef = useRef(null);
 
-
   const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
@@ -127,7 +126,7 @@ export default function BotoxTreatmentSection() {
     }
   };
 
-const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -177,7 +176,7 @@ const scrollToBeforeAfter = () => {
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -417,10 +416,9 @@ const scrollToBeforeAfter = () => {
 
       <BotoxSection />
 
-    <div ref={beforeAfterSectionRef}>
+      <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
 
       <ConsultationSection />
 
@@ -535,16 +533,18 @@ const scrollToBeforeAfter = () => {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                  }`}
+                }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

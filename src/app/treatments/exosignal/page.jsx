@@ -2,7 +2,14 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star, ChevronDown, CheckCircle, Clock, AlertTriangle, Pound } from "lucide-react";
+import {
+  Star,
+  ChevronDown,
+  CheckCircle,
+  Clock,
+  AlertTriangle,
+  Pound,
+} from "lucide-react";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
@@ -13,77 +20,84 @@ import MediaCoverage from "@/components/MediaCoverage";
 
 export default function ExoSignalHairTreatmentSection() {
   const [openIndex, setOpenIndex] = useState(null);
- const pricingSectionRef = useRef(null);
-   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const pricingSectionRef = useRef(null);
+  const beforeAfterSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Visible Results",
       value: "Improved hair thickness and volume",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Results Timeline",
       value: "3-6 Months",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "Treatment Course",
       value: "4 Sessions",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Session Frequency",
       value: "Every 2 Weeks",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "Procedure Time",
       value: "30-45 Minutes",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "Discomfort",
       value: "Minimal",
-      icon: AlertTriangle
+      icon: AlertTriangle,
     },
     {
       heading: "Downtime",
       value: "None",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Our Pricing",
       value: "From £700",
       description: "View all",
-      icon: Pound
+      icon: Pound,
     },
   ];
 
   const faqs = [
     {
       question: "What is ExoSignal™ Hair treatment?",
-      answer: "ExoSignal™ Hair is an advanced professional hair treatment using synthetic exosome technology. It targets hair follicles at a cellular level to address hair loss, improve scalp health, and support growth after transplant or shedding."
+      answer:
+        "ExoSignal™ Hair is an advanced professional hair treatment using synthetic exosome technology. It targets hair follicles at a cellular level to address hair loss, improve scalp health, and support growth after transplant or shedding.",
     },
     {
       question: "How does ExoSignal™ work?",
-      answer: "The treatment uses synthetic exosomes to enhance absorption and effectiveness of active ingredients like PDRN and biomimetic peptides. These components work together to stimulate hair bulb cells, reduce inflammation, and invigorate follicles for improved hair growth."
+      answer:
+        "The treatment uses synthetic exosomes to enhance absorption and effectiveness of active ingredients like PDRN and biomimetic peptides. These components work together to stimulate hair bulb cells, reduce inflammation, and invigorate follicles for improved hair growth.",
     },
     {
       question: "Who is a good candidate for ExoSignal™?",
-      answer: "This treatment is ideal for those experiencing Androgenetic Alopecia, Alopecia Areata, Telogen Effluvium, or those who have undergone hair transplant procedures and want to support regrowth."
+      answer:
+        "This treatment is ideal for those experiencing Androgenetic Alopecia, Alopecia Areata, Telogen Effluvium, or those who have undergone hair transplant procedures and want to support regrowth.",
     },
     {
       question: "How many sessions will I need?",
-      answer: "A typical course consists of 4 sessions, spaced 2 weeks apart for optimal results."
+      answer:
+        "A typical course consists of 4 sessions, spaced 2 weeks apart for optimal results.",
     },
     {
       question: "When will I see results?",
-      answer: "Most patients begin to notice improvements in hair quality and reduction in shedding within 4-6 weeks. Full results including increased volume and thickness are typically visible after 3-6 months."
+      answer:
+        "Most patients begin to notice improvements in hair quality and reduction in shedding within 4-6 weeks. Full results including increased volume and thickness are typically visible after 3-6 months.",
     },
     {
       question: "Are there any side effects?",
-      answer: "ExoSignal™ Hair is generally well-tolerated with minimal side effects. Some patients may experience slight redness or tingling at the application site, which typically resolves within a few hours."
+      answer:
+        "ExoSignal™ Hair is generally well-tolerated with minimal side effects. Some patients may experience slight redness or tingling at the application site, which typically resolves within a few hours.",
     },
   ];
 
@@ -96,7 +110,7 @@ export default function ExoSignalHairTreatmentSection() {
     }
   };
 
-const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -132,13 +146,15 @@ const scrollToBeforeAfter = () => {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced synthetic exosome technology that targets hair follicles at a cellular level to combat hair loss and promote regrowth.
+                Advanced synthetic exosome technology that targets hair
+                follicles at a cellular level to combat hair loss and promote
+                regrowth.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -227,7 +243,7 @@ const scrollToBeforeAfter = () => {
                       {card.value}
                     </h3>
                     {card.description && (
-                      <p 
+                      <p
                         onClick={scrollToPricing}
                         className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
                       >
@@ -250,36 +266,51 @@ const scrollToBeforeAfter = () => {
               What is ExoSignal™ Hair Treatment?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              ExoSignal™ Hair is a breakthrough treatment using synthetic exosome technology to target hair loss at its root cause. By delivering powerful active ingredients directly to hair follicles, it stimulates cellular regeneration, reduces inflammation, and promotes healthier, thicker hair growth.
+              ExoSignal™ Hair is a breakthrough treatment using synthetic
+              exosome technology to target hair loss at its root cause. By
+              delivering powerful active ingredients directly to hair follicles,
+              it stimulates cellular regeneration, reduces inflammation, and
+              promotes healthier, thicker hair growth.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Key Ingredients:
+              </h3>
               <ul className="space-y-4 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Synthetic Exosomes</span> - Enhance absorption and effectiveness of active ingredients
+                    <span className="font-medium">Synthetic Exosomes</span> -
+                    Enhance absorption and effectiveness of active ingredients
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">PDRN</span> - Polynucleotide DNA fragments that stimulate hair bulb cells and reduce inflammation
+                    <span className="font-medium">PDRN</span> - Polynucleotide
+                    DNA fragments that stimulate hair bulb cells and reduce
+                    inflammation
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Biomimetic Peptides</span> - Blend of 8 peptides including Copper Tripeptide-1 and Oligopeptide-20 to invigorate follicles
+                    <span className="font-medium">Biomimetic Peptides</span> -
+                    Blend of 8 peptides including Copper Tripeptide-1 and
+                    Oligopeptide-20 to invigorate follicles
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                   <div>
-                    <span className="font-medium">Plant Stem Cells & Vitamins</span> - Nourish scalp cells with Panthenol, Glutathione, and Biotin
+                    <span className="font-medium">
+                      Plant Stem Cells & Vitamins
+                    </span>{" "}
+                    - Nourish scalp cells with Panthenol, Glutathione, and
+                    Biotin
                   </div>
                 </li>
               </ul>
@@ -302,7 +333,8 @@ const scrollToBeforeAfter = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Effective for various types of hair loss including Androgenetic Alopecia and Alopecia Areata
+                  Effective for various types of hair loss including
+                  Androgenetic Alopecia and Alopecia Areata
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -322,13 +354,16 @@ const scrollToBeforeAfter = () => {
               Who Can Benefit From ExoSignal™?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              ExoSignal™ Hair treatment is designed to address various hair loss conditions and support hair restoration in multiple scenarios.
+              ExoSignal™ Hair treatment is designed to address various hair loss
+              conditions and support hair restoration in multiple scenarios.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Primary Indications:</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Primary Indications:
+              </h3>
               <ul className="space-y-2 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
@@ -350,7 +385,9 @@ const scrollToBeforeAfter = () => {
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Treatment Protocol:</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Treatment Protocol:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
@@ -382,10 +419,10 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
-    <div ref={beforeAfterSectionRef}>
+      <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
+
       <ConsultationSection />
 
       {/* Pricing Section */}
@@ -409,19 +446,24 @@ const scrollToBeforeAfter = () => {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  Our ExoSignal™ Hair treatment represents the cutting edge of hair restoration technology, using synthetic exosomes to deliver remarkable results for various types of hair loss.
+                  Our ExoSignal™ Hair treatment represents the cutting edge of
+                  hair restoration technology, using synthetic exosomes to
+                  deliver remarkable results for various types of hair loss.
                 </p>
                 <p>
-                  The complete treatment course includes 4 sessions administered by our expert practitioners who specialize in advanced hair restoration techniques.
+                  The complete treatment course includes 4 sessions administered
+                  by our expert practitioners who specialize in advanced hair
+                  restoration techniques.
                 </p>
                 <p>
                   For a personalized assessment and exact pricing, please{" "}
-                  <button 
+                  <button
                     onClick={() => setBookingOpen(true)}
                     className="underline hover:text-gray-900 transition-colors"
                   >
                     book a consultation
-                  </button>.
+                  </button>
+                  .
                 </p>
               </div>
             </div>
@@ -443,7 +485,9 @@ const scrollToBeforeAfter = () => {
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Complete Course (4 sessions):</span>
+                    <span className="text-gray-700">
+                      Complete Course (4 sessions):
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £700
                     </span>
@@ -455,7 +499,9 @@ const scrollToBeforeAfter = () => {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Maintenance Session (after initial course):</span>
+                    <span className="text-gray-700">
+                      Maintenance Session (after initial course):
+                    </span>
                     <span className="text-lg font-bold text-gray-900">
                       £180
                     </span>

@@ -41,8 +41,9 @@ export default function TearTroughFillerSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const beforeAfterSectionRef = useRef(null);
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -126,7 +127,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -176,7 +177,7 @@ const beforeAfterSectionRef = useRef(null);
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -430,7 +431,6 @@ const beforeAfterSectionRef = useRef(null);
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
 
       <ConsultationSection />
 

@@ -436,7 +436,7 @@ const beforeAfterSectionRef = useRef(null);
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
+       
 
       <ConsultationSection />
 

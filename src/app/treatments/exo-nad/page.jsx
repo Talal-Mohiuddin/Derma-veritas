@@ -2,7 +2,14 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star, ChevronDown, CheckCircle, Clock, AlertTriangle, Pound } from "lucide-react";
+import {
+  Star,
+  ChevronDown,
+  CheckCircle,
+  Clock,
+  AlertTriangle,
+  Pound,
+} from "lucide-react";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
@@ -14,77 +21,84 @@ import ConsultationSection from "@/components/consultation-section";
 
 export default function ExoNadPeelingSection() {
   const [openIndex, setOpenIndex] = useState(null);
- const pricingSectionRef = useRef(null);
-   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const pricingSectionRef = useRef(null);
+  const beforeAfterSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Visible Results",
       value: "Improved skin tone and texture",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Results Last",
       value: "Long-term with proper care",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "No. of Sessions",
       value: "1 Treatment (can be repeated)",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Procedure Time",
       value: "60-75 Minutes",
-      description: "Multi-step process"
+      description: "Multi-step process",
     },
     {
       heading: "Discomfort",
       value: "Mild to Moderate",
-      icon: AlertTriangle
+      icon: AlertTriangle,
     },
     {
       heading: "Downtime",
       value: "3-5 Days",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "Side Effects",
       value: "Temporary redness, peeling, sensitivity",
-      icon: AlertTriangle
+      icon: AlertTriangle,
     },
     {
       heading: "Our Pricing",
       value: "£380 per session",
-      icon: Pound
+      icon: Pound,
     },
   ];
 
   const faqs = [
     {
       question: "What is EXO–NAD Skin Longevity Peeling?",
-      answer: "EXO–NAD is a professional multi-step peel that combines synthetic exosome technology with epigenetic and cellular energy boosters to rejuvenate, protect, and enhance skin vitality."
+      answer:
+        "EXO–NAD is a professional multi-step peel that combines synthetic exosome technology with epigenetic and cellular energy boosters to rejuvenate, protect, and enhance skin vitality.",
     },
     {
       question: "How does the treatment work?",
-      answer: "The 3-step protocol includes: 1) Exo Peel gently exfoliates and stimulates cellular longevity, 2) pH Normalizer soothes and restores skin balance, 3) Longevity Serum delivers NAD⁺, GHK-Cu peptide, and growth factors for deep renewal."
+      answer:
+        "The 3-step protocol includes: 1) Exo Peel gently exfoliates and stimulates cellular longevity, 2) pH Normalizer soothes and restores skin balance, 3) Longevity Serum delivers NAD⁺, GHK-Cu peptide, and growth factors for deep renewal.",
     },
     {
       question: "Who is a good candidate for this treatment?",
-      answer: "Ideal for those seeking to improve skin tone and texture, reduce fine lines and wrinkles, restore elasticity and firmness, and protect DNA for long-term skin health."
+      answer:
+        "Ideal for those seeking to improve skin tone and texture, reduce fine lines and wrinkles, restore elasticity and firmness, and protect DNA for long-term skin health.",
     },
     {
       question: "What is the downtime after treatment?",
-      answer: "Expect 3-5 days of downtime with redness, peeling, and sensitivity as the skin undergoes renewal. It's important to follow aftercare instructions carefully."
+      answer:
+        "Expect 3-5 days of downtime with redness, peeling, and sensitivity as the skin undergoes renewal. It's important to follow aftercare instructions carefully.",
     },
     {
       question: "How often can I get this treatment?",
-      answer: "Depending on your skin goals and condition, this treatment can be repeated every 4-6 weeks for optimal results."
+      answer:
+        "Depending on your skin goals and condition, this treatment can be repeated every 4-6 weeks for optimal results.",
     },
     {
       question: "What makes EXO–NAD different from other peels?",
-      answer: "This peel combines advanced synthetic exosome technology with epigenetic boosters and cellular energy enhancers for comprehensive skin rejuvenation at a cellular level."
-    }
+      answer:
+        "This peel combines advanced synthetic exosome technology with epigenetic boosters and cellular energy enhancers for comprehensive skin rejuvenation at a cellular level.",
+    },
   ];
 
   const scrollToPricing = () => {
@@ -96,7 +110,7 @@ export default function ExoNadPeelingSection() {
     }
   };
 
-const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -132,14 +146,15 @@ const scrollToBeforeAfter = () => {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                A revolutionary multi-step peel combining synthetic exosome technology 
-                with epigenetic boosters for comprehensive skin rejuvenation.
+                A revolutionary multi-step peel combining synthetic exosome
+                technology with epigenetic boosters for comprehensive skin
+                rejuvenation.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -263,34 +278,42 @@ const scrollToBeforeAfter = () => {
               What is EXO–NAD Skin Longevity Peeling?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              EXO–NAD is a professional multi-step peel that combines synthetic exosome technology
-              with epigenetic and cellular energy boosters to rejuvenate, protect, and enhance skin
-              vitality. This advanced treatment works at the cellular level to deliver comprehensive
+              EXO–NAD is a professional multi-step peel that combines synthetic
+              exosome technology with epigenetic and cellular energy boosters to
+              rejuvenate, protect, and enhance skin vitality. This advanced
+              treatment works at the cellular level to deliver comprehensive
               skin renewal.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">What's Included:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                What's Included:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Exo Peel</span> – Bi-phasic exfoliating system
+                  <span className="font-medium">Exo Peel</span> – Bi-phasic
+                  exfoliating system
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">pH Normalizer</span> – Gold-enriched solution for barrier recovery
+                  <span className="font-medium">pH Normalizer</span> –
+                  Gold-enriched solution for barrier recovery
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  <span className="font-medium">Longevity Serum</span> – Deeply nourishes and revitalizes skin
+                  <span className="font-medium">Longevity Serum</span> – Deeply
+                  nourishes and revitalizes skin
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Key Benefits:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Key Benefits:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
@@ -320,35 +343,43 @@ const scrollToBeforeAfter = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
             How It Works: 3-Step Protocol
           </h2>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="text-4xl font-bold text-gray-300 mb-4">1</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Exo Peel</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Exo Peel
+              </h3>
               <p className="text-gray-600">
-                Gently exfoliates and stimulates cellular longevity with Epitalon peptide
-                and glycolic acid. Prepares the skin for optimal absorption of active ingredients.
+                Gently exfoliates and stimulates cellular longevity with
+                Epitalon peptide and glycolic acid. Prepares the skin for
+                optimal absorption of active ingredients.
               </p>
             </div>
-            
+
             {/* Step 2 */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="text-4xl font-bold text-gray-300 mb-4">2</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">pH Normalizer</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                pH Normalizer
+              </h3>
               <p className="text-gray-600">
-                Soothes and restores skin balance post-peel with a gold-enriched solution
-                that enhances barrier recovery and reduces redness.
+                Soothes and restores skin balance post-peel with a gold-enriched
+                solution that enhances barrier recovery and reduces redness.
               </p>
             </div>
-            
+
             {/* Step 3 */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <div className="text-4xl font-bold text-gray-300 mb-4">3</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Longevity Serum</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                Longevity Serum
+              </h3>
               <p className="text-gray-600">
-                Delivers NAD⁺, GHK-Cu peptide, and growth factors for deep renewal,
-                DNA repair, and cellular energy support to maximize results.
+                Delivers NAD⁺, GHK-Cu peptide, and growth factors for deep
+                renewal, DNA repair, and cellular energy support to maximize
+                results.
               </p>
             </div>
           </div>
@@ -361,39 +392,55 @@ const scrollToBeforeAfter = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
             Core Ingredients & Benefits
           </h2>
-          
+
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Epitalon Peptide</h3>
-                <p className="text-gray-600">Protects DNA and supports cellular longevity</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Epitalon Peptide
+                </h3>
+                <p className="text-gray-600">
+                  Protects DNA and supports cellular longevity
+                </p>
               </div>
-              
+
               <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">NAD⁺ Complex</h3>
-                <p className="text-gray-600">Boosts cellular energy and youthful skin metabolism</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  NAD⁺ Complex
+                </h3>
+                <p className="text-gray-600">
+                  Boosts cellular energy and youthful skin metabolism
+                </p>
               </div>
             </div>
-            
+
             <div className="space-y-6">
               <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">GHK-Cu Peptide</h3>
-                <p className="text-gray-600">Stimulates collagen, smooths skin, and supports tissue repair</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  GHK-Cu Peptide
+                </h3>
+                <p className="text-gray-600">
+                  Stimulates collagen, smooths skin, and supports tissue repair
+                </p>
               </div>
-              
+
               <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Biomimetic Growth Factors</h3>
-                <p className="text-gray-600">Enhance skin regeneration and fibroblast activity</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Biomimetic Growth Factors
+                </h3>
+                <p className="text-gray-600">
+                  Enhance skin regeneration and fibroblast activity
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-    <div ref={beforeAfterSectionRef}>
+      <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-      <ReviewsSection />
+
       <ConsultationSection />
 
       {/* Pricing Section */}
@@ -417,13 +464,14 @@ const scrollToBeforeAfter = () => {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  Our EXO–NAD Skin Longevity Peeling is performed by expert practitioners
-                  who specialize in advanced skin rejuvenation treatments. The pricing reflects
-                  the premium ingredients and sophisticated technology used in this procedure.
+                  Our EXO–NAD Skin Longevity Peeling is performed by expert
+                  practitioners who specialize in advanced skin rejuvenation
+                  treatments. The pricing reflects the premium ingredients and
+                  sophisticated technology used in this procedure.
                 </p>
                 <p>
-                  If you would like to discuss this treatment or determine if it's right for your
-                  skin concerns, please feel free to{" "}
+                  If you would like to discuss this treatment or determine if
+                  it's right for your skin concerns, please feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
