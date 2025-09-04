@@ -166,10 +166,10 @@ export async function POST(request) {
         // Get user data to check if they were referred
         const userRef = doc(db, "users", body.userId);
         const userSnap = await getDoc(userRef);
-        
+
         if (userSnap.exists()) {
           const userData = userSnap.data();
-          
+
           if (userData.referredBy) {
             // Find the referrer user
             const referrerQuery = query(
@@ -177,23 +177,25 @@ export async function POST(request) {
               where("referralCode", "==", userData.referredBy)
             );
             const referrerSnapshot = await getDocs(referrerQuery);
-            
+
             if (!referrerSnapshot.empty) {
               const referrerDoc = referrerSnapshot.docs[0];
               const referrerId = referrerDoc.id;
               const referrerData = referrerDoc.data();
-              
+
               // Calculate 10% reward from treatment cost
               let rewardAmount = 0;
               if (body.treatmentDetails?.optionPrice) {
                 // Extract numeric value from price string (e.g., "£250" -> 250)
                 const priceString = body.treatmentDetails.optionPrice;
-                const numericPrice = parseFloat(priceString.replace(/[£$,]/g, ''));
+                const numericPrice = parseFloat(
+                  priceString.replace(/[£$,]/g, "")
+                );
                 if (!isNaN(numericPrice)) {
                   rewardAmount = Math.round(numericPrice * 0.1 * 100) / 100; // 10% with 2 decimal places
                 }
               }
-              
+
               if (rewardAmount > 0) {
                 // Create reward entry
                 const rewardEntry = {
@@ -202,39 +204,39 @@ export async function POST(request) {
                   referredUserEmail: body.email,
                   appointmentId: docRef.id,
                   appointmentNumber,
-                  treatmentName: body.treatmentDetails?.treatmentName || body.treatment,
+                  treatmentName:
+                    body.treatmentDetails?.treatmentName || body.treatment,
                   treatmentCost: body.treatmentDetails?.optionPrice || "N/A",
                   rewardAmount,
                   status: "pending", // Admin needs to approve
                   createdAt: new Date(),
                 };
-                
+
                 // Get current referrals array and update the matching referral
                 const currentReferrals = referrerData.referrals || [];
-                const updatedReferrals = currentReferrals.map(referral => {
+                const updatedReferrals = currentReferrals.map((referral) => {
                   if (referral.referredUserId === body.userId) {
                     return {
                       ...referral,
-                      status: "rewarded",
-                      rewardAmount,
                       appointmentId: docRef.id,
                       appointmentNumber,
-                      updatedAt: new Date()
+                      updatedAt: new Date(),
                     };
                   }
                   return referral;
                 });
-                
+
                 // Update referrer's document
                 const referrerRef = doc(db, "users", referrerId);
                 await updateDoc(referrerRef, {
-                  referralRewards: (referrerData.referralRewards || 0) + rewardAmount,
                   referrals: updatedReferrals,
                   rewards: arrayUnion(rewardEntry),
                   updatedAt: new Date(),
                 });
-                
-                console.log(`Referral reward of £${rewardAmount} added for referrer ${referrerId}`);
+
+                console.log(
+                  `Referral reward of £${rewardAmount} added for referrer ${referrerId}`
+                );
               }
             }
           }

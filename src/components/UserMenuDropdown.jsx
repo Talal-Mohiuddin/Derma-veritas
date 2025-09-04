@@ -9,6 +9,7 @@ import {
   Shield,
   ShoppingCart,
   LogIn,
+  Share2,
 } from "lucide-react";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useCartItemCount } from "@/hooks/useCart";
@@ -84,6 +85,14 @@ export default function UserMenuDropdown({ iconColor = "white" }) {
                         {cartCount}
                       </span>
                     )}
+                  </div>
+                </Link>
+
+                {/* Referral Portal Link */}
+                <Link href="/referportal" onClick={() => setIsOpen(false)}>
+                  <div className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer">
+                    <Share2 className="w-4 h-4 mr-3" />
+                    <span>Referral Portal</span>
                   </div>
                 </Link>
 

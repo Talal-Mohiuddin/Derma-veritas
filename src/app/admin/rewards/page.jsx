@@ -427,10 +427,6 @@ export default function ReferralRewardsPage() {
                     <p className="text-sm text-green-600">Referral Code</p>
                     <p className="font-mono font-medium">{selectedReward.referrerCode}</p>
                   </div>
-                  <div>
-                    <p className="text-sm text-green-600">Total Rewards</p>
-                    <p className="font-medium">{formatCurrency(selectedReward.totalReferralRewards)}</p>
-                  </div>
                 </div>
               </div>
 
@@ -486,7 +482,7 @@ export default function ReferralRewardsPage() {
                 <h4 className="font-semibold text-yellow-800 mb-2">Reward Information</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-yellow-600">Reward Amount</p>
+                    <p className="text-sm text-yellow-600">Reward Amount (10% of treatment cost)</p>
                     <p className="text-2xl font-bold text-green-600">
                       {formatCurrency(selectedReward.rewardAmount)}
                     </p>
@@ -498,7 +494,7 @@ export default function ReferralRewardsPage() {
                     </Badge>
                   </div>
                   <div>
-                    <p className="text-sm text-yellow-600">Created Date</p>
+                    <p className="text-sm text-yellow-600">Reward Created</p>
                     <p className="font-medium">{formatDate(selectedReward.createdAt)}</p>
                   </div>
                   {selectedReward.processedAt && (
@@ -507,6 +503,13 @@ export default function ReferralRewardsPage() {
                       <p className="font-medium">{formatDate(selectedReward.processedAt)}</p>
                     </div>
                   )}
+                </div>
+                
+                <div className="mt-3 p-3 bg-yellow-100 rounded-lg">
+                  <p className="text-sm text-yellow-800">
+                    <strong>Note:</strong> This reward was automatically generated when the referred user completed their first appointment. 
+                    The reward amount is calculated as 10% of the treatment cost.
+                  </p>
                 </div>
               </div>
 
