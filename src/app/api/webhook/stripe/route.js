@@ -1,13 +1,20 @@
 import Stripe from "stripe";
 import { db } from "../../../../config/db.js";
-import { doc, getDoc, updateDoc, addDoc, collection, deleteDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  addDoc,
+  collection,
+  deleteDoc,
+} from "firebase/firestore";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const sig = req.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_SECRET_WEBHOOK_SECRET?.trim();
-  
+
   // Get the raw body
   const body = await req.text();
 
@@ -19,18 +26,24 @@ export async function POST(req) {
 
   if (!webhookSecret) {
     console.error("STRIPE_SECRET_WEBHOOK_SECRET is not configured");
-    return Response.json({
-      success: false,
-      message: "Webhook secret not configured",
-    }, { status: 500 });
+    return Response.json(
+      {
+        success: false,
+        message: "Webhook secret not configured",
+      },
+      { status: 500 }
+    );
   }
 
   if (!sig) {
     console.error("Stripe signature header is missing");
-    return Response.json({
-      success: false,
-      message: "Stripe signature header is missing",
-    }, { status: 400 });
+    return Response.json(
+      {
+        success: false,
+        message: "Stripe signature header is missing",
+      },
+      { status: 400 }
+    );
   }
 
   let event;
@@ -40,11 +53,14 @@ export async function POST(req) {
     console.log("Webhook signature verified successfully");
   } catch (err) {
     console.error(`Webhook signature verification failed: ${err.message}`);
-    return Response.json({
-      success: false,
-      message: "Webhook signature verification failed",
-      error: err.message,
-    }, { status: 400 });
+    return Response.json(
+      {
+        success: false,
+        message: "Webhook signature verification failed",
+        error: err.message,
+      },
+      { status: 400 }
+    );
   }
 
   // Handle payment intent succeeded (for cart purchases)
@@ -63,7 +79,7 @@ export async function POST(req) {
       // Handle cart purchase orders
       if (orderType === "cart_purchase" && userId) {
         console.log(`Processing cart purchase for user ${userId}`);
-        
+
         try {
           // Get user's cart
           const cartRef = doc(db, "carts", userId);
@@ -71,34 +87,41 @@ export async function POST(req) {
 
           if (!cartSnap.exists()) {
             console.error(`Cart not found for user: ${userId}`);
-            return Response.json({
-              success: false,
-              message: "Cart not found",
-            }, { status: 404 });
+            return Response.json(
+              {
+                success: false,
+                message: "Cart not found",
+              },
+              { status: 404 }
+            );
           }
 
           const cartData = cartSnap.data();
-          console.log(`Cart found with ${cartData.products?.length || 0} products`);
+          console.log(
+            `Cart found with ${cartData.products?.length || 0} products`
+          );
 
           if (!cartData.products || cartData.products.length === 0) {
             console.error(`Cart is empty for user: ${userId}`);
-            return Response.json({
-              success: false,
-              message: "Cart is empty",
-            }, { status: 400 });
+            return Response.json(
+              {
+                success: false,
+                message: "Cart is empty",
+              },
+              { status: 400 }
+            );
           }
 
           // Get user details
           const userRef = doc(db, "users", userId);
           const userSnap = await getDoc(userRef);
-          
+
           let userDetails = {};
           if (userSnap.exists()) {
             const userData = userSnap.data();
             userDetails = {
               name: userData.displayName || userData.name,
               email: userData.email,
-              photoURL: userData.photoURL,
             };
           }
 
@@ -108,7 +131,7 @@ export async function POST(req) {
             orderNumber: `ORD-${Date.now()}`,
             products: cartData.products,
             totalAmount: paymentIntent.amount / 100, // Convert from cents
-            subtotal: cartData.totalPrice || (paymentIntent.amount / 100),
+            subtotal: cartData.totalPrice || paymentIntent.amount / 100,
             status: "processing",
             paymentStatus: "paid",
             paymentMethod: "stripe",
@@ -121,7 +144,8 @@ export async function POST(req) {
 
           // Add billing details if available
           if (paymentIntent.charges?.data?.[0]?.billing_details) {
-            const billingDetails = paymentIntent.charges.data[0].billing_details;
+            const billingDetails =
+              paymentIntent.charges.data[0].billing_details;
             orderData.billingAddress = {
               name: billingDetails.name,
               email: billingDetails.email,
@@ -148,7 +172,9 @@ export async function POST(req) {
             updatedAt: new Date(),
           });
 
-          console.log(`Successfully processed cart purchase for user ${userId}, order ID: ${orderRef.id}`);
+          console.log(
+            `Successfully processed cart purchase for user ${userId}, order ID: ${orderRef.id}`
+          );
           return Response.json({
             success: true,
             message: "Order created successfully",
@@ -158,17 +184,20 @@ export async function POST(req) {
         } catch (error) {
           console.error(`Error processing cart purchase: ${error.message}`);
           console.error("Full error:", error);
-          return Response.json({
-            success: false,
-            message: "Error processing cart purchase",
-            error: error.message,
-          }, { status: 500 });
+          return Response.json(
+            {
+              success: false,
+              message: "Error processing cart purchase",
+              error: error.message,
+            },
+            { status: 500 }
+          );
         }
       } else {
         console.log("Not a cart purchase or missing required metadata");
         console.log("OrderType:", orderType);
         console.log("UserId:", userId);
-        
+
         // Return success for non-cart events to avoid retries
         return Response.json({
           success: true,
@@ -176,12 +205,17 @@ export async function POST(req) {
         });
       }
     } catch (error) {
-      console.error(`Error processing payment_intent.succeeded webhook: ${error.message}`);
+      console.error(
+        `Error processing payment_intent.succeeded webhook: ${error.message}`
+      );
       console.error("Full error:", error);
-      return Response.json({
-        success: false,
-        message: `Webhook processing failed: ${error.message}`,
-      }, { status: 500 });
+      return Response.json(
+        {
+          success: false,
+          message: `Webhook processing failed: ${error.message}`,
+        },
+        { status: 500 }
+      );
     }
   }
 
@@ -198,47 +232,71 @@ export async function POST(req) {
       const metadata = session.metadata || {};
       const { userId, planName, orderType, monthlyPrice } = metadata;
 
-      console.log("Extracted metadata:", { userId, planName, orderType, monthlyPrice });
+      console.log("Extracted metadata:", {
+        userId,
+        planName,
+        orderType,
+        monthlyPrice,
+      });
 
       // Handle membership subscription
       if (orderType === "membership_subscription" && userId && planName) {
-        console.log(`Processing membership subscription for user ${userId}, plan: ${planName}`);
-        
+        console.log(
+          `Processing membership subscription for user ${userId}, plan: ${planName}`
+        );
+
         try {
-          const validPlans = ["Veritas Glow", "Veritas Sculpt", "Veritas Prestige"];
+          const validPlans = [
+            "Veritas Glow",
+            "Veritas Sculpt",
+            "Veritas Prestige",
+          ];
           if (!validPlans.includes(planName)) {
             console.error(`Invalid plan name: ${planName}`);
-            return Response.json({
-              success: false,
-              message: "Invalid plan name",
-            }, { status: 400 });
+            return Response.json(
+              {
+                success: false,
+                message: "Invalid plan name",
+              },
+              { status: 400 }
+            );
           }
 
           // Use Firestore to get user document
           console.log(`Looking up user in Firestore with ID: ${userId}`);
           const userRef = doc(db, "users", userId);
-          
+
           let userSnap;
           try {
             userSnap = await getDoc(userRef);
           } catch (firestoreError) {
-            console.error(`Firestore error getting user: ${firestoreError.message}`);
-            return Response.json({
-              success: false,
-              message: "Database error retrieving user",
-              error: firestoreError.message,
-            }, { status: 500 });
+            console.error(
+              `Firestore error getting user: ${firestoreError.message}`
+            );
+            return Response.json(
+              {
+                success: false,
+                message: "Database error retrieving user",
+                error: firestoreError.message,
+              },
+              { status: 500 }
+            );
           }
 
           if (!userSnap.exists()) {
             console.error(`User not found in Firestore: ${userId}`);
-            return Response.json({
-              success: false,
-              message: "User not found",
-            }, { status: 404 });
+            return Response.json(
+              {
+                success: false,
+                message: "User not found",
+              },
+              { status: 404 }
+            );
           }
 
-          console.log(`User found in Firestore, updating membership for user: ${userId}`);
+          console.log(
+            `User found in Firestore, updating membership for user: ${userId}`
+          );
 
           // Update user with membership plan and subscription info using Firestore
           try {
@@ -258,15 +316,22 @@ export async function POST(req) {
               updatedAt: new Date(),
             });
           } catch (updateError) {
-            console.error(`Firestore error updating user: ${updateError.message}`);
-            return Response.json({
-              success: false,
-              message: "Database error updating user",
-              error: updateError.message,
-            }, { status: 500 });
+            console.error(
+              `Firestore error updating user: ${updateError.message}`
+            );
+            return Response.json(
+              {
+                success: false,
+                message: "Database error updating user",
+                error: updateError.message,
+              },
+              { status: 500 }
+            );
           }
 
-          console.log(`Successfully created subscription for plan ${planName} for user: ${userId}`);
+          console.log(
+            `Successfully created subscription for plan ${planName} for user: ${userId}`
+          );
           return Response.json({
             success: true,
             message: "Membership subscription activated successfully",
@@ -274,20 +339,27 @@ export async function POST(req) {
             userId: userId,
           });
         } catch (error) {
-          console.error(`Error processing membership subscription: ${error.message}`);
+          console.error(
+            `Error processing membership subscription: ${error.message}`
+          );
           console.error("Full error:", error);
-          return Response.json({
-            success: false,
-            message: "Error processing membership subscription",
-            error: error.message,
-          }, { status: 500 });
+          return Response.json(
+            {
+              success: false,
+              message: "Error processing membership subscription",
+              error: error.message,
+            },
+            { status: 500 }
+          );
         }
       } else {
-        console.log("Not a membership subscription or missing required metadata");
+        console.log(
+          "Not a membership subscription or missing required metadata"
+        );
         console.log("OrderType:", orderType);
         console.log("UserId:", userId);
         console.log("PlanName:", planName);
-        
+
         // Return success for non-membership events to avoid retries
         return Response.json({
           success: true,
@@ -297,10 +369,13 @@ export async function POST(req) {
     } catch (error) {
       console.error(`Error processing webhook: ${error.message}`);
       console.error("Full error:", error);
-      return Response.json({
-        success: false,
-        message: `Webhook processing failed: ${error.message}`,
-      }, { status: 500 });
+      return Response.json(
+        {
+          success: false,
+          message: `Webhook processing failed: ${error.message}`,
+        },
+        { status: 500 }
+      );
     }
   }
 
