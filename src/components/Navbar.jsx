@@ -4,6 +4,7 @@ import { Menu, ChevronDown, Gift, Star, Sparkles, Heart } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import MobileMenuDrawer from "./MobileMenuDrawer";
 import ClinicsModal from "./ClinicsModal"; // import your modal
 import { BookingModal } from "./booking-modal";
@@ -206,16 +207,13 @@ export default function Navbar() {
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => (window.location.href = "/")}
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-black flex items-center justify-center">
-              <span className="text-white font-bold text-lg">AL</span>
-            </div>
-            <span
-              className={`text-xl sm:text-2xl font-light transition-colors duration-300 ${
-                isScrolled ? "text-white" : textColor
-              }`}
-            >
-              Aesthetics
-            </span>
+            <Image
+              src="/image-removebg-preview_white.png"
+              alt="Aesthetics Logo"
+              width={80}
+              height={80}
+              priority
+            />
           </div>
 
           {/* Right - Buttons */}

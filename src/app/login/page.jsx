@@ -12,10 +12,10 @@ export default function LoginPage() {
         <div className="text-center">
           <Link href="/">
             <Image
-              src="/logo_white (1).png"
+              src="/image-removebg-preview.png"
               alt="Logo"
-              width={120}
-              height={120}
+              width={80}
+              height={80}
               className="mx-auto"
             />
           </Link>
