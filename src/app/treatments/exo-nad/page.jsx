@@ -2,122 +2,91 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-
-import { Star } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Star, ChevronDown, CheckCircle, Clock, AlertTriangle, Pound } from "lucide-react";
 import { useState, useRef } from "react";
-import ClinicsModal from "@/components/ClinicsModal";
-import PriceCard from "@/components/pricecard/price-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Play } from "lucide-react";
+import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
 import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
-import BotoxSection from "@/components/BotoxSection";
-import {
-  Eye,
-  CheckCircle,
-  RotateCcw,
-  Clock,
-  Frown,
-  TrendingDown,
-  AlertTriangle,
-  KeyRound as Pound,
-} from "lucide-react";
-
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
-export default function BotoxTreatmentSection() {
-  const [expandedSections, setExpandedSections] = useState({});
+export default function ExoNadPeelingSection() {
   const [openIndex, setOpenIndex] = useState(null);
-  // Create a ref for the pricing section
-  const pricingSectionRef = useRef(null);
-  const beforeAfterSectionRef = useRef(null);
-
-
-  const { bookingOpen, setBookingOpen } = useStore();
+ const pricingSectionRef = useRef(null);
+   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Visible Results",
-      value: "Noticeable reduction of fine lines",
+      value: "Improved skin tone and texture",
+      icon: CheckCircle
     },
     {
       heading: "Results Last",
-      value: "3–6 Months",
+      value: "Long-term with proper care",
+      icon: Clock
     },
     {
       heading: "No. of Sessions",
-      value: "Typically 1 Treatment",
+      value: "1 Treatment (can be repeated)",
+      icon: CheckCircle
     },
     {
       heading: "Procedure Time",
-      value: "15–30 Minutes",
-      description: "30-45 minutes for hyperhidrosis",
+      value: "60-75 Minutes",
+      description: "Multi-step process"
     },
     {
       heading: "Discomfort",
-      value: "Mild",
+      value: "Mild to Moderate",
+      icon: AlertTriangle
     },
     {
       heading: "Downtime",
-      value: "Minimal",
+      value: "3-5 Days",
+      icon: Clock
     },
     {
       heading: "Side Effects",
-      value: "Temporary redness, slight swelling or bruising",
+      value: "Temporary redness, peeling, sensitivity",
+      icon: AlertTriangle
     },
     {
       heading: "Our Pricing",
-      value: "From £125",
-      description: "View all",
+      value: "£380 per session",
+      icon: Pound
     },
   ];
 
   const faqs = [
     {
-      question: "What are anti-wrinkle injections?",
-      answer:
-        "Anti-wrinkle injections are a simple, non-surgical treatment that relaxes certain facial muscles. This reduces the appearance of fine lines and wrinkles, giving a smoother, refreshed look. The treatment is safe, quick, and requires minimal downtime.",
+      question: "What is EXO–NAD Skin Longevity Peeling?",
+      answer: "EXO–NAD is a professional multi-step peel that combines synthetic exosome technology with epigenetic and cellular energy boosters to rejuvenate, protect, and enhance skin vitality."
     },
     {
-      question: "How long do the results last?",
-      answer:
-        "Results typically last 3-6 months, depending on individual factors and the areas treated.",
+      question: "How does the treatment work?",
+      answer: "The 3-step protocol includes: 1) Exo Peel gently exfoliates and stimulates cellular longevity, 2) pH Normalizer soothes and restores skin balance, 3) Longevity Serum delivers NAD⁺, GHK-Cu peptide, and growth factors for deep renewal."
     },
     {
-      question: "Is the procedure painful?",
-      answer:
-        "Most patients experience mild discomfort. The procedure uses very fine needles which minimize any pain during treatment.",
+      question: "Who is a good candidate for this treatment?",
+      answer: "Ideal for those seeking to improve skin tone and texture, reduce fine lines and wrinkles, restore elasticity and firmness, and protect DNA for long-term skin health."
     },
     {
-      question: "What is the downtime?",
-      answer:
-        "There is minimal downtime. Some patients may experience temporary redness, slight swelling or bruising for a few hours to a couple of days.",
+      question: "What is the downtime after treatment?",
+      answer: "Expect 3-5 days of downtime with redness, peeling, and sensitivity as the skin undergoes renewal. It's important to follow aftercare instructions carefully."
     },
     {
-      question: "Who performs the treatment?",
-      answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers.",
+      question: "How often can I get this treatment?",
+      answer: "Depending on your skin goals and condition, this treatment can be repeated every 4-6 weeks for optimal results."
     },
     {
-      question: "What areas can be treated?",
-      answer:
-        "We treat multiple areas including forehead lines, frown lines, crow's feet, masseter muscles for jaw slimming, neckbands, and hyperhidrosis (excessive sweating).",
-    },
+      question: "What makes EXO–NAD different from other peels?",
+      answer: "This peel combines advanced synthetic exosome technology with epigenetic boosters and cellular energy enhancers for comprehensive skin rejuvenation at a cellular level."
+    }
   ];
 
-  // Function to scroll to pricing section
   const scrollToPricing = () => {
     if (pricingSectionRef.current) {
       pricingSectionRef.current.scrollIntoView({
@@ -136,13 +105,6 @@ const scrollToBeforeAfter = () => {
     }
   };
 
-  const toggleSection = (section) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
-
   return (
     <>
       {/* Hero Section */}
@@ -155,23 +117,23 @@ const scrollToBeforeAfter = () => {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Anti-Wrinkle Injections
+                  Advanced Skin Rejuvenation
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Botox Treatment for
+                EXO–NAD Skin
                 <br />
-                smoother, younger
+                Longevity Peeling
                 <br />
-                looking skin
+                Treatment
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Achieve a refreshed, youthful appearance with our safe and
-                effective anti-wrinkle injections at Derma Veritas.
+                A revolutionary multi-step peel combining synthetic exosome technology 
+                with epigenetic boosters for comprehensive skin rejuvenation.
               </p>
 
               {/* Buttons */}
@@ -185,7 +147,7 @@ const scrollToBeforeAfter = () => {
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
 
-                {/* VIEW PRICES - Updated to call scrollToPricing */}
+                {/* VIEW PRICES */}
                 <button
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
@@ -200,8 +162,8 @@ const scrollToBeforeAfter = () => {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/botox-treatment-consultation.png"
-                  alt="Professional botox treatment being administered"
+                  src="/images/exo-nad-peel-treatment.png"
+                  alt="EXO-NAD Skin Longevity Peeling treatment"
                   className="w-full h-full object-cover"
                 />
 
@@ -228,118 +190,66 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
+      {/* Treatment Overview Cards */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white border border-gray-200 p-6 md:p-8 shadow-[-4px_4px_0_0_rgba(0,0,0,0.1)]">
             {/* Top Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Eye className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[0].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[0].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <CheckCircle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[1].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[1].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <RotateCcw className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[2].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[2].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Clock className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[3].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[3].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[3].description}
-                </p>
-              </div>
+              {cardData.slice(0, 4).map((card, index) => {
+                const IconComponent = card.icon || CheckCircle;
+                return (
+                  <div key={index} className="text-center md:text-left">
+                    <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      <span className="text-gray-600 text-sm font-light">
+                        {card.heading}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-light text-gray-900 mb-1">
+                      {card.value}
+                    </h3>
+                    {card.description && (
+                      <p className="text-gray-500 text-sm font-light">
+                        {card.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Bottom Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Frown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[4].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[4].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <TrendingDown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[5].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[5].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <AlertTriangle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[6].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[6].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Pound className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[7].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[7].value}
-                </h3>
-                <p
-                  onClick={scrollToPricing}
-                  className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
-                >
-                  {cardData[7].description}
-                </p>
-              </div>
+              {cardData.slice(4).map((card, index) => {
+                const IconComponent = card.icon || CheckCircle;
+                return (
+                  <div key={index} className="text-center md:text-left">
+                    <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      <span className="text-gray-600 text-sm font-light">
+                        {card.heading}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-light text-gray-900">
+                      {card.value}
+                    </h3>
+                    {card.description && (
+                      <p className="text-gray-500 text-sm font-light">
+                        {card.description}
+                      </p>
+                    )}
+                    {card.heading === "Our Pricing" && (
+                      <p
+                        onClick={scrollToPricing}
+                        className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
+                      >
+                        View all
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -350,64 +260,53 @@ const scrollToBeforeAfter = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What are Anti-Wrinkle Injections?
+              What is EXO–NAD Skin Longevity Peeling?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Anti-wrinkle injections are a simple, non-surgical treatment that
-              relaxes certain facial muscles. This reduces the appearance of
-              fine lines and wrinkles, giving a smoother, refreshed look. The
-              treatment is safe, quick, and requires minimal downtime.
+              EXO–NAD is a professional multi-step peel that combines synthetic exosome technology
+              with epigenetic and cellular energy boosters to rejuvenate, protect, and enhance skin
+              vitality. This advanced treatment works at the cellular level to deliver comprehensive
+              skin renewal.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">What's Included:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Noticeable reduction of fine lines
+                  <span className="font-medium">Exo Peel</span> – Bi-phasic exfoliating system
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Slimmer jawline (masseter treatment)
+                  <span className="font-medium">pH Normalizer</span> – Gold-enriched solution for barrier recovery
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Reduced teeth grinding
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Smoother, firmer neck appearance
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Reduced excessive sweating
+                  <span className="font-medium">Longevity Serum</span> – Deeply nourishes and revitalizes skin
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our Clinic:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Key Benefits:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Treatments performed exclusively by expert physicians and
-                  clinical pharmacy leads
+                  Improves skin tone, texture, and radiance
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Industry-leading trainers with extensive experience
+                  Reduces fine lines and wrinkles
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, effective, and natural-looking results
+                  Restores elasticity and firmness
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Minimal downtime for a quick return to daily life
+                  Protects DNA and telomeres for long-term skin health
                 </li>
               </ul>
             </div>
@@ -415,16 +314,89 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
-      <BotoxSection />
+      {/* How It Works Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+            How It Works: 3-Step Protocol
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="text-4xl font-bold text-gray-300 mb-4">1</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Exo Peel</h3>
+              <p className="text-gray-600">
+                Gently exfoliates and stimulates cellular longevity with Epitalon peptide
+                and glycolic acid. Prepares the skin for optimal absorption of active ingredients.
+              </p>
+            </div>
+            
+            {/* Step 2 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="text-4xl font-bold text-gray-300 mb-4">2</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">pH Normalizer</h3>
+              <p className="text-gray-600">
+                Soothes and restores skin balance post-peel with a gold-enriched solution
+                that enhances barrier recovery and reduces redness.
+              </p>
+            </div>
+            
+            {/* Step 3 */}
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className="text-4xl font-bold text-gray-300 mb-4">3</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Longevity Serum</h3>
+              <p className="text-gray-600">
+                Delivers NAD⁺, GHK-Cu peptide, and growth factors for deep renewal,
+                DNA repair, and cellular energy support to maximize results.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Ingredients Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 text-center mb-12">
+            Core Ingredients & Benefits
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-5 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Epitalon Peptide</h3>
+                <p className="text-gray-600">Protects DNA and supports cellular longevity</p>
+              </div>
+              
+              <div className="bg-gray-50 p-5 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">NAD⁺ Complex</h3>
+                <p className="text-gray-600">Boosts cellular energy and youthful skin metabolism</p>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-5 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">GHK-Cu Peptide</h3>
+                <p className="text-gray-600">Stimulates collagen, smooths skin, and supports tissue repair</p>
+              </div>
+              
+              <div className="bg-gray-50 p-5 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Biomimetic Growth Factors</h3>
+                <p className="text-gray-600">Enhance skin regeneration and fibroblast activity</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
     <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
       <ReviewsSection />
-
       <ConsultationSection />
 
-      {/* Pricing Section with ref */}
+      {/* Pricing Section */}
       <section
         ref={pricingSectionRef}
         className="py-12 md:py-20 px-4"
@@ -436,7 +408,7 @@ const scrollToBeforeAfter = () => {
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Botox Treatment Cost
+                  EXO–NAD Treatment Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -445,14 +417,13 @@ const scrollToBeforeAfter = () => {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are performed exclusively by our expert
-                  physicians and clinical pharmacy leads who are
-                  industry-leading trainers. Our pricing reflects the expertise
-                  and premium service you receive.
+                  Our EXO–NAD Skin Longevity Peeling is performed by expert practitioners
+                  who specialize in advanced skin rejuvenation treatments. The pricing reflects
+                  the premium ingredients and sophisticated technology used in this procedure.
                 </p>
                 <p>
-                  If you would like to discuss any of our treatments, please
-                  feel free to{" "}
+                  If you would like to discuss this treatment or determine if it's right for your
+                  skin concerns, please feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -463,11 +434,10 @@ const scrollToBeforeAfter = () => {
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Individual Treatment Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Anti-Wrinkle Treatments
+                    EXO–NAD Skin Longevity Peeling
                   </h3>
                   <button
                     className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
@@ -479,37 +449,21 @@ const scrollToBeforeAfter = () => {
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">One Area:</span>
+                    <span className="text-gray-700">Single Session:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £125
+                      £380
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Three Areas:</span>
+                    <span className="text-gray-700">Course of 3 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £250
+                      £1,000
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Masseter Muscle Treatment:
-                    </span>
+                    <span className="text-gray-700">Course of 6 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £300
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Neckbands Treatment:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £300
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Hyperhidrosis (Excessive Sweating):
-                    </span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £350
+                      £1,900
                     </span>
                   </div>
                 </div>
@@ -519,6 +473,7 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
@@ -535,16 +490,18 @@ const scrollToBeforeAfter = () => {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                  }`}
+                }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

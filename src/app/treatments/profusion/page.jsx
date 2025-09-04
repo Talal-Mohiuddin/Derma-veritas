@@ -21,7 +21,6 @@ import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
-import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -36,37 +35,36 @@ import {
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
-export default function NonSurgicalRhinoplastySection() {
+export default function HandRejuvenationSection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+ const pricingSectionRef = useRef(null);
+   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Results Seen",
-      value: "Immediately",
-      description: "Instant reshaping and refinement",
+      value: "Immediate to Gradual",
+      description: "Depends on treatment type",
     },
     {
       heading: "Results Last",
-      value: "9–12 Months",
+      value: "3-12 Months",
     },
     {
       heading: "No. of Sessions",
-      value: "1 Treatment",
-      description: "Touch-up optional",
+      value: "1-3 Treatments",
     },
     {
       heading: "Procedure Time",
-      value: "30-45 Minutes",
+      value: "20-45 Minutes",
     },
     {
       heading: "Pain",
-      value: "Mild",
-      description: "Numbing cream available",
+      value: "Minimal",
+      description: "Topical anesthetic available",
     },
     {
       heading: "Downtime",
@@ -74,45 +72,84 @@ const beforeAfterSectionRef = useRef(null);
     },
     {
       heading: "Side Effects",
-      value: "Bruising, Redness, Tenderness",
+      value: "Mild swelling/bruising",
     },
     {
       heading: "Our Pricing",
-      value: "From £450",
+      value: "From £200",
       description: "View all",
     },
   ];
 
   const faqs = [
     {
-      question: "What is Non-Surgical Rhinoplasty?",
+      question: "What is Hand Rejuvenation?",
       answer:
-        "Non-Surgical Rhinoplasty (also called the liquid nose job) is a safe, minimally invasive procedure that reshapes and enhances the nose using dermal fillers. It is an excellent alternative for patients who want to improve the appearance of their nose without undergoing surgery.",
+        "Hand Rejuvenation is a non-surgical treatment designed to restore youthfulness, smoothness, and volume to aging hands. It addresses signs of aging such as volume loss, prominent veins, wrinkles, and sun damage.",
     },
     {
-      question: "When can I see the results?",
+      question: "Which treatment is best for my hands?",
       answer:
-        "Results are visible immediately after the procedure, with instant reshaping and refinement of your nose.",
+        "The best treatment depends on your specific concerns. Dermal fillers are ideal for volume loss, PRP improves skin quality, polynucleotides enhance hydration, and laser therapy targets pigmentation and wrinkles.",
     },
     {
       question: "How long do the results last?",
       answer:
-        "Results typically last 9-12 months, depending on individual metabolism and the product used.",
+        "Results vary by treatment: Dermal fillers last 6-12 months, PRP several months with maintenance, polynucleotides 3-6 months, and laser results are progressive over weeks.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "Most patients experience mild discomfort. Numbing cream can be applied to minimize any pain during treatment.",
+        "Most treatments involve minimal discomfort. Topical anesthetics can be applied to ensure comfort during the procedure.",
     },
     {
       question: "What is the downtime?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary redness or swelling for 24-48 hours.",
+        "There is minimal downtime. Some treatments may cause mild swelling or bruising for a few days, while laser treatments may cause mild redness/peeling.",
     },
     {
       question: "Who performs the treatment?",
       answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers with advanced training in facial anatomy.",
+        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers.",
+    },
+  ];
+
+  const treatmentOptions = [
+    {
+      title: "Dermal Fillers (1–2 ml)",
+      price: "£300 – £450",
+      results: "Immediate restoration of volume and smoother appearance",
+      duration: "6–12 months",
+      sessions: "Typically 1",
+      time: "30 minutes",
+      downtime: "Minimal; mild swelling/bruising may occur",
+    },
+    {
+      title: "PRP Therapy (3 Sessions)",
+      price: "£500",
+      results: "Gradual improvement in skin quality, texture, and glow",
+      duration: "Results last several months with follow-up maintenance",
+      sessions: "3 (recommended)",
+      time: "30–45 minutes",
+      downtime: "Minimal",
+    },
+    {
+      title: "Polynucleotide (PN) Therapy (2–3 Sessions)",
+      price: "£350 – £500",
+      results: "Increased hydration, elasticity, and tissue regeneration",
+      duration: "3–6 months",
+      sessions: "2–3 depending on goals",
+      time: "30 minutes",
+      downtime: "Minimal",
+    },
+    {
+      title: "Laser / Light Therapy (CO₂ / Phototherapy)",
+      price: "From £200 per session",
+      results: "Reduction in pigmentation, age spots, and wrinkles",
+      duration: "Progressive results over weeks",
+      sessions: "1–3",
+      time: "20–40 minutes",
+      downtime: "Mild redness/peeling for a few days",
     },
   ];
 
@@ -126,7 +163,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -154,29 +191,29 @@ const beforeAfterSectionRef = useRef(null);
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Dermal Filler Treatment
+                  Non-Surgical Treatment
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Non-Surgical
+                Hand Rejuvenation
                 <br />
-                Rhinoplasty for
+                for youthful,
                 <br />
-                natural nose refinement
+                smooth hands
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Reshape and enhance your nose without surgery using advanced
-                dermal filler techniques at Derma Veritas.
+                Restore youthfulness, smoothness, and volume to aging hands with
+                our advanced non-surgical treatments at Derma Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button 
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -200,7 +237,7 @@ const beforeAfterSectionRef = useRef(null);
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
                   src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                  alt="Professional non-surgical rhinoplasty treatment being administered"
+                  alt="Professional hand rejuvenation treatment"
                   className="w-full h-full object-cover"
                 />
 
@@ -340,7 +377,10 @@ const beforeAfterSectionRef = useRef(null);
                 <h3 className="text-lg font-light text-gray-900 mb-1">
                   {cardData[7].value}
                 </h3>
-                <p className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700">
+                <p
+                  onClick={scrollToPricing}
+                  className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
+                >
                   {cardData[7].description}
                 </p>
               </div>
@@ -354,17 +394,15 @@ const beforeAfterSectionRef = useRef(null);
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What is Non-Surgical Rhinoplasty?
+              What is Hand Rejuvenation?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Non-Surgical Rhinoplasty (also called the liquid nose job) is a
-              safe, minimally invasive procedure that reshapes and enhances the
-              nose using dermal fillers. It is an excellent alternative for
-              patients who want to improve the appearance of their nose without
-              undergoing surgery. By strategically placing hyaluronic acid
-              fillers, we can smooth bumps, lift the tip, refine asymmetry, and
-              improve overall nose contour — all with immediate results and no
-              downtime.
+              Hand Rejuvenation is a non-surgical treatment designed to restore
+              youthfulness, smoothness, and volume to aging hands. Over time,
+              hands often show signs of aging such as volume loss, prominent
+              veins, wrinkles, and sun damage. Using advanced techniques, we
+              rejuvenate the skin, restore volume, and improve overall texture
+              for naturally youthful-looking hands.
             </p>
           </div>
 
@@ -376,23 +414,23 @@ const beforeAfterSectionRef = useRef(null);
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Straightens and balances nose profile
+                  Restores lost volume and plumpness
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Smooths bumps and irregularities
+                  Reduces appearance of veins and tendons
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Lifts and defines the nasal tip
+                  Improves skin quality, hydration, and texture
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Corrects minor asymmetry
+                  Diminishes age spots, fine lines, and wrinkles
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  No scars, stitches, or long recovery
+                  Non-surgical, minimally invasive, and natural-looking results
                 </li>
               </ul>
             </div>
@@ -404,23 +442,25 @@ const beforeAfterSectionRef = useRef(null);
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Performed by expert injectors with advanced training
+                  Treatments performed only by expert doctors & clinical
+                  pharmacy leads
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Precision technique ensures natural-looking results
+                  Combination of advanced injectables and laser-based therapies
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, non-surgical option compared to traditional rhinoplasty
+                  Tailored treatment plans depending on skin type and hand
+                  condition
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized treatment tailored to each individual
+                  Safe, effective, and natural-looking rejuvenation
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Minimal downtime with immediate confidence boost
+                  Minimal downtime with long-lasting results
                 </li>
               </ul>
             </div>
@@ -428,9 +468,8 @@ const beforeAfterSectionRef = useRef(null);
         </div>
       </section>
 
-      <BotoxSection />
-
-      <div ref={beforeAfterSectionRef}>
+      {/* BeforeAfterSection would go here if you have hand-specific before/after images */}
+    <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
       <ReviewsSection />
@@ -449,7 +488,7 @@ const beforeAfterSectionRef = useRef(null);
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Non-Surgical Rhinoplasty Cost
+                  Hand Rejuvenation Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -476,78 +515,54 @@ const beforeAfterSectionRef = useRef(null);
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Non-Surgical Rhinoplasty Pricing */}
-              <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-base font-semibold text-gray-900">
-                    Non-Surgical Rhinoplasty
-                  </h3>
-                  <button
-                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
-                    onClick={() => setBookingOpen(true)}
-                  >
-                    BOOK
-                  </button>
-                </div>
-
-                <div className="divide-y divide-gray-200">
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Standard Treatment:</span>
+              {treatmentOptions.map((treatment, index) => (
+                <div
+                  key={index}
+                  className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]"
+                >
+                  <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-base font-semibold text-gray-900">
+                      {treatment.title}
+                    </h3>
                     <span className="text-lg font-bold text-gray-900">
-                      £450
+                      {treatment.price}
                     </span>
                   </div>
-                  <div className="py-3">
-                    <p className="text-sm text-gray-600 mb-2">
-                      Includes consultation and follow-up
-                    </p>
-                  </div>
-                </div>
-              </div>
 
-              {/* Package Pricing */}
-              <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-base font-semibold text-gray-900">
-                    Combination Packages
-                  </h3>
-                  <button
-                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
-                    onClick={() => setBookingOpen(true)}
-                  >
-                    BOOK
+                  <div className="space-y-3 text-sm text-gray-600">
+                    <div className="flex justify-between">
+                      <span>Visible Results:</span>
+                      <span className="text-gray-900">{treatment.results}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Duration:</span>
+                      <span className="text-gray-900">
+                        {treatment.duration}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Sessions:</span>
+                      <span className="text-gray-900">
+                        {treatment.sessions}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Procedure Time:</span>
+                      <span className="text-gray-900">{treatment.time}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Downtime:</span>
+                      <span className="text-gray-900">
+                        {treatment.downtime}
+                      </span>
+                    </div>
+                  </div>
+
+                  <button className="w-full mt-4 px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                    BOOK NOW
                   </button>
                 </div>
-
-                <div className="divide-y divide-gray-200">
-                  <div className="py-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">
-                        Rhinoplasty + Filler Package:
-                      </span>
-                      <span className="text-lg font-bold text-gray-900">
-                        £650
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      Includes Non-Surgical Rhinoplasty + 1ml Dermal Filler
-                    </p>
-                  </div>
-                  <div className="py-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">
-                        Custom Treatment Plan:
-                      </span>
-                      <span className="text-lg font-bold text-gray-900">
-                        Consultation
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      Tailored to your specific needs and goals
-                    </p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

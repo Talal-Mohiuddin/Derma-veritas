@@ -45,8 +45,8 @@ export default function ProfhiloSkinBoosterSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-  const pricingSectionRef = useRef(null);
-  const { bookingOpen, setBookingOpen } = useStore();
+const beforeAfterSectionRef = useRef(null);
+  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -158,6 +158,15 @@ export default function ProfhiloSkinBoosterSection() {
     }
   };
 
+   const scrollToBeforeAfter = () => {
+    if (beforeAfterSectionRef.current) {
+      beforeAfterSectionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
@@ -199,7 +208,10 @@ export default function ProfhiloSkinBoosterSection() {
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider">
+               <button 
+                  onClick={scrollToBeforeAfter}
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
+                >
                   VIEW RESULTS
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
@@ -479,7 +491,9 @@ export default function ProfhiloSkinBoosterSection() {
 
       <BotoxSection />
 
-      <BeforeAfterSection />
+      <div ref={beforeAfterSectionRef}>
+        <BeforeAfterSection />
+      </div>
       <ReviewsSection />
 
       <ConsultationSection />

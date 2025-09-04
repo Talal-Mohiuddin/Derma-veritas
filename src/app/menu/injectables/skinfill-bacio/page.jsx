@@ -2,122 +2,97 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Star, ChevronDown, Play, CheckCircle, Clock, RotateCcw, Frown, TrendingDown, AlertTriangle, KeyRound as Pound, Eye } from "lucide-react";
 import { useState, useRef } from "react";
-import ClinicsModal from "@/components/ClinicsModal";
-import PriceCard from "@/components/pricecard/price-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Play } from "lucide-react";
+import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
-import Footer from "@/components/Footer";
-import ClubMembership from "@/components/ClubMembership";
-import MediaCoverage from "@/components/MediaCoverage";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
-import {
-  Eye,
-  CheckCircle,
-  RotateCcw,
-  Clock,
-  Frown,
-  TrendingDown,
-  AlertTriangle,
-  KeyRound as Pound,
-  Droplets,
-  Heart,
-  Sparkles,
-} from "lucide-react";
-
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
+import ClubMembership from "@/components/ClubMembership";
+import MediaCoverage from "@/components/MediaCoverage";
 
-export default function PolynucleotidesSection() {
+export default function SkinfillBacioPage() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
-
-  // Create a ref for the pricing section
 const beforeAfterSectionRef = useRef(null);
   const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
-      heading: "Results Seen",
-      value: "2-4 Weeks",
-      description: "Optimal Results After Multiple Sessions",
+      heading: "Visible Results",
+      value: "Immediate smoother, plumper lips",
+      icon: Eye
     },
     {
       heading: "Results Last",
-      value: "3–6 Months",
+      value: "6–12 Months",
+      icon: CheckCircle
     },
     {
       heading: "No. of Sessions",
-      value: "2-3 Treatments",
+      value: "3 Sessions Recommended",
+      icon: RotateCcw
     },
     {
       heading: "Procedure Time",
-      value: "30-45 Minutes",
+      value: "15–30 Minutes",
+      icon: Clock
     },
     {
-      heading: "Pain",
+      heading: "Discomfort",
       value: "Mild",
-      description: "Numbing Cream Available",
+      icon: Frown
     },
     {
       heading: "Downtime",
       value: "Minimal",
+      icon: TrendingDown
     },
     {
       heading: "Side Effects",
-      value: "Redness, Tenderness, Bruising",
+      value: "Temporary redness, slight swelling or bruising",
+      icon: AlertTriangle
     },
     {
       heading: "Our Pricing",
-      value: "From £190",
-      description: "View all",
+      value: "£230 Per Session",
+      icon: Pound
     },
   ];
 
   const faqs = [
     {
-      question: "What are Polynucleotides?",
+      question: "What is Skinfill™ Bacio?",
       answer:
-        "Polynucleotides (PN) are advanced regenerative molecules derived from natural sources that work at a cellular level to repair, hydrate, and restore the skin. This treatment stimulates collagen and elastin production without adding volume like traditional fillers.",
-    },
-    {
-      question: "When can I see the results?",
-      answer:
-        "Initial results are visible within 2-4 weeks, with optimal results appearing after completing the recommended treatment sessions.",
+        "Skinfill™ Bacio is a professional lip booster designed to hydrate, refine, and naturally enhance lip volume. With Vitamin B12 and non-crosslinked hyaluronic acid, it delivers soft, plump lips while keeping a natural look.",
     },
     {
       question: "How long do the results last?",
       answer:
-        "Results typically last 3-6 months, depending on individual factors and skin condition. Maintenance treatments are recommended for sustained benefits.",
+        "Results typically last 6-12 months, depending on individual factors and metabolism.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "Most patients experience mild discomfort. Numbing cream can be applied to minimize any pain during treatment.",
+        "Most patients experience mild discomfort. We use topical anesthetics to minimize any pain during treatment.",
     },
     {
       question: "What is the downtime?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary redness or swelling for up to 24 hours.",
+        "There is minimal downtime. Some patients may experience temporary redness, slight swelling or bruising for a few hours to a couple of days.",
     },
     {
       question: "Who performs the treatment?",
       answer:
         "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers.",
     },
+    {
+      question: "How many sessions are recommended?",
+      answer:
+        "We recommend 3 sessions spaced 2–4 weeks apart for optimal results.",
+    },
   ];
 
-  // Function to scroll to pricing section
   const scrollToPricing = () => {
     if (pricingSectionRef.current) {
       pricingSectionRef.current.scrollIntoView({
@@ -155,23 +130,22 @@ const beforeAfterSectionRef = useRef(null);
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Regenerative Skin Treatment
+                  Premium Lip Enhancement
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Polynucleotides
+                Skinfill™ Bacio for
                 <br />
-                Skin Rejuvenation
+                Hydrated, Natural
                 <br />
-                Treatment
+                Looking Lips
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Advanced cellular-level repair and hydration for naturally
-                radiant, youthful-looking skin at Derma Veritas.
+                Achieve softer, fuller lips with our professional lip booster treatment featuring Vitamin B12 and non-crosslinked hyaluronic acid.
               </p>
 
               {/* Buttons */}
@@ -185,7 +159,7 @@ const beforeAfterSectionRef = useRef(null);
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
 
-                {/* VIEW PRICES - Updated to call scrollToPricing */}
+                {/* VIEW PRICES */}
                 <button
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
@@ -200,8 +174,8 @@ const beforeAfterSectionRef = useRef(null);
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                  alt="Professional polynucleotide skin rejuvenation treatment"
+                  src="/images/skinfill-treatment.jpg"
+                  alt="Skinfill Bacio lip treatment"
                   className="w-full h-full object-cover"
                 />
 
@@ -228,123 +202,32 @@ const beforeAfterSectionRef = useRef(null);
         </div>
       </section>
 
+      {/* Treatment Highlights */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white border border-gray-200 p-6 md:p-8 shadow-[-4px_4px_0_0_rgba(0,0,0,0.1)]">
-            {/* Top Row */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Eye className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[0].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[0].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[0].description}
-                </p>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <CheckCircle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[1].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[1].value}
-                </h3>
-                {cardData[1].description && (
-                  <p className="text-gray-500 text-sm font-light">
-                    {cardData[1].description}
-                  </p>
-                )}
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <RotateCcw className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[2].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[2].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Clock className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[3].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[3].value}
-                </h3>
-              </div>
-            </div>
-
-            {/* Bottom Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Frown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[4].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[4].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[4].description}
-                </p>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <TrendingDown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[5].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[5].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <AlertTriangle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[6].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[6].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Pound className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[7].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[7].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700">
-                  {cardData[7].description}
-                </p>
-              </div>
+              {cardData.map((card, index) => {
+                const IconComponent = card.icon;
+                return (
+                  <div key={index} className="text-center md:text-left">
+                    <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      <span className="text-gray-600 text-sm font-light">
+                        {card.heading}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-light text-gray-900">
+                      {card.value}
+                    </h3>
+                    {card.description && (
+                      <p className="text-gray-500 text-sm font-light">
+                        {card.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -355,70 +238,77 @@ const beforeAfterSectionRef = useRef(null);
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What is Polynucleotide Skin Rejuvenation?
+              What is Skinfill™ Bacio?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Polynucleotides (PN) are advanced regenerative molecules derived
-              from natural sources that work at a cellular level to repair,
-              hydrate, and restore the skin. This treatment stimulates collagen
-              and elastin production, improves skin elasticity, and enhances
-              overall radiance without adding volume like traditional fillers.
+              Skinfill™ Bacio is a professional lip booster designed to hydrate, refine, and naturally
+              enhance lip volume. With Vitamin B12 and non-crosslinked hyaluronic acid, it delivers soft,
+              plump lips while keeping a natural look.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Benefits Include:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
-                  <Droplets className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                  Deep hydration and improved skin elasticity
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span><strong>Hyaluronic Acid (HA)</strong> – Multiphasic formula for deep hydration, subtle volume, and lip tissue restoration</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <Sparkles className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                  Reduces fine lines, wrinkles, and dullness
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span><strong>Vitamin B12</strong> – Boosts collagen and elastin, improving lip firmness, smoothness, and reducing early signs of aging</span>
+                </li>
+              </ul>
+              
+              <h3 className="text-xl font-semibold text-gray-900 mt-8">Benefits:</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Intense hydration for softer, fuller lips
                 </li>
                 <li className="flex items-start gap-3">
-                  <Heart className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                  Repairs damaged tissue and promotes cell renewal
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Subtle, natural volume and contour
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                  Restores natural glow and firmness
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Smoother lip texture and definition
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                  Safe, non-surgical, and minimally invasive
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Supports cell renewal and elasticity
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Ideal For:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Treatment Protocol:</h3>
+              <p className="text-gray-600">
+                Recommended: 3 sessions spaced 2–4 weeks apart for optimal results.
+              </p>
+              
+              <h3 className="text-xl font-semibold text-gray-900 mt-8">Results & Duration:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Clients looking for natural skin revitalisation
+                  Immediate effect: Lips feel smoother and plumper right after treatment
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Those wanting to improve skin texture and tone
+                  Long-lasting: Results last 6–12 months, depending on the individual
+                </li>
+              </ul>
+              
+              <h3 className="text-xl font-semibold text-gray-900 mt-8">Recovery:</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Minimal downtime
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  People seeking to reduce signs of aging without fillers
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Anyone wanting to enhance skin radiance and hydration
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Those looking for minimal downtime treatments
+                  Temporary redness, swelling, or bruising may occur but usually fades within days
                 </li>
               </ul>
             </div>
@@ -426,15 +316,18 @@ const beforeAfterSectionRef = useRef(null);
         </div>
       </section>
 
-      {/* BeforeAfterSection would go here */}
+      {/* Before & After Section */}
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
+
+      {/* Reviews Section */}
       <ReviewsSection />
 
+      {/* Consultation Section */}
       <ConsultationSection />
 
-      {/* Pricing Section with ref */}
+      {/* Pricing Section */}
       <section
         ref={pricingSectionRef}
         className="py-12 md:py-20 px-4"
@@ -446,7 +339,7 @@ const beforeAfterSectionRef = useRef(null);
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Polynucleotides Cost
+                  Skinfill™ Bacio Treatment Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -473,11 +366,10 @@ const beforeAfterSectionRef = useRef(null);
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Individual Treatment Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Polynucleotide Treatments
+                    Skinfill™ Bacio Lip Enhancement
                   </h3>
                   <button
                     className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
@@ -491,64 +383,19 @@ const beforeAfterSectionRef = useRef(null);
                   <div className="flex justify-between items-center py-3">
                     <span className="text-gray-700">Single Session:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £190
+                      £230
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">2 Sessions Package:</span>
+                    <span className="text-gray-700">Course of 3 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £350
+                      £600
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">3 Sessions Package:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £500
+                    <span className="text-gray-700 text-sm">
+                      (Save £90 with course booking)
                     </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Package Pricing */}
-              <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-base font-semibold text-gray-900">
-                    Maintenance Packages
-                  </h3>
-                  <button
-                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
-                    onClick={() => setBookingOpen(true)}
-                  >
-                    BOOK
-                  </button>
-                </div>
-
-                <div className="divide-y divide-gray-200">
-                  <div className="py-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">
-                        Annual Maintenance (4 sessions):
-                      </span>
-                      <span className="text-lg font-bold text-gray-900">
-                        £650
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      Recommended for sustained results throughout the year
-                    </p>
-                  </div>
-                  <div className="py-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">
-                        Custom Treatment Plan:
-                      </span>
-                      <span className="text-lg font-bold text-gray-900">
-                        Consultation
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      Tailored to your specific skin needs and goals
-                    </p>
                   </div>
                 </div>
               </div>
@@ -557,6 +404,7 @@ const beforeAfterSectionRef = useRef(null);
         </div>
       </section>
 
+      {/* FAQ Section */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">

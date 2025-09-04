@@ -21,7 +21,6 @@ import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
-import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -31,88 +30,96 @@ import {
   TrendingDown,
   AlertTriangle,
   KeyRound as Pound,
+  Droplets,
+  Activity,
+  Leaf,
+  Shield,
 } from "lucide-react";
 
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 
-export default function NonSurgicalRhinoplastySection() {
+export default function HairRevitalizingTreatmentSection() {
   const [expandedSections, setExpandedSections] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
-
   // Create a ref for the pricing section
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+ const pricingSectionRef = useRef(null);
+   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
-      heading: "Results Seen",
-      value: "Immediately",
-      description: "Instant reshaping and refinement",
+      heading: "Visible Results",
+      value: "Stronger, denser hair",
+      icon: Eye,
     },
     {
-      heading: "Results Last",
-      value: "9–12 Months",
+      heading: "Results Timeline",
+      value: "3–6 Months",
+      icon: Clock,
     },
     {
-      heading: "No. of Sessions",
-      value: "1 Treatment",
-      description: "Touch-up optional",
+      heading: "Recommended Sessions",
+      value: "4+ Treatments",
+      icon: RotateCcw,
     },
     {
-      heading: "Procedure Time",
-      value: "30-45 Minutes",
+      heading: "Session Frequency",
+      value: "Every 2 Weeks",
+      icon: Activity,
     },
     {
-      heading: "Pain",
-      value: "Mild",
-      description: "Numbing cream available",
+      heading: "Discomfort",
+      value: "Minimal",
+      icon: Frown,
     },
     {
       heading: "Downtime",
-      value: "Minimal",
+      value: "None",
+      icon: TrendingDown,
     },
     {
       heading: "Side Effects",
-      value: "Bruising, Redness, Tenderness",
+      value: "Temporary redness",
+      icon: AlertTriangle,
     },
     {
       heading: "Our Pricing",
-      value: "From £450",
+      value: "From £600",
       description: "View all",
+      icon: Pound,
     },
   ];
 
   const faqs = [
     {
-      question: "What is Non-Surgical Rhinoplasty?",
+      question: "What is Hair+ Revitalizing treatment?",
       answer:
-        "Non-Surgical Rhinoplasty (also called the liquid nose job) is a safe, minimally invasive procedure that reshapes and enhances the nose using dermal fillers. It is an excellent alternative for patients who want to improve the appearance of their nose without undergoing surgery.",
-    },
-    {
-      question: "When can I see the results?",
-      answer:
-        "Results are visible immediately after the procedure, with instant reshaping and refinement of your nose.",
+        "Hair+ Revitalizing is a professional scalp treatment designed to strengthen hair, reduce thinning, and support natural growth. Delivered through mesotherapy or microneedling, it helps with a wide range of hair concerns from male and female pattern loss to postpartum and menopausal shedding.",
     },
     {
       question: "How long do the results last?",
       answer:
-        "Results typically last 9-12 months, depending on individual metabolism and the product used.",
+        "Results are long-lasting with proper maintenance. We recommend follow-up treatments every 6-12 months after the initial course to maintain optimal results.",
     },
     {
       question: "Is the procedure painful?",
       answer:
-        "Most patients experience mild discomfort. Numbing cream can be applied to minimize any pain during treatment.",
+        "Most patients experience minimal discomfort. We use topical anesthetics when necessary to ensure your comfort throughout the procedure.",
     },
     {
       question: "What is the downtime?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary redness or swelling for 24-48 hours.",
+        "There is no downtime. You can resume your normal activities immediately after treatment. Some temporary redness may occur but typically subsides within a few hours.",
     },
     {
       question: "Who performs the treatment?",
       answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers with advanced training in facial anatomy.",
+        "All treatments are performed exclusively by our expert physicians and clinical specialists who are trained in advanced hair restoration techniques.",
+    },
+    {
+      question: "How soon will I see results?",
+      answer:
+        "Initial improvements can often be seen within 4-6 weeks, with optimal results becoming apparent after 3-6 months as your hair goes through its natural growth cycle.",
     },
   ];
 
@@ -126,7 +133,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -154,29 +161,28 @@ const beforeAfterSectionRef = useRef(null);
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Dermal Filler Treatment
+                  Advanced Hair Restoration
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Non-Surgical
+                Hair+ Revitalizing
                 <br />
-                Rhinoplasty for
+                for thicker, stronger
                 <br />
-                natural nose refinement
+                healthier hair
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Reshape and enhance your nose without surgery using advanced
-                dermal filler techniques at Derma Veritas.
+                Combat hair thinning and promote natural growth with our advanced scalp treatment at Derma Veritas.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button 
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -199,8 +205,8 @@ const beforeAfterSectionRef = useRef(null);
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                  alt="Professional non-surgical rhinoplasty treatment being administered"
+                  src="/images/hair-treatment-consultation.png"
+                  alt="Professional hair revitalizing treatment being administered"
                   className="w-full h-full object-cover"
                 />
 
@@ -232,118 +238,55 @@ const beforeAfterSectionRef = useRef(null);
           <div className="bg-white border border-gray-200 p-6 md:p-8 shadow-[-4px_4px_0_0_rgba(0,0,0,0.1)]">
             {/* Top Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Eye className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[0].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[0].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[0].description}
-                </p>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <CheckCircle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[1].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[1].value}
-                </h3>
-                {cardData[1].description && (
-                  <p className="text-gray-500 text-sm font-light">
-                    {cardData[1].description}
-                  </p>
-                )}
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <RotateCcw className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[2].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[2].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Clock className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[3].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[3].value}
-                </h3>
-              </div>
+              {cardData.slice(0, 4).map((card, index) => {
+                const IconComponent = card.icon;
+                return (
+                  <div key={index} className="text-center md:text-left">
+                    <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      <span className="text-gray-600 text-sm font-light">
+                        {card.heading}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-light text-gray-900 mb-1">
+                      {card.value}
+                    </h3>
+                    {card.description && (
+                      <p className="text-gray-500 text-sm font-light">
+                        {card.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Bottom Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Frown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[4].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[4].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[4].description}
-                </p>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <TrendingDown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[5].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[5].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <AlertTriangle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[6].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[6].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Pound className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[7].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[7].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700">
-                  {cardData[7].description}
-                </p>
-              </div>
+              {cardData.slice(4, 8).map((card, index) => {
+                const IconComponent = card.icon;
+                return (
+                  <div key={index} className="text-center md:text-left">
+                    <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      <span className="text-gray-600 text-sm font-light">
+                        {card.heading}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-light text-gray-900">
+                      {card.value}
+                    </h3>
+                    {card.description && (
+                      <p
+                        onClick={scrollToPricing}
+                        className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
+                      >
+                        {card.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -354,73 +297,67 @@ const beforeAfterSectionRef = useRef(null);
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What is Non-Surgical Rhinoplasty?
+              What is Hair+ Revitalizing Treatment?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Non-Surgical Rhinoplasty (also called the liquid nose job) is a
-              safe, minimally invasive procedure that reshapes and enhances the
-              nose using dermal fillers. It is an excellent alternative for
-              patients who want to improve the appearance of their nose without
-              undergoing surgery. By strategically placing hyaluronic acid
-              fillers, we can smooth bumps, lift the tip, refine asymmetry, and
-              improve overall nose contour — all with immediate results and no
-              downtime.
+              Hair+ Revitalizing is a professional scalp treatment designed to strengthen hair, reduce
+              thinning, and support natural growth. Delivered through mesotherapy or microneedling, it
+              helps with a wide range of hair concerns from male and female pattern loss to postpartum
+              and menopausal shedding.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Benefits Include:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Straightens and balances nose profile
+                  <Droplets className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium">Phosphatidic Acid</span> – Stimulates hair bulbs and prolongs the growth phase
+                  </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Smooths bumps and irregularities
+                  <Activity className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium">Vitamin B2 (Riboflavin)</span> – Supports follicle energy and protection
+                  </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Lifts and defines the nasal tip
+                  <Shield className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium">Superoxide Dismutase (SOD)</span> – A strong antioxidant that combats scalp stress
+                  </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Corrects minor asymmetry
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  No scars, stitches, or long recovery
+                  <Leaf className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <span className="font-medium">Amino Acid Complex</span> – Provides building blocks for stronger hair and scalp health
+                  </div>
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our Clinic:
+                Benefits:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Performed by expert injectors with advanced training
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Revitalizes scalp and hair follicles
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Precision technique ensures natural-looking results
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Reduces hair thinning and boosts density
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, non-surgical option compared to traditional rhinoplasty
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Suitable for both men and women
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized treatment tailored to each individual
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Minimal downtime with immediate confidence boost
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Can be combined with PRP, light therapy, or threads for enhanced results
                 </li>
               </ul>
             </div>
@@ -428,9 +365,69 @@ const beforeAfterSectionRef = useRef(null);
         </div>
       </section>
 
-      <BotoxSection />
+      {/* Treatment Protocol Section */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Treatment Protocol
+            </h2>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              For optimal results, we recommend a structured treatment plan tailored to your specific hair concerns.
+            </p>
+          </div>
 
-      <div ref={beforeAfterSectionRef}>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Recommended Plan</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-blue-600 text-sm font-bold">1</span>
+                  </div>
+                  <span><strong>4+ sessions</strong> for optimal results</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-blue-600 text-sm font-bold">2</span>
+                  </div>
+                  <span>Sessions spaced <strong>about 2 weeks apart</strong></span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                    <span className="text-blue-600 text-sm font-bold">3</span>
+                  </div>
+                  <span>Each session takes approximately <strong>30-45 minutes</strong></span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Expected Results</h3>
+              <ul className="space-y-3 text-gray-600">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Stronger, denser, and healthier-looking hair over time
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Reduced hair shedding within 4-6 weeks
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Visible improvement in hair thickness after 3 months
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  Optimal results achieved with complete treatment plan
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
       <ReviewsSection />
@@ -449,7 +446,7 @@ const beforeAfterSectionRef = useRef(null);
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Non-Surgical Rhinoplasty Cost
+                  Hair+ Revitalizing Treatment
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -459,9 +456,13 @@ const beforeAfterSectionRef = useRef(null);
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
                   All treatments are performed exclusively by our expert
-                  physicians and clinical pharmacy leads who are
-                  industry-leading trainers. Our pricing reflects the expertise
-                  and premium service you receive.
+                  physicians and clinical specialists who are trained in
+                  advanced hair restoration techniques. Our pricing reflects
+                  the expertise and premium service you receive.
+                </p>
+                <p>
+                  For optimal results, we recommend a course of 4 sessions
+                  as part of a structured treatment plan.
                 </p>
                 <p>
                   If you would like to discuss any of our treatments, please
@@ -476,11 +477,11 @@ const beforeAfterSectionRef = useRef(null);
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Non-Surgical Rhinoplasty Pricing */}
+              {/* Package Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Non-Surgical Rhinoplasty
+                    Hair+ Revitalizing Treatment Packages
                   </h3>
                   <button
                     className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
@@ -492,59 +493,49 @@ const beforeAfterSectionRef = useRef(null);
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Standard Treatment:</span>
+                    <span className="text-gray-700">4-Session Package:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £450
+                      £600
                     </span>
                   </div>
-                  <div className="py-3">
-                    <p className="text-sm text-gray-600 mb-2">
-                      Includes consultation and follow-up
-                    </p>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-gray-700">Single Session:</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £180
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-gray-700">
+                      Maintenance Session (after initial package):
+                    </span>
+                    <span className="text-lg font-bold text-gray-900">
+                      £150
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Package Pricing */}
+              {/* Combination Treatments */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-base font-semibold text-gray-900">
-                    Combination Packages
-                  </h3>
-                  <button
-                    className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
-                    onClick={() => setBookingOpen(true)}
-                  >
-                    BOOK
-                  </button>
-                </div>
+                <h3 className="text-base font-semibold text-gray-900 mb-4">
+                  Enhanced Combination Treatments
+                </h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  For even better results, Hair+ Revitalizing can be combined with:
+                </p>
 
                 <div className="divide-y divide-gray-200">
-                  <div className="py-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">
-                        Rhinoplasty + Filler Package:
-                      </span>
-                      <span className="text-lg font-bold text-gray-900">
-                        £650
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      Includes Non-Surgical Rhinoplasty + 1ml Dermal Filler
-                    </p>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-gray-700">With PRP:</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      +£200
+                    </span>
                   </div>
-                  <div className="py-3">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-gray-900 font-medium">
-                        Custom Treatment Plan:
-                      </span>
-                      <span className="text-lg font-bold text-gray-900">
-                        Consultation
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      Tailored to your specific needs and goals
-                    </p>
+                  <div className="flex justify-between items-center py-3">
+                    <span className="text-gray-700">With Light Therapy:</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      +£100
+                    </span>
                   </div>
                 </div>
               </div>

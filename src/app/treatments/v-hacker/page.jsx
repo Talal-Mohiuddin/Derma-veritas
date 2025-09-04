@@ -2,118 +2,86 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-
-import { Star } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Star, CheckCircle, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
-import ClinicsModal from "@/components/ClinicsModal";
-import PriceCard from "@/components/pricecard/price-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Play } from "lucide-react";
+import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
-import Footer from "@/components/Footer";
-import ClubMembership from "@/components/ClubMembership";
-import MediaCoverage from "@/components/MediaCoverage";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
-import BotoxSection from "@/components/BotoxSection";
-import {
-  Eye,
-  CheckCircle,
-  RotateCcw,
-  Clock,
-  Frown,
-  TrendingDown,
-  AlertTriangle,
-  KeyRound as Pound,
-} from "lucide-react";
-
 import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
+import ClubMembership from "@/components/ClubMembership";
+import MediaCoverage from "@/components/MediaCoverage";
 
-export default function BotoxTreatmentSection() {
-  const [expandedSections, setExpandedSections] = useState({});
+export default function VHackerTreatmentSection() {
   const [openIndex, setOpenIndex] = useState(null);
-  // Create a ref for the pricing section
-  const pricingSectionRef = useRef(null);
-  const beforeAfterSectionRef = useRef(null);
-
-
-  const { bookingOpen, setBookingOpen } = useStore();
+ const pricingSectionRef = useRef(null);
+   const beforeAfterSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
       heading: "Visible Results",
-      value: "Noticeable reduction of fine lines",
+      value: "Firms, hydrates and brightens skin",
     },
     {
       heading: "Results Last",
-      value: "3–6 Months",
+      value: "Long-term cellular improvement",
     },
     {
-      heading: "No. of Sessions",
-      value: "Typically 1 Treatment",
+      heading: "Recommended Sessions",
+      value: "3+ for optimal results",
     },
     {
       heading: "Procedure Time",
-      value: "15–30 Minutes",
-      description: "30-45 minutes for hyperhidrosis",
+      value: "30-45 Minutes",
     },
     {
       heading: "Discomfort",
-      value: "Mild",
+      value: "Minimal",
     },
     {
       heading: "Downtime",
       value: "Minimal",
     },
     {
-      heading: "Side Effects",
-      value: "Temporary redness, slight swelling or bruising",
+      heading: "Technology",
+      value: "Exosomal delivery for deep absorption",
     },
     {
       heading: "Our Pricing",
-      value: "From £125",
+      value: "From £300",
       description: "View all",
     },
   ];
 
   const faqs = [
     {
-      question: "What are anti-wrinkle injections?",
+      question: "What is V-Hacker?",
       answer:
-        "Anti-wrinkle injections are a simple, non-surgical treatment that relaxes certain facial muscles. This reduces the appearance of fine lines and wrinkles, giving a smoother, refreshed look. The treatment is safe, quick, and requires minimal downtime.",
+        "V-Hacker is an advanced biohacking treatment that works at the cellular level to boost skin health, longevity, and vitality using a powerful blend of peptides, growth factors, and exosomal delivery technology.",
     },
     {
-      question: "How long do the results last?",
+      question: "How does V-Hacker work?",
       answer:
-        "Results typically last 3-6 months, depending on individual factors and the areas treated.",
+        "Like a hacker optimizes a system, V-Hacker 'biohacks' your skin cells with advanced peptides, growth factors, and exosomal delivery for deep rejuvenation. It works at the cellular level to enhance DNA protection, improve blood flow, boost energy production, and stimulate collagen and elasticity.",
     },
     {
-      question: "Is the procedure painful?",
+      question: "What are the key ingredients in V-Hacker?",
       answer:
-        "Most patients experience mild discomfort. The procedure uses very fine needles which minimize any pain during treatment.",
+        "V-Hacker contains Epithalon for DNA protection, GHK-Cu for improved blood flow, NAD+ for energy and DNA repair, exosomal delivery technology for deeper absorption, various peptides and growth factors (EGF, IGF, VEGF, FGF) for skin regeneration, Hyaluronic Acid for hydration, and Buffered Succinate for skin energy balance.",
     },
     {
-      question: "What is the downtime?",
+      question: "How many sessions are recommended?",
       answer:
-        "There is minimal downtime. Some patients may experience temporary redness, slight swelling or bruising for a few hours to a couple of days.",
+        "We recommend a course of 3 sessions for optimal results, with maintenance treatments as needed based on your skin goals and response to the treatment.",
     },
     {
-      question: "Who performs the treatment?",
+      question: "Is there any downtime after treatment?",
       answer:
-        "All treatments are performed exclusively by our expert physicians and clinical pharmacy leads who are industry-leading trainers.",
+        "There is minimal downtime. Some patients may experience temporary redness or slight swelling that typically resolves within a few hours.",
     },
     {
-      question: "What areas can be treated?",
+      question: "Who is a good candidate for V-Hacker?",
       answer:
-        "We treat multiple areas including forehead lines, frown lines, crow's feet, masseter muscles for jaw slimming, neckbands, and hyperhidrosis (excessive sweating).",
+        "V-Hacker is ideal for anyone looking to address signs of aging, improve skin vitality, reduce oxidative stress, and achieve overall skin rejuvenation at the cellular level.",
     },
   ];
 
@@ -136,13 +104,6 @@ const scrollToBeforeAfter = () => {
     }
   };
 
-  const toggleSection = (section) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
-  };
-
   return (
     <>
       {/* Hero Section */}
@@ -155,23 +116,22 @@ const scrollToBeforeAfter = () => {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Anti-Wrinkle Injections
+                  Advanced Biohacking Treatment
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Botox Treatment for
+                V-Hacker:
                 <br />
-                smoother, younger
+                Cellular-Level Skin
                 <br />
-                looking skin
+                Rejuvenation
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Achieve a refreshed, youthful appearance with our safe and
-                effective anti-wrinkle injections at Derma Veritas.
+                Biohack your skin's health with our advanced peptide and growth factor treatment that works at the cellular level for lasting vitality and rejuvenation.
               </p>
 
               {/* Buttons */}
@@ -200,8 +160,8 @@ const scrollToBeforeAfter = () => {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/botox-treatment-consultation.png"
-                  alt="Professional botox treatment being administered"
+                  src="/images/vhacker-treatment.png"
+                  alt="V-Hacker advanced biohacking treatment"
                   className="w-full h-full object-cover"
                 />
 
@@ -228,118 +188,29 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
+      {/* Key Benefits Cards */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="bg-white border border-gray-200 p-6 md:p-8 shadow-[-4px_4px_0_0_rgba(0,0,0,0.1)]">
-            {/* Top Row */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Eye className="w-5 h-5 text-gray-600" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {cardData.map((card, index) => (
+                <div key={index} className="text-center md:text-left">
+                  <h3 className="text-lg font-light text-gray-900 mb-1">
+                    {card.value}
+                  </h3>
                   <span className="text-gray-600 text-sm font-light">
-                    {cardData[0].heading}
+                    {card.heading}
                   </span>
+                  {card.description && (
+                    <p 
+                      onClick={scrollToPricing}
+                      className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700 mt-1"
+                    >
+                      {card.description}
+                    </p>
+                  )}
                 </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[0].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <CheckCircle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[1].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[1].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <RotateCcw className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[2].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[2].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Clock className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[3].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[3].value}
-                </h3>
-                <p className="text-gray-500 text-sm font-light">
-                  {cardData[3].description}
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Row */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Frown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[4].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[4].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <TrendingDown className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[5].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[5].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <AlertTriangle className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[6].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900">
-                  {cardData[6].value}
-                </h3>
-              </div>
-
-              <div className="text-center md:text-left">
-                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Pound className="w-5 h-5 text-gray-600" />
-                  <span className="text-gray-600 text-sm font-light">
-                    {cardData[7].heading}
-                  </span>
-                </div>
-                <h3 className="text-lg font-light text-gray-900 mb-1">
-                  {cardData[7].value}
-                </h3>
-                <p
-                  onClick={scrollToPricing}
-                  className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
-                >
-                  {cardData[7].description}
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -350,64 +221,74 @@ const scrollToBeforeAfter = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What are Anti-Wrinkle Injections?
+              What is V-Hacker Biohacking Treatment?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Anti-wrinkle injections are a simple, non-surgical treatment that
-              relaxes certain facial muscles. This reduces the appearance of
-              fine lines and wrinkles, giving a smoother, refreshed look. The
-              treatment is safe, quick, and requires minimal downtime.
+              V-Hacker is an advanced biohacking treatment that works at the cellular level to boost skin health, longevity, and vitality. Using a powerful combination of peptides, growth factors, and exosomal delivery technology, it optimizes your skin's function for lasting rejuvenation.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">Key Ingredients:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Noticeable reduction of fine lines
+                  <span className="font-medium">Epithalon:</span> Protects DNA and supports cell lifespan
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Slimmer jawline (masseter treatment)
+                  <span className="font-medium">GHK-Cu (Copper Peptide):</span> Improves blood flow and skin vitality
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Reduced teeth grinding
+                  <span className="font-medium">NAD+:</span> Boosts energy, DNA repair, and skin elasticity
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Smoother, firmer neck appearance
+                  <span className="font-medium">Exosomal delivery tech:</span> Ensures deeper absorption
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Reduced excessive sweating
+                  <span className="font-medium">Peptides & Growth Factors:</span> EGF, IGF, VEGF, FGF for skin regeneration
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="font-medium">Hyaluronic Acid:</span> Hydrates and plumps
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="font-medium">Buffered Succinate:</span> Balances skin energy
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our Clinic:
-              </h3>
+              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Treatments performed exclusively by expert physicians and
-                  clinical pharmacy leads
+                  Firms, hydrates, and brightens skin
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Industry-leading trainers with extensive experience
+                  Reduces signs of aging and oxidative stress
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Safe, effective, and natural-looking results
+                  Stimulates collagen and elasticity
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Minimal downtime for a quick return to daily life
+                  Smooths and revitalizes skin
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Works at cellular level for long-term improvements
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                  Minimal downtime with natural-looking results
                 </li>
               </ul>
             </div>
@@ -415,13 +296,10 @@ const scrollToBeforeAfter = () => {
         </div>
       </section>
 
-      <BotoxSection />
-
     <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
       <ReviewsSection />
-
       <ConsultationSection />
 
       {/* Pricing Section with ref */}
@@ -436,7 +314,7 @@ const scrollToBeforeAfter = () => {
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Botox Treatment Cost
+                  V-Hacker Treatment Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -445,14 +323,13 @@ const scrollToBeforeAfter = () => {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are performed exclusively by our expert
-                  physicians and clinical pharmacy leads who are
-                  industry-leading trainers. Our pricing reflects the expertise
-                  and premium service you receive.
+                  V-Hacker is an advanced biohacking treatment that uses cutting-edge technology
+                  including exosomal delivery for optimal results. Our pricing reflects the premium
+                  ingredients and expertise required for this innovative treatment.
                 </p>
                 <p>
-                  If you would like to discuss any of our treatments, please
-                  feel free to{" "}
+                  We recommend a course of 3 sessions for optimal cellular-level results. 
+                  If you would like to discuss this treatment, please feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -463,11 +340,11 @@ const scrollToBeforeAfter = () => {
 
             {/* Right Pricing Cards */}
             <div className="space-y-6">
-              {/* Individual Treatment Pricing */}
+              {/* Package Pricing */}
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Anti-Wrinkle Treatments
+                    V-Hacker Biohacking Treatment
                   </h3>
                   <button
                     className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
@@ -479,37 +356,21 @@ const scrollToBeforeAfter = () => {
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">One Area:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £125
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Three Areas:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £250
-                    </span>
-                  </div>
-                  <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Masseter Muscle Treatment:
-                    </span>
+                    <span className="text-gray-700">1 Session:</span>
                     <span className="text-lg font-bold text-gray-900">
                       £300
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Neckbands Treatment:</span>
+                    <span className="text-gray-700">2 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £300
+                      £500
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">
-                      Hyperhidrosis (Excessive Sweating):
-                    </span>
+                    <span className="text-gray-700">3 Sessions:</span>
                     <span className="text-lg font-bold text-gray-900">
-                      £350
+                      £700
                     </span>
                   </div>
                 </div>
@@ -535,16 +396,18 @@ const scrollToBeforeAfter = () => {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
-                    }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                  }`}
+                }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

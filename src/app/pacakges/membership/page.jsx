@@ -46,34 +46,39 @@ export default function ClubMembershipPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <div className="flex flex-col items-center justify-center text-center">
-            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mb-12">
-              <span className="text-white text-3xl font-bold">DV</span>
-            </div>
-
-            <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
-              <span className="text-black">Elite</span>{" "}
-              <span className="text-gray-400">Membership</span>
-            </h1>
-
-            <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
-              Join our exclusive membership program and experience the ultimate
-              in aesthetic care with monthly treatments, premium benefits, and
-              significant savings.
-            </p>
-
-            <Button
-              onClick={() => setBookingOpen(true)}
-              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
-            >
-              <span>JOIN TODAY</span>
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </Button>
-          </div>
-        </div>
+{/* Hero Section */}
+<div className="relative bg-gradient-to-b from-gray-50 to-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+    <div className="flex flex-col items-center justify-center text-center">
+      <div className="w-38 h-38 flex items-center justify-center mb-12">
+        <img 
+          src="/Derma Veritas Logo Design New File-01.svg" 
+          alt="Derma Veritas Logo" 
+          className="w-full h-full object-contain"
+        />
       </div>
+
+      <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
+        <span className="text-black">Elite</span>{" "}
+        <span className="text-gray-400">Membership</span>
+      </h1>
+
+      <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
+        Join our exclusive membership program and experience the ultimate
+        in aesthetic care with monthly treatments, premium benefits, and
+        significant savings.
+      </p>
+
+      <Button
+        onClick={() => setBookingOpen(true)}
+        className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors"
+      >
+        <span>JOIN TODAY</span>
+        <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+      </Button>
+    </div>
+  </div>
+</div>
 
       {/* Membership Overview */}
       <div className="grid grid-cols-1 lg:grid-cols-2">
