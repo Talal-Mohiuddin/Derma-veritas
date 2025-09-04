@@ -128,26 +128,10 @@ export async function POST(req) {
 
           // Create order data
           const currentDate = Timestamp.now();
-          
-          // Process products to ensure proper structure
-          const processedProducts = cartData.products.map(product => ({
-            productId: product.productId,
-            quantity: product.quantity,
-            price: product.productDetails?.price || product.price || 0,
-            productDetails: {
-              name: product.productDetails?.name || product.name || 'Unknown Product',
-              price: product.productDetails?.price || product.price || 0,
-              description: product.productDetails?.description || product.description || '',
-              images: product.productDetails?.images || product.images || [],
-              id: product.productDetails?.id || product.productId
-            },
-            addedAt: product.addedAt || currentDate
-          }));
-
           const orderData = {
             userId: userId,
             orderNumber: `ORD-${Date.now()}`,
-            products: processedProducts,
+            products: cartData.products,
             totalAmount: paymentIntent.amount / 100, // Convert from cents
             subtotal: cartData.totalPrice || paymentIntent.amount / 100,
             status: "processing",

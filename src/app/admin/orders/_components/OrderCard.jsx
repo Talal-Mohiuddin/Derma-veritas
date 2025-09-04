@@ -187,33 +187,16 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
           Products ({order.products?.length || 0})
         </p>
         <div className="space-y-2 max-h-24 overflow-y-auto">
-          {order.products?.slice(0, 2).map((product, index) => {
-            // Debug logging
-            console.log('Product data:', product);
-            
-            // Get product name with fallbacks
-            const productName = 
-              product.productDetails?.name || 
-              product.name || 
-              `Product ${product.productId || index + 1}`;
-            
-            // Get product price with fallbacks
-            const productPrice = 
-              product.productDetails?.price || 
-              product.price || 
-              0;
-            
-            return (
-              <div key={index} className="flex justify-between items-center text-sm">
-                <span className="text-gray-600 truncate">
-                  {productName} × {product.quantity}
-                </span>
-                <span className="text-gray-900 font-medium">
-                  {formatCurrency(productPrice * product.quantity)}
-                </span>
-              </div>
-            );
-          })}
+          {order.products?.slice(0, 2).map((product, index) => (
+            <div key={index} className="flex justify-between items-center text-sm">
+              <span className="text-gray-600 truncate">
+                {product.productDetails?.name || `Product ${index + 1}`} × {product.quantity}
+              </span>
+              <span className="text-gray-900 font-medium">
+                {formatCurrency((product.productDetails?.price || product.price || 0) * product.quantity)}
+              </span>
+            </div>
+          ))}
           {order.products?.length > 2 && (
             <p className="text-xs text-gray-500">
               +{order.products.length - 2} more items

@@ -15,16 +15,31 @@ export default function CartPage() {
   const removeItemMutation = useRemoveFromCart();
   const clearCartMutation = useClearCart();
 
+  // Debug cart data
+  console.log("Cart data:", cartData);
+  if (cartData?.cart?.products) {
+    console.log("Cart products:", cartData.cart.products);
+    cartData.cart.products.forEach((product, index) => {
+      console.log(`Product ${index}:`, product);
+      console.log(`Product details:`, product.productDetails);
+      console.log(`Product price:`, product.productDetails?.price || product.price);
+    });
+  }
+
   // Calculate totals reactively
   const cartTotals = useMemo(() => {
     if (!cartData?.cart?.products) return { subtotal: 0, total: 0, itemCount: 0 };
     
     const subtotal = cartData.cart.products.reduce((total, item) => {
-      const price = item.productDetails?.price || 0;
+      // Try multiple ways to get the price
+      const price = item.productDetails?.price || item.price || 0;
+      console.log(`Calculating for item ${item.productId}: price=${price}, quantity=${item.quantity}`);
       return total + (price * item.quantity);
     }, 0);
     
     const itemCount = cartData.cart.products.reduce((count, item) => count + item.quantity, 0);
+    
+    console.log("Calculated totals:", { subtotal, itemCount });
     
     return {
       subtotal,
@@ -152,8 +167,12 @@ export default function CartPage() {
                 
                 <div className="divide-y divide-gray-100">
                   {cartData.cart.products.map((item) => {
-                    const itemTotal = (item.productDetails?.price || 0) * item.quantity;
+                    // Try multiple ways to get the price
+                    const price = item.productDetails?.price || item.price || 0;
+                    const itemTotal = price * item.quantity;
                     const isUpdating = updateQuantityMutation.isPending || removeItemMutation.isPending;
+                    
+                    console.log(`Rendering item ${item.productId}: price=${price}, total=${itemTotal}`);
                     
                     return (
                       <div key={item.productId} className={`p-6 hover:bg-gray-50 transition-colors ${isUpdating ? 'opacity-60' : ''}`}>
@@ -184,7 +203,10 @@ export default function CartPage() {
                               {item.productDetails?.description}
                             </p>
                             <p className="text-lg font-semibold text-gray-900 mt-2">
-                              £{(item.productDetails?.price || 0).toFixed(2)}
+                              £{price.toFixed(2)}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              Unit price
                             </p>
                           </div>
 
@@ -213,6 +235,9 @@ export default function CartPage() {
                           <div className="text-right">
                             <p className="font-semibold text-gray-900">
                               £{itemTotal.toFixed(2)}
+                            </p>
+                            <p className="text-xs text-gray-500">
+                              {item.quantity} × £{price.toFixed(2)}
                             </p>
                           </div>
 

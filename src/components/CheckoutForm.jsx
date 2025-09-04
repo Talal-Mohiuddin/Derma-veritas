@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function  ({ cartData, clientSecret }) {
+export default function CheckoutForm({ cartData, clientSecret }) {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -104,6 +104,10 @@ export default function  ({ cartData, clientSecret }) {
       setIsLoading(false);
     }
   };
+
+  // Debug cart data to see the structure
+  console.log("Cart data in checkout:", cartData);
+  console.log("Products in cart:", cartData?.cart?.products);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
@@ -303,38 +307,52 @@ export default function  ({ cartData, clientSecret }) {
               
               <div className="p-6">
                 <div className="space-y-4 mb-6">
-                  {cartData?.cart?.products?.map((item) => (
-                    <div key={item.productId} className="flex items-center gap-4">
-                      <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
-                        {item.productDetails?.images?.[0]?.url ? (
-                          <Image
-                            src={item.productDetails.images[0].url}
-                            alt={item.productDetails.name}
-                            width={64}
-                            height={64}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                            <span className="text-gray-400 text-xs">No Image</span>
-                          </div>
-                        )}
+                  {cartData?.cart?.products?.map((item) => {
+                    // Debug individual item
+                    console.log("Item in checkout:", item);
+                    console.log("Product details:", item.productDetails);
+                    console.log("Product price:", item.productDetails?.price);
+                    
+                    // Try multiple ways to get the price
+                    const price = item.productDetails?.price || item.price || 0;
+                    const itemTotal = price * item.quantity;
+                    
+                    return (
+                      <div key={item.productId} className="flex items-center gap-4">
+                        <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                          {item.productDetails?.images?.[0]?.url ? (
+                            <Image
+                              src={item.productDetails.images[0].url}
+                              alt={item.productDetails.name}
+                              width={64}
+                              height={64}
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                              <span className="text-gray-400 text-xs">No Image</span>
+                            </div>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-medium text-gray-900 truncate">
+                            {item.productDetails?.name || 'Product'}
+                          </h4>
+                          <p className="text-sm text-gray-500">
+                            Qty: {item.quantity}
+                          </p>
+                          <p className="text-xs text-gray-400">
+                            Unit price: £{price.toFixed(2)}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-medium text-gray-900">
+                            £{itemTotal.toFixed(2)}
+                          </p>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-gray-900 truncate">
-                          {item.productDetails?.name || 'Product'}
-                        </h4>
-                        <p className="text-sm text-gray-500">
-                          Qty: {item.quantity}
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium text-gray-900">
-                          £{((item.productDetails?.price || 0) * item.quantity).toFixed(2)}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 
                 <div className="space-y-2 border-t pt-4">
