@@ -126,6 +126,7 @@ export async function POST(req) {
           }
 
           // Create order data
+          const currentDate = new Date();
           const orderData = {
             userId: userId,
             orderNumber: `ORD-${Date.now()}`,
@@ -137,9 +138,9 @@ export async function POST(req) {
             paymentMethod: "stripe",
             stripePaymentIntentId: paymentIntent.id,
             userDetails: userDetails,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            paidAt: new Date(),
+            createdAt: currentDate,
+            updatedAt: currentDate,
+            paidAt: currentDate,
           };
 
           // Add billing details if available
@@ -300,10 +301,11 @@ export async function POST(req) {
 
           // Update user with membership plan and subscription info using Firestore
           try {
+            const updateDate = new Date();
             await updateDoc(userRef, {
               membershipPlan: planName,
               membershipStatus: "active",
-              planUpdatedAt: new Date(),
+              planUpdatedAt: updateDate,
               stripeSubscriptionId: session.subscription,
               stripeCustomerId: session.customer,
               membershipPaymentInfo: {
@@ -311,9 +313,9 @@ export async function POST(req) {
                 stripeSubscriptionId: session.subscription,
                 stripeCustomerId: session.customer,
                 monthlyPrice: parseInt(monthlyPrice) / 100,
-                subscriptionStarted: new Date(),
+                subscriptionStarted: updateDate,
               },
-              updatedAt: new Date(),
+              updatedAt: updateDate,
             });
           } catch (updateError) {
             console.error(

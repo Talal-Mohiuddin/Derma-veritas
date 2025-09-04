@@ -72,7 +72,13 @@ export const useAddToCart = () => {
       // Snapshot the previous value
       const previousCart = queryClient.getQueryData(["cart", user?.uid]);
 
-      // Optimistically update to the new value
+      // Skip optimistic update if we don't have complete product data
+      // This prevents showing items with $0.00 price
+      if (!previousCart?.cart?.products) {
+        return { previousCart };
+      }
+
+      // Only do optimistic update if we have the product details already
       queryClient.setQueryData(["cart", user?.uid], (old) => {
         if (!old) return old;
 
@@ -89,14 +95,12 @@ export const useAddToCart = () => {
               : item
           );
         } else {
-          // Add new product
-          updatedProducts = [
-            ...old.cart.products,
-            { productId, quantity, addedAt: new Date(), productDetails: null }
-          ];
+          // Don't add new product optimistically without product details
+          // Let the server response handle it
+          return old;
         }
 
-        // Recalculate total price
+        // Recalculate total price only for existing products with complete data
         const newTotalPrice = updatedProducts.reduce((total, item) => {
           const price = item.productDetails?.price || 0;
           return total + (price * item.quantity);
@@ -288,12 +292,18 @@ export const useUpdateCartQuantity = () => {
 
       const previousCart = queryClient.getQueryData(["cart", user?.uid]);
 
+      // Only do optimistic update if we have complete product data
       queryClient.setQueryData(["cart", user?.uid], (old) => {
-        if (!old) return old;
+        if (!old?.cart?.products) return old;
 
         const productIndex = old.cart.products.findIndex(
           item => item.productId === productId
         );
+
+        // Don't optimistically update if product details are missing
+        if (productIndex > -1 && !old.cart.products[productIndex].productDetails?.price) {
+          return old;
+        }
 
         let updatedProducts;
         if (quantity <= 0) {
@@ -309,11 +319,8 @@ export const useUpdateCartQuantity = () => {
               : item
           );
         } else {
-          // Add new product
-          updatedProducts = [
-            ...old.cart.products,
-            { productId, quantity, addedAt: new Date(), productDetails: null }
-          ];
+          // Don't add new product without details
+          return old;
         }
 
         // Recalculate total price
