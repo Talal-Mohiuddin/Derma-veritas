@@ -1,26 +1,14 @@
 "use client";
 
 import { useStore } from "@/store/zustand";
-import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
-import ClinicsModal from "@/components/ClinicsModal";
-import PriceCard from "@/components/pricecard/price-card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Play } from "lucide-react";
+
 import BeforeAfterSection from "@/components/before-after-section";
-import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
-import MobileMenuDrawer from "@/components/MobileMenuDrawer";
 import {
   Eye,
   CheckCircle,
@@ -40,8 +28,9 @@ export default function HandRejuvenationSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const beforeAfterSectionRef = useRef(null);
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -163,7 +152,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -213,7 +202,7 @@ const beforeAfterSectionRef = useRef(null);
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
