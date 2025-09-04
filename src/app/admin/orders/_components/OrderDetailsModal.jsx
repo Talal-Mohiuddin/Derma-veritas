@@ -16,7 +16,6 @@ import {
   User,
   MapPin,
   CreditCard,
-  Calendar,
   ShoppingBag,
 } from "lucide-react";
 
@@ -87,31 +86,44 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Current Status:</span>
-                  <Badge className={`${getStatusColor(order.status)} border flex items-center gap-1`}>
+                  <Badge
+                    className={`${getStatusColor(
+                      order.status
+                    )} border flex items-center gap-1`}
+                  >
                     <StatusIcon className="w-3 h-3" />
-                    {order.status?.charAt(0).toUpperCase() + order.status?.slice(1) || "Pending"}
+                    {order.status?.charAt(0).toUpperCase() +
+                      order.status?.slice(1) || "Pending"}
                   </Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Payment Status:</span>
-                  <Badge 
+                  <Badge
                     className={`${
-                      order.paymentStatus === "paid" || order.paymentStatus === "completed"
-                        ? "bg-green-100 text-green-800 border-green-200" 
+                      order.paymentStatus === "paid" ||
+                      order.paymentStatus === "completed"
+                        ? "bg-green-100 text-green-800 border-green-200"
                         : "bg-orange-100 text-orange-800 border-orange-200"
                     } border`}
                   >
-                    {order.paymentStatus === "paid" || order.paymentStatus === "completed" ? "Paid" : "Pending"}
+                    {order.paymentStatus === "paid" ||
+                    order.paymentStatus === "completed"
+                      ? "Paid"
+                      : "Pending"}
                   </Badge>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">Order Date:</span>
-                  <span className="text-sm font-medium">{formatDate(order.createdAt)}</span>
+                  <span className="text-sm font-medium">
+                    {formatDate(order.createdAt)}
+                  </span>
                 </div>
                 {order.updatedAt && (
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-600">Last Updated:</span>
-                    <span className="text-sm font-medium">{formatDate(order.updatedAt)}</span>
+                    <span className="text-sm font-medium">
+                      {formatDate(order.updatedAt)}
+                    </span>
                   </div>
                 )}
               </div>
@@ -127,8 +139,9 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                 <Avatar className="h-12 w-12">
                   <AvatarImage src={order.userDetails?.photoURL} />
                   <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium">
-                    {order.userDetails?.name?.charAt(0)?.toUpperCase() || 
-                     order.userDetails?.email?.charAt(0)?.toUpperCase() || "U"}
+                    {order.userDetails?.name?.charAt(0)?.toUpperCase() ||
+                      order.userDetails?.email?.charAt(0)?.toUpperCase() ||
+                      "U"}
                   </AvatarFallback>
                 </Avatar>
                 <div>
@@ -152,12 +165,19 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                 <div className="text-sm text-gray-700 space-y-1">
                   <p>{order.shippingAddress.name}</p>
                   <p>{order.shippingAddress.address}</p>
-                  {order.shippingAddress.address2 && <p>{order.shippingAddress.address2}</p>}
+                  {order.shippingAddress.address2 && (
+                    <p>{order.shippingAddress.address2}</p>
+                  )}
                   <p>
-                    {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}
+                    {order.shippingAddress.city}, {order.shippingAddress.state}{" "}
+                    {order.shippingAddress.zipCode}
                   </p>
-                  {order.shippingAddress.country && <p>{order.shippingAddress.country}</p>}
-                  {order.shippingAddress.phone && <p>Phone: {order.shippingAddress.phone}</p>}
+                  {order.shippingAddress.country && (
+                    <p>{order.shippingAddress.country}</p>
+                  )}
+                  {order.shippingAddress.phone && (
+                    <p>Phone: {order.shippingAddress.phone}</p>
+                  )}
                 </div>
               </div>
             )}
@@ -176,12 +196,16 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Session ID:</span>
-                    <span className="font-mono text-xs">{order.stripeSessionId}</span>
+                    <span className="font-mono text-xs">
+                      {order.stripeSessionId}
+                    </span>
                   </div>
                   {order.paidAt && (
                     <div className="flex justify-between">
                       <span className="text-gray-600">Paid At:</span>
-                      <span className="font-medium">{formatDate(order.paidAt)}</span>
+                      <span className="font-medium">
+                        {formatDate(order.paidAt)}
+                      </span>
                     </div>
                   )}
                 </div>
@@ -199,7 +223,10 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
               </h3>
               <div className="space-y-3">
                 {order.products?.map((product, index) => (
-                  <div key={index} className="bg-white rounded-lg p-3 flex items-center space-x-3">
+                  <div
+                    key={index}
+                    className="bg-white rounded-lg p-3 flex items-center space-x-3"
+                  >
                     <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
                       {product.productDetails?.images?.[0]?.url ? (
                         <img
@@ -216,13 +243,16 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                         {product.productDetails?.name || `Product ${index + 1}`}
                       </div>
                       <div className="text-sm text-gray-600">
-                        Quantity: {product.quantity} × {formatCurrency(product.price)}
+                        Quantity: {product.quantity} ×{" "}
+                        {formatCurrency(product.price)}
                       </div>
-                      {product.productDetails?.price !== product.price && (
-                        <div className="text-xs text-gray-500">
-                          Current price: {formatCurrency(product.productDetails?.price)}
-                        </div>
-                      )}
+                      {product.productDetails?.price !== product.price &&
+                        product.originalPrice > 0 && (
+                          <div className="text-xs text-gray-500">
+                            Current price:{" "}
+                            {formatCurrency(product.productDetails?.price)}
+                          </div>
+                        )}
                     </div>
                     <div className="text-right">
                       <div className="font-semibold text-gray-900">
@@ -236,11 +266,15 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
 
             {/* Order Summary */}
             <div className="bg-gray-50 rounded-xl p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">Order Summary</h3>
+              <h3 className="font-semibold text-gray-900 mb-3">
+                Order Summary
+              </h3>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Subtotal:</span>
-                  <span>{formatCurrency(order.subtotal || order.totalAmount)}</span>
+                  <span>
+                    {formatCurrency(order.subtotal || order.totalAmount)}
+                  </span>
                 </div>
                 {order.shipping && (
                   <div className="flex justify-between text-sm">
@@ -257,13 +291,17 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                 {order.discount && (
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Discount:</span>
-                    <span className="text-green-600">-{formatCurrency(order.discount)}</span>
+                    <span className="text-green-600">
+                      -{formatCurrency(order.discount)}
+                    </span>
                   </div>
                 )}
                 <div className="border-t border-gray-200 pt-2 mt-2">
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total:</span>
-                    <span className="text-purple-600">{formatCurrency(order.totalAmount)}</span>
+                    <span className="text-purple-600">
+                      {formatCurrency(order.totalAmount)}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -272,7 +310,9 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
             {/* Additional Notes */}
             {order.notes && (
               <div className="bg-gray-50 rounded-xl p-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Order Notes</h3>
+                <h3 className="font-semibold text-gray-900 mb-3">
+                  Order Notes
+                </h3>
                 <p className="text-sm text-gray-700">{order.notes}</p>
               </div>
             )}

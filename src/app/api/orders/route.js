@@ -14,6 +14,23 @@ async function isAdmin(userId) {
   return userData.role === "admin";
 }
 
+// Helper function to calculate order totals with fallback pricing
+function calculateOrderTotals(products) {
+  let calculatedSubtotal = 0;
+  
+  products.forEach(product => {
+    const orderPrice = product.price || 0;
+    const currentPrice = product.productDetails?.price || 0;
+    const displayPrice = orderPrice > 0 ? orderPrice : currentPrice;
+    calculatedSubtotal += displayPrice * product.quantity;
+  });
+  
+  return {
+    calculatedSubtotal,
+    hasFallbackPricing: products.some(p => (p.price || 0) === 0 && (p.productDetails?.price || 0) > 0)
+  };
+}
+
 // Helper function to populate order with user and product details
 async function populateOrder(orderData, orderId) {
   // Get user details
@@ -48,7 +65,6 @@ async function populateOrder(orderData, orderId) {
               description: productData.description,
               price: productData.price, // Current price
               category: productData.category,
-              brand: productData.brand
             };
           }
         } catch (error) {
@@ -56,20 +72,32 @@ async function populateOrder(orderData, orderId) {
         }
       }
       
+      // Apply fallback pricing logic here
+      const orderPrice = product.price || 0;
+      const currentPrice = productDetails?.price || 0;
+      const finalPrice = orderPrice > 0 ? orderPrice : currentPrice;
+      
       return {
         productId: product.productId,
         quantity: product.quantity,
-        price: product.price, // Price at time of purchase
-        productDetails // Current product information
+        price: finalPrice, // Use fallback price
+        originalPrice: product.price, // Keep original for reference
+        productDetails
       };
     })
   );
+
+  // Calculate total using final prices
+  const calculatedTotal = populatedProducts.reduce((sum, product) => {
+    return sum + (product.price * product.quantity);
+  }, 0);
 
   return {
     id: orderId,
     ...orderData,
     userDetails,
-    products: populatedProducts
+    products: populatedProducts,
+    calculatedTotal
   };
 }
 
