@@ -20,10 +20,34 @@ import {
   Clock,
 } from "lucide-react";
 
+// Utility function to convert Firestore timestamp to Date
+const convertTimestamp = (timestamp) => {
+  if (!timestamp) return null;
+  
+  // If it's already a Date object, return it
+  if (timestamp instanceof Date) return timestamp;
+  
+  // If it's a Firestore timestamp object
+  if (timestamp && typeof timestamp === 'object' && timestamp.seconds) {
+    return new Date(timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000));
+  }
+  
+  // If it's a string, try to parse it
+  if (typeof timestamp === 'string') {
+    return new Date(timestamp);
+  }
+  
+  return null;
+};
+
 const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDeleting }) => {
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
-    return new Date(dateString).toLocaleDateString("en-US", {
+    
+    const date = convertTimestamp(dateString);
+    if (!date || isNaN(date.getTime())) return "N/A";
+    
+    return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -33,9 +57,9 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
   };
 
   const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
+    return new Intl.NumberFormat("en-GB", {
       style: "currency",
-      currency: "USD",
+      currency: "GBP",
     }).format(amount || 0);
   };
 
@@ -169,7 +193,7 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
                 {product.productDetails?.name || `Product ${index + 1}`} × {product.quantity}
               </span>
               <span className="text-gray-900 font-medium">
-                {formatCurrency(product.price * product.quantity)}
+                {formatCurrency((product.productDetails?.price || product.price || 0) * product.quantity)}
               </span>
             </div>
           ))}

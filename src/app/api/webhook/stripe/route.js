@@ -7,6 +7,7 @@ import {
   addDoc,
   collection,
   deleteDoc,
+  Timestamp,
 } from "firebase/firestore";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -126,7 +127,7 @@ export async function POST(req) {
           }
 
           // Create order data
-          const currentDate = new Date();
+          const currentDate = Timestamp.now();
           const orderData = {
             userId: userId,
             orderNumber: `ORD-${Date.now()}`,
@@ -301,7 +302,7 @@ export async function POST(req) {
 
           // Update user with membership plan and subscription info using Firestore
           try {
-            const updateDate = new Date();
+            const updateDate = Timestamp.now();
             await updateDoc(userRef, {
               membershipPlan: planName,
               membershipStatus: "active",

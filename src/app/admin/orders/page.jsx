@@ -23,6 +23,40 @@ import { toast } from "sonner";
 import OrderCard from "./_components/OrderCard";
 import OrderDetailsModal from "./_components/OrderDetailsModal";
 
+// Utility function to convert Firestore timestamp to Date
+const convertTimestamp = (timestamp) => {
+  if (!timestamp) return null;
+  
+  // If it's already a Date object, return it
+  if (timestamp instanceof Date) return timestamp;
+  
+  // If it's a Firestore timestamp object
+  if (timestamp && typeof timestamp === 'object' && timestamp.seconds) {
+    return new Date(timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000));
+  }
+  
+  // If it's a string, try to parse it
+  if (typeof timestamp === 'string') {
+    return new Date(timestamp);
+  }
+  
+  return null;
+};
+
+// Utility function to process order data and convert timestamps
+const processOrderData = (orders) => {
+  return orders.map(order => ({
+    ...order,
+    createdAt: convertTimestamp(order.createdAt),
+    updatedAt: convertTimestamp(order.updatedAt),
+    paidAt: convertTimestamp(order.paidAt),
+    products: order.products?.map(product => ({
+      ...product,
+      addedAt: convertTimestamp(product.addedAt)
+    })) || []
+  }));
+};
+
 export default function OrdersPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
@@ -46,11 +80,12 @@ export default function OrdersPage() {
     error,
     refetch,
   } = useOrdersData(true); // Pass true to get all orders (admin view)
+  console.log("Fetched orders data:", ordersData);
 
   const updateStatusMutation = useUpdateOrderStatus();
   const deleteOrderMutation = useDeleteOrder();
 
-  const orders = ordersData?.orders || [];
+  const orders = ordersData?.orders ? processOrderData(ordersData.orders) : [];
 
   // Filter orders
   const filteredOrders = orders.filter((order) => {
