@@ -45,40 +45,48 @@ export default function PackagesPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center"
-          >
-            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mx-auto mb-8">
-              <span className="text-white text-3xl font-bold">DV</span>
-            </div>
-
-            <h1 className="text-5xl lg:text-7xl font-light text-center mb-6">
-              <span className="text-black">Treatment</span>{" "}
-              <span className="text-gray-400">Packages</span>
-            </h1>
-
-            <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mx-auto mb-12">
-              Discover our comprehensive treatment packages designed to address
-              your unique skin concerns and aesthetic goals with the latest in
-              medicDerma Veritas technology.
-            </p>
-
-            <Button
-              onClick={() => setBookingOpen(true)}
-              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728]  tracking-wide hover:bg-gray-700 transition-colors rounded-lg"
-            >
-              <span>BOOK A CONSULTATION</span>
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </Button>
-          </motion.div>
+    
+{/* Hero Section */}
+<div className="relative bg-gradient-to-b from-gray-50 to-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="text-center"
+    >
+      {/* Logo Container with reduced bottom margin */}
+      <div className="flex justify-center mb-8"> {/* Reduced from mb-12 to mb-8 */}
+        <div className="w-36 h-36 md:w-44 md:h-44 flex items-center justify-center">
+          <img 
+            src="/Derma Veritas Logo Design New File-01.svg" 
+            alt="Derma Veritas Logo" 
+            className="w-full h-full object-contain"
+          />
         </div>
       </div>
+
+      <h1 className="text-5xl lg:text-7xl font-light text-center mb-6">
+        <span className="text-black">Treatment</span>{" "}
+        <span className="text-gray-400">Packages</span>
+      </h1>
+
+      <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mx-auto mb-12">
+        Discover our comprehensive treatment packages designed to address
+        your unique skin concerns and aesthetic goals with the latest in
+        medicDerma Veritas technology.
+      </p>
+
+      <Button
+        onClick={() => setBookingOpen(true)}
+        className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] tracking-wide hover:bg-gray-700 transition-colors rounded-lg"
+      >
+        <span>BOOK A CONSULTATION</span>
+        <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+      </Button>
+    </motion.div>
+  </div>
+</div>
 
       {/* Package Categories */}
       <section className="py-16 lg:py-20 bg-white">

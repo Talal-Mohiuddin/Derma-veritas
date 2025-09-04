@@ -114,6 +114,8 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
           "polynucleotides-skin-rejuvenation-treatment",
         "botox-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
+        "skinfill-bacio": "skinfill-bacio",
+        "sglt-inhibitor-injections": "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -133,6 +135,11 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "quad-laser-hair-removal": "quad-laser-hair-removal",
         "mole-removal": "mole-removal",
         "skin-tag-removal": "skin-tag-removal",
+        "exo-nad": "exo",
+        "v-hacker": "v-hacker",
+        "hair-revitalizing": "revitalizing",
+        exosignal: "exosignal",
+        sglt: "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -140,7 +147,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     return "";
   };
 
-  // Menu data - Updated with your treatments
+  // Menu data - Updated with your new treatments while keeping previous ones
   const injectablesLinks = [
     "Anti-Wrinkle Treatment",
     "Non Surgical Rhinoplasty",
@@ -159,24 +166,34 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     "Polynucleotides Skin Rejuvenation Treatment",
     "Botox Treatment",
     "Skin Boosters",
+    "Skinfill™ Bacio",
+    "SGLT 1/2 Inhibitor Injections",
   ];
 
   const skincareLinks = [
-    { name: "Chemical Peels", slug: "co2" },
+    { name: "Chemical Peels", slug: "chemical-peels" },
     { name: "Microneedling", slug: "microneedling" },
-    { name: "RF Microneedling", slug: "RF-Microneedling" },
+    { name: "RF Microneedling", slug: "rf-microneedling" },
     { name: "Co2 Laser", slug: "co2" },
-    { name: "Polynucleotide", slug: "Polynucleotide" },
+    { name: "Polynucleotide", slug: "polynucleotide" },
     { name: "Endolift", slug: "endolift" },
+    { name: "EXO–NAD Skin Longevity Peeling", slug: "exo-nad" },
   ];
 
   const wellnessLinks = [
     { name: "Exosome Therapy", slug: "exosome-therapy" },
     { name: "PRP Therapy", slug: "prp-therapy" },
+    { name: "V-Hacker", slug: "v-hacker" },
+    { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
   ];
 
   const laserLinks = [
     { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
+  ];
+
+  const hairLinks = [
+    { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
+    { name: "ExoSignal™ Hair", slug: "exosignal" },
   ];
 
   const facialConcernsLinks = [
@@ -280,7 +297,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 <Link
                   key={item.name}
                   href={item.slug ? `/treatments/${item.slug}` : item.path}
-                  className="block py-2 text-base font-light text-white hover:text-gray-200 transition-colors cursor-pointer"
+                  className="block py-2 text-lg font-light text-white hover:text-gray-200 transition-colors cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
@@ -463,6 +480,12 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     section="Laser"
                     links={laserLinks}
                     type="laser"
+                  />
+                  <MobileDropdown
+                    label="Hair Treatments"
+                    section="Hair"
+                    links={hairLinks}
+                    type="hair"
                   />
                 </div>
 
@@ -677,6 +700,13 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                             section="Laser"
                             links={laserLinks}
                             type="laser"
+                          />
+
+                          <DesktopDropdown
+                            label="Hair Treatments"
+                            section="Hair"
+                            links={hairLinks}
+                            type="hair"
                           />
                         </>
                       )}
