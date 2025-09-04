@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { db } from "../../../../config/db.js";
-import { doc, getDoc, updateDoc, collection, addDoc, deleteDoc, query, where, getDocs } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -76,35 +76,57 @@ export async function POST(req) {
             }, { status: 400 });
           }
 
+          // Use Firestore to get user document
+          console.log(`Looking up user in Firestore with ID: ${userId}`);
           const userRef = doc(db, "users", userId);
-          const userSnap = await getDoc(userRef);
+          
+          let userSnap;
+          try {
+            userSnap = await getDoc(userRef);
+          } catch (firestoreError) {
+            console.error(`Firestore error getting user: ${firestoreError.message}`);
+            return Response.json({
+              success: false,
+              message: "Database error retrieving user",
+              error: firestoreError.message,
+            }, { status: 500 });
+          }
 
           if (!userSnap.exists()) {
-            console.error(`User not found: ${userId}`);
+            console.error(`User not found in Firestore: ${userId}`);
             return Response.json({
               success: false,
               message: "User not found",
             }, { status: 404 });
           }
 
-          console.log(`User found, updating membership for user: ${userId}`);
+          console.log(`User found in Firestore, updating membership for user: ${userId}`);
 
-          // Update user with membership plan and subscription info
-          await updateDoc(userRef, {
-            membershipPlan: planName,
-            membershipStatus: "active",
-            planUpdatedAt: new Date(),
-            stripeSubscriptionId: session.subscription,
-            stripeCustomerId: session.customer,
-            membershipPaymentInfo: {
-              stripeSessionId: session.id,
+          // Update user with membership plan and subscription info using Firestore
+          try {
+            await updateDoc(userRef, {
+              membershipPlan: planName,
+              membershipStatus: "active",
+              planUpdatedAt: new Date(),
               stripeSubscriptionId: session.subscription,
               stripeCustomerId: session.customer,
-              monthlyPrice: parseInt(monthlyPrice) / 100,
-              subscriptionStarted: new Date(),
-            },
-            updatedAt: new Date(),
-          });
+              membershipPaymentInfo: {
+                stripeSessionId: session.id,
+                stripeSubscriptionId: session.subscription,
+                stripeCustomerId: session.customer,
+                monthlyPrice: parseInt(monthlyPrice) / 100,
+                subscriptionStarted: new Date(),
+              },
+              updatedAt: new Date(),
+            });
+          } catch (updateError) {
+            console.error(`Firestore error updating user: ${updateError.message}`);
+            return Response.json({
+              success: false,
+              message: "Database error updating user",
+              error: updateError.message,
+            }, { status: 500 });
+          }
 
           console.log(`Successfully created subscription for plan ${planName} for user: ${userId}`);
           return Response.json({
