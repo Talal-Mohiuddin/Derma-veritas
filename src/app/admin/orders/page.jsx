@@ -86,6 +86,20 @@ export default function OrdersPage() {
   const deleteOrderMutation = useDeleteOrder();
 
   const orders = ordersData?.orders ? processOrderData(ordersData.orders) : [];
+  
+  // Temporary debugging
+  if (orders.length > 0) {
+    console.log('First order products structure:', orders[0].products);
+    orders[0].products?.forEach((product, index) => {
+      console.log(`Product ${index}:`, {
+        productId: product.productId,
+        name: product.productDetails?.name || product.name,
+        price: product.productDetails?.price || product.price,
+        quantity: product.quantity,
+        fullProduct: product
+      });
+    });
+  }
 
   // Filter orders
   const filteredOrders = orders.filter((order) => {
