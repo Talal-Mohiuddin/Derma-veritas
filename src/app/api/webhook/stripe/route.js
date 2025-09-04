@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { db } from "../../../../config/db.js";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, addDoc, collection, deleteDoc } from "firebase/firestore";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -45,6 +45,144 @@ export async function POST(req) {
       message: "Webhook signature verification failed",
       error: err.message,
     }, { status: 400 });
+  }
+
+  // Handle payment intent succeeded (for cart purchases)
+  if (event.type === "payment_intent.succeeded") {
+    const paymentIntent = event.data.object;
+    console.log("Processing payment_intent.succeeded event");
+    console.log("Payment Intent ID:", paymentIntent.id);
+    console.log("Payment Intent metadata:", paymentIntent.metadata);
+
+    try {
+      const metadata = paymentIntent.metadata || {};
+      const { userId, orderType } = metadata;
+
+      console.log("Extracted metadata:", { userId, orderType });
+
+      // Handle cart purchase orders
+      if (orderType === "cart_purchase" && userId) {
+        console.log(`Processing cart purchase for user ${userId}`);
+        
+        try {
+          // Get user's cart
+          const cartRef = doc(db, "carts", userId);
+          const cartSnap = await getDoc(cartRef);
+
+          if (!cartSnap.exists()) {
+            console.error(`Cart not found for user: ${userId}`);
+            return Response.json({
+              success: false,
+              message: "Cart not found",
+            }, { status: 404 });
+          }
+
+          const cartData = cartSnap.data();
+          console.log(`Cart found with ${cartData.products?.length || 0} products`);
+
+          if (!cartData.products || cartData.products.length === 0) {
+            console.error(`Cart is empty for user: ${userId}`);
+            return Response.json({
+              success: false,
+              message: "Cart is empty",
+            }, { status: 400 });
+          }
+
+          // Get user details
+          const userRef = doc(db, "users", userId);
+          const userSnap = await getDoc(userRef);
+          
+          let userDetails = {};
+          if (userSnap.exists()) {
+            const userData = userSnap.data();
+            userDetails = {
+              name: userData.displayName || userData.name,
+              email: userData.email,
+              photoURL: userData.photoURL,
+            };
+          }
+
+          // Create order data
+          const orderData = {
+            userId: userId,
+            orderNumber: `ORD-${Date.now()}`,
+            products: cartData.products,
+            totalAmount: paymentIntent.amount / 100, // Convert from cents
+            subtotal: cartData.totalPrice || (paymentIntent.amount / 100),
+            status: "processing",
+            paymentStatus: "paid",
+            paymentMethod: "stripe",
+            stripePaymentIntentId: paymentIntent.id,
+            userDetails: userDetails,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            paidAt: new Date(),
+          };
+
+          // Add billing details if available
+          if (paymentIntent.charges?.data?.[0]?.billing_details) {
+            const billingDetails = paymentIntent.charges.data[0].billing_details;
+            orderData.billingAddress = {
+              name: billingDetails.name,
+              email: billingDetails.email,
+              phone: billingDetails.phone,
+              address: billingDetails.address?.line1,
+              address2: billingDetails.address?.line2,
+              city: billingDetails.address?.city,
+              state: billingDetails.address?.state,
+              zipCode: billingDetails.address?.postal_code,
+              country: billingDetails.address?.country,
+            };
+          }
+
+          // Create order in Firestore
+          console.log("Creating order in Firestore...");
+          const orderRef = await addDoc(collection(db, "orders"), orderData);
+          console.log(`Order created with ID: ${orderRef.id}`);
+
+          // Clear the user's cart
+          console.log("Clearing user's cart...");
+          await updateDoc(cartRef, {
+            products: [],
+            totalPrice: 0,
+            updatedAt: new Date(),
+          });
+
+          console.log(`Successfully processed cart purchase for user ${userId}, order ID: ${orderRef.id}`);
+          return Response.json({
+            success: true,
+            message: "Order created successfully",
+            orderId: orderRef.id,
+            orderNumber: orderData.orderNumber,
+          });
+        } catch (error) {
+          console.error(`Error processing cart purchase: ${error.message}`);
+          console.error("Full error:", error);
+          return Response.json({
+            success: false,
+            message: "Error processing cart purchase",
+            error: error.message,
+          }, { status: 500 });
+        }
+      } else {
+        console.log("Not a cart purchase or missing required metadata");
+        console.log("OrderType:", orderType);
+        console.log("UserId:", userId);
+        
+        // Return success for non-cart events to avoid retries
+        return Response.json({
+          success: true,
+          message: "Event processed - not a cart purchase",
+        });
+      }
+    } catch (error) {
+      console.error(`Error processing payment_intent.succeeded webhook: ${error.message}`);
+      console.error("Full error:", error);
+      return Response.json({
+        success: false,
+        message: `Webhook processing failed: ${error.message}`,
+      }, { status: 500 });
+    }
   }
 
   // Handle subscription creation

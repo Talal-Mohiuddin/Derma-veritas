@@ -53,6 +53,21 @@ export default function ProductForm({ product, onClose, onSuccess }) {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
+    
+    // Validate file sizes (limit to 5MB per file for base64 storage)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    const oversizedFiles = files.filter(file => file.size > maxSize);
+    
+    if (oversizedFiles.length > 0) {
+      toast.error("Some images are too large. Please use images smaller than 5MB.");
+      return;
+    }
+    
+    if (files.length > 5) {
+      toast.error("Please select no more than 5 images.");
+      return;
+    }
+    
     setImageFiles(files);
     
     // Create preview URLs
@@ -240,7 +255,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Upload Images
+                  Upload Images (Max 5 images, 5MB each)
                 </label>
                 <input
                   type="file"
@@ -249,6 +264,9 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   onChange={handleImageChange}
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
+                <p className="text-xs text-gray-500 mt-1">
+                  Supported formats: JPG, PNG, GIF, WebP
+                </p>
               </div>
 
               {imagePreviews.length > 0 && (

@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function CheckoutForm({ cartData, clientSecret }) {
+export default function  ({ cartData, clientSecret }) {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();

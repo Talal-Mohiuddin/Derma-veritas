@@ -210,8 +210,8 @@ export default function Navbar() {
             <Image
               src="/image-removebg-preview_white.png"
               alt="Aesthetics Logo"
-              width={80}
-              height={80}
+              width={90}
+              height={90}
               priority
             />
           </div>

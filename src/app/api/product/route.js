@@ -129,29 +129,19 @@ export async function POST(request) {
       ingredients, servingSize, howToUse
     } = cleanFields;
 
-    // Handle uploaded images
+    // Handle uploaded images - convert to base64
     let images = [];
     if (files.length > 0) {
-      const uploadDir = path.join(process.cwd(), 'public/uploads/products');
-      
-      // Ensure upload directory exists
-      try {
-        await mkdir(uploadDir, { recursive: true });
-      } catch (error) {
-        // Directory might already exist
-      }
-
       for (const file of files) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        const filename = `${Date.now()}_${file.name}`;
-        const filepath = path.join(uploadDir, filename);
-        
-        await writeFile(filepath, buffer);
+        const base64 = buffer.toString('base64');
+        const mimeType = file.type || 'image/jpeg';
         
         images.push({
-          url: `/uploads/products/${filename}`,
-          altText: cleanFields.altText || ""
+          url: `data:${mimeType};base64,${base64}`,
+          altText: cleanFields.altText || "",
+          filename: file.name
         });
       }
     }
