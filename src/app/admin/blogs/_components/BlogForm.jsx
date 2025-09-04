@@ -48,10 +48,15 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
     const file = e.target.files[0];
     if (file) {
       // Validate file type
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+      const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/webp",
+      ];
       if (!allowedTypes.includes(file.type)) {
         toast.error("Invalid file type. Only JPEG, PNG, and WebP are allowed.");
-        e.target.value = '';
+        e.target.value = "";
         return;
       }
 
@@ -59,15 +64,9 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
       const maxSize = 5 * 1024 * 1024; // 5MB
       if (file.size > maxSize) {
         toast.error("File size too large. Maximum 5MB allowed.");
-        e.target.value = '';
+        e.target.value = "";
         return;
       }
-
-      console.log("Selected file:", {
-        name: file.name,
-        size: file.size,
-        type: file.type
-      });
 
       setFormData((prev) => ({ ...prev, coverImage: file }));
       const reader = new FileReader();
@@ -110,15 +109,6 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
       isEditing ? "Updating blog..." : "Creating blog..."
     );
 
-    console.log("Submitting form data:", {
-      ...formData,
-      coverImage: formData.coverImage ? {
-        name: formData.coverImage.name,
-        size: formData.coverImage.size,
-        type: formData.coverImage.type
-      } : null
-    });
-
     try {
       if (isEditing) {
         await updateBlogMutation.mutateAsync({
@@ -136,7 +126,9 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
     } catch (error) {
       console.error("Form submission error:", error);
       toast.dismiss(loadingToastId);
-      toast.error(error.message || "Something went wrong. Please try again. ❌");
+      toast.error(
+        error.message || "Something went wrong. Please try again. ❌"
+      );
     }
   };
 
@@ -244,8 +236,9 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                       setPreviewImage("");
                       setFormData((prev) => ({ ...prev, coverImage: null }));
                       // Reset file input
-                      const fileInput = document.querySelector('input[type="file"]');
-                      if (fileInput) fileInput.value = '';
+                      const fileInput =
+                        document.querySelector('input[type="file"]');
+                      if (fileInput) fileInput.value = "";
                     }}
                     className="text-red-600 hover:text-red-700 text-sm"
                   >
@@ -343,7 +336,8 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
               showAbove={false}
             />
             <p className="text-sm text-gray-500 mt-2">
-              Use the toolbar to format your content with headings, lists, links, and more.
+              Use the toolbar to format your content with headings, lists,
+              links, and more.
             </p>
           </div>
 

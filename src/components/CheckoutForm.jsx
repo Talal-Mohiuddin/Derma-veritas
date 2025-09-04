@@ -38,17 +38,17 @@ export default function CheckoutForm({ cartData, clientSecret }) {
     const { name, value } = e.target;
     if (name.startsWith("address.")) {
       const addressField = name.split(".")[1];
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         address: {
           ...prev.address,
-          [addressField]: value
-        }
+          [addressField]: value,
+        },
       }));
     } else {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
   };
@@ -95,7 +95,6 @@ export default function CheckoutForm({ cartData, clientSecret }) {
       // Payment succeeded
       toast.success("Payment successful! Redirecting...");
       window.location.href = "/checkout/success";
-
     } catch (error) {
       console.error("Payment error:", error);
       setError(error.message || "Payment failed");
@@ -105,22 +104,19 @@ export default function CheckoutForm({ cartData, clientSecret }) {
     }
   };
 
-  // Debug cart data to see the structure
-  console.log("Cart data in checkout:", cartData);
-  console.log("Products in cart:", cartData?.cart?.products);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/cart" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+            <Link
+              href="/cart"
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+            >
               <ArrowLeft className="w-5 h-5" />
               <span className="font-medium">Back to Cart</span>
             </Link>
-
-         
 
             <div className="w-24"></div>
           </div>
@@ -129,7 +125,9 @@ export default function CheckoutForm({ cartData, clientSecret }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-light text-gray-900 mb-2">Checkout</h1>
+          <h1 className="text-3xl md:text-4xl font-light text-gray-900 mb-2">
+            Checkout
+          </h1>
           <p className="text-gray-600">Complete your order</p>
         </div>
 
@@ -141,7 +139,9 @@ export default function CheckoutForm({ cartData, clientSecret }) {
               <div className="bg-white rounded-2xl shadow-sm">
                 <div className="p-6 border-b flex items-center gap-3">
                   <User className="w-5 h-5 text-gray-400" />
-                  <h2 className="text-xl font-semibold text-gray-900">Contact Information</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Contact Information
+                  </h2>
                 </div>
                 <div className="p-6 space-y-4">
                   <div className="grid md:grid-cols-2 gap-4">
@@ -194,7 +194,9 @@ export default function CheckoutForm({ cartData, clientSecret }) {
               <div className="bg-white rounded-2xl shadow-sm">
                 <div className="p-6 border-b flex items-center gap-3">
                   <MapPin className="w-5 h-5 text-gray-400" />
-                  <h2 className="text-xl font-semibold text-gray-900">Billing Address</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Billing Address
+                  </h2>
                 </div>
                 <div className="p-6 space-y-4">
                   <div>
@@ -274,11 +276,11 @@ export default function CheckoutForm({ cartData, clientSecret }) {
               <div className="bg-white rounded-2xl shadow-sm">
                 <div className="p-6 border-b flex items-center gap-3">
                   <CreditCard className="w-5 h-5 text-gray-400" />
-                  <h2 className="text-xl font-semibold text-gray-900">Payment Information</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Payment Information
+                  </h2>
                 </div>
-                <div className="p-6">
-                  {clientSecret && <PaymentElement />}
-                </div>
+                <div className="p-6">{clientSecret && <PaymentElement />}</div>
               </div>
 
               {error && (
@@ -293,7 +295,9 @@ export default function CheckoutForm({ cartData, clientSecret }) {
                 className="w-full bg-black text-white py-4 rounded-xl font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 <CreditCard className="w-5 h-5" />
-                {isLoading ? 'Processing...' : `Pay £${cartData?.cart?.totalPrice?.toFixed(2) || '0.00'}`}
+                {isLoading
+                  ? "Processing..."
+                  : `Pay £${cartData?.cart?.totalPrice?.toFixed(2) || "0.00"}`}
               </button>
             </form>
           </div>
@@ -302,23 +306,24 @@ export default function CheckoutForm({ cartData, clientSecret }) {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-sm sticky top-8">
               <div className="p-6 border-b">
-                <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
+                <h2 className="text-xl font-semibold text-gray-900">
+                  Order Summary
+                </h2>
               </div>
-              
+
               <div className="p-6">
                 <div className="space-y-4 mb-6">
                   {cartData?.cart?.products?.map((item) => {
-                    // Debug individual item
-                    console.log("Item in checkout:", item);
-                    console.log("Product details:", item.productDetails);
-                    console.log("Product price:", item.productDetails?.price);
-                    
+
                     // Try multiple ways to get the price
                     const price = item.productDetails?.price || item.price || 0;
                     const itemTotal = price * item.quantity;
-                    
+
                     return (
-                      <div key={item.productId} className="flex items-center gap-4">
+                      <div
+                        key={item.productId}
+                        className="flex items-center gap-4"
+                      >
                         <div className="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                           {item.productDetails?.images?.[0]?.url ? (
                             <Image
@@ -330,13 +335,15 @@ export default function CheckoutForm({ cartData, clientSecret }) {
                             />
                           ) : (
                             <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                              <span className="text-gray-400 text-xs">No Image</span>
+                              <span className="text-gray-400 text-xs">
+                                No Image
+                              </span>
                             </div>
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium text-gray-900 truncate">
-                            {item.productDetails?.name || 'Product'}
+                            {item.productDetails?.name || "Product"}
                           </h4>
                           <p className="text-sm text-gray-500">
                             Qty: {item.quantity}
@@ -354,11 +361,13 @@ export default function CheckoutForm({ cartData, clientSecret }) {
                     );
                   })}
                 </div>
-                
+
                 <div className="space-y-2 border-t pt-4">
                   <div className="flex justify-between text-gray-600">
                     <span>Subtotal</span>
-                    <span>£{cartData?.cart?.totalPrice?.toFixed(2) || '0.00'}</span>
+                    <span>
+                      £{cartData?.cart?.totalPrice?.toFixed(2) || "0.00"}
+                    </span>
                   </div>
                   <div className="flex justify-between text-gray-600">
                     <span>Shipping</span>
@@ -371,7 +380,9 @@ export default function CheckoutForm({ cartData, clientSecret }) {
                   <div className="border-t pt-2">
                     <div className="flex justify-between text-lg font-semibold text-gray-900">
                       <span>Total</span>
-                      <span>£{cartData?.cart?.totalPrice?.toFixed(2) || '0.00'}</span>
+                      <span>
+                        £{cartData?.cart?.totalPrice?.toFixed(2) || "0.00"}
+                      </span>
                     </div>
                   </div>
                 </div>

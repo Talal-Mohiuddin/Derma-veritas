@@ -12,7 +12,7 @@ export default function LoginPage() {
         <div className="text-center">
           <Link href="/">
             <Image
-              src="/image-removebg-preview.png"
+              src="/logo_black.png"
               alt="Logo"
               width={80}
               height={80}

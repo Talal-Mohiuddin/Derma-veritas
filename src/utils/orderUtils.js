@@ -1,5 +1,12 @@
 import { db } from "../config/db.js";
-import { collection, addDoc, doc, getDoc, updateDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  getDocs,
+} from "firebase/firestore";
 
 // Create order from Stripe webhook
 export async function createOrderFromStripe(session, metadata) {
@@ -22,7 +29,9 @@ export async function createOrderFromStripe(session, metadata) {
     const orderNumber = `ORD-${timestamp}-${ordersCount + 1}`;
 
     // Parse shipping address
-    const parsedShippingAddress = shippingAddress ? JSON.parse(shippingAddress) : {};
+    const parsedShippingAddress = shippingAddress
+      ? JSON.parse(shippingAddress)
+      : {};
 
     // Create order document
     const orderData = {
@@ -37,7 +46,7 @@ export async function createOrderFromStripe(session, metadata) {
       stripePaymentIntentId: session.payment_intent,
       currency: session.currency,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     const docRef = await addDoc(collection(db, "orders"), orderData);
@@ -46,19 +55,19 @@ export async function createOrderFromStripe(session, metadata) {
     if (orderProducts && orderProducts.length > 0) {
       const userRef = doc(db, "users", userId);
       const userSnap = await getDoc(userRef);
-      
+
       if (userSnap.exists()) {
         const userData = userSnap.data();
         const currentHistory = userData.Buyinghistory || [];
-        
-        const newHistoryItems = orderProducts.map(product => ({
+
+        const newHistoryItems = orderProducts.map((product) => ({
           productId: product.productId,
           date: new Date(),
-          orderNumber
+          orderNumber,
         }));
-        
+
         await updateDoc(userRef, {
-          Buyinghistory: [...currentHistory, ...newHistoryItems]
+          Buyinghistory: [...currentHistory, ...newHistoryItems],
         });
       }
     }
@@ -68,31 +77,31 @@ export async function createOrderFromStripe(session, metadata) {
       try {
         const productRef = doc(db, "products", product.productId);
         const productSnap = await getDoc(productRef);
-        
+
         if (productSnap.exists()) {
           const productData = productSnap.data();
           const currentStock = productData.stockQuantity || 0;
-          
+
           if (currentStock > 0) {
             await updateDoc(productRef, {
-              stockQuantity: Math.max(0, currentStock - product.quantity)
+              stockQuantity: Math.max(0, currentStock - product.quantity),
             });
           }
         }
       } catch (stockError) {
-        console.error(`Error updating stock for product ${product.productId}:`, stockError);
+        console.error(
+          `Error updating stock for product ${product.productId}:`,
+          stockError
+        );
         // Continue with other products even if one fails
       }
     }
 
-    console.log(`Order created successfully: ${orderNumber} for user: ${userId}`);
-    
     return {
       id: docRef.id,
       orderNumber,
-      ...orderData
+      ...orderData,
     };
-
   } catch (error) {
     console.error("Error creating order from Stripe:", error);
     throw error;
@@ -111,14 +120,14 @@ export function isValidOrderStatus(status) {
   const validStatuses = [
     "pending",
     "processing",
-    "shipped", 
+    "shipped",
     "delivered",
-    "cancelled"
+    "cancelled",
   ];
   return validStatuses.includes(status);
 }
 
-// Validate payment status  
+// Validate payment status
 export function isValidPaymentStatus(status) {
   const validStatuses = ["pending", "completed", "failed"];
   return validStatuses.includes(status);

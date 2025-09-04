@@ -48,7 +48,6 @@ export default function ReferralPortalPage() {
     data: userProfile,
     isLoading: profileLoading,
   } = useCurrentUserProfile(user?.uid);
-  console.log("User Profile:", userProfile);
 
   const copyToClipboard = () => {
     if (referralData?.referralLink) {

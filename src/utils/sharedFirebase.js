@@ -37,16 +37,21 @@ export async function generateUniqueReferralCode() {
   return code;
 }
 
-export async function createUserDocumentWithReferral(user, userData, referredBy) {
+export async function createUserDocumentWithReferral(
+  user,
+  userData,
+  referredBy
+) {
   try {
     const db = getFirestore();
-    
+
     // Check if user document already exists
     const userDocRef = doc(db, "users", user.uid);
-    const userDoc = await getDocs(query(collection(db, "users"), where("email", "==", user.email)));
-    
+    const userDoc = await getDocs(
+      query(collection(db, "users"), where("email", "==", user.email))
+    );
+
     if (!userDoc.empty) {
-      console.log("User document already exists");
       return;
     }
 
@@ -58,7 +63,10 @@ export async function createUserDocumentWithReferral(user, userData, referredBy)
 
     // If referred, update the referrer's referrals array
     if (referredBy) {
-      const referrerQuery = query(collection(db, "users"), where("referralCode", "==", referredBy));
+      const referrerQuery = query(
+        collection(db, "users"),
+        where("referralCode", "==", referredBy)
+      );
       const referrerSnapshot = await getDocs(referrerQuery);
       if (!referrerSnapshot.empty) {
         const referrerDoc = referrerSnapshot.docs[0];
@@ -73,8 +81,6 @@ export async function createUserDocumentWithReferral(user, userData, referredBy)
         });
       }
     }
-
-    console.log("User document created successfully with referral tracking");
   } catch (error) {
     console.error("Error creating user document:", error);
     throw error;

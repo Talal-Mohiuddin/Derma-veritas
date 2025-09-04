@@ -16,10 +16,43 @@ export default function ContactPage() {
     ageConfirm: false,
   });
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/user/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ type: 'success', message: 'Message sent successfully! We\'ll get back to you soon.' });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+          newsletter: false,
+          ageConfirm: false,
+        });
+      } else {
+        setSubmitStatus({ type: 'error', message: result.error || 'Failed to send message. Please try again.' });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: 'Network error. Please check your connection and try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -72,6 +105,17 @@ export default function ContactPage() {
 
           {/* Right Side - Contact Form */}
           <div className="space-y-6">
+            {/* Status Message */}
+            {submitStatus && (
+              <div className={`p-4 rounded-lg ${
+                submitStatus.type === 'success' 
+                  ? 'bg-green-50 text-green-800 border border-green-200' 
+                  : 'bg-red-50 text-red-800 border border-red-200'
+              }`}>
+                {submitStatus.message}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Field */}
               <div className="space-y-2">
@@ -172,9 +216,10 @@ export default function ContactPage() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+                disabled={isSubmitting}
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                SEND MESSAGE
+                {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
               </Button>
             </form>
           </div>

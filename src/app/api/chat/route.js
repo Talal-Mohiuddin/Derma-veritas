@@ -94,7 +94,6 @@ ALWAYS RETURN THE RESPONSE IN MARKDOWN FORMAT.
 export async function POST(req) {
   try {
     const { messages } = await req.json();
-    console.log("Received messages:", messages);
 
     const response = streamText({
       model,

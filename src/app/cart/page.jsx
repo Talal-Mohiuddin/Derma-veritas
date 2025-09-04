@@ -2,9 +2,21 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useCartData, useUpdateCartQuantity, useRemoveFromCart, useClearCart } from "@/hooks/useCart";
+import {
+  useCartData,
+  useUpdateCartQuantity,
+  useRemoveFromCart,
+  useClearCart,
+} from "@/hooks/useCart";
 import { useAuth } from "@/store/FirebaseAuthProvider";
-import { ArrowLeft, Plus, Minus, Trash2, ShoppingBag, CreditCard } from "lucide-react";
+import {
+  ArrowLeft,
+  Plus,
+  Minus,
+  Trash2,
+  ShoppingBag,
+  CreditCard,
+} from "lucide-react";
 import { toast } from "sonner";
 import { useMemo } from "react";
 
@@ -16,35 +28,31 @@ export default function CartPage() {
   const clearCartMutation = useClearCart();
 
   // Debug cart data
-  console.log("Cart data:", cartData);
   if (cartData?.cart?.products) {
-    console.log("Cart products:", cartData.cart.products);
-    cartData.cart.products.forEach((product, index) => {
-      console.log(`Product ${index}:`, product);
-      console.log(`Product details:`, product.productDetails);
-      console.log(`Product price:`, product.productDetails?.price || product.price);
-    });
+    cartData.cart.products.forEach((product, index) => {});
   }
 
   // Calculate totals reactively
   const cartTotals = useMemo(() => {
-    if (!cartData?.cart?.products) return { subtotal: 0, total: 0, itemCount: 0 };
-    
+    if (!cartData?.cart?.products)
+      return { subtotal: 0, total: 0, itemCount: 0 };
+
     const subtotal = cartData.cart.products.reduce((total, item) => {
       // Try multiple ways to get the price
       const price = item.productDetails?.price || item.price || 0;
-      console.log(`Calculating for item ${item.productId}: price=${price}, quantity=${item.quantity}`);
-      return total + (price * item.quantity);
+
+      return total + price * item.quantity;
     }, 0);
-    
-    const itemCount = cartData.cart.products.reduce((count, item) => count + item.quantity, 0);
-    
-    console.log("Calculated totals:", { subtotal, itemCount });
-    
+
+    const itemCount = cartData.cart.products.reduce(
+      (count, item) => count + item.quantity,
+      0
+    );
+
     return {
       subtotal,
       total: subtotal, // Add tax/shipping calculations here if needed
-      itemCount
+      itemCount,
     };
   }, [cartData?.cart?.products]);
 
@@ -55,7 +63,10 @@ export default function CartPage() {
         await removeItemMutation.mutateAsync({ productId, quantity: 999 }); // Remove all
         toast.success("Item removed from cart");
       } else {
-        await updateQuantityMutation.mutateAsync({ productId, quantity: newQuantity });
+        await updateQuantityMutation.mutateAsync({
+          productId,
+          quantity: newQuantity,
+        });
       }
     } catch (error) {
       toast.error("Failed to update quantity");
@@ -85,9 +96,16 @@ export default function CartPage() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
         <div className="bg-white rounded-2xl p-8 max-w-md mx-auto text-center shadow-xl">
           <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">Please Sign In</h2>
-          <p className="text-gray-600 mb-6">You need to be signed in to view your cart</p>
-          <Link href="/login" className="bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition-colors">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+            Please Sign In
+          </h2>
+          <p className="text-gray-600 mb-6">
+            You need to be signed in to view your cart
+          </p>
+          <Link
+            href="/login"
+            className="bg-black text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition-colors"
+          >
             Sign In
           </Link>
         </div>
@@ -101,12 +119,13 @@ export default function CartPage() {
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <Link href="/shop" className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors">
+            <Link
+              href="/shop"
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+            >
               <ArrowLeft className="w-5 h-5" />
               <span className="font-medium">Continue Shopping</span>
             </Link>
-
-           
 
             <div className="w-24"></div>
           </div>
@@ -115,8 +134,12 @@ export default function CartPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-light text-gray-900 mb-2">Shopping Cart</h1>
-          <p className="text-gray-600">Review your items and proceed to checkout</p>
+          <h1 className="text-3xl md:text-4xl font-light text-gray-900 mb-2">
+            Shopping Cart
+          </h1>
+          <p className="text-gray-600">
+            Review your items and proceed to checkout
+          </p>
         </div>
 
         {isLoading ? (
@@ -138,9 +161,16 @@ export default function CartPage() {
         ) : !cartData?.cart?.products?.length ? (
           <div className="bg-white rounded-2xl p-12 text-center">
             <ShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Your cart is empty</h2>
-            <p className="text-gray-600 mb-8">Discover our amazing skincare products and treatments</p>
-            <Link href="/shop" className="bg-black text-white px-8 py-4 rounded-xl font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+              Your cart is empty
+            </h2>
+            <p className="text-gray-600 mb-8">
+              Discover our amazing skincare products and treatments
+            </p>
+            <Link
+              href="/shop"
+              className="bg-black text-white px-8 py-4 rounded-xl font-medium hover:bg-gray-800 transition-colors inline-flex items-center gap-2"
+            >
               <ShoppingBag className="w-5 h-5" />
               Start Shopping
             </Link>
@@ -164,18 +194,23 @@ export default function CartPage() {
                     </button>
                   )}
                 </div>
-                
+
                 <div className="divide-y divide-gray-100">
                   {cartData.cart.products.map((item) => {
                     // Try multiple ways to get the price
                     const price = item.productDetails?.price || item.price || 0;
                     const itemTotal = price * item.quantity;
-                    const isUpdating = updateQuantityMutation.isPending || removeItemMutation.isPending;
-                    
-                    console.log(`Rendering item ${item.productId}: price=${price}, total=${itemTotal}`);
-                    
+                    const isUpdating =
+                      updateQuantityMutation.isPending ||
+                      removeItemMutation.isPending;
+
                     return (
-                      <div key={item.productId} className={`p-6 hover:bg-gray-50 transition-colors ${isUpdating ? 'opacity-60' : ''}`}>
+                      <div
+                        key={item.productId}
+                        className={`p-6 hover:bg-gray-50 transition-colors ${
+                          isUpdating ? "opacity-60" : ""
+                        }`}
+                      >
                         <div className="flex items-center gap-4">
                           {/* Product Image */}
                           <div className="w-20 h-20 bg-gray-100 rounded-xl overflow-hidden flex-shrink-0">
@@ -189,7 +224,9 @@ export default function CartPage() {
                               />
                             ) : (
                               <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                                <span className="text-gray-400 text-xs">No Image</span>
+                                <span className="text-gray-400 text-xs">
+                                  No Image
+                                </span>
                               </div>
                             )}
                           </div>
@@ -197,7 +234,7 @@ export default function CartPage() {
                           {/* Product Info */}
                           <div className="flex-1 min-w-0">
                             <h3 className="font-semibold text-gray-900 truncate">
-                              {item.productDetails?.name || 'Product'}
+                              {item.productDetails?.name || "Product"}
                             </h3>
                             <p className="text-gray-600 text-sm mt-1 line-clamp-2">
                               {item.productDetails?.description}
@@ -205,15 +242,18 @@ export default function CartPage() {
                             <p className="text-lg font-semibold text-gray-900 mt-2">
                               £{price.toFixed(2)}
                             </p>
-                            <p className="text-xs text-gray-500">
-                              Unit price
-                            </p>
+                            <p className="text-xs text-gray-500">Unit price</p>
                           </div>
 
                           {/* Quantity Controls */}
                           <div className="flex items-center border rounded-xl overflow-hidden">
                             <button
-                              onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                              onClick={() =>
+                                updateQuantity(
+                                  item.productId,
+                                  item.quantity - 1
+                                )
+                              }
                               disabled={isUpdating}
                               className="px-3 py-2 hover:bg-gray-100 transition-colors disabled:opacity-50"
                             >
@@ -223,7 +263,12 @@ export default function CartPage() {
                               {item.quantity}
                             </span>
                             <button
-                              onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                              onClick={() =>
+                                updateQuantity(
+                                  item.productId,
+                                  item.quantity + 1
+                                )
+                              }
                               disabled={isUpdating}
                               className="px-3 py-2 hover:bg-gray-100 transition-colors disabled:opacity-50"
                             >
@@ -261,9 +306,11 @@ export default function CartPage() {
             <div className="lg:col-span-1">
               <div className="bg-white rounded-2xl shadow-sm sticky top-8">
                 <div className="p-6 border-b">
-                  <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Order Summary
+                  </h2>
                 </div>
-                
+
                 <div className="p-6 space-y-4">
                   <div className="flex justify-between text-gray-600">
                     <span>Subtotal</span>
@@ -293,7 +340,7 @@ export default function CartPage() {
                     <CreditCard className="w-5 h-5" />
                     Proceed to Checkout
                   </Link>
-                  
+
                   <p className="text-xs text-gray-500 text-center mt-4">
                     Secure checkout powered by Stripe
                   </p>

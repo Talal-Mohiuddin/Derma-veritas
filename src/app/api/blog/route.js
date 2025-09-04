@@ -175,13 +175,11 @@ export async function POST(request) {
 
         // Create directory if it doesn't exist
         if (!existsSync(uploadDir)) {
-          console.log("Creating upload directory...");
           await mkdir(uploadDir, { recursive: true });
         }
 
         await writeFile(filepath, buffer);
         coverImage = `/uploads/blogs/${filename}`;
-        console.log("File uploaded successfully:", coverImage);
       } catch (uploadError) {
         console.error("File upload error:", uploadError);
         return NextResponse.json(

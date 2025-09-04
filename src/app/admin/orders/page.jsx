@@ -26,34 +26,37 @@ import OrderDetailsModal from "./_components/OrderDetailsModal";
 // Utility function to convert Firestore timestamp to Date
 const convertTimestamp = (timestamp) => {
   if (!timestamp) return null;
-  
+
   // If it's already a Date object, return it
   if (timestamp instanceof Date) return timestamp;
-  
+
   // If it's a Firestore timestamp object
-  if (timestamp && typeof timestamp === 'object' && timestamp.seconds) {
-    return new Date(timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000));
+  if (timestamp && typeof timestamp === "object" && timestamp.seconds) {
+    return new Date(
+      timestamp.seconds * 1000 + Math.floor(timestamp.nanoseconds / 1000000)
+    );
   }
-  
+
   // If it's a string, try to parse it
-  if (typeof timestamp === 'string') {
+  if (typeof timestamp === "string") {
     return new Date(timestamp);
   }
-  
+
   return null;
 };
 
 // Utility function to process order data and convert timestamps
 const processOrderData = (orders) => {
-  return orders.map(order => ({
+  return orders.map((order) => ({
     ...order,
     createdAt: convertTimestamp(order.createdAt),
     updatedAt: convertTimestamp(order.updatedAt),
     paidAt: convertTimestamp(order.paidAt),
-    products: order.products?.map(product => ({
-      ...product,
-      addedAt: convertTimestamp(product.addedAt)
-    })) || []
+    products:
+      order.products?.map((product) => ({
+        ...product,
+        addedAt: convertTimestamp(product.addedAt),
+      })) || [],
   }));
 };
 
@@ -74,13 +77,7 @@ export default function OrdersPage() {
     return () => clearTimeout(timer);
   }, [searchTerm]);
 
-  const {
-    data: ordersData,
-    isLoading,
-    error,
-    refetch,
-  } = useOrdersData(true); // Pass true to get all orders (admin view)
-  console.log("Fetched orders data:", ordersData);
+  const { data: ordersData, isLoading, error, refetch } = useOrdersData(true); // Pass true to get all orders (admin view)
 
   const updateStatusMutation = useUpdateOrderStatus();
   const deleteOrderMutation = useDeleteOrder();
@@ -89,19 +86,30 @@ export default function OrdersPage() {
 
   // Filter orders
   const filteredOrders = orders.filter((order) => {
-    const matchesSearch = 
+    const matchesSearch =
       !debouncedSearch ||
-      order.orderNumber?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      order.userDetails?.name?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
-      order.userDetails?.email?.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      order.orderNumber
+        ?.toLowerCase()
+        .includes(debouncedSearch.toLowerCase()) ||
+      order.userDetails?.name
+        ?.toLowerCase()
+        .includes(debouncedSearch.toLowerCase()) ||
+      order.userDetails?.email
+        ?.toLowerCase()
+        .includes(debouncedSearch.toLowerCase()) ||
       order.id?.toLowerCase().includes(debouncedSearch.toLowerCase());
 
-    const matchesStatus = statusFilter === "all" || order.status === statusFilter;
-    
-    const matchesPaymentStatus = 
-      paymentStatusFilter === "all" || 
-      (paymentStatusFilter === "paid" && (order.paymentStatus === "paid" || order.paymentStatus === "completed")) ||
-      (paymentStatusFilter === "pending" && order.paymentStatus !== "paid" && order.paymentStatus !== "completed");
+    const matchesStatus =
+      statusFilter === "all" || order.status === statusFilter;
+
+    const matchesPaymentStatus =
+      paymentStatusFilter === "all" ||
+      (paymentStatusFilter === "paid" &&
+        (order.paymentStatus === "paid" ||
+          order.paymentStatus === "completed")) ||
+      (paymentStatusFilter === "pending" &&
+        order.paymentStatus !== "paid" &&
+        order.paymentStatus !== "completed");
 
     return matchesSearch && matchesStatus && matchesPaymentStatus;
   });
@@ -115,7 +123,9 @@ export default function OrdersPage() {
     delivered: orders.filter((o) => o.status === "delivered").length,
     cancelled: orders.filter((o) => o.status === "cancelled").length,
     totalRevenue: orders.reduce((sum, o) => sum + (o.totalAmount || 0), 0),
-    paidOrders: orders.filter((o) => o.paymentStatus === "paid" || o.paymentStatus === "completed").length,
+    paidOrders: orders.filter(
+      (o) => o.paymentStatus === "paid" || o.paymentStatus === "completed"
+    ).length,
   };
 
   const handleUpdateStatus = async (orderId, status) => {
@@ -128,7 +138,11 @@ export default function OrdersPage() {
   };
 
   const handleDeleteOrder = async (orderId) => {
-    if (!confirm("Are you sure you want to delete this order? This action cannot be undone.")) {
+    if (
+      !confirm(
+        "Are you sure you want to delete this order? This action cannot be undone."
+      )
+    ) {
       return;
     }
 
@@ -162,8 +176,12 @@ export default function OrdersPage() {
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
-          <div className="text-xl font-semibold text-gray-700 mb-2">Loading Orders...</div>
-          <div className="text-gray-500">Please wait while we fetch the data</div>
+          <div className="text-xl font-semibold text-gray-700 mb-2">
+            Loading Orders...
+          </div>
+          <div className="text-gray-500">
+            Please wait while we fetch the data
+          </div>
         </div>
       </div>
     );
@@ -207,7 +225,9 @@ export default function OrdersPage() {
           <div className="flex items-center justify-between mb-2">
             <ShoppingBag className="w-8 h-8 text-purple-600" />
           </div>
-          <div className="text-2xl font-bold text-purple-600">{stats.total}</div>
+          <div className="text-2xl font-bold text-purple-600">
+            {stats.total}
+          </div>
           <div className="text-sm text-gray-600">Total Orders</div>
         </div>
 
@@ -215,7 +235,9 @@ export default function OrdersPage() {
           <div className="flex items-center justify-between mb-2">
             <DollarSign className="w-8 h-8 text-green-600" />
           </div>
-          <div className="text-2xl font-bold text-green-600">{formatCurrency(stats.totalRevenue)}</div>
+          <div className="text-2xl font-bold text-green-600">
+            {formatCurrency(stats.totalRevenue)}
+          </div>
           <div className="text-sm text-gray-600">Total Revenue</div>
         </div>
 
@@ -223,7 +245,9 @@ export default function OrdersPage() {
           <div className="flex items-center justify-between mb-2">
             <CheckCircle className="w-8 h-8 text-blue-600" />
           </div>
-          <div className="text-2xl font-bold text-blue-600">{stats.paidOrders}</div>
+          <div className="text-2xl font-bold text-blue-600">
+            {stats.paidOrders}
+          </div>
           <div className="text-sm text-gray-600">Paid Orders</div>
         </div>
 
@@ -231,33 +255,47 @@ export default function OrdersPage() {
           <div className="flex items-center justify-between mb-2">
             <Package className="w-8 h-8 text-orange-600" />
           </div>
-          <div className="text-2xl font-bold text-orange-600">{stats.delivered}</div>
+          <div className="text-2xl font-bold text-orange-600">
+            {stats.delivered}
+          </div>
           <div className="text-sm text-gray-600">Delivered</div>
         </div>
       </div>
 
       {/* Status Overview */}
       <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
-        <h3 className="font-semibold text-gray-900 mb-4">Order Status Overview</h3>
+        <h3 className="font-semibold text-gray-900 mb-4">
+          Order Status Overview
+        </h3>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-yellow-600">{stats.pending}</div>
+            <div className="text-2xl font-bold text-yellow-600">
+              {stats.pending}
+            </div>
             <div className="text-sm text-gray-600">Pending</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">{stats.processing}</div>
+            <div className="text-2xl font-bold text-blue-600">
+              {stats.processing}
+            </div>
             <div className="text-sm text-gray-600">Processing</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-600">{stats.shipped}</div>
+            <div className="text-2xl font-bold text-purple-600">
+              {stats.shipped}
+            </div>
             <div className="text-sm text-gray-600">Shipped</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-green-600">{stats.delivered}</div>
+            <div className="text-2xl font-bold text-green-600">
+              {stats.delivered}
+            </div>
             <div className="text-sm text-gray-600">Delivered</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-red-600">{stats.cancelled}</div>
+            <div className="text-2xl font-bold text-red-600">
+              {stats.cancelled}
+            </div>
             <div className="text-sm text-gray-600">Cancelled</div>
           </div>
         </div>
@@ -318,9 +356,13 @@ export default function OrdersPage() {
       {filteredOrders.length === 0 ? (
         <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
           <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No Orders Found</h3>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+            No Orders Found
+          </h3>
           <p className="text-gray-600">
-            {searchTerm || statusFilter !== "all" || paymentStatusFilter !== "all"
+            {searchTerm ||
+            statusFilter !== "all" ||
+            paymentStatusFilter !== "all"
               ? "No orders match your current filters"
               : "No orders have been placed yet"}
           </p>

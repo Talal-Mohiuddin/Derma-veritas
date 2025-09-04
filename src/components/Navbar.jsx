@@ -208,7 +208,7 @@ export default function Navbar() {
             onClick={() => (window.location.href = "/")}
           >
             <Image
-              src="/image-removebg-preview_white.png"
+              src={isScrolled || isHomePage ? "/logo_white.png" : "/logo_black.png"}
               alt="Aesthetics Logo"
               width={90}
               height={90}
