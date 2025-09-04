@@ -235,7 +235,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 lg:order-2">
             <h2 className="text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
-              Trusted medical care under the leadership of Dr. Mofashir Nawaz.{" "}
+              Expert skin and hair care under the leadership of Dr. Mofashir
+              Nawaz.{" "}
             </h2>
             <p className="text-gray-600 leading-relaxed">
               Derma Veritas offers medically-led skin and dermatology clinic in

@@ -74,6 +74,11 @@ export default function Navbar() {
 
   // Function to determine treatment based on current page
   const getCurrentTreatment = () => {
+    // Handle packages - fix the path matching
+    if (pathname.includes("/packages/profusion") || pathname === "/pacakges/profusion") {
+      return "profusion-hydrafacial";
+    }
+
     // Handle injectable treatments
     if (pathname.includes("/menu/injectables/")) {
       const treatmentSlug = pathname.split("/menu/injectables/")[1];

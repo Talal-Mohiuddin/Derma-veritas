@@ -388,6 +388,39 @@ export function BookingModal({
         },
       ],
     },
+    "profusion-hydrafacial": {
+      name: "ProFusion HydraFacial - Advanced Skin Rejuvenation",
+      options: [
+        {
+          id: "signature-rf",
+          name: "Signature + RF (40 min)",
+          price: "£150",
+          description:
+            "Cleanse, exfoliate, extraction, hydration + RF tightening. Package: £750 for 6 sessions",
+        },
+        {
+          id: "deluxe-rf",
+          name: "Deluxe + RF (50 min)",
+          price: "£180",
+          description:
+            "Signature + custom booster serum + LED therapy + RF. Package: £900 for 6 sessions",
+        },
+        {
+          id: "platinum-rf",
+          name: "Platinum + RF (70 min)",
+          price: "£210",
+          description:
+            "Deluxe + lymphatic drainage + advanced RF lifting. Package: £1,050 for 6 sessions",
+        },
+        {
+          id: "elite-cellular",
+          name: "Elite – Cellular Repair & Lift (75 min)",
+          price: "£250",
+          description:
+            "Platinum + enhanced serums + deep RF collagen stimulation. Package: £1,250 for 6 sessions",
+        },
+      ],
+    },
   };
 
   // Auto-fill user info when logged in
@@ -621,6 +654,9 @@ export function BookingModal({
                     </SelectItem>
                     <SelectItem value="endolift" className="pl-6">
                       Endolift
+                    </SelectItem>
+                    <SelectItem value="profusion-hydrafacial" className="pl-6">
+                      ProFusion HydraFacial
                     </SelectItem>
 
                     {/* Wellness */}

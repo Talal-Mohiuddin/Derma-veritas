@@ -398,7 +398,7 @@ export default function DermalFillersSection() {
                 <h3 className="text-xl font-semibold text-gray-900">
                   Dermal Filler Treatments
                 </h3>
-                <button className="px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button className="px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg">
                   BOOK NOW
                 </button>
               </div>
@@ -446,7 +446,7 @@ export default function DermalFillersSection() {
                 <h3 className="text-xl font-semibold text-gray-900">
                   Premium Treatments
                 </h3>
-                <button className="px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button className="px-4 py-2 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg">
                   BOOK NOW
                 </button>
               </div>
