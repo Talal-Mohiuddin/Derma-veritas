@@ -50,15 +50,22 @@ export async function POST(req) {
   // Handle subscription creation
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
+    console.log("Processing checkout.session.completed event");
+    console.log("Session ID:", session.id);
+    console.log("Session metadata:", session.metadata);
+    console.log("Session mode:", session.mode);
+    console.log("Payment status:", session.payment_status);
 
     try {
       const metadata = session.metadata || {};
       const { userId, planName, orderType, monthlyPrice } = metadata;
 
-      console.log("Webhook metadata:", metadata);
+      console.log("Extracted metadata:", { userId, planName, orderType, monthlyPrice });
 
       // Handle membership subscription
       if (orderType === "membership_subscription" && userId && planName) {
+        console.log(`Processing membership subscription for user ${userId}, plan: ${planName}`);
+        
         try {
           const validPlans = ["Veritas Glow", "Veritas Sculpt", "Veritas Prestige"];
           if (!validPlans.includes(planName)) {
@@ -80,6 +87,8 @@ export async function POST(req) {
             }, { status: 404 });
           }
 
+          console.log(`User found, updating membership for user: ${userId}`);
+
           // Update user with membership plan and subscription info
           await updateDoc(userRef, {
             membershipPlan: planName,
@@ -97,23 +106,37 @@ export async function POST(req) {
             updatedAt: new Date(),
           });
 
-          console.log(`Created subscription for plan ${planName} for user: ${userId}`);
+          console.log(`Successfully created subscription for plan ${planName} for user: ${userId}`);
           return Response.json({
             success: true,
             message: "Membership subscription activated successfully",
             plan: planName,
+            userId: userId,
           });
         } catch (error) {
           console.error(`Error processing membership subscription: ${error.message}`);
+          console.error("Full error:", error);
           return Response.json({
             success: false,
             message: "Error processing membership subscription",
             error: error.message,
           }, { status: 500 });
         }
+      } else {
+        console.log("Not a membership subscription or missing required metadata");
+        console.log("OrderType:", orderType);
+        console.log("UserId:", userId);
+        console.log("PlanName:", planName);
+        
+        // Return success for non-membership events to avoid retries
+        return Response.json({
+          success: true,
+          message: "Event processed - not a membership subscription",
+        });
       }
     } catch (error) {
       console.error(`Error processing webhook: ${error.message}`);
+      console.error("Full error:", error);
       return Response.json({
         success: false,
         message: `Webhook processing failed: ${error.message}`,
@@ -121,9 +144,11 @@ export async function POST(req) {
     }
   }
 
+  console.log(`Received event type: ${event.type} - acknowledging`);
   // Acknowledge other events
   return Response.json({
     success: true,
     message: "Event received",
+    eventType: event.type,
   });
 }
