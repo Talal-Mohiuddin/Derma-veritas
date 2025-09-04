@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   const sig = req.headers.get("stripe-signature");
-  const webhookSecret = process.env.STRIPE_SECRET_WEBHOOK_SECRET;
+  const webhookSecret = process.env.STRIPE_SECRET_WEBHOOK_SECRET?.trim();
   
   // Get the raw body
   const body = await req.text();
