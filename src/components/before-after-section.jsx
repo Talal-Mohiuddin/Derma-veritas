@@ -9,50 +9,32 @@ const treatments = [
     id: 1,
     title: "Temple Hollow Injections",
     image: "/images/temple.png",
-    hasVideo: true,
-    videoUrl:
-      "https://www.dropbox.com/scl/fo/k3bry0f2j8u5e5250laql/AAEkgvlGwrifRQmo-EL_69Y?dl=0&e=2&preview=EndoliftX%C2%AE%2BProcedure.mp4&rlkey=vg70w8gspccmgn1u31odzfxdv&st=ya723am1",
   },
   {
     id: 2,
     title: "Non-Surgical Rhinoplasty",
     image: "/images/non-surgical.png",
-    hasVideo: true,
-    videoUrl:
-      "https://www.dropbox.com/scl/fo/k3bry0f2j8u5e5250laql/AAEkgvlGwrifRQmo-EL_69Y?dl=0&e=2&preview=Endolift%2BSTORIES%2BENG.mov&rlkey=vg70w8gspccmgn1u31odzfxdv&st=ya723am1",
   },
   {
     id: 3,
     title: "Over Injected Fillers",
     image: "/images/over.png",
-    hasVideo: true,
     featured: true,
-    videoUrl:
-      "https://www.dropbox.com/scl/fo/k3bry0f2j8u5e5250laql/AAEkgvlGwrifRQmo-EL_69Y?dl=0&e=2&preview=Treatment%2Bline.mp4&rlkey=vg70w8gspccmgn1u31odzfxdv&st=ya723am1",
   },
   {
     id: 4,
     title: "Hyperhidrosis Treatment",
     image: "/images/sample_image.jpg",
-    hasVideo: true,
-    videoUrl:
-      "https://www.dropbox.com/scl/fo/k3bry0f2j8u5e5250laql/AAEkgvlGwrifRQmo-EL_69Y?dl=0&e=2&preview=20210303%2BEVERMOOVE%2BPOST%2BENG.mov&rlkey=vg70w8gspccmgn1u31odzfxdv&st=ya723am1",
   },
   {
     id: 5,
     title: "Lip Enhancement",
     image: "/images/lip-enhacement.png",
-    hasVideo: true,
-    videoUrl:
-      "https://www.dropbox.com/scl/fo/k3bry0f2j8u5e5250laql/AAEkgvlGwrifRQmo-EL_69Y?dl=0&e=2&preview=Promo%2B7.mov&rlkey=vg70w8gspccmgn1u31odzfxdv&st=ya723am1",
   },
   {
     id: 6,
     title: "Jawline Contouring",
     image: "/images/jawline.png",
-    hasVideo: true,
-    videoUrl:
-      "https://www.dropbox.com/scl/fo/k3bry0f2j8u5e5250laql/AAEkgvlGwrifRQmo-EL_69Y?dl=0&e=2&preview=EndoliftX%C2%AE%2B%26%2BChristmas.mp4&rlkey=vg70w8gspccmgn1u31odzfxdv&st=ya723am1",
   },
 ];
 
