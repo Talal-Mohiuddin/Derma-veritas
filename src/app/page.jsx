@@ -72,8 +72,9 @@ export default function Home() {
       <main className="relative h-screen overflow-hidden">
         <div className="absolute inset-0 w-full h-full bg-black">
           <iframe
-            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${videoLoaded ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-500`}
+            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${
+              videoLoaded ? "opacity-100" : "opacity-0"
+            } transition-opacity duration-500`}
             src="https://www.youtube.com/embed/0T9C5RcoLMo?autoplay=1&mute=1&loop=1&playlist=0T9C5RcoLMo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&start=0&end=0&version=3&enablejsapi=1"
             title="Background Video"
             frameBorder="0"
@@ -270,149 +271,149 @@ export default function Home() {
       </section>
 
       {/* Popular Treatments */}
-     {/* Popular Treatments */}
-<section className="px-4 py-20 bg-[var(--section-bg)] text-[var(--section-fg)]">
-  <div className="max-w-7xl mx-auto">
-    <h2 className="text-3xl font-bold text-center mb-12">
-      Popular Treatments
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
-      {/* Endolift */}
-      <article className="flex gap-4 lg:border-r lg:pr-12 border-[var(--section-divider)]">
-        <svg
-          className="w-6 h-6 text-gray-400 mt-1 shrink-0"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M13 10V3L4 14h7v7l9-11h-7z"
-          />
-        </svg>
-        <div>
-          <h3 className="text-2xl font-semibold">Endolift</h3>
-          <p className="mt-3 text-gray-600">
-            A revolutionary laser treatment that stimulates collagen
-            production for natural-looking facial contouring.
-          </p>
-          <a
-            href="/treatments/Endolift"
-            className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
-          >
-            Learn more
-          </a>
-        </div>
-      </article>
+      {/* Popular Treatments */}
+      <section className="px-4 py-20 bg-[var(--section-bg)] text-[var(--section-fg)]">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Popular Treatments
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+            {/* Endolift */}
+            <article className="flex gap-4 lg:border-r lg:pr-12 border-[var(--section-divider)]">
+              <svg
+                className="w-6 h-6 text-gray-400 mt-1 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+              <div>
+                <h3 className="text-2xl font-semibold">Endolift</h3>
+                <p className="mt-3 text-gray-600">
+                  A revolutionary laser treatment that stimulates collagen
+                  production for natural-looking facial contouring.
+                </p>
+                <a
+                  href="/treatments/Endolift"
+                  className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
+                >
+                  Learn more
+                </a>
+              </div>
+            </article>
 
-      {/* CO2 Laser */}
-      <article className="flex gap-4 lg:border-r lg:pr-12 border-[var(--section-divider)]">
-        <svg
-          className="w-6 h-6 text-gray-400 mt-1 shrink-0"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
-          />
-        </svg>
-        <div>
-          <h3 className="text-2xl font-semibold">CO₂ Fractional Laser</h3>
-          <p className="mt-3 text-gray-600">
-            Advanced laser resurfacing treatment that addresses skin
-            imperfections, wrinkles, and scars.
-          </p>
-          <a
-            href="/treatments/co2"
-            className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
-          >
-            Learn more
-          </a>
-        </div>
-      </article>
+            {/* CO2 Laser */}
+            <article className="flex gap-4 lg:border-r lg:pr-12 border-[var(--section-divider)]">
+              <svg
+                className="w-6 h-6 text-gray-400 mt-1 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+                />
+              </svg>
+              <div>
+                <h3 className="text-2xl font-semibold">CO₂ Fractional Laser</h3>
+                <p className="mt-3 text-gray-600">
+                  Advanced laser resurfacing treatment that addresses skin
+                  imperfections, wrinkles, and scars.
+                </p>
+                <a
+                  href="/treatments/co2"
+                  className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
+                >
+                  Learn more
+                </a>
+              </div>
+            </article>
 
-      {/* Pro Fusion */}
-      <article className="flex gap-4 lg:border-r lg:pr-12 border-[var(--section-divider)]">
-        <svg
-          className="w-6 h-6 text-gray-400 mt-1 shrink-0"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-          />
-        </svg>
-        <div>
-          <h3 className="text-2xl font-semibold">Pro Fusion</h3>
-          <p className="mt-3 text-gray-600">
-            Advanced skin rejuvenation treatment that combines multiple
-            technologies for comprehensive results.
-          </p>
-          <a
-            href="/treatments/profusion"
-            className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
-          >
-            Learn more
-          </a>
-        </div>
-      </article>
+            {/* Pro Fusion */}
+            <article className="flex gap-4 lg:border-r lg:pr-12 border-[var(--section-divider)]">
+              <svg
+                className="w-6 h-6 text-gray-400 mt-1 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+              <div>
+                <h3 className="text-2xl font-semibold">Pro Fusion</h3>
+                <p className="mt-3 text-gray-600">
+                  Advanced skin rejuvenation treatment that combines multiple
+                  technologies for comprehensive results.
+                </p>
+                <a
+                  href="/pacakges/profusion"
+                  className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
+                >
+                  Learn more
+                </a>
+              </div>
+            </article>
 
-      {/* Quad Laser */}
-      <article className="flex gap-4">
-        <svg
-          className="w-6 h-6 text-gray-400 mt-1 shrink-0"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-        <div>
-          <h3 className="text-2xl font-semibold">Quad Laser</h3>
-          <p className="mt-3 text-gray-600">
-            State-of-the-art hair removal technology that targets hair
-            follicles with precision for lasting results.
-          </p>
-          <a
-            href="/treatments/quad-laser-hair-removal"
-            className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
-          >
-            Learn more
-          </a>
+            {/* Quad Laser */}
+            <article className="flex gap-4">
+              <svg
+                className="w-6 h-6 text-gray-400 mt-1 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+              <div>
+                <h3 className="text-2xl font-semibold">Quad Laser</h3>
+                <p className="mt-3 text-gray-600">
+                  State-of-the-art hair removal technology that targets hair
+                  follicles with precision for lasting results.
+                </p>
+                <a
+                  href="/treatments/quad-laser-hair-removal"
+                  className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
+                >
+                  Learn more
+                </a>
+              </div>
+            </article>
+          </div>
+
+          {/* All Treatments Button */}
+          <div className="text-center mt-16">
+            <a
+              href="/treatments"
+              className="inline-block px-6 py-3 bg-transparent border border-gray-300 text-black rounded-full font-medium hover:bg-gray-100 transition-colors"
+            >
+              View All Treatments
+            </a>
+          </div>
         </div>
-      </article>
-    </div>
-    
-    {/* All Treatments Button */}
-    <div className="text-center mt-16">
-      <a
-        href="/treatments"
-        className="inline-block px-6 py-3 bg-transparent border border-gray-300 text-black rounded-full font-medium hover:bg-gray-100 transition-colors"
-      >
-        View All Treatments
-      </a>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Treatments Section */}
       <section
