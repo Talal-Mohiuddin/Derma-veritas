@@ -38,10 +38,22 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const router = useRouter();
 
   const toggleSection = (section) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
+    setExpandedSections((prev) => {
+      const isCurrentlyExpanded = prev[section];
+      
+      // If the section is currently expanded, just close it
+      if (isCurrentlyExpanded) {
+        return {
+          ...prev,
+          [section]: false,
+        };
+      }
+      
+      // If opening a new section, close all others and open this one
+      return {
+        [section]: true,
+      };
+    });
   };
 
   const handleLogoutClick = async () => {
