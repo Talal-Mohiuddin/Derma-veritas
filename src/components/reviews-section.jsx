@@ -192,17 +192,13 @@ export default function ReviewsSection() {
               style={{ width: "90%" }}
             >
               <Card
-                className={`p-12  border border-gray-200  min-h-[400px] flex flex-col bg-gray-100 justify-between w-full transition-all rounded-2xl duration-300 ${
+                className={`p-12  border border-gray-200  min-h-[400px] flex flex-col bg-gray-200 justify-between w-full transition-all rounded-2xl duration-300 ${
                   index === currentReview
                     ? "scale-100 opacity-100"
                     : "scale-95 opacity-70"
                 }`}
                 style={{
                   boxShadow: "rgba(0, 0, 0, 0.1) -6px 8px 0px 0px",
-                  backgroundImage: "url('/review2.jpeg')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  backgroundRepeat: "no-repeat",
                 }}
               >
                 <div>
@@ -216,11 +212,11 @@ export default function ReviewsSection() {
                     ))}
                   </div>
 
-                  <h3 className="text-2xl font-bold text-white mb-6">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6">
                     {review.name}
                   </h3>
 
-                  <p className="text-white text-lg leading-relaxed font-medium">
+                  <p className="text-gray-700 text-lg leading-relaxed font-medium">
                     {review.text}
                   </p>
                 </div>

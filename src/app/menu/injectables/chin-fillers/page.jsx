@@ -274,7 +274,7 @@ export default function ChinFillerSection() {
                   <span className="text-sm text-gray-600">(0.5–1.0 ml)</span>
                 </div>
 
-                <button className="w-full relative py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide">
+                <button className="w-full relative py-3 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wide">
                   BOOK CONSULTATION
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>

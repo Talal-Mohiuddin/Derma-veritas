@@ -101,7 +101,7 @@ export default function MeetTheTeamPage() {
 
             <button
               onClick={() => setBookingOpen(true)}
-              className="bg-gray-800 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-gray-700 transition-colors"
+              className="bg-gray-800 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-gray-700 transition-colors rounded-lg"
             >
               BOOK A TREATMENT
             </button>
