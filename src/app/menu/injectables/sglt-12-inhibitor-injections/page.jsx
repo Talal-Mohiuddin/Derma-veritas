@@ -18,7 +18,9 @@ import {
 import {
   Play,
   CheckCircle,
+  RotateCcw,
   Clock,
+  Frown,
   TrendingDown,
   AlertTriangle,
   KeyRound as Pound,
@@ -40,29 +42,31 @@ export default function SGLTInhibitorPage() {
 
   const cardData = [
     {
-      heading: "Visible Results",
-      value: "Improved metabolic function",
+      heading: "Results Seen",
+      value: "Within Weeks",
+      description: "Gradual improvement over time",
       icon: TrendingDown,
     },
     {
       heading: "Results Last",
       value: "Varies with treatment plan",
-      icon: Clock,
+      icon: CheckCircle,
     },
     {
-      heading: "Treatment Frequency",
-      value: "Weekly or bi-weekly",
-      icon: Clock,
+      heading: "No. of Sessions",
+      value: "4-8 Treatments",
+      icon: RotateCcw,
     },
     {
       heading: "Procedure Time",
-      value: "Quick injection",
-      description: "Typically 15-20 minutes",
+      value: "15-20 Minutes",
+      icon: Clock,
     },
     {
-      heading: "Discomfort",
+      heading: "Pain",
       value: "Minimal",
-      icon: AlertTriangle,
+      description: "Quick injection",
+      icon: Frown,
     },
     {
       heading: "Downtime",
@@ -229,53 +233,116 @@ export default function SGLTInhibitorPage() {
           <div className="bg-white border border-gray-200 p-6 md:p-8 shadow-[-4px_4px_0_0_rgba(0,0,0,0.1)]">
             {/* Top Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mb-8">
-              {cardData.slice(0, 4).map((card, index) => (
-                <div key={index} className="text-center md:text-left">
-                  <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                    {card.icon && (
-                      <card.icon className="w-5 h-5 text-gray-600" />
-                    )}
-                    <span className="text-gray-600 text-sm font-light">
-                      {card.heading}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-light text-gray-900 mb-1">
-                    {card.value}
-                  </h3>
-                  {card.description && (
-                    <p className="text-gray-500 text-sm font-light">
-                      {card.description}
-                    </p>
-                  )}
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <TrendingDown className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[0].heading}
+                  </span>
                 </div>
-              ))}
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[0].value}
+                </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[0].description}
+                </p>
+              </div>
+
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <CheckCircle className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[1].heading}
+                  </span>
+                </div>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[1].value}
+                </h3>
+              </div>
+
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <RotateCcw className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[2].heading}
+                  </span>
+                </div>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[2].value}
+                </h3>
+              </div>
+
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <Clock className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[3].heading}
+                  </span>
+                </div>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[3].value}
+                </h3>
+              </div>
             </div>
 
             {/* Bottom Row */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
-              {cardData.slice(4, 8).map((card, index) => (
-                <div key={index} className="text-center md:text-left">
-                  <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                    {card.icon && (
-                      <card.icon className="w-5 h-5 text-gray-600" />
-                    )}
-                    <span className="text-gray-600 text-sm font-light">
-                      {card.heading}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-light text-gray-900">
-                    {card.value}
-                  </h3>
-                  {card.description && (
-                    <p
-                      onClick={scrollToPricing}
-                      className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
-                    >
-                      {card.description}
-                    </p>
-                  )}
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <Frown className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[4].heading}
+                  </span>
                 </div>
-              ))}
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[4].value}
+                </h3>
+                <p className="text-gray-500 text-sm font-light">
+                  {cardData[4].description}
+                </p>
+              </div>
+
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <TrendingDown className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[5].heading}
+                  </span>
+                </div>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[5].value}
+                </h3>
+              </div>
+
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <AlertTriangle className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[6].heading}
+                  </span>
+                </div>
+                <h3 className="text-lg font-light text-gray-900">
+                  {cardData[6].value}
+                </h3>
+              </div>
+
+              <div className="text-center md:text-left">
+                <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                  <Pound className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-600 text-sm font-light">
+                    {cardData[7].heading}
+                  </span>
+                </div>
+                <h3 className="text-lg font-light text-gray-900 mb-1">
+                  {cardData[7].value}
+                </h3>
+                <p 
+                  onClick={scrollToPricing}
+                  className="text-gray-500 text-sm font-light underline cursor-pointer hover:text-gray-700"
+                >
+                  {cardData[7].description}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -301,46 +368,48 @@ export default function SGLTInhibitorPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Mechanism of Action:
+                Benefits Include:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Blocks glucose reabsorption in the kidneys
+                  Supports weight management and fat reduction
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Encourages safe glucose excretion through urine
+                  Improves blood sugar regulation
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Promotes fat metabolism for energy
+                  Enhances energy and metabolic function
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Supports improved metabolic function
+                  Complements diet and exercise programs
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-gray-900">Benefits:</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                How It Works:
+              </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Supports weight management and fat reduction
+                  Blocks glucose reabsorption in the kidneys
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Improves blood sugar regulation
+                  Encourages safe glucose excretion through urine
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Enhances energy and metabolic function
+                  Promotes fat metabolism for energy
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Complements diet and exercise programs
+                  Supports improved metabolic function
                 </li>
               </ul>
             </div>

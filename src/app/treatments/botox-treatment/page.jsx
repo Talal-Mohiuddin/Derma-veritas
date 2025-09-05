@@ -199,7 +199,7 @@ export default function BotoxTreatmentSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/botox-treatment-consultation.png"
+                  src="https://tse2.mm.bing.net/th/id/OIP.Cz8MANYu6-VaXySiJf1T5AHaE8?cb=thfc1ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
                   alt="Professional botox treatment being administered"
                   className="w-full h-full object-cover"
                 />

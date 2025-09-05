@@ -253,10 +253,13 @@ export default function ProductListing() {
       <div className="relative bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex flex-col items-center justify-center text-center">
-            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mb-12">
-              <span className="text-white text-3xl font-bold">DV</span>
-            </div>
-
+            <div className="w-40 h-40 flex items-center justify-center mb-12">
+        <img 
+          src="/Derma Veritas Logo Design New File-01.svg" 
+          alt="Derma Veritas Logo" 
+          className="w-full h-full object-contain"
+        />
+      </div>
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
               <span className="text-black">Premium</span>{" "}
               <span className="text-gray-400">Skincare</span>
