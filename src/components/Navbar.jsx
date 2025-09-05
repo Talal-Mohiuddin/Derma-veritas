@@ -105,8 +105,6 @@ export default function Navbar() {
         "skin-boosters": "profhilo",
         
         "skinfill-bacio": "skinfill-bacio",
-        "sglt-inhibitor-injections": "sglt",
-        "sglt-12-inhibitor-injections": "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -131,7 +129,6 @@ export default function Navbar() {
         "v-hacker": "v-hacker",
         "hair-revitalizing": "revitalizing",
         exosignal: "exosignal",
-        sglt: "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }

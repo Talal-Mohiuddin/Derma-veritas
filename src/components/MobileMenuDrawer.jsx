@@ -127,7 +127,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "botox-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
         "skinfill-bacio": "skinfill-bacio",
-        "sglt-inhibitor-injections": "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -151,7 +150,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "v-hacker": "v-hacker",
         "hair-revitalizing": "revitalizing",
         exosignal: "exosignal",
-        sglt: "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -179,7 +177,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     "Botox Treatment",
     "Skin Boosters",
     "Skinfill™ Bacio",
-    "SGLT 1/2 Inhibitor Injections",
   ];
 
   const skincareLinks = [

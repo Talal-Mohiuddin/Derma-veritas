@@ -38,7 +38,6 @@ INJECTABLE TREATMENTS:
 - Botox Treatment
 - Skin Boosters
 - Skinfill™ Bacio (Professional lip booster with Vitamin B12 and HA)
-- SGLT 1/2 Inhibitor Injections (Metabolic therapy for weight management)
 
 SKINCARE TREATMENTS:
 - Chemical Peels
@@ -88,7 +87,6 @@ New Treatment Pages:
 - ExoSignal™ Hair: /treatments/exosignal
 - EXO–NAD Skin Longevity Peeling: /treatments/exo-nad
 - Skinfill™ Bacio: /menu/injectables/skinfill-bacio
-- SGLT 1/2 Inhibitor: /menu/injectables/sglt-12-inhibitor-injections
 
 Instructions:
 1. Be warm, friendly, and professional

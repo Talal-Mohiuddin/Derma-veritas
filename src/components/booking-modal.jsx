@@ -541,35 +541,6 @@ export function BookingModal({
           description: "Complete treatment course (Save £90)"
         }
       ]
-    },
-    "sglt": {
-      name: "SGLT 1/2 Inhibitor Therapy",
-      options: [
-        {
-          id: "consultation",
-          name: "Initial Consultation",
-          price: "Consultation Required",
-          description: "Professional assessment for metabolic therapy"
-        },
-        {
-          id: "single-injection",
-          name: "Single Injection Session",
-          price: "Price on Consultation",
-          description: "Individual treatment session"
-        },
-        {
-          id: "four-sessions",
-          name: "Package of 4 Sessions",
-          price: "Price on Consultation",
-          description: "Structured treatment course"
-        },
-        {
-          id: "eight-sessions",
-          name: "Package of 8 Sessions",
-          price: "Price on Consultation",
-          description: "Complete metabolic therapy program"
-        }
-      ]
     }
   };
 
@@ -822,9 +793,6 @@ export function BookingModal({
                     </SelectItem>
                     <SelectItem value="iv-drips" className="pl-6">
                       PRP Therapy
-                    </SelectItem>
-                    <SelectItem value="sglt" className="pl-6">
-                      SGLT 1/2 Inhibitor Therapy
                     </SelectItem>
 
                     {/* Advanced Treatments */}
