@@ -11,7 +11,7 @@ export default function ClinicsModal({ isOpen, onClose }) {
   const clinic = {
     name: "Derma Veritas",
     email: "info@dermaveritas.com",
-    phone: "+92-7741-340615",
+    phone: "+44-7741-340615",
     hours: [
       "Monday - Friday: 11:00 - 19:00",
       "Saturday: 8:00 - 18:00",

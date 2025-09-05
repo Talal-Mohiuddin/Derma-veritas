@@ -7,8 +7,12 @@ import Link from "next/link";
 import { useStore } from "@/store/zustand";
 import ConsultationSection from "@/components/consultation-section";
 
+// Function to generate slug from treatment name
+const generateSlug = (name) => {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+};
 
-// Treatment categories data with your specific images
+// Updated treatment categories based on your menu drawer
 const treatmentCategories = [
   {
     id: "injectables",
@@ -103,6 +107,24 @@ const treatmentCategories = [
         name: "Polynucleotides Skin Rejuvenation Treatment",
         description: "Revitalize your skin with polynucleotides for improved texture, tone, and elasticity.",
         image: "https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=",
+      },
+      {
+        id: 16,
+        name: "Botox Treatment",
+        description: "Professional botox treatments to smooth wrinkles and fine lines.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOphOwuZ-j4tfu-zKK3LmpjOay_rKdLhFsvzC0pS28rArMdh_dPQJlvuDvRFWlCXLEv5k&usqp=CAU",
+      },
+      {
+        id: 17,
+        name: "Skin Boosters",
+        description: "Hydrate and revitalize your skin with our skin booster treatments.",
+        image: "https://thumbs.dreamstime.com/b/medical-treatment-26268599.jpg",
+      },
+      {
+        id: 18,
+        name: "Skinfill™ Bacio",
+        description: "Advanced skinfill treatment for enhanced facial contours and volume.",
+        image: "https://img.freepik.com/free-photo/anonymous-doctor-helping-colleague-write-prescription_23-2147896202.jpg?semt=ais_hybrid&w=740&q=80",
       }
     ]
   },
@@ -111,22 +133,46 @@ const treatmentCategories = [
     name: "Skincare",
     treatments: [
       {
-        id: 16,
+        id: 19,
         name: "Chemical Peels",
         description: "Revitalize your skin with our professional-grade chemical peels for a radiant complexion.",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOphOwuZ-j4tfu-zKK3LmpjOay_rKdLhFsvzC0pS28rArMdh_dPQJlvuDvRFWlCXLEv5k&usqp=CAU",
       },
       {
-        id: 17,
+        id: 20,
         name: "Microneedling",
         description: "Stimulate collagen production and improve skin texture with our microneedling treatments.",
         image: "https://thumbs.dreamstime.com/b/medical-treatment-26268599.jpg",
       },
       {
-        id: 18,
+        id: 21,
         name: "RF Microneedling",
         description: "Combine microneedling with radio frequency for enhanced skin tightening and rejuvenation.",
         image: "https://img.freepik.com/free-photo/anonymous-doctor-helping-colleague-write-prescription_23-2147896202.jpg?semt=ais_hybrid&w=740&q=80",
+      },
+      {
+        id: 22,
+        name: "Co2 Laser",
+        description: "Advanced CO2 laser treatment for skin resurfacing and rejuvenation.",
+        image: "https://img.freepik.com/free-photo/stethoscope-hanging-from-doctor-s-gown_1232-646.jpg?semt=ais_hybrid&w=740&q=80",
+      },
+      {
+        id: 23,
+        name: "Polynucleotide",
+        description: "Polynucleotide treatments for skin regeneration and revitalization.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRalrdoQZBQZTJVkZjIf34lWjfB1hyyfRyeFV_ndZaxRiO8cjnQvrcGwvVBUJ4BluGd2bQ&usqp=CAU",
+      },
+      {
+        id: 24,
+        name: "Endolift",
+        description: "Minimally invasive laser treatment for skin tightening and lifting.",
+        image: "https://img.freepik.com/free-photo/overhead-view-pen-spiral-notebook-stethoscope-grey-background_23-2148129623.jpg?semt=ais_hybrid&w=740&q=80",
+      },
+      {
+        id: 25,
+        name: "EXO–NAD Skin Longevity Peeling",
+        description: "Advanced peeling treatment for skin longevity and rejuvenation.",
+        image: "https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=",
       }
     ]
   },
@@ -135,10 +181,58 @@ const treatmentCategories = [
     name: "Wellness",
     treatments: [
       {
-        id: 19,
+        id: 26,
         name: "Exosome Therapy",
         description: "Advanced regenerative therapy using exosomes to promote healing and rejuvenation.",
         image: "https://img.freepik.com/free-photo/stethoscope-hanging-from-doctor-s-gown_1232-646.jpg?semt=ais_hybrid&w=740&q=80",
+      },
+      {
+        id: 27,
+        name: "PRP Therapy",
+        description: "Platelet-rich plasma therapy for skin rejuvenation and healing.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOphOwuZ-j4tfu-zKK3LmpjOay_rKdLhFsvzC0pS28rArMdh_dPQJlvuDvRFWlCXLEv5k&usqp=CAU",
+      },
+      {
+        id: 28,
+        name: "V-Hacker",
+        description: "Innovative treatment for targeted body contouring and fat reduction.",
+        image: "https://thumbs.dreamstime.com/b/medical-treatment-26268599.jpg",
+      },
+      {
+        id: 29,
+        name: "Hair+ Revitalizing",
+        description: "Comprehensive hair revitalizing treatment for healthier, stronger hair.",
+        image: "https://img.freepik.com/free-photo/anonymous-doctor-helping-colleague-write-prescription_23-2147896202.jpg?semt=ais_hybrid&w=740&q=80",
+      }
+    ]
+  },
+  {
+    id: "laser",
+    name: "Laser Treatments",
+    treatments: [
+      {
+        id: 30,
+        name: "Quad Laser Hair Removal",
+        description: "Advanced laser technology for effective and permanent hair removal.",
+        image: "https://img.freepik.com/free-photo/stethoscope-hanging-from-doctor-s-gown_1232-646.jpg?semt=ais_hybrid&w=740&q=80",
+      }
+    ]
+  },
+  {
+    id: "hair",
+    name: "Hair Treatments",
+    treatments: [
+      {
+        id: 31,
+        name: "Hair+ Revitalizing",
+        description: "Comprehensive hair revitalizing treatment for healthier, stronger hair.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRalrdoQZBQZTJVkZjIf34lWjfB1hyyfRyeFV_ndZaxRiO8cjnQvrcGwvVBUJ4BluGd2bQ&usqp=CAU",
+      },
+      {
+        id: 32,
+        name: "ExoSignal™ Hair",
+        description: "Advanced hair treatment using exosome technology for hair growth and revitalization.",
+        image: "https://img.freepik.com/free-photo/overhead-view-pen-spiral-notebook-stethoscope-grey-background_23-2148129623.jpg?semt=ais_hybrid&w=740&q=80",
       }
     ]
   },
@@ -147,35 +241,28 @@ const treatmentCategories = [
     name: "Minor Ops",
     treatments: [
       {
-        id: 20,
+        id: 33,
         name: "Mole Removal",
         description: "Safe and effective removal of unwanted moles with minimal scarring.",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRalrdoQZBQZTJVkZjIf34lWjfB1hyyfRyeFV_ndZaxRiO8cjnQvrcGwvVBUJ4BluGd2bQ&usqp=CAU",
+        image: "https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=",
       },
       {
-        id: 21,
+        id: 34,
         name: "Skin Tag Removal",
         description: "Quick and painless removal of skin tags for smoother skin.",
-        image: "https://img.freepik.com/free-photo/overhead-view-pen-spiral-notebook-stethoscope-grey-background_23-2148129623.jpg?semt=ais_hybrid&w=740&q=80",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOphOwuZ-j4tfu-zKK3LmpjOay_rKdLhFsvzC0pS28rArMdh_dPQJlvuDvRFWlCXLEv5k&usqp=CAU",
       }
     ]
   }
 ];
-
-// Function to generate slug from treatment name
-const generateSlug = (name) => {
-  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-};
 
 export default function TreatmentsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState(null);
-
-    const [openIndex, setOpenIndex] = useState(null);
-      const { bookingOpen, setBookingOpen } = useStore();
-    
+  const [openIndex, setOpenIndex] = useState(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   // Filter treatments based on search query and category
   const filteredTreatments = treatmentCategories.flatMap(category => {
@@ -191,8 +278,6 @@ export default function TreatmentsPage() {
       .map(treatment => ({ ...treatment, category: category.name }));
   });
 
-
-  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -246,13 +331,13 @@ export default function TreatmentsPage() {
       <div className="relative bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex flex-col items-center justify-center text-center">
-              <div className="w-40 h-40 flex items-center justify-center mb-12">
-        <img 
-          src="/Derma Veritas Logo Design New File-01.svg" 
-          alt="Derma Veritas Logo" 
-          className="w-full h-full object-contain"
-        />
-      </div>
+            <div className="w-40 h-40 flex items-center justify-center mb-12">
+              <img 
+                src="/Derma Veritas Logo Design New File-01.svg" 
+                alt="Derma Veritas Logo" 
+                className="w-full h-full object-contain"
+              />
+            </div>
 
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
               <span className="text-black">Our</span>{" "}
@@ -530,7 +615,7 @@ export default function TreatmentsPage() {
             }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gray-800 text-white  text-lg font-medium hover:bg-gray-700 transition-colors rounded-lg"
-           onClick={() => setBookingOpen(true)}
+            onClick={() => setBookingOpen(true)}
           >
             Book a Consultation
           </motion.button>

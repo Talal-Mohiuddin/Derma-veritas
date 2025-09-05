@@ -21,7 +21,7 @@ export default function Footer() {
             className="flex items-start space-x-2 hover:text-white transition-colors"
           >
             <FaWhatsapp className="w-5 h-5 mt-1 flex-shrink-0" />
-            <p>+92-7741-340615</p>
+            <p>+44-7741-340615</p>
           </Link>
 
           <div className="flex items-start space-x-2 hover:text-white transition-colors">
