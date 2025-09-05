@@ -8,49 +8,21 @@ export default function MeetTheTeamPage() {
   // Get the booking modal state from Zustand store
   const { setBookingOpen } = useStore();
 
-  // Team members data with online images
+  // Updated team members data with the specified professionals
   const teamMembers = [
     {
       id: 1,
-      name: "Dr. Sarah Johnson",
-      role: "Medical Director & Founder",
-      bio: "Board-certified dermatologist with over 15 years of experience in medical and cosmetic dermatology. Dr. Johnson specializes in laser treatments and innovative skin rejuvenation techniques.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      role: "Lead Aesthetic Practitioner",
-      bio: "With a background in nursing and advanced certifications in injectables and laser technology, Michael brings precision and artistry to every treatment he performs.",
+      name: "Dr. Mofasher Nawaz",
+      role: "Specialty Registrar in Medicine | Medical Doctor (DV) | Anaesthetics Trainer",
+      bio: "Dr. Mofasher works in the hospital environment as a Specialty Registrar in Medicine and has also built extensive experience in anaesthetics over more than 6 years. He has a strong background in advanced procedures, patient safety, and clinical training, having taught many medical professionals in anaesthetics practice. At our clinic, Dr. Mofasher applies this dual expertise in medicine and anaesthetics to deliver safe, effective, and patient-focused treatments tailored to individual needs.",
       image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
     },
     {
-      id: 3,
-      name: "Jessica Williams",
-      role: "Senior Esthetician",
-      bio: "Jessica is a licensed esthetician with expertise in advanced facial treatments, chemical peels, and developing personalized skincare regimens for clients with diverse skin concerns.",
-      image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: 4,
-      name: "David Rodriguez",
-      role: "Patient Care Coordinator",
-      bio: "David ensures every patient's journey is seamless from consultation to follow-up. His extensive knowledge of treatments helps clients make informed decisions about their care.",
+      id: 2,
+      name: "Mr. A. Singh",
+      role: "GP Pharmacist | ACP | Advance Anaesthetics Practitioner | Operational Director (DV)",
+      bio: "Mr. Singh is a clinical pharmacist and advanced clinical practitioner with wide experience in general practice prescribing and advanced patient care. He also has expertise in cosmetic procedures and a deep understanding of pharmacology in treating dermatological conditions in community. At the clinic, he is dedicated to providing high-quality, professional treatments that focus on safety, comfort, and natural results.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: 5,
-      name: "Emily Thompson",
-      role: "Nurse Practitioner",
-      bio: "Emily is an experienced nurse practitioner specializing in non-surgical facial rejuvenation. She is known for her gentle approach and natural-looking results with injectables.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      id: 6,
-      name: "Robert Kim",
-      role: "Laser Specialist",
-      bio: "Robert is certified in multiple laser platforms and specializes in tattoo removal, hair reduction, and treating pigmentation issues with cutting-edge technology.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
     }
   ];
 
@@ -122,14 +94,12 @@ export default function MeetTheTeamPage() {
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
             At Derma Veritas, our team consists of highly trained medical
-            professionals, licensed estheticians, and skincare specialists who
-            bring years of experience and a passion for aesthetic medicine.
+            professionals with extensive experience in both hospital and clinical settings.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            We believe in a collaborative approach to skincare, where our
-            diverse expertise comes together to create comprehensive treatment
-            plans tailored to your unique needs and goals.
+            We combine medical expertise with aesthetic precision to deliver safe,
+            effective treatments tailored to your unique needs and goals.
           </p>
         </div>
 
@@ -156,7 +126,7 @@ export default function MeetTheTeamPage() {
               "We prioritize your safety and satisfaction above all else",
               "Our treatments enhance your natural beauty, not mask it",
               "We believe in education and transparency throughout your journey",
-              "Continuous training ensures we offer the most advanced techniques",
+              "Hospital-grade standards ensure the highest level of care",
               "We create a welcoming environment where you feel comfortable",
             ].map((benefit, index) => (
               <li key={index} className="flex items-start gap-4">
@@ -183,11 +153,11 @@ export default function MeetTheTeamPage() {
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
               Meet the skilled professionals dedicated to providing exceptional
-              aesthetic care
+              aesthetic care with medical expertise
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={member.id}
@@ -214,11 +184,8 @@ export default function MeetTheTeamPage() {
                   <h3 className="text-xl font-medium text-gray-800 mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-gray-600 mb-4">{member.role}</p>
+                  <p className="text-gray-600 mb-4 text-sm">{member.role}</p>
                   <div className="flex space-x-4">
-                    <button className="text-xs text-gray-500 hover:text-gray-800 transition-colors">
-                      VIEW PROFILE
-                    </button>
                     <button
                       onClick={() => setBookingOpen(true)}
                       className="text-xs text-gray-500 hover:text-gray-800 transition-colors"

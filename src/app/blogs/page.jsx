@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Calendar } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Get your skin glowing and camera-ready for your special day with these expert tips.",
+    directory: "prepare-skin-special-event"
   },
   {
     id: "static-2",
@@ -28,6 +30,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Learn why proper sun protection is crucial for optimal healing and results.",
+    directory: "sun-protection-after-procedures"
   },
   {
     id: "static-3",
@@ -37,6 +40,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Discover the perfect aesthetic treatments to help you look radiant on your wedding day.",
+    directory: "aesthetic-treatments-brides"
   },
   {
     id: "static-4",
@@ -46,6 +50,7 @@ const staticBlogPosts = [
     tags: ["Face", "Skincare"],
     excerpt:
       "Create a comprehensive anti-aging routine that delivers visible results.",
+    directory: "anti-aging-skincare-routine"
   },
   {
     id: "static-5",
@@ -55,6 +60,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Get the truth about Botox treatments and what to expect from the procedure.",
+    directory: "botox-myths-facts"
   },
   {
     id: "static-6",
@@ -64,6 +70,7 @@ const staticBlogPosts = [
     tags: ["Face", "Skincare"],
     excerpt:
       "Protect and nourish your skin during the hot summer months with these expert tips.",
+    directory: "summer-skincare-tips"
   },
   {
     id: "static-7",
@@ -73,6 +80,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Everything you need to know about chemical peels and their transformative benefits.",
+    directory: "chemical-peels-guide"
   },
   {
     id: "static-8",
@@ -82,6 +90,7 @@ const staticBlogPosts = [
     tags: ["Face", "Skincare"],
     excerpt:
       "Discover how proper hydration impacts your skin health and appearance.",
+    directory: "hydration-healthy-skin"
   },
   {
     id: "static-9",
@@ -91,6 +100,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Learn about different types of dermal fillers and their applications.",
+    directory: "dermal-fillers-explained"
   },
   {
     id: "static-10",
@@ -100,16 +110,24 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Follow these essential aftercare tips to ensure the best possible treatment outcomes.",
+    directory: "post-treatment-care"
   },
 ].map((post) => ({
   ...post,
   slug: slugify(post.title), // Add slug to static posts
 }));
 
+// Create a mapping from slug to directory name
+const slugToDirectoryMap = {};
+staticBlogPosts.forEach(post => {
+  slugToDirectoryMap[post.slug] = post.directory;
+});
+
 export default function BlogsPage() {
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
+  const router = useRouter();
 
   // Fetch dynamic blog posts (only published)
   const { data, isLoading, error } = useBlogsData("", "published");
@@ -142,15 +160,30 @@ export default function BlogsPage() {
     }));
   };
 
+  const handleBlogClick = (slug) => {
+    // Check if this is a static post with a mapped directory
+    const directory = slugToDirectoryMap[slug];
+    if (directory) {
+      router.push(`/blogs/${directory}`);
+    } else {
+      // For dynamic posts, use the slug directly
+      router.push(`/blogs/${slug}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <div className="relative bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex flex-col items-center justify-center text-center">
-            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mb-12">
-              <span className="text-white text-3xl font-bold">DV</span>
-            </div>
+             <div className="w-40 h-40 flex items-center justify-center mb-12">
+        <img 
+          src="/Derma Veritas Logo Design New File-01.svg" 
+          alt="Derma Veritas Logo" 
+          className="w-full h-full object-contain"
+        />
+      </div>
 
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
               <span className="text-black">News</span>{" "}
@@ -192,9 +225,13 @@ export default function BlogsPage() {
 
         <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-6 sm:px-8 lg:px-12 py-12 lg:py-16 flex flex-col justify-center">
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-16 h-16 bg-gray-800 rounded-xl flex items-center justify-center">
-              <span className="text-white text-lg font-bold">DV</span>
-            </div>
+              <div className="w-40 h-40 pd-100 flex items-center justify-center mb-12">
+        <img 
+          src="/Derma Veritas Logo Design New File-01.svg" 
+          alt="Derma Veritas Logo" 
+          className="w-full h-full object-contain"
+        />
+      </div>
             <div>
               <span className="text-3xl font-light text-black">Expert</span>
               <br />
@@ -262,16 +299,10 @@ export default function BlogsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300"
+                className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+                onClick={() => handleBlogClick(post.slug)}
               >
-                {/* Wrap entire card content with Link */}
-                <Link
-                  href={`/blogs/${post.slug}`}
-                  className="absolute inset-0 z-10"
-                  aria-label={`Read more about ${post.title}`}
-                />
-
-                <div className="aspect-[4/3] overflow-hidden rounded-t-lg relative z-0">
+                <div className="aspect-[4/3] overflow-hidden rounded-t-lg">
                   <img
                     src={post.image || "/images/placeholder.svg"}
                     alt={post.title}
@@ -279,7 +310,7 @@ export default function BlogsPage() {
                   />
                 </div>
 
-                <div className="p-6 relative z-0">
+                <div className="p-6">
                   <div className="flex items-center text-gray-500 text-sm mb-4">
                     <Calendar className="w-4 h-4 mr-2" />
                     {post.date}
@@ -293,7 +324,7 @@ export default function BlogsPage() {
                     {post.excerpt}
                   </p>
 
-                  <div className="flex justify-between items-center relative z-20">
+                  <div className="flex justify-between items-center">
                     <span className="flex items-center text-gray-600 text-sm font-medium">
                       Read more →
                     </span>

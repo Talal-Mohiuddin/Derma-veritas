@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Filter, ChevronDown, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { useStore } from "@/store/zustand";
+import ConsultationSection from "@/components/consultation-section";
+
 
 // Treatment categories data with your specific images
 const treatmentCategories = [
@@ -170,6 +173,10 @@ export default function TreatmentsPage() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
+    const [openIndex, setOpenIndex] = useState(null);
+      const { bookingOpen, setBookingOpen } = useStore();
+    
+
   // Filter treatments based on search query and category
   const filteredTreatments = treatmentCategories.flatMap(category => {
     if (selectedCategory !== "all" && selectedCategory !== category.id) {
@@ -184,6 +191,8 @@ export default function TreatmentsPage() {
       .map(treatment => ({ ...treatment, category: category.name }));
   });
 
+
+  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -237,9 +246,13 @@ export default function TreatmentsPage() {
       <div className="relative bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex flex-col items-center justify-center text-center">
-            <div className="w-24 h-24 bg-gray-800 rounded-2xl flex items-center justify-center mb-12">
-              <span className="text-white text-3xl font-bold">DV</span>
-            </div>
+              <div className="w-40 h-40 flex items-center justify-center mb-12">
+        <img 
+          src="/Derma Veritas Logo Design New File-01.svg" 
+          alt="Derma Veritas Logo" 
+          className="w-full h-full object-contain"
+        />
+      </div>
 
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
               <span className="text-black">Our</span>{" "}
@@ -517,6 +530,7 @@ export default function TreatmentsPage() {
             }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-3 bg-gray-800 text-white  text-lg font-medium hover:bg-gray-700 transition-colors rounded-lg"
+           onClick={() => setBookingOpen(true)}
           >
             Book a Consultation
           </motion.button>
