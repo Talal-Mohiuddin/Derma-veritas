@@ -38,10 +38,22 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const router = useRouter();
 
   const toggleSection = (section) => {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [section]: !prev[section],
-    }));
+    setExpandedSections((prev) => {
+      const isCurrentlyExpanded = prev[section];
+      
+      // If the section is currently expanded, just close it
+      if (isCurrentlyExpanded) {
+        return {
+          ...prev,
+          [section]: false,
+        };
+      }
+      
+      // If opening a new section, close all others and open this one
+      return {
+        [section]: true,
+      };
+    });
   };
 
   const handleLogoutClick = async () => {
@@ -115,7 +127,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "botox-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
         "skinfill-bacio": "skinfill-bacio",
-        "sglt-inhibitor-injections": "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -139,7 +150,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "v-hacker": "v-hacker",
         "hair-revitalizing": "revitalizing",
         exosignal: "exosignal",
-        sglt: "sglt",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -167,7 +177,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     "Botox Treatment",
     "Skin Boosters",
     "Skinfill™ Bacio",
-    "SGLT 1/2 Inhibitor Injections",
   ];
 
   const skincareLinks = [

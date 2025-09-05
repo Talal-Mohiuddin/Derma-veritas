@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useCreateProduct, useUpdateProduct } from "../../../../hooks/useProduct";
 import { toast } from "sonner";
+import { uploadToCloudinary } from "../../../../utils/cloudinary-client";
 
 export default function ProductForm({ product, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -19,6 +20,8 @@ export default function ProductForm({ product, onClose, onSuccess }) {
   const [newIngredient, setNewIngredient] = useState({ name: "", quantity: "" });
   const [imageFiles, setImageFiles] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([]);
 
   const createProductMutation = useCreateProduct();
   const updateProductMutation = useUpdateProduct();
@@ -51,10 +54,10 @@ export default function ProductForm({ product, onClose, onSuccess }) {
     }));
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
     
-    // Validate file sizes (limit to 5MB per file for base64 storage)
+    // Validate file sizes
     const maxSize = 5 * 1024 * 1024; // 5MB
     const oversizedFiles = files.filter(file => file.size > maxSize);
     
@@ -67,20 +70,42 @@ export default function ProductForm({ product, onClose, onSuccess }) {
       toast.error("Please select no more than 5 images.");
       return;
     }
-    
-    setImageFiles(files);
-    
-    // Create preview URLs
-    const previews = files.map(file => URL.createObjectURL(file));
-    setImagePreviews(previews);
+
+    if (files.length === 0) return;
+
+    setIsUploading(true);
+    const uploadToastId = toast.loading("Uploading images...");
+
+    try {
+      const uploadPromises = files.map(file => 
+        uploadToCloudinary(file, 'products')
+      );
+      
+      const uploadResults = await Promise.all(uploadPromises);
+      
+      setUploadedImages(uploadResults);
+      setImagePreviews(uploadResults.map(result => result.url));
+      setImageFiles(files); // Keep for form validation
+      
+      toast.dismiss(uploadToastId);
+      toast.success(`${uploadResults.length} image(s) uploaded successfully!`);
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.dismiss(uploadToastId);
+      toast.error("Failed to upload images. Please try again.");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const removeImage = (index) => {
     const newFiles = imageFiles.filter((_, i) => i !== index);
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
+    const newUploaded = uploadedImages.filter((_, i) => i !== index);
     
     setImageFiles(newFiles);
     setImagePreviews(newPreviews);
+    setUploadedImages(newUploaded);
   };
 
   const addIngredient = () => {
@@ -114,12 +139,17 @@ export default function ProductForm({ product, onClose, onSuccess }) {
     );
     
     try {
+      // Create the submit data object with proper structure
       const submitData = {
         ...formData,
         price: parseFloat(formData.price),
         stockQuantity: parseInt(formData.stockQuantity),
-        images: imageFiles.length > 0 ? imageFiles : undefined
+        imageUrls: uploadedImages.length > 0 ? uploadedImages : []
       };
+
+      // Log the data being sent for debugging
+      console.log('Submitting product data:', submitData);
+      console.log('Uploaded images:', uploadedImages);
 
       if (isEditing) {
         await updateProductMutation.mutateAsync({
@@ -262,11 +292,17 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   multiple
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  disabled={isUploading}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Supported formats: JPG, PNG, GIF, WebP
                 </p>
+                {isUploading && (
+                  <p className="text-sm text-blue-600 mt-2">
+                    Uploading images to Cloudinary...
+                  </p>
+                )}
               </div>
 
               {imagePreviews.length > 0 && (
@@ -281,7 +317,8 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                       <button
                         type="button"
                         onClick={() => removeImage(index)}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 text-xs"
+                        disabled={isUploading}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 text-xs disabled:opacity-50"
                       >
                         ×
                       </button>
@@ -382,7 +419,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
             </button>
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || isUploading}
               className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
             >
               {isLoading ? "Saving..." : (isEditing ? "Update Product" : "Create Product")}

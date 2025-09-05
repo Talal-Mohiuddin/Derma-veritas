@@ -131,6 +131,21 @@ export default function BlogsPage() {
 
   // Fetch dynamic blog posts (only published)
   const { data, isLoading, error } = useBlogsData("", "published");
+  console.log(data);
+
+  // Helper function to convert Firestore timestamp to Date
+  const convertFirestoreTimestamp = (timestamp) => {
+    if (timestamp && timestamp.seconds) {
+      return new Date(timestamp.seconds * 1000);
+    }
+    return new Date();
+  };
+
+  // Helper function to strip HTML tags and get plain text
+  const stripHtmlTags = (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || "";
+  };
 
   // Combine static and dynamic posts
   const dynamicBlogPosts =
@@ -138,14 +153,14 @@ export default function BlogsPage() {
       id: blog.id,
       slug: slugify(blog.title), // Generate slug for dynamic posts
       title: blog.title,
-      date: new Date(blog.createdAt).toLocaleDateString("en-US", {
+      date: convertFirestoreTimestamp(blog.createdAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
         day: "numeric",
       }),
       image: blog.coverImage || "/images/placeholder.svg",
-      tags: blog.tags || [],
-      excerpt: blog.content.substring(0, 100) + "...", // Generate excerpt from content
+      tags: Array.isArray(blog.tags) && blog.tags.length > 0 ? blog.tags : [blog.category || "General"],
+      excerpt: stripHtmlTags(blog.content).substring(0, 100) + "...", // Generate excerpt from content
     })) || [];
 
   // Merge static and dynamic posts, sort by date (newest first)

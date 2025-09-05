@@ -457,7 +457,7 @@ export default function ProductListing() {
             that will deliver visible results and complement any ongoing treatments.
           </p>
 
-          <button className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors w-fit">
+          <button className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wide hover:bg-gray-700 transition-colors w-fit">
             <span>BOOK CONSULTATION</span>
             <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
           </button>
