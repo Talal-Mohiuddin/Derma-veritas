@@ -1,17 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "../../../../config/db.js";
-import { doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
-import { writeFile } from "fs/promises";
-import path from "path";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
-// GET - Fetch blog by ID
+// GET - Get single blog by ID
 export async function GET(request, { params }) {
   try {
-    const { id } = await params;
-    const blogRef = doc(db, "blogs", id);
-    const blogSnap = await getDoc(blogRef);
+    const { id } = params;
+    const docRef = doc(db, "blogs", id);
+    const docSnap = await getDoc(docRef);
 
-    if (!blogSnap.exists()) {
+    if (!docSnap.exists()) {
       return NextResponse.json(
         { success: false, message: "Blog not found" },
         { status: 404 }
@@ -20,9 +23,10 @@ export async function GET(request, { params }) {
 
     return NextResponse.json({
       success: true,
-      blog: { id: blogSnap.id, ...blogSnap.data() },
+      blog: { id: docSnap.id, ...docSnap.data() },
     });
   } catch (error) {
+    console.error("API Error:", error);
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }
@@ -30,24 +34,32 @@ export async function GET(request, { params }) {
   }
 }
 
-// PUT - Update blog (admin only)
+// PUT - Update blog
 export async function PUT(request, { params }) {
   try {
-    const { id } = await params;
+    const { id } = params;
     const formData = await request.formData();
-    const isAdmin = formData.get("isAdmin") === "true";
+    
+    const title = formData.get("title");
+    const content = formData.get("content");
+    const category = formData.get("category");
+    const tagsString = formData.get("tags");
+    const coverImageUrl = formData.get("coverImageUrl");
+    const status = formData.get("status");
+    const isAdmin = formData.get("isAdmin");
 
+    // Basic admin check (you should implement proper authentication)
     if (!isAdmin) {
       return NextResponse.json(
-        { success: false, message: "Only admin can update blogs" },
-        { status: 403 }
+        { success: false, message: "Unauthorized" },
+        { status: 401 }
       );
     }
 
-    const blogRef = doc(db, "blogs", id);
-    const blogSnap = await getDoc(blogRef);
+    const docRef = doc(db, "blogs", id);
+    const docSnap = await getDoc(docRef);
 
-    if (!blogSnap.exists()) {
+    if (!docSnap.exists()) {
       return NextResponse.json(
         { success: false, message: "Blog not found" },
         { status: 404 }
@@ -55,52 +67,47 @@ export async function PUT(request, { params }) {
     }
 
     const updateData = {};
-    
-    const title = formData.get("title");
-    const content = formData.get("content");
-    const category = formData.get("category");
-    const status = formData.get("status");
-    const tagsString = formData.get("tags");
-    const coverImageFile = formData.get("coverImage");
 
     if (title) updateData.title = title;
     if (content) updateData.content = content;
     if (category) updateData.category = category;
     if (status) updateData.status = status;
 
-    // Parse tags
+    // Handle tags
     if (tagsString) {
       try {
         updateData.tags = JSON.parse(tagsString);
       } catch (e) {
         return NextResponse.json(
-          { success: false, message: "Tags must be a valid JSON array" },
+          { success: false, message: "Invalid tags format" },
           { status: 400 }
         );
       }
     }
 
-    // Handle cover image upload
-    if (coverImageFile && coverImageFile.size > 0) {
-      const bytes = await coverImageFile.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      
-      const filename = `${Date.now()}-${coverImageFile.name}`;
-      const filepath = path.join(process.cwd(), "public/uploads/blogs", filename);
-      
-      await writeFile(filepath, buffer);
-      updateData.coverImage = `/uploads/blogs/${filename}`;
+    // Handle cover image
+    if (coverImageUrl) {
+      try {
+        const imageData = JSON.parse(coverImageUrl);
+        updateData.coverImage = imageData.url;
+      } catch (e) {
+        updateData.coverImage = coverImageUrl;
+      }
     }
 
     updateData.updatedAt = new Date();
 
-    await updateDoc(blogRef, updateData);
+    await updateDoc(docRef, updateData);
+
+    const updatedDoc = await getDoc(docRef);
 
     return NextResponse.json({
       success: true,
       message: "Blog updated successfully",
+      blog: { id: updatedDoc.id, ...updatedDoc.data() },
     });
   } catch (error) {
+    console.error("Blog update error:", error);
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }
@@ -108,36 +115,39 @@ export async function PUT(request, { params }) {
   }
 }
 
-// DELETE - Delete blog (admin only)
+// DELETE - Delete blog
 export async function DELETE(request, { params }) {
   try {
-    const { id } = await params;
-    const { isAdmin } = await request.json();
+    const { id } = params;
+    const body = await request.json();
+    const { isAdmin } = body;
 
+    // Basic admin check
     if (!isAdmin) {
       return NextResponse.json(
-        { success: false, message: "Only admin can delete blogs" },
-        { status: 403 }
+        { success: false, message: "Unauthorized" },
+        { status: 401 }
       );
     }
 
-    const blogRef = doc(db, "blogs", id);
-    const blogSnap = await getDoc(blogRef);
+    const docRef = doc(db, "blogs", id);
+    const docSnap = await getDoc(docRef);
 
-    if (!blogSnap.exists()) {
+    if (!docSnap.exists()) {
       return NextResponse.json(
         { success: false, message: "Blog not found" },
         { status: 404 }
       );
     }
 
-    await deleteDoc(blogRef);
+    await deleteDoc(docRef);
 
     return NextResponse.json({
       success: true,
       message: "Blog deleted successfully",
     });
   } catch (error) {
+    console.error("Blog deletion error:", error);
     return NextResponse.json(
       { success: false, message: error.message },
       { status: 500 }

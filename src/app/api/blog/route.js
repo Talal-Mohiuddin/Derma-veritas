@@ -105,7 +105,7 @@ export async function POST(request) {
     const content = formData.get("content");
     const category = formData.get("category");
     const tagsString = formData.get("tags");
-    const coverImageFile = formData.get("coverImage");
+    const coverImageUrl = formData.get("coverImageUrl"); // Cloudinary URL data
     const status = formData.get("status") || "published";
 
     if (!title || !content || !category) {
@@ -129,66 +129,18 @@ export async function POST(request) {
       }
     }
 
-    // Handle cover image upload
+    // Handle Cloudinary URL
     let coverImage = "";
-    if (coverImageFile && coverImageFile.size > 0) {
+    if (coverImageUrl) {
       try {
-        // Validate file type
-        const allowedTypes = [
-          "image/jpeg",
-          "image/jpg",
-          "image/png",
-          "image/webp",
-        ];
-        if (!allowedTypes.includes(coverImageFile.type)) {
-          return NextResponse.json(
-            {
-              success: false,
-              message:
-                "Invalid file type. Only JPEG, PNG, and WebP are allowed.",
-            },
-            { status: 400 }
-          );
-        }
-
-        // Validate file size (5MB limit)
-        const maxSize = 5 * 1024 * 1024; // 5MB
-        if (coverImageFile.size > maxSize) {
-          return NextResponse.json(
-            {
-              success: false,
-              message: "File size too large. Maximum 5MB allowed.",
-            },
-            { status: 400 }
-          );
-        }
-
-        const bytes = await coverImageFile.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-
-        const filename = `${Date.now()}-${coverImageFile.name.replace(
-          /[^a-zA-Z0-9.-]/g,
-          "_"
-        )}`;
-        const uploadDir = path.join(process.cwd(), "public/uploads/blogs");
-        const filepath = path.join(uploadDir, filename);
-
-        // Create directory if it doesn't exist
-        if (!existsSync(uploadDir)) {
-          await mkdir(uploadDir, { recursive: true });
-        }
-
-        await writeFile(filepath, buffer);
-        coverImage = `/uploads/blogs/${filename}`;
-      } catch (uploadError) {
-        console.error("File upload error:", uploadError);
-        return NextResponse.json(
-          {
-            success: false,
-            message: `File upload failed: ${uploadError.message}`,
-          },
-          { status: 500 }
-        );
+        const imageData = JSON.parse(coverImageUrl);
+        coverImage = imageData.url;
+        console.log('Parsed cover image URL:', coverImage);
+      } catch (e) {
+        console.error('Error parsing cover image URL:', e);
+        console.log('Raw coverImageUrl value:', coverImageUrl);
+        // Fallback if it's just a string URL
+        coverImage = coverImageUrl;
       }
     }
 
@@ -203,6 +155,8 @@ export async function POST(request) {
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+
+    console.log('Creating blog with data:', blogData);
 
     const docRef = await addDoc(collection(db, "blogs"), blogData);
 

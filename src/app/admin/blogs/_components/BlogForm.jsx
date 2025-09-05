@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import RichTextEditor from "./RichTextEditor";
 import { useCreateBlog, useUpdateBlog } from "../../../../hooks/useBlog";
+import { uploadToCloudinary } from "../../../../utils/cloudinary-client";
 
 export default function BlogForm({ blog, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -15,6 +16,8 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
   });
   const [tagInput, setTagInput] = useState("");
   const [previewImage, setPreviewImage] = useState("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadedCoverImage, setUploadedCoverImage] = useState(null);
 
   const createBlogMutation = useCreateBlog();
   const updateBlogMutation = useUpdateBlog();
@@ -44,34 +47,50 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      // Validate file type
-      const allowedTypes = [
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/webp",
-      ];
-      if (!allowedTypes.includes(file.type)) {
-        toast.error("Invalid file type. Only JPEG, PNG, and WebP are allowed.");
-        e.target.value = "";
-        return;
-      }
+    if (!file) return;
 
-      // Validate file size (5MB limit)
-      const maxSize = 5 * 1024 * 1024; // 5MB
-      if (file.size > maxSize) {
-        toast.error("File size too large. Maximum 5MB allowed.");
-        e.target.value = "";
-        return;
-      }
+    // Validate file type
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Invalid file type. Only JPEG, PNG, and WebP are allowed.");
+      e.target.value = "";
+      return;
+    }
 
+    // Validate file size (5MB limit)
+    const maxSize = 5 * 1024 * 1024; // 5MB
+    if (file.size > maxSize) {
+      toast.error("File size too large. Maximum 5MB allowed.");
+      e.target.value = "";
+      return;
+    }
+
+    setIsUploading(true);
+    const uploadToastId = toast.loading("Uploading cover image...");
+
+    try {
+      const uploadResult = await uploadToCloudinary(file, 'blogs');
+      
+      setUploadedCoverImage(uploadResult);
       setFormData((prev) => ({ ...prev, coverImage: file }));
-      const reader = new FileReader();
-      reader.onloadend = () => setPreviewImage(reader.result);
-      reader.readAsDataURL(file);
+      setPreviewImage(uploadResult.url);
+      
+      toast.dismiss(uploadToastId);
+      toast.success("Cover image uploaded successfully!");
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.dismiss(uploadToastId);
+      toast.error("Failed to upload image. Please try again.");
+      e.target.value = "";
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -110,15 +129,24 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
     );
 
     try {
+      const submitData = {
+        ...formData,
+        coverImageUrl: uploadedCoverImage ? JSON.stringify(uploadedCoverImage) : undefined
+      };
+
+      // Log the data being sent for debugging
+      console.log('Submitting blog data:', submitData);
+      console.log('Uploaded cover image:', uploadedCoverImage);
+
       if (isEditing) {
         await updateBlogMutation.mutateAsync({
           id: blog.id,
-          blogData: formData,
+          blogData: submitData,
         });
         toast.dismiss(loadingToastId);
         toast.success("Blog updated successfully! ✅");
       } else {
-        await createBlogMutation.mutateAsync(formData);
+        await createBlogMutation.mutateAsync(submitData);
         toast.dismiss(loadingToastId);
         toast.success("Blog created successfully! 🎉");
       }
@@ -234,13 +262,14 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                     type="button"
                     onClick={() => {
                       setPreviewImage("");
+                      setUploadedCoverImage(null);
                       setFormData((prev) => ({ ...prev, coverImage: null }));
                       // Reset file input
-                      const fileInput =
-                        document.querySelector('input[type="file"]');
+                      const fileInput = document.querySelector('input[type="file"]');
                       if (fileInput) fileInput.value = "";
                     }}
-                    className="text-red-600 hover:text-red-700 text-sm"
+                    disabled={isUploading}
+                    className="text-red-600 hover:text-red-700 text-sm disabled:opacity-50"
                   >
                     Remove Image
                   </button>
@@ -262,13 +291,14 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                   </svg>
                   <div className="mt-4">
                     <label className="cursor-pointer">
-                      <span className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                        Upload Image
+                      <span className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50">
+                        {isUploading ? "Uploading..." : "Upload Image"}
                       </span>
                       <input
                         type="file"
                         accept="image/jpeg,image/jpg,image/png,image/webp"
                         onChange={handleImageChange}
+                        disabled={isUploading}
                         className="hidden"
                       />
                     </label>
@@ -353,10 +383,10 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
             </button>
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || isUploading}
               className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
             >
-              {isLoading && (
+              {(isLoading || isUploading) && (
                 <svg
                   className="animate-spin h-4 w-4"
                   fill="none"

@@ -51,29 +51,27 @@ export const useCreateProduct = () => {
     mutationFn: async (productData) => {
       const formData = new FormData();
       
-      // Append all product fields
+      // Add all text fields
       Object.keys(productData).forEach(key => {
-        if (key === 'images' && productData[key]) {
-          // Handle multiple image files
-          productData[key].forEach(file => {
-            formData.append('images', file);
-          });
-        } else if (key === 'ingredients' && Array.isArray(productData[key])) {
-          // Convert ingredients array to JSON string
-          formData.append(key, JSON.stringify(productData[key]));
-        } else if (productData[key] !== undefined && productData[key] !== null) {
+        if (key === 'imageUrls' && productData.imageUrls) {
+          // Serialize image URLs as JSON string
+          formData.append('imageUrls', JSON.stringify(productData.imageUrls));
+        } else if (key === 'ingredients') {
+          // Serialize ingredients as JSON string
+          formData.append('ingredients', JSON.stringify(productData.ingredients));
+        } else if (productData[key] !== undefined && key !== 'images') {
           formData.append(key, productData[key]);
         }
       });
 
-      const response = await fetch("/api/product", {
-        method: "POST",
+      const response = await fetch('/api/product', {
+        method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create product");
+        throw new Error(errorData.message || 'Failed to create product');
       }
 
       return response.json();

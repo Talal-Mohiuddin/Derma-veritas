@@ -49,13 +49,13 @@ export const useCreateBlog = () => {
 
       // Append all blog fields
       Object.keys(blogData).forEach((key) => {
-        if (key === "coverImage" && blogData[key]) {
-          // Handle cover image file
-          formData.append("coverImage", blogData[key]);
+        if (key === "coverImageUrl" && blogData[key]) {
+          // Handle Cloudinary URL data
+          formData.append("coverImageUrl", blogData[key]);
         } else if (key === "tags" && Array.isArray(blogData[key])) {
           // Convert tags array to JSON string
           formData.append("tags", JSON.stringify(blogData[key]));
-        } else if (blogData[key] !== undefined && blogData[key] !== null) {
+        } else if (blogData[key] !== undefined && blogData[key] !== null && key !== "coverImage") {
           formData.append(key, blogData[key]);
         }
       });
@@ -105,13 +105,13 @@ export const useUpdateBlog = () => {
 
       // Append all blog fields
       Object.keys(blogData).forEach((key) => {
-        if (key === "coverImage" && blogData[key]) {
-          // Handle cover image file
-          formData.append("coverImage", blogData[key]);
+        if (key === "coverImageUrl" && blogData[key]) {
+          // Handle Cloudinary URL data
+          formData.append("coverImageUrl", blogData[key]);
         } else if (key === "tags" && Array.isArray(blogData[key])) {
           // Convert tags array to JSON string
           formData.append("tags", JSON.stringify(blogData[key]));
-        } else if (blogData[key] !== undefined && blogData[key] !== null) {
+        } else if (blogData[key] !== undefined && blogData[key] !== null && key !== "coverImage") {
           formData.append(key, blogData[key]);
         }
       });
