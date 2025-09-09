@@ -209,19 +209,6 @@ export default function Home() {
       </section>
 
       {/* Floating Chat */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <div className="relative">
-          <Button
-            className="bg-black hover:bg-gray-800 text-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg transition-colors"
-            onClick={() => setIsChatOpen(true)}
-          >
-            <MessageCircle className="w-10 h-10" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Chat Window */}
-      <Chatwindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
 
       {/* Booking Modal */}
       <BookingModal
@@ -235,8 +222,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 lg:order-2">
             <h2 className="text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
-              Expert skin and hair care under the leadership of Dr. Mofashir
-              Nawaz.{" "}
+              Expert skin and hair care under the trusted leadership of Dr.
+              Mofasher Nawaz and Mr. A. Singh.{" "}
             </h2>
             <p className="text-gray-600 leading-relaxed">
               Derma Veritas offers medically-led skin and dermatology clinic in
@@ -259,18 +246,17 @@ export default function Home() {
           <div className="relative lg:order-1">
             <img
               src="/owner.png"
-              alt="Dr Mofashir Nawaz"
+              alt="Dr Mofasher Nawaz"
               className="w-full h-auto rounded-lg"
             />
             <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg">
-              <h3 className="font-semibold text-gray-900">Dr Mofashir Nawaz</h3>
+              <h3 className="font-semibold text-gray-900">Dr Mofasher Nawaz</h3>
               <p className="text-sm text-gray-600">Owner & Founder</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Treatments */}
       {/* Popular Treatments */}
       <section className="px-4 py-20 bg-[var(--section-bg)] text-[var(--section-fg)]">
         <div className="max-w-7xl mx-auto">
@@ -301,7 +287,7 @@ export default function Home() {
                   production for natural-looking facial contouring.
                 </p>
                 <a
-                  href="/treatments/Endolift"
+                  href="/treatments/endolift"
                   className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
                 >
                   Learn more
@@ -414,6 +400,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <ConsultationSection />
 
       {/* Treatments Section */}
       <section
@@ -423,47 +410,42 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-black">
           {/* Header */}
           <div className="text-center mb-16">
-            <p className="text-black text-sm uppercase tracking-wider mb-4 ">
-              Choose a Treatment
-            </p>
-            <h2 className="text-black text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
-              Relax, Rejuvenate,
-              <br />
-              Refresh, Renew.
-            </h2>
+            {/* Common Conditions */}
+            <div className="text-center flex gap-10 flex-col">
+              <h3 className="text-black text-lg">
+                Common Conditions we treat...
+              </h3>
+              <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto mb-4">
+                {conditions.map((condition) => (
+                  <span
+                    key={condition}
+                    className="bg-gray-700 text-white px-5 py-2 text-xs uppercase tracking-wide hover:bg-gray-600 transition-colors cursor-pointer rounded-full"
+                  >
+                    {condition}
+                  </span>
+                ))}
+              </div>
+              <p className="text-black text-sm uppercase tracking-wider mb-4 ">
+                Choose a Treatment
+              </p>
+            </div>
           </div>
 
           {/* Treatment Slider */}
           <div className="relative mb-16">
             <TreatmentSlider />
           </div>
-
-          {/* Common Conditions */}
-          <div className="text-center">
-            <h3 className="text-black text-lg mb-8">
-              Common Conditions we treat...
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {conditions.map((condition) => (
-                <span
-                  key={condition}
-                  className="bg-gray-700 text-white px-5 py-2 text-xs uppercase tracking-wide hover:bg-gray-600 transition-colors cursor-pointer rounded-full"
-                >
-                  {condition}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
       <ReviewsSection />
-      <ConsultationSection />
       <BeforeAfterSection />
-      <TechnologiesBrandsSection />
-      <RecentBlogsSection />
+      {/* <TechnologiesBrandsSection /> */}
+
       <Simplicity />
+
       <ClubMembership />
+      <RecentBlogsSection />
       <MediaCoverage />
     </div>
   );

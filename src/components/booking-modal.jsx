@@ -22,6 +22,7 @@ import {
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useRouter } from "next/navigation";
 import { useCreateAppointment } from "@/hooks/useAppointment";
+import { useCurrentUserProfile } from "@/hooks/useUser";
 import { toast } from "sonner";
 
 export function BookingModal({
@@ -33,6 +34,12 @@ export function BookingModal({
   const { user } = useAuth();
   const router = useRouter();
   const createAppointment = useCreateAppointment();
+
+  // Get user profile data
+  const {
+    data: profileData,
+    isLoading: profileLoading,
+  } = useCurrentUserProfile(user?.uid);
 
   const [formData, setFormData] = useState({
     treatment: "",
@@ -219,7 +226,7 @@ export function BookingModal({
       ],
     },
     "anti-wrinkle-treatment": {
-      name: "Botox (Advanced Anti-Wrinkle Treatment)",
+      name: "Anti-Wrinkle Treatment (Advanced Anti-Wrinkle Treatment)",
       options: [
         {
           id: "one-area",
@@ -428,102 +435,104 @@ export function BookingModal({
           id: "single-session",
           name: "1 Session",
           price: "£300",
-          description: "Advanced biohacking treatment with peptides and exosomal delivery"
+          description:
+            "Advanced biohacking treatment with peptides and exosomal delivery",
         },
         {
           id: "two-sessions",
           name: "2 Sessions",
           price: "£500",
-          description: "Recommended course for enhanced results"
+          description: "Recommended course for enhanced results",
         },
         {
           id: "three-sessions",
           name: "3 Sessions",
           price: "£700",
-          description: "Complete course for optimal cellular-level results"
-        }
-      ]
+          description: "Complete course for optimal cellular-level results",
+        },
+      ],
     },
-    "revitalizing": {
+    revitalizing: {
       name: "Hair+ Revitalizing Treatment",
       options: [
         {
           id: "four-session-package",
           name: "4-Session Package",
           price: "£600",
-          description: "Complete treatment course for optimal hair restoration"
+          description: "Complete treatment course for optimal hair restoration",
         },
         {
           id: "single-session",
           name: "Single Session",
           price: "£180",
-          description: "Individual treatment session"
+          description: "Individual treatment session",
         },
         {
           id: "maintenance-session",
           name: "Maintenance Session",
           price: "£150",
-          description: "After initial package completion"
+          description: "After initial package completion",
         },
         {
           id: "with-prp",
           name: "With PRP Enhancement",
           price: "+£200",
-          description: "Enhanced results with PRP therapy"
+          description: "Enhanced results with PRP therapy",
         },
         {
           id: "with-light-therapy",
           name: "With Light Therapy",
           price: "+£100",
-          description: "Additional light therapy for better results"
-        }
-      ]
+          description: "Additional light therapy for better results",
+        },
+      ],
     },
-    "exosignal": {
+    exosignal: {
       name: "ExoSignal™ Hair Treatment",
       options: [
         {
           id: "complete-course",
           name: "Complete Course (4 sessions)",
           price: "£700",
-          description: "Full treatment course using synthetic exosome technology"
+          description:
+            "Full treatment course using synthetic exosome technology",
         },
         {
           id: "single-session",
           name: "Single Session",
           price: "£200",
-          description: "Individual treatment session"
+          description: "Individual treatment session",
         },
         {
           id: "maintenance-session",
           name: "Maintenance Session",
           price: "£180",
-          description: "After initial course completion"
-        }
-      ]
+          description: "After initial course completion",
+        },
+      ],
     },
-    "exo": {
+    exo: {
       name: "EXO–NAD Skin Longevity Peeling",
       options: [
         {
           id: "single-session",
           name: "Single Session",
           price: "£380",
-          description: "Multi-step peel with synthetic exosome technology"
+          description: "Multi-step peel with synthetic exosome technology",
         },
         {
           id: "three-sessions",
           name: "Course of 3 Sessions",
           price: "£1,000",
-          description: "Recommended course for optimal results"
+          description: "Recommended course for optimal results",
         },
         {
           id: "six-sessions",
           name: "Course of 6 Sessions",
           price: "£1,900",
-          description: "Complete rejuvenation program"
-        }
-      ]
+          description: "Complete rejuvenation program",
+        },
+      ],
     },
     "skinfill-bacio": {
       name: "Skinfill™ Bacio Lip Enhancement",
@@ -532,16 +541,16 @@ export function BookingModal({
           id: "single-session",
           name: "Single Session",
           price: "£230",
-          description: "Professional lip booster with Vitamin B12 and HA"
+          description: "Professional lip booster with Vitamin B12 and HA",
         },
         {
           id: "three-sessions",
           name: "Course of 3 Sessions",
           price: "£600",
-          description: "Complete treatment course (Save £90)"
-        }
-      ]
-    }
+          description: "Complete treatment course (Save £90)",
+        },
+      ],
+    },
   };
 
   // Auto-fill user info when logged in
@@ -549,8 +558,9 @@ export function BookingModal({
     if (user && open) {
       setFormData((prev) => ({
         ...prev,
-        name: user.displayName || "",
+        name: user.displayName || profileData?.name || "",
         email: user.email || "",
+        phone: profileData?.phone || "",
         treatment: selectedTreatment || prev.treatment,
       }));
     } else if (selectedTreatment && open) {
@@ -559,7 +569,7 @@ export function BookingModal({
         treatment: selectedTreatment,
       }));
     }
-  }, [user, selectedTreatment, open]);
+  }, [user, profileData, selectedTreatment, open]);
 
   // Reset treatmentOption when treatment changes
   useEffect(() => {

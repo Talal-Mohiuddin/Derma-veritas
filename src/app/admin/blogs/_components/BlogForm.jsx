@@ -134,10 +134,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
         coverImageUrl: uploadedCoverImage ? JSON.stringify(uploadedCoverImage) : undefined
       };
 
-      // Log the data being sent for debugging
-      console.log('Submitting blog data:', submitData);
-      console.log('Uploaded cover image:', uploadedCoverImage);
-
+    
       if (isEditing) {
         await updateBlogMutation.mutateAsync({
           id: blog.id,

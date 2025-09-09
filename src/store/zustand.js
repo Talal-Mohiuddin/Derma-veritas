@@ -6,6 +6,8 @@ export const useStore = create((set) => ({
   userRole: null,
   bookingOpen: false,
   pendingBooking: null, // Store pending booking data
+  isChatOpen: false,
+  setIsChatOpen: (isOpen) => set({ isChatOpen: isOpen }),
   setUser: (user) => set({ user }),
   setUserRole: (role) => set({ userRole: role }),
   setBookingOpen: (isOpen) => set({ bookingOpen: isOpen }),

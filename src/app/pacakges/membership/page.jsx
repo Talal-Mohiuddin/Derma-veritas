@@ -30,7 +30,9 @@ export default function ClubMembershipPage() {
       const result = await createCheckout.mutateAsync({
         planName,
         userId: user.uid,
-        successUrl: `${window.location.origin}/membership/success?plan=${encodeURIComponent(planName)}`,
+        successUrl: `${
+          window.location.origin
+        }/membership/success?plan=${encodeURIComponent(planName)}`,
         cancelUrl: `${window.location.origin}/membership/cancel`,
       });
 
@@ -46,39 +48,39 @@ export default function ClubMembershipPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-{/* Hero Section */}
-<div className="relative bg-gradient-to-b from-gray-50 to-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-    <div className="flex flex-col items-center justify-center text-center">
-      <div className="w-38 h-38 flex items-center justify-center mb-12">
-        <img 
-          src="/Derma Veritas Logo Design New File-01.svg" 
-          alt="Derma Veritas Logo" 
-          className="w-full h-full object-contain"
-        />
+      {/* Hero Section */}
+      <div className="relative bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="flex flex-col items-center justify-center text-center">
+            <div className="w-38 h-38 flex items-center justify-center mb-12">
+              <img
+                src="/Derma Veritas Logo Design New File-01.svg"
+                alt="Derma Veritas Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
+              <span className="text-black">Elite</span>{" "}
+              <span className="text-gray-400">Membership</span>
+            </h1>
+
+            <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
+              Join our exclusive membership program and experience the ultimate
+              skin and hair care with monthly treatments, premium benefits, and
+              significant savings.
+            </p>
+
+            <Button
+              onClick={() => setBookingOpen(true)}
+              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wide hover:bg-gray-700 transition-colors"
+            >
+              <span>JOIN TODAY</span>
+              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
+            </Button>
+          </div>
+        </div>
       </div>
-
-      <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
-        <span className="text-black">Elite</span>{" "}
-        <span className="text-gray-400">Membership</span>
-      </h1>
-
-      <p className="text-gray-600 text-xl leading-relaxed text-center max-w-4xl mb-12">
-        Join our exclusive membership program and experience the ultimate
-        in aesthetic care with monthly treatments, premium benefits, and
-        significant savings.
-      </p>
-
-      <Button
-        onClick={() => setBookingOpen(true)}
-        className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wide hover:bg-gray-700 transition-colors"
-      >
-        <span>JOIN TODAY</span>
-        <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-      </Button>
-    </div>
-  </div>
-</div>
 
       {/* Membership Overview */}
       <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -88,21 +90,21 @@ export default function ClubMembershipPage() {
           </div>
 
           <h2 className="text-4xl lg:text-5xl font-light text-gray-800 mb-8 leading-tight">
-            Transform Your Skin with Monthly Luxury
+            Monthly Care for Healthy Skin & Hair
           </h2>
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
             Our Elite Membership Program offers you the opportunity to maintain
-            optimal skin health and aesthetic enhancement through carefully
-            curated monthly treatments. Each tier is designed to provide
-            comprehensive care while delivering exceptional value.
+            optimal skin health, hair vitality, and aesthetic enhancement
+            through carefully curated monthly treatments. Each tier is designed
+            to provide comprehensive care while delivering exceptional value.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            From advanced facial treatments to cutting-edge injectables, our
-            membership ensures you receive the highest quality care from our
-            team of medical professionals, with exclusive discounts and priority
-            access to new treatments.
+            From advanced facial treatments and professional hair care solutions
+            to cutting-edge injectables, our membership ensures you receive the
+            highest quality care from our team of medical professionals, with
+            exclusive discounts and priority access to new treatments.
           </p>
         </div>
 
@@ -184,7 +186,9 @@ export default function ClubMembershipPage() {
                   <div className="text-3xl font-light text-gray-800 mb-2">
                     £80<span className="text-lg text-gray-500">/month</span>
                   </div>
-                  <div className="text-sm text-gray-500 mt-1">Billed monthly</div>
+                  <div className="text-sm text-gray-500 mt-1">
+                    Billed monthly
+                  </div>
                 </div>
 
                 <ul className="space-y-4 text-gray-700 mb-8">
@@ -242,13 +246,15 @@ export default function ClubMembershipPage() {
                   <div className="text-3xl font-light text-gray-800 mb-2">
                     £160<span className="text-lg text-gray-500">/month</span>
                   </div>
-                  <div className="text-sm text-gray-500 mt-1">Billed monthly</div>
+                  <div className="text-sm text-gray-500 mt-1">
+                    Billed monthly
+                  </div>
                 </div>
 
                 <ul className="space-y-4 text-gray-700 mb-8">
                   {[
                     "3× Profhilo treatments (includes top-up)",
-                    "1× Botox (3 areas every 3 months)",
+                    "1× Anti-Wrinkle Treatment (3 areas every 3 months)",
                     "1× Laser Hair Removal (any area)",
                     "1× RF Microneedling or PRP Facial",
                     "15% off injectables & fillers",
@@ -296,7 +302,9 @@ export default function ClubMembershipPage() {
                   <div className="text-3xl font-light text-gray-800 mb-2">
                     £299<span className="text-lg text-gray-500">/month</span>
                   </div>
-                  <div className="text-sm text-gray-500 mt-1">Billed monthly</div>
+                  <div className="text-sm text-gray-500 mt-1">
+                    Billed monthly
+                  </div>
                 </div>
 
                 <ul className="space-y-4 text-gray-700 mb-8">
@@ -304,7 +312,7 @@ export default function ClubMembershipPage() {
                     "Endolift (discounted annually)",
                     "3× CO₂ Laser sessions",
                     "Quarterly Exosome therapy",
-                    "20% off fillers & Botox",
+                    "20% off fillers & Anti-Wrinkle Treatment",
                     "RF Microneedling included",
                     "Complete hair care treatments",
                     "Monthly product gifts",

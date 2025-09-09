@@ -124,7 +124,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
           "polynucleotides-hair-loss-treatment",
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
-        "botox-treatment": "anti-wrinkle-treatment",
+        "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
         "skinfill-bacio": "skinfill-bacio",
       };
@@ -174,7 +174,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     "Hand Rejuvenation",
     "Polynucleotides Hair Loss Treatment",
     "Polynucleotides Skin Rejuvenation Treatment",
-    "Botox Treatment",
+    "Anti-Wrinkle Treatment",
     "Skin Boosters",
     "Skinfill™ Bacio",
   ];
@@ -514,7 +514,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 {/* Static Links */}
                 {[
                   { name: "Packages", href: "/pacakges" },
-                  { name: "Club AL Membership", href: "/pacakges/membership" },
+                  { name: "DV Membership", href: "/pacakges/membership" },
                   { name: "Meet The Team", href: "/team" },
                   { name: "Shop Now", href: "/shop" },
                   { name: "About Us", href: "/about" },
@@ -612,7 +612,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       className="block text-xl font-light text-white hover:text-gray-200 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
-                      Club AL Membership
+                      DV Membership
                     </Link>
                   </div>
 

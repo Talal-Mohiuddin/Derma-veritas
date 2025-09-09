@@ -57,14 +57,14 @@ export default function Navbar() {
 
   const bannerMessages = [
     {
-      icon: <Gift className="w-4 h-4 text-white" />,
+      icon: <Gift className="w-5 h-5 text-black" />,
       title: "Refer & Earn",
       content: "Earn 10% cash reward when your friend completes their treatment",
       cta: "Learn More",
       link: "/refer-a-friend",
     },
     {
-      icon: <Sparkles className="w-4 h-4 text-white" />,
+      icon: <Sparkles className="w-5 h-5 text-black" />,
       title: "Limited Time Offer",
       content: "Free skin analysis with any treatment package this month",
       cta: "Get Started",
@@ -101,9 +101,9 @@ export default function Navbar() {
           "polynucleotides-hair-loss-treatment",
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
-        "botox-treatment": "anti-wrinkle-treatment",
+        "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
-        
+
         "skinfill-bacio": "skinfill-bacio",
       };
       return treatmentMap[treatmentSlug] || "";
@@ -140,46 +140,40 @@ export default function Navbar() {
     <>
       {/* Animated Referral Program Banner */}
       <header
-        className="bg-gradient-to-r from-gray-700 via-gray-800 to-black px-4 py-2 overflow-hidden fixed top-0 left-0 right-0 z-50"
-        style={{
-          backgroundImage: "url('/review2.jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
+        className="bg-gray-100 px-4 py-1 overflow-hidden fixed top-0 left-0 right-0 z-50"
       >
-        <div className="flex animate-scroll whitespace-nowrap">
+        <div className="flex animate-scroll whitespace-nowrap text-black">
           {/* Repeat messages for seamless scrolling */}
           {[...bannerMessages, ...bannerMessages].map((message, index) => (
             <div
               key={index}
               className="flex items-center justify-center min-w-fit mx-8 sm:mx-12"
             >
-              <div className="flex items-center gap-2">
-                {message.icon}
-                <span className="text-white font-bold text-xs uppercase tracking-wide">
+              <div className="flex items-center gap-2 text-black">
+                <div className="text-black">{message.icon}</div>
+                <span className="text-black font-bold text-lg uppercase tracking-wide">
                   {message.title}
                 </span>
               </div>
               <div className="hidden sm:block ml-3">
-                <span className="text-white text-xs font-medium">
+                <span className="text-black text-lg font-medium">
                   {message.content}
                 </span>
               </div>
               <Link
                 href={message.link}
-                className="ml-3 bg-white text-gray-800 px-3 py-1 rounded-full text-xs font-bold uppercase hover:bg-gray-100 transition-colors shadow-sm"
+                className="ml-3 bg-black text-white px-3 py-1 rounded-full text-sm font-bold uppercase hover:bg-gray-800 transition-colors shadow-sm"
               >
                 {message.cta}
               </Link>
-              <div className="mx-4 sm:mx-6 w-px h-4 bg-white/30"></div>
+              <div className="mx-4 sm:mx-6 w-px h-4 bg-black/30"></div>
             </div>
           ))}
         </div>
 
         {/* Gradient overlays for smooth edges */}
-        <div className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-gray-700 to-transparent pointer-events-none"></div>
-        <div className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-black to-transparent pointer-events-none"></div>
+        <div className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-gray-100 to-transparent pointer-events-none"></div>
+        <div className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-gray-100 to-transparent pointer-events-none"></div>
       </header>
 
       <style jsx>{`

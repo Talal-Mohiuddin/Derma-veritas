@@ -17,8 +17,8 @@ export default function AboutPage() {
             About Us
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            Dr Mofashir Nawaz is a leading cosmetic specialist, and the owner
-            and founder of Derma Veritas.
+            Dr. Mofasher Nawaz and Mr. A. Singh. is a leading cosmetic
+            specialist, and the owner and founder of Derma Veritas.
           </p>
         </div>
 
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className="order-2 md:order-1">
             <Image
               src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-              alt="Dr Mofashir Nawaz at awards ceremony"
+              alt="Dr Mofasher Nawaz at awards ceremony"
               width={500}
               height={600}
               className="rounded-lg shadow-lg w-full h-auto"
@@ -41,7 +41,7 @@ export default function AboutPage() {
               <div className="flex items-center gap-4 mb-4">
                 <div className="h-px bg-muted-foreground/30 flex-1 max-w-12"></div>
                 <span className="text-sm text-muted-foreground font-medium">
-                  Dr Mofashir Nawaz
+                  Dr. Mofasher Nawaz and Mr. A. Singh.
                 </span>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-balance">
@@ -49,17 +49,19 @@ export default function AboutPage() {
                 skills in the area of advanced aesthetic techniques.
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                At Derma Veritas, all injectors are meticulously trained by Dr
-                Ash Labib to ensure the highest level of quality and precision
-                in our treatments. Dr Ash Labib, with over{" "}
-                <strong>27 years</strong> of experience in the aesthetics
-                industry, exudes a genuine passion for his work and a strong
-                dedication to providing exceptional treatments and procedures.
+                At Derma Veritas, all injectors are meticulously trained by Dr.
+                Mofasher Nawaz and Mr. A. Singh. to ensure the highest level of
+                quality and precision in our treatments. Dr. Mofasher Nawaz and
+                Mr. A. Singh., with over <strong>27 years</strong> of experience
+                in the aesthetics industry, exudes a genuine passion for his
+                work and a strong dedication to providing exceptional treatments
+                and procedures.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                During his illustrious 24-year career at the NHS, Dr Labib
-                specialised in Rhinology and Rhinoplasty. Over the past decade,
-                he has played a pioneering role in co-developing the{" "}
+                During his illustrious 24-year career at the NHS, Dr. Mofasher
+                Nawaz and Mr. A. Singh. specialised in Rhinology and
+                Rhinoplasty. Over the past decade, he has played a pioneering
+                role in co-developing the{" "}
                 <strong>Non-Surgical Rhinoplasty</strong> procedure, often
                 referred to as the <strong>"15-minute nose job"</strong>. This
                 innovative approach has garnered widespread acclaim for its
@@ -77,13 +79,13 @@ export default function AboutPage() {
               An International Ambassador to the Industry
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              As an International Ambassador for Allergan, Dr Labib imparts
-              advanced faciDerma Veritas training on a national and global
-              scale. He participates in clinical research and audits,
-              contributing to the advancement of the field. Dr Labib's passion
-              extends beyond patient care as he serves as a trainer and educator
-              for fellow industry professionals at the AL Medical Academy. He
-              strongly advocates for
+              As an International Ambassador for Allergan, Dr. Mofasher Nawaz
+              and Mr. A. Singh. imparts advanced faciDerma Veritas training on a
+              national and global scale. He participates in clinical research
+              and audits, contributing to the advancement of the field. Dr.
+              Mofasher Nawaz and Mr. A. Singh.'s passion extends beyond patient
+              care as he serves as a trainer and educator for fellow industry
+              professionals at the AL Medical Academy. He strongly advocates for
             </p>
           </div>
 
@@ -93,9 +95,10 @@ export default function AboutPage() {
               Over 6500 completed Non-Surgical Rhinoplasties
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              With Dr Ash Labib's vast experience and unwavering commitment to
-              enhancing natural beauty, Derma Veritas stands at the forefront of
-              the field. Our impressive track record includes{" "}
+              With Dr. Mofasher Nawaz and Mr. A. Singh. vast experience and
+              unwavering commitment to enhancing natural beauty, Derma Veritas
+              stands at the forefront of the field. Our impressive track record
+              includes{" "}
               <strong>over 6500 completed non-surgical rhinoplasties</strong>{" "}
               and the training of <strong>over 2000 injectors worldwide</strong>
               . You can trust Derma Veritas to deliver unparalleled expertise

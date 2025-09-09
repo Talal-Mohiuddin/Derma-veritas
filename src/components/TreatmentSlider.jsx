@@ -6,26 +6,100 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 const treatments = [
-  { id: 1, title: "Botox Treatment", image: "/images/sample_image.jpg", price: "From £200", slug: "botox-treatment" },
-  { id: 2, title: "Cheek Fillers", image: "/images/sample_image.jpg", price: "From £450", slug: "cheek-fillers" },
-  { id: 3, title: "Chemical Peels", image: "/images/sample_image.jpg", price: "From £150", slug: "chemical-peels" },
-  { id: 4, title: "Dermal Fillers", image: "/images/sample_image.jpg", price: "From £350", slug: "dermal-fillers" },
-  { id: 5, title: "Exosome Therapy", image: "/images/sample_image.jpg", price: "From £350", slug: "exosome-therapy" },
-  { id: 6, title: "Lip Fillers", image: "/images/sample_image.jpg", price: "From £300", slug: "lip-fillers" },
-  { id: 7, title: "Microneedling", image: "/images/sample_image.jpg", price: "From £180", slug: "microneedling" },
-  { id: 8, title: "Non-Surgical Face Lift", image: "/images/sample_image.jpg", price: "From £600", slug: "non-surgical-face-lift" },
-  { id: 9, title: "Polynucleotide", image: "/images/sample_image.jpg", price: "From £800", slug: "Polynucleotide" },
-  { id: 10, title: "PRP Therapy", image: "/images/sample_image.jpg", price: "From £180", slug: "PRP-Therapy" },
-  { id: 11, title: "Quad Laser Hair Removal", image: "/images/sample_image.jpg", price: "From £250", slug: "Quad-Laser-Hair-Removal" },
-  
+  {
+    id: 1,
+    title: "Anti-Wrinkle Treatment",
+    image: "/images/sample_image.jpg",
+    price: "From £200",
+    slug: "Anti-Wrinkle-treatment",
+  },
+  {
+    id: 2,
+    title: "Cheek Fillers",
+    image: "/images/sample_image.jpg",
+    price: "From £450",
+    slug: "cheek-fillers",
+  },
+  {
+    id: 3,
+    title: "Chemical Peels",
+    image: "/images/sample_image.jpg",
+    price: "From £150",
+    slug: "chemical-peels",
+  },
+  {
+    id: 4,
+    title: "Dermal Fillers",
+    image: "/images/sample_image.jpg",
+    price: "From £350",
+    slug: "dermal-fillers",
+  },
+  {
+    id: 5,
+    title: "Exosome Therapy",
+    image: "/images/sample_image.jpg",
+    price: "From £350",
+    slug: "exosome-therapy",
+  },
+  {
+    id: 6,
+    title: "Lip Fillers",
+    image: "/images/sample_image.jpg",
+    price: "From £300",
+    slug: "lip-fillers",
+  },
+  {
+    id: 7,
+    title: "Microneedling",
+    image: "/images/sample_image.jpg",
+    price: "From £180",
+    slug: "microneedling",
+  },
+  {
+    id: 8,
+    title: "Non-Surgical Face Lift",
+    image: "/images/sample_image.jpg",
+    price: "From £600",
+    slug: "non-surgical-face-lift",
+  },
+  {
+    id: 9,
+    title: "Polynucleotide",
+    image: "/images/sample_image.jpg",
+    price: "From £800",
+    slug: "Polynucleotide",
+  },
+  {
+    id: 10,
+    title: "PRP Therapy",
+    image: "/images/sample_image.jpg",
+    price: "From £180",
+    slug: "PRP-Therapy",
+  },
+  {
+    id: 11,
+    title: "Quad Laser Hair Removal",
+    image: "/images/sample_image.jpg",
+    price: "From £250",
+    slug: "Quad-Laser-Hair-Removal",
+  },
 
+  {
+    id: 12,
+    title: "RF Microneedling",
+    image: "/images/sample_image.jpg",
+    price: "From £180",
+    slug: "RF-Microneedling",
+  },
 
-
-  { id: 12, title: "RF Microneedling", image: "/images/sample_image.jpg", price: "From £180", slug: "RF-Microneedling" },
-
-  { id: 13, title: "Skin Boosters", image: "/images/sample_image.jpg", price: "From £180", slug: "skin-boosters" },
-
-]
+  {
+    id: 13,
+    title: "Skin Boosters",
+    image: "/images/sample_image.jpg",
+    price: "From £180",
+    slug: "skin-boosters",
+  },
+];
 
 export default function TreatmentSlider() {
   const [currentIndex, setCurrentIndex] = useState(0)

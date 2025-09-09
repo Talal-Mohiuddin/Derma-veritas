@@ -36,6 +36,7 @@ export async function POST(request) {
       email,
       password,
       displayName,
+      phone,
       isGoogleAuth = false,
       uid,
     } = await request.json();
@@ -78,6 +79,7 @@ export async function POST(request) {
     const userData = {
       name: displayName || email.split("@")[0],
       email: email.toLowerCase().trim(),
+      phone: phone || "",
       role: "user",
       Buyinghistory: [],
       plan: null,
@@ -87,6 +89,7 @@ export async function POST(request) {
       referredBy,
       referrals: [],
       referralRewards: 0,
+      emailVerified: false,
     };
 
     return new Response(

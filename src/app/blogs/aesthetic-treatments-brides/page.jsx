@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { ArrowLeft, CalendarDays } from "lucide-react"
+import Link from "next/link";
+import { ArrowLeft, CalendarDays } from "lucide-react";
 
 export default function AestheticTreatmentsBridesPage() {
   return (
@@ -25,8 +25,12 @@ export default function AestheticTreatmentsBridesPage() {
             </h1>
 
             <div className="flex gap-2 mb-8">
-              <span className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-md">Face</span>
-              <span className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-md">Aesthetics</span>
+              <span className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-md">
+                Face
+              </span>
+              <span className="px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-md">
+                Aesthetics
+              </span>
             </div>
           </div>
 
@@ -40,34 +44,44 @@ export default function AestheticTreatmentsBridesPage() {
 
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-muted-foreground mb-8">
-              Your wedding day is one of the most photographed days of your life. Aesthetic treatments can help you look
-              and feel your absolute best while maintaining a natural, radiant appearance.
+              Your wedding day is one of the most photographed days of your
+              life. Aesthetic treatments can help you look and feel your
+              absolute best while maintaining a natural, radiant appearance.
             </p>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Planning Your Treatment Timeline</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">
+              Planning Your Treatment Timeline
+            </h2>
             <p className="text-foreground mb-6">
-              Start planning your aesthetic treatments 6-12 months before your wedding. This allows time for multiple
-              sessions if needed and ensures any potential side effects have resolved well before your big day.
+              Start planning your aesthetic treatments 6-12 months before your
+              wedding. This allows time for multiple sessions if needed and
+              ensures any potential side effects have resolved well before your
+              big day.
             </p>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">Popular Pre-Wedding Treatments</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">
+              Popular Pre-Wedding Treatments
+            </h2>
             <ul className="list-disc pl-6 text-foreground mb-6">
-              <li>Botox for smooth, worry-free expressions</li>
+              <li>Anti-Wrinkle Treatment for smooth, worry-free expressions</li>
               <li>Dermal fillers for enhanced facial contours</li>
               <li>Chemical peels for glowing, even-toned skin</li>
               <li>Laser treatments for hair removal</li>
               <li>Microneedling for improved skin texture</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">The Natural Enhancement Approach</h2>
+            <h2 className="text-2xl font-semibold text-foreground mt-8 mb-4">
+              The Natural Enhancement Approach
+            </h2>
             <p className="text-foreground mb-6">
-              The goal is to enhance your natural beauty, not create a dramatically different appearance. Subtle
-              treatments that improve skin quality and address specific concerns will photograph beautifully and ensure
-              you still look like yourself.
+              The goal is to enhance your natural beauty, not create a
+              dramatically different appearance. Subtle treatments that improve
+              skin quality and address specific concerns will photograph
+              beautifully and ensure you still look like yourself.
             </p>
           </div>
         </article>
       </div>
     </div>
-  )
+  );
 }

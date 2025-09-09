@@ -1,6 +1,8 @@
+import { useStore } from "@/store/zustand";
 import { Shield } from "lucide-react";
 
 export default function ConsultationSection() {
+  const { bookingOpen, setBookingOpen } = useStore();
   const steps = [
     {
       number: 1,
@@ -71,6 +73,15 @@ export default function ConsultationSection() {
               </button>
             </div>
           ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <button
+            onClick={() => setBookingOpen(true)}
+            className="inline-block px-6 py-3 bg-transparent border border-gray-300 text-black rounded-full font-medium hover:bg-gray-100 transition-colors"
+          >
+            Book a consultation
+          </button>
         </div>
       </div>
     </section>

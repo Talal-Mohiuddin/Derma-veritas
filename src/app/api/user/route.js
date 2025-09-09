@@ -80,7 +80,8 @@ export async function GET(request) {
       users = users.filter(
         (user) =>
           user.name?.toLowerCase().includes(searchLower) ||
-          user.email?.toLowerCase().includes(searchLower)
+          user.email?.toLowerCase().includes(searchLower) ||
+          user.phone?.toLowerCase().includes(searchLower)
       );
     }
 

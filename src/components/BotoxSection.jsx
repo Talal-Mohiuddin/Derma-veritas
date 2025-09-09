@@ -27,7 +27,7 @@ export default function BotoxSection() {
                      data-[state=active]:text-gray-900 rounded-none py-4 px-6 font-medium 
                      hover:bg-transparent hover:text-gray-900 hover:border-transparent"
             >
-              What is Botox and how does it work?
+              What is Anti-Wrinkle Treatment and how does it work?
             </TabsTrigger>
             <TabsTrigger
               value="what-helps"
@@ -37,7 +37,7 @@ export default function BotoxSection() {
                      data-[state=active]:text-gray-900 rounded-none py-4 px-6 font-medium 
                      hover:bg-transparent hover:text-gray-900 hover:border-transparent"
             >
-              What can Botox help with?
+              What can Anti-Wrinkle Treatment help with?
             </TabsTrigger>
           </TabsList>
 
@@ -69,10 +69,10 @@ export default function BotoxSection() {
               <div className="space-y-6">
                 <div>
                   <span className="text-sm text-gray-600 font-medium">
-                    Botox Treatment
+                    Anti-Wrinkle Treatment Treatment
                   </span>
                   <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
-                    What is Botox and how does it work?
+                    What is Anti-Wrinkle Treatment and how does it work?
                   </h3>
                 </div>
 
@@ -119,12 +119,12 @@ export default function BotoxSection() {
                 <div className="rounded-2xl overflow-hidden bg-gray-200 aspect-[4/3]">
                   <img
                     src="/images/professional-aesthetic-consultation-modern-clinic-.png"
-                    alt="Dr Mofashir Nawaz explaining Botox treatments"
+                    alt="Dr Mofasher Nawaz explaining Anti-Wrinkle treatments"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute top-4 right-4 bg-white rounded-lg px-3 py-2 shadow-lg">
                     <div className="text-xs text-gray-600 font-medium">
-                      Dr Mofashir Nawaz
+                      Dr Mofasher Nawaz
                     </div>
                     <div className="text-xs text-gray-500">Owner & Founder</div>
                   </div>
@@ -145,10 +145,10 @@ export default function BotoxSection() {
               <div className="space-y-6">
                 <div>
                   <span className="text-sm text-gray-600 font-medium">
-                    Botox Injectables
+                    Anti-Wrinkle Treatment Injectables
                   </span>
                   <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-6">
-                    What can Botox help with?
+                    What can Anti-Wrinkle Treatment help with?
                   </h3>
                 </div>
 
