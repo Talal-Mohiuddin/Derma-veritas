@@ -15,63 +15,73 @@ export default function MeetTheTeamPage() {
       name: "Dr. Sarah Johnson",
       role: "Medical Director & Founder",
       bio: "Board-certified dermatologist with over 15 years of experience in medical and cosmetic dermatology. Dr. Johnson specializes in laser treatments and innovative skin rejuvenation techniques.",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      image:
+        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     },
     {
       id: 2,
       name: "Michael Chen",
       role: "Lead Aesthetic Practitioner",
       bio: "With a background in nursing and advanced certifications in injectables and laser technology, Michael brings precision and artistry to every treatment he performs.",
-      image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      image:
+        "https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     },
     {
       id: 3,
       name: "Jessica Williams",
       role: "Senior Esthetician",
       bio: "Jessica is a licensed esthetician with expertise in advanced facial treatments, chemical peels, and developing personalized skincare regimens for clients with diverse skin concerns.",
-      image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      image:
+        "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     },
     {
       id: 4,
       name: "David Rodriguez",
       role: "Patient Care Coordinator",
       bio: "David ensures every patient's journey is seamless from consultation to follow-up. His extensive knowledge of treatments helps clients make informed decisions about their care.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      image:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     },
     {
       id: 5,
       name: "Emily Thompson",
       role: "Nurse Practitioner",
       bio: "Emily is an experienced nurse practitioner specializing in non-surgical facial rejuvenation. She is known for her gentle approach and natural-looking results with injectables.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      image:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
     },
     {
       id: 6,
       name: "Robert Kim",
       role: "Laser Specialist",
       bio: "Robert is certified in multiple laser platforms and specializes in tattoo removal, hair reduction, and treating pigmentation issues with cutting-edge technology.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    }
+      image:
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    },
   ];
 
   // Core values data
   const coreValues = [
     {
       title: "Excellence",
-      description: "We are committed to delivering the highest standard of care using evidence-based practices and continuous education."
+      description:
+        "We are committed to delivering the highest standard of care using evidence-based practices and continuous education.",
     },
     {
       title: "Compassion",
-      description: "We listen to your concerns and tailor treatments to your unique needs, ensuring you feel heard and valued."
+      description:
+        "We listen to your concerns and tailor treatments to your unique needs, ensuring you feel heard and valued.",
     },
     {
       title: "Innovation",
-      description: "We stay at the forefront of aesthetic medicine, incorporating the latest technologies and techniques for optimal results."
+      description:
+        "We stay at the forefront of aesthetic medicine, incorporating the latest technologies and techniques for optimal results.",
     },
     {
       title: "Integrity",
-      description: "We provide honest recommendations and transparent pricing, building trust through every interaction."
-    }
+      description:
+        "We provide honest recommendations and transparent pricing, building trust through every interaction.",
+    },
   ];
 
   return (
@@ -80,13 +90,14 @@ export default function MeetTheTeamPage() {
       <div className="relative bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex flex-col items-center justify-center text-center">
-            <div className="w-40 h-40 flex items-center justify-center mb-12">
-        <img 
-          src="/Derma Veritas Logo Design New File-01.svg" 
-          alt="Derma Veritas Logo" 
-          className="w-full h-full object-contain"
-        />
-      </div>
+            <div className="w-28 h-28  flex items-center justify-center">
+              <img
+                src="/logo_black.png
+"
+                alt="Derma Veritas Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
 
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
               <span className="text-black">Meet Our</span>{" "}

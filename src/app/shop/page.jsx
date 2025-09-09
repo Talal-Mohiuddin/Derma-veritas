@@ -74,7 +74,8 @@ export default function ProductListing() {
           <div className="flex flex-col items-center justify-center text-center">
             <div className="w-40 h-40 flex items-center justify-center mb-12">
               <img
-                src="/Derma Veritas Logo Design New File-01.svg"
+                src="/logo_black.png
+"
                 alt="Derma Veritas Logo"
                 className="w-full h-full object-contain"
               />
