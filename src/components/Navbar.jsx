@@ -59,23 +59,28 @@ export default function Navbar() {
     {
       icon: <Gift className="w-5 h-5 text-black" />,
       title: "Refer & Earn",
-      content: "Earn 10% cash reward when your friend completes their treatment",
+      content:
+        "Earn 10% cash reward when your friend completes their treatment",
       cta: "Learn More",
       link: "/refer-a-friend",
     },
     {
-      icon: <Sparkles className="w-5 h-5 text-black" />,
-      title: "Limited Time Offer",
-      content: "Free skin analysis with any treatment package this month",
-      cta: "Get Started",
-      link: "/treatments",
+      icon: <Star className="w-5 h-5 text-black" />,
+      title: "Luxury Clinic",
+      content:
+        "Experience world-class skin & hair treatments in our premium clinic",
+      cta: "Visit Us",
+      link: "/locations",
     },
   ];
 
   // Function to determine treatment based on current page
   const getCurrentTreatment = () => {
     // Handle packages - fix the path matching
-    if (pathname.includes("/packages/profusion") || pathname === "/pacakges/profusion") {
+    if (
+      pathname.includes("/packages/profusion") ||
+      pathname === "/pacakges/profusion"
+    ) {
       return "profusion-hydrafacial";
     }
 
@@ -139,9 +144,7 @@ export default function Navbar() {
   return (
     <>
       {/* Animated Referral Program Banner */}
-      <header
-        className="bg-gray-100 px-4 py-1 overflow-hidden fixed top-0 left-0 right-0 z-50"
-      >
+      <header className="bg-gray-100 px-4 py-1 overflow-hidden fixed top-0 left-0 right-0 z-50">
         <div className="flex animate-scroll whitespace-nowrap text-black">
           {/* Repeat messages for seamless scrolling */}
           {[...bannerMessages, ...bannerMessages].map((message, index) => (
@@ -214,7 +217,9 @@ export default function Navbar() {
             onClick={() => (window.location.href = "/")}
           >
             <Image
-              src={isScrolled || isHomePage ? "/logo_white.png" : "/logo_black.png"}
+              src={
+                isScrolled || isHomePage ? "/logo_white.png" : "/logo_black.png"
+              }
               alt="Aesthetics Logo"
               width={90}
               height={90}

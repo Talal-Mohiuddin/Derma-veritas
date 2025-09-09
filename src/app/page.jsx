@@ -85,7 +85,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 pt-40">
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-12 max-w-4xl">
-            Derma Veritas <br /> Doctor <br /> Led Clinic
+            Derma Veritas <br />
+            Doctor Led
+            <br />
+            Skin & Hair Clinic
           </h1>
 
           {/* Button Container */}
