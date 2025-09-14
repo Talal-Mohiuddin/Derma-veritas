@@ -201,9 +201,9 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                 <Users className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
               </div>
               <div className="text-lg sm:text-2xl font-bold text-purple-600">
-                {user.referralRewards || 0}
+                £{(user.totalRewardsEarned || 0).toFixed(2)}
               </div>
-              <div className="text-xs sm:text-sm text-purple-700">Referral Rewards</div>
+              <div className="text-xs sm:text-sm text-purple-700">Total Rewards Earned</div>
             </div>
 
             <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200">
@@ -211,9 +211,9 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                 <UserPlus className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600" />
               </div>
               <div className="text-lg sm:text-2xl font-bold text-orange-600">
-                {user.referrerInfo ? "Yes" : "No"}
+                {user.usedReferralCodesCount || 0}
               </div>
-              <div className="text-xs sm:text-sm text-orange-700">Was Referred</div>
+              <div className="text-xs sm:text-sm text-orange-700">Codes Used</div>
             </div>
           </div>
 
@@ -297,7 +297,7 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                   {user.referralCode && (
                     <div>
                       <p className="text-sm text-gray-600 mb-2">
-                        Referral Code
+                        User's Referral Code
                       </p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
                         <code className="bg-white px-3 py-2 rounded border text-green-600 font-bold text-sm sm:text-base w-full sm:w-auto text-center sm:text-left">
@@ -316,45 +316,67 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                     </div>
                   )}
 
-                  <div>
-                    {user.referrerInfo ? (
-                      <div>
-                        <p className="text-sm text-gray-600 mb-2">
-                          Referred By
-                        </p>
-                        <div className="flex items-center space-x-3 bg-white p-3 rounded border">
-                          <Avatar className="h-8 w-8 flex-shrink-0">
-                            <AvatarFallback className="bg-blue-100 text-blue-600 text-sm">
-                              {user.referrerInfo.name
-                                ?.charAt(0)
-                                ?.toUpperCase() ||
-                                user.referrerInfo.email
-                                  ?.charAt(0)
-                                  ?.toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-gray-900 text-sm sm:text-base truncate">
-                              {user.referrerInfo.name || "Unknown"}
-                            </div>
-                            <div className="text-xs sm:text-sm text-gray-600 truncate">
-                              {user.referrerInfo.email}
-                            </div>
-                          </div>
-                          <Badge variant="outline" className="text-xs flex-shrink-0">
-                            Referrer
-                          </Badge>
-                        </div>
+                  {/* Referral Activity Summary */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-white p-3 rounded border text-center">
+                      <div className="text-lg font-bold text-green-600">
+                        {user.referralCount || 0}
                       </div>
-                    ) : (
-                      <div className="text-center py-4">
-                        <UserPlus className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                        <p className="text-sm text-gray-600">
-                          Direct signup - not referred
-                        </p>
+                      <div className="text-xs text-gray-600">Users Referred</div>
+                    </div>
+                    <div className="bg-white p-3 rounded border text-center">
+                      <div className="text-lg font-bold text-purple-600">
+                        £{(user.totalRewardsEarned || 0).toFixed(2)}
                       </div>
-                    )}
+                      <div className="text-xs text-gray-600">Total Earned</div>
+                    </div>
+                    <div className="bg-white p-3 rounded border text-center">
+                      <div className="text-lg font-bold text-orange-600">
+                        {user.usedReferralCodesCount || 0}
+                      </div>
+                      <div className="text-xs text-gray-600">Codes Used</div>
+                    </div>
                   </div>
+
+                  {/* Used Referral Codes */}
+                  {user.usedReferralCodes && user.usedReferralCodes.length > 0 && (
+                    <div>
+                      <p className="text-sm text-gray-600 mb-2">
+                        Referral Codes This User Has Used
+                      </p>
+                      <div className="space-y-2 max-h-40 overflow-y-auto">
+                        {user.usedReferralCodes.map((usage, index) => (
+                          <div key={index} className="bg-white p-3 rounded border flex justify-between items-center">
+                            <div>
+                              <code className="font-mono text-sm font-bold text-blue-600">
+                                {usage.code}
+                              </code>
+                              <div className="text-xs text-gray-500">
+                                Used on: {formatDate(usage.usedAt)}
+                              </div>
+                            </div>
+                            {usage.referrerReward > 0 && (
+                              <Badge variant="outline" className="text-xs">
+                                Reward: £{usage.referrerReward}
+                              </Badge>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Pending Rewards */}
+                  {user.pendingRewards > 0 && (
+                    <div className="bg-yellow-100 border border-yellow-300 rounded-lg p-3">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-yellow-600" />
+                        <span className="text-sm font-medium text-yellow-800">
+                          {user.pendingRewards} pending reward{user.pendingRewards !== 1 ? 's' : ''} awaiting approval
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

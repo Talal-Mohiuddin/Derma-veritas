@@ -416,7 +416,7 @@ export default function Home() {
             {/* Common Conditions */}
             <div className="text-center flex gap-10 flex-col">
               <h3 className="text-black text-lg">
-                Common Conditions we treat...
+                Conditions We Specialize In...
               </h3>
               <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto mb-4">
                 {conditions.map((condition) => (

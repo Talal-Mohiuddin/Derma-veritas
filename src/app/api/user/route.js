@@ -70,6 +70,11 @@ export async function GET(request) {
           createdAt: userData.createdAt?.toDate?.()?.toISOString() || userData.createdAt,
           referrerInfo,
           referralCount: userData.referrals?.length || 0,
+          usedReferralCodesCount: userData.usedReferralCodes?.length || 0,
+          totalRewardsEarned: userData.rewards?.reduce(
+            (sum, reward) => sum + (reward.status === "approved" ? reward.rewardAmount : 0), 0
+          ) || 0,
+          pendingRewards: userData.rewards?.filter(reward => reward.status === "pending").length || 0,
         });
       }
     }

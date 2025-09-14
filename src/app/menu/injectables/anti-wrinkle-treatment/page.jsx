@@ -160,7 +160,7 @@ export default function DermalFillersSection() {
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
                 Turn back the clocks on your skin using Anti-Wrinkle Treatment
-                injections at AL Aesthetics.
+                injections at Derma Veritas.
               </p>
 
               {/* Buttons */}
