@@ -22,18 +22,19 @@ export async function POST(request) {
       "Veritas Glow": {
         monthlyPrice: 8000, // £80.00 in pence
         name: "Veritas Glow",
-        description: "Entry Tier - ProFusion HydraFacial monthly + benefits"
+        description: "Entry Tier - ProFusion HydraFacial monthly + benefits",
       },
       "Veritas Sculpt": {
         monthlyPrice: 16000, // £160.00 in pence
         name: "Veritas Sculpt",
-        description: "Mid Tier - Profhilo treatments + Botox + benefits"
+        description:
+          "Mid Tier - Profhilo treatments + Anti-Wrinkle Treatment + benefits",
       },
       "Veritas Prestige": {
         monthlyPrice: 29900, // £299.00 in pence
         name: "Veritas Prestige",
-        description: "Luxury Tier - Endolift + CO₂ Laser + premium benefits"
-      }
+        description: "Luxury Tier - Endolift + CO₂ Laser + premium benefits",
+      },
     };
 
     const selectedPlan = membershipPlans[planName];
@@ -47,12 +48,9 @@ export async function POST(request) {
     // Verify user exists
     const userRef = doc(db, "users", userId);
     const userDoc = await getDoc(userRef);
-    
+
     if (!userDoc.exists()) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     const userData = userDoc.data();
@@ -68,7 +66,7 @@ export async function POST(request) {
         },
       });
       customerId = customer.id;
-      
+
       // Save customer ID to user document
       await updateDoc(userRef, {
         stripeCustomerId: customerId,
@@ -79,19 +77,19 @@ export async function POST(request) {
     // Create simple subscription checkout session
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      payment_method_types: ['card'],
-      mode: 'subscription',
+      payment_method_types: ["card"],
+      mode: "subscription",
       line_items: [
         {
           price_data: {
-            currency: 'gbp',
+            currency: "gbp",
             product_data: {
               name: `${selectedPlan.name} Membership`,
               description: selectedPlan.description,
             },
             unit_amount: selectedPlan.monthlyPrice,
             recurring: {
-              interval: 'month',
+              interval: "month",
             },
           },
           quantity: 1,
@@ -103,8 +101,13 @@ export async function POST(request) {
           planName: planName,
         },
       },
-      success_url: successUrl || `${process.env.NEXT_PUBLIC_BASE_URL}/membership/success?plan=${encodeURIComponent(planName)}`,
-      cancel_url: cancelUrl || `${process.env.NEXT_PUBLIC_BASE_URL}/membership/cancel`,
+      success_url:
+        successUrl ||
+        `${
+          process.env.NEXT_PUBLIC_BASE_URL
+        }/membership/success?plan=${encodeURIComponent(planName)}`,
+      cancel_url:
+        cancelUrl || `${process.env.NEXT_PUBLIC_BASE_URL}/membership/cancel`,
       metadata: {
         userId: userId,
         planName: planName,
@@ -112,13 +115,12 @@ export async function POST(request) {
         monthlyPrice: selectedPlan.monthlyPrice.toString(),
       },
     });
-    
+
     return NextResponse.json({
       sessionId: session.id,
       url: session.url,
       subscription: true,
     });
-
   } catch (error) {
     console.error("Error creating membership checkout session:", error);
     return NextResponse.json(
@@ -150,20 +152,14 @@ export async function PUT(request) {
 
     const validPlans = ["Veritas Glow", "Veritas Sculpt", "Veritas Prestige"];
     if (!validPlans.includes(planName)) {
-      return NextResponse.json(
-        { error: "Invalid plan name" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid plan name" }, { status: 400 });
     }
 
     const userRef = doc(db, "users", userId);
     const userDoc = await getDoc(userRef);
 
     if (!userDoc.exists()) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     await updateDoc(userRef, {
@@ -177,7 +173,6 @@ export async function PUT(request) {
       message: "Membership plan updated successfully",
       plan: planName,
     });
-
   } catch (error) {
     console.error("Error updating membership plan:", error);
     return NextResponse.json(

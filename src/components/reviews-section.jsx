@@ -10,7 +10,7 @@ const reviews = [
     id: 1,
     name: "Sapna Panesar",
     rating: 5,
-    text: "Dr Labib was fantastic, couldn't recommend him more. Extremely professional and knowledgeable, highly trusted! His years of experience truly show and has helped my gain more confidence. Thank you",
+    text: "Dr. Mofasher Nawaz and Mr. A. Singh. was fantastic, couldn't recommend him more. Extremely professional and knowledgeable, highly trusted! His years of experience truly show and has helped my gain more confidence. Thank you",
   },
   {
     id: 2,

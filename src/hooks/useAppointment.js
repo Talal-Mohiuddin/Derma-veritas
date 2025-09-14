@@ -50,12 +50,17 @@ export const useCreateAppointment = () => {
         body: JSON.stringify(appointmentData),
       });
 
+      const responseData = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to create appointment");
+        // Create a more detailed error object
+        const error = new Error(responseData.message || "Failed to create appointment");
+        error.errorType = responseData.errorType;
+        error.statusCode = response.status;
+        throw error;
       }
 
-      return response.json();
+      return responseData;
     },
     onSuccess: (data) => {
       // Invalidate appointments lists
@@ -65,6 +70,12 @@ export const useCreateAppointment = () => {
       if (data.isFirstAppointment) {
         queryClient.invalidateQueries({ queryKey: ["referralData"] });
         queryClient.invalidateQueries({ queryKey: ["users"] });
+      }
+    },
+    onError: (error) => {
+      // Log specific error types for debugging
+      if (error.errorType) {
+        console.warn(`Appointment creation failed with error type: ${error.errorType}`, error.message);
       }
     },
   });

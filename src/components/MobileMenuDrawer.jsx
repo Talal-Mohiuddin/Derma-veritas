@@ -124,7 +124,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
           "polynucleotides-hair-loss-treatment",
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
-        "botox-treatment": "anti-wrinkle-treatment",
+        "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
         "skinfill-bacio": "skinfill-bacio",
       };
@@ -174,7 +174,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     "Hand Rejuvenation",
     "Polynucleotides Hair Loss Treatment",
     "Polynucleotides Skin Rejuvenation Treatment",
-    "Botox Treatment",
+    "Anti-Wrinkle Treatment",
     "Skin Boosters",
     "Skinfill™ Bacio",
   ];
@@ -498,24 +498,13 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   />
                 </div>
 
-                {/* Conditions */}
-                <div className="border-b border-white/20 pb-4 mb-4">
-                  <h3 className="text-base font-bold uppercase text-white mb-3">
-                    Conditions
-                  </h3>
-                  <MobileDropdown
-                    label="Facial Concerns"
-                    section="FacialConcerns"
-                    links={facialConcernsLinks}
-                    type="conditions"
-                  />
-                </div>
+              
 
                 {/* Static Links */}
                 {[
                   { name: "Packages", href: "/pacakges" },
-                  { name: "Club AL Membership", href: "/pacakges/membership" },
-                  { name: "Meet The Team", href: "/team" },
+                  { name: "DV Membership", href: "/pacakges/membership" },
+                 /* { name: "Meet The Team", href: "/team" },*/
                   { name: "Shop Now", href: "/shop" },
                   { name: "About Us", href: "/about" },
                   { name: "Contact Us", href: "/contact" },
@@ -581,19 +570,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     </button>
                   </div>
 
-                  {/* Conditions Section */}
-                  <div
-                    className="py-4 pr-8"
-                    onMouseEnter={() => showSubmenu("conditions")}
-                    onMouseLeave={hideSubmenu}
-                  >
-                    <button
-                      className="block text-xl font-light text-white hover:text-gray-200 transition-colors text-left w-full cursor-pointer"
-                      onClick={() => toggleSubmenu("conditions")}
-                    >
-                      Conditions
-                    </button>
-                  </div>
+                 
 
                   {/* Static Links */}
                   <div className="py-4">
@@ -612,7 +589,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       className="block text-xl font-light text-white hover:text-gray-200 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
-                      Club AL Membership
+                      DV Membership
                     </Link>
                   </div>
 
@@ -626,7 +603,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     </Link>
                   </div>
 
-                  <div className="py-4">
+                  {/* <div className="py-4">
                     <Link
                       href="/team"
                       className="block text-lg font-light text-white hover:text-gray-200 transition-colors cursor-pointer"
@@ -634,7 +611,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                     >
                       Meet The Team
                     </Link>
-                  </div>
+                  </div> */}
 
                   <div className="py-4">
                     <Link

@@ -55,15 +55,22 @@ export default function Home() {
   };
 
   const conditions = [
-    "CROW'S FEET",
-    "EYE BAGS / DARK CIRCLES",
-    "SAGGING JOWLS",
-    "PEBBLED CHIN",
-    "FROWN LINES",
-    "FOREHEAD LINES",
-    "TEMPLE HOLLOWS",
-    "BUMP ON NOSE",
-    "GUMMY SMILE",
+    { name: "Sagging Skin", path: "/treatments/Endolift" },
+    { name: "Double Chin", path: "/menu/injectables/fat-dissolving-injections" },
+    { name: "Eye Bags", path: "/treatments/prp-therapy" },
+    { name: "Acne Scars", path: "/treatments/co2" },
+    { name: "Stretch Marks", path: "/treatments/microneedling" },
+    { name: "Sun Damage", path: "/treatments/chemical-peels" },
+    { name: "Open Pores", path: "/treatments/rf-microneedling" },
+    { name: "Loose skin", path: "/menu/injectables/profhilo" },
+    { name: "Early Aging", path: "/menu/injectables/anti-wrinkle-treatment" },
+    { name: "Hair Loss", path: "/treatments/prp-therapy" },
+    { name: "Postpartum Hair Thinning", path: "/treatments/mesotherapy" },
+    { name: "Damaged Hair", path: "/treatments/exosignal" },
+    { name: "Dark Circles", path: "/menu/injectables/tear-trough-filler" },
+    { name: "Sensitive Skin", path: "/treatments/led-phototherapy" },
+    { name: "Dry Skin", path: "/treatments/exosome-therapy" },
+    { name: "Lip Volume Loss", path: "/menu/injectables/lip-fillers" }
   ];
 
   return (
@@ -72,9 +79,8 @@ export default function Home() {
       <main className="relative h-screen overflow-hidden">
         <div className="absolute inset-0 w-full h-full bg-black">
           <iframe
-            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${
-              videoLoaded ? "opacity-100" : "opacity-0"
-            } transition-opacity duration-500`}
+            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${videoLoaded ? "opacity-100" : "opacity-0"
+              } transition-opacity duration-500`}
             src="https://www.youtube.com/embed/0T9C5RcoLMo?autoplay=1&mute=1&loop=1&playlist=0T9C5RcoLMo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&start=0&end=0&version=3&enablejsapi=1"
             title="Background Video"
             frameBorder="0"
@@ -85,7 +91,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 pt-40">
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-12 max-w-4xl">
-            Derma Veritas <br /> Doctor <br /> Led Clinic
+            Derma Veritas <br />
+            Doctor Led
+            <br />
+            Skin & Hair Clinic
           </h1>
 
           {/* Button Container */}
@@ -113,93 +122,36 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Timing Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="grid lg:grid-cols-2">
-              {/* Clinic Hours */}
-              <div className="p-10 lg:p-12">
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-14 h-14 bg-gradient-to-br from-gray-800 to-black rounded-xl flex items-center justify-center shadow-lg">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-7 w-7 text-white"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h2 className="text-3xl font-light text-gray-900">
-                      Clinic Hours
-                    </h2>
-                    <p className="text-gray-500 text-sm">We're here for you</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <div className="group flex justify-between items-center py-4 px-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 border border-gray-100">
-                    <span className="font-medium text-gray-700">
-                      Monday - Friday
-                    </span>
-                    <span className="font-semibold text-gray-900 text-lg">
-                      11:00 - 19:00
-                    </span>
-                  </div>
-                  <div className="group flex justify-between items-center py-4 px-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 border border-gray-100">
-                    <span className="font-medium text-gray-700">Saturday</span>
-                    <span className="font-semibold text-gray-900 text-lg">
-                      08:00 - 18:00
-                    </span>
-                  </div>
-                  <div className="group flex justify-between items-center py-4 px-5 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 border border-gray-100">
-                    <span className="font-medium text-gray-700">Sunday</span>
-                    <span className="font-semibold text-gray-900 text-lg">
-                      08:00 - 18:00
-                    </span>
-                  </div>
-                </div>
+      {/* CTA Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-xl p-8 lg:p-10 text-white">
+            <div className="text-center space-y-6">
+              <div>
+                <h3 className="text-2xl font-semibold mb-3">
+                  Start Your Transformation
+                </h3>
+                <p className="text-gray-300">
+                  Book a complimentary consultation with our specialists today.
+                </p>
               </div>
 
-              {/* CTA Section */}
-              <div className="bg-gradient-to-br from-gray-900 to-black p-10 lg:p-12 text-white flex flex-col justify-center">
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-2xl font-light mb-3">
-                      Ready to Begin Your Transformation?
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      Schedule your complimentary consultation with our
-                      specialists and discover the right treatment for you.
-                    </p>
+              <div className="space-y-4">
+                <Button
+                  onClick={() => setBookingOpen(true)}
+                  className="bg-white text-black hover:bg-gray-100 font-semibold py-3 px-6 transition-all duration-200 shadow-lg hover:shadow-xl rounded-lg"
+                >
+                  BOOK CONSULTATION
+                </Button>
+
+                <div className="flex items-center justify-center gap-6 text-sm">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>No hidden fees</span>
                   </div>
-
-                  <div className="space-y-4">
-                    <Button
-                      onClick={() => setBookingOpen(true)}
-                      className="w-full bg-white text-black hover:bg-gray-100 font-semibold py-4 px-8 transition-all duration-200 shadow-lg hover:shadow-xl rounded-lg"
-                    >
-                      BOOK A CONSULTATION
-                    </Button>
-
-                    <div className="flex items-center justify-center gap-6 text-sm text-black">
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4" />
-                        <span>No hidden fees</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <BadgeCheck className="w-4 h-4" />
-                        <span>Expert care</span>
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <BadgeCheck className="w-4 h-4" />
+                    <span>Expert care</span>
                   </div>
                 </div>
               </div>
@@ -209,19 +161,6 @@ export default function Home() {
       </section>
 
       {/* Floating Chat */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <div className="relative">
-          <Button
-            className="bg-black hover:bg-gray-800 text-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg transition-colors"
-            onClick={() => setIsChatOpen(true)}
-          >
-            <MessageCircle className="w-10 h-10" />
-          </Button>
-        </div>
-      </div>
-
-      {/* Chat Window */}
-      <Chatwindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
 
       {/* Booking Modal */}
       <BookingModal
@@ -235,8 +174,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 lg:order-2">
             <h2 className="text-4xl lg:text-5xl font-light text-gray-900 leading-tight">
-              Expert skin and hair care under the leadership of Dr. Mofashir
-              Nawaz.{" "}
+              Expert skin and hair care under the trusted leadership of Dr.
+              Mofasher Nawaz and Mr. A. Singh.{" "}
             </h2>
             <p className="text-gray-600 leading-relaxed">
               Derma Veritas offers medically-led skin and dermatology clinic in
@@ -259,18 +198,17 @@ export default function Home() {
           <div className="relative lg:order-1">
             <img
               src="/owner.png"
-              alt="Dr Mofashir Nawaz"
+              alt="Dr Mofasher Nawaz"
               className="w-full h-auto rounded-lg"
             />
             <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-3 shadow-lg">
-              <h3 className="font-semibold text-gray-900">Dr Mofashir Nawaz</h3>
+              <h3 className="font-semibold text-gray-900">Dr Mofasher Nawaz</h3>
               <p className="text-sm text-gray-600">Owner & Founder</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Treatments */}
       {/* Popular Treatments */}
       <section className="px-4 py-20 bg-[var(--section-bg)] text-[var(--section-fg)]">
         <div className="max-w-7xl mx-auto">
@@ -301,7 +239,7 @@ export default function Home() {
                   production for natural-looking facial contouring.
                 </p>
                 <a
-                  href="/treatments/Endolift"
+                  href="/treatments/endolift"
                   className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
                 >
                   Learn more
@@ -414,6 +352,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <ConsultationSection />
 
       {/* Treatments Section */}
       <section
@@ -423,47 +362,46 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-black">
           {/* Header */}
           <div className="text-center mb-16">
-            <p className="text-black text-sm uppercase tracking-wider mb-4 ">
-              Choose a Treatment
-            </p>
-            <h2 className="text-black text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
-              Relax, Rejuvenate,
-              <br />
-              Refresh, Renew.
-            </h2>
+            {/* Common Conditions */}
+            <div className="text-center flex gap-10 flex-col">
+              <h3 className="text-black text-lg">
+                Conditions We Specialize In...
+              </h3>
+              <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto mb-4">
+                {conditions.map((condition) => (
+                  <span
+                    key={condition.name}
+                    onClick={() => router.push(condition.path)}
+                    className="bg-gray-700 text-white px-5 py-2 text-xs uppercase tracking-wide hover:bg-gray-600 transition-colors cursor-pointer rounded-full"
+                  >
+                    {condition.name}
+                  </span>
+                ))}
+              </div>
+              <p className="text-black text-sm uppercase tracking-wider mb-4 ">
+                Choose a Treatment
+              </p>
+            </div>
           </div>
 
           {/* Treatment Slider */}
           <div className="relative mb-16">
             <TreatmentSlider />
           </div>
-
-          {/* Common Conditions */}
-          <div className="text-center">
-            <h3 className="text-black text-lg mb-8">
-              Common Conditions we treat...
-            </h3>
-            <div className="flex flex-wrap justify-center gap-3">
-              {conditions.map((condition) => (
-                <span
-                  key={condition}
-                  className="bg-gray-700 text-white px-5 py-2 text-xs uppercase tracking-wide hover:bg-gray-600 transition-colors cursor-pointer rounded-full"
-                >
-                  {condition}
-                </span>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
       <ReviewsSection />
-      <ConsultationSection />
       <BeforeAfterSection />
-      <TechnologiesBrandsSection />
-      <RecentBlogsSection />
+      {/* <TechnologiesBrandsSection /> */}
+
+
+
+
       <Simplicity />
+
       <ClubMembership />
+      <RecentBlogsSection />
       <MediaCoverage />
     </div>
   );

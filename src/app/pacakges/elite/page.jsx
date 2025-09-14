@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { 
-  Star, 
-  ChevronDown, 
-  CheckCircle, 
-  Clock, 
+import {
+  Star,
+  ChevronDown,
+  CheckCircle,
+  Clock,
   Calendar,
   Gift,
   Users,
@@ -22,7 +22,7 @@ import {
   Frown,
   TrendingDown,
   AlertTriangle,
-  Pound
+  Pound,
 } from "lucide-react";
 
 export default function MembershipProgramPage() {
@@ -40,9 +40,9 @@ export default function MembershipProgramPage() {
         "3x RF Microneedling areas in first 3 sessions",
         "1x PRP Hair/Face (alternate months)",
         "10% off all injectables & skincare products",
-        "Priority booking & member-only flash offers"
+        "Priority booking & member-only flash offers",
       ],
-      mostPopular: false
+      mostPopular: false,
     },
     {
       name: "Veritas Sculpt",
@@ -51,14 +51,14 @@ export default function MembershipProgramPage() {
       description: "Our most popular tier for regular clients",
       benefits: [
         "3x Profhilo (beginning with one top-up)",
-        "1x Botox (3 areas every 3 months)",
+        "1x Anti-Wrinkle Treatment (3 areas every 3 months)",
         "1x Laser Hair Removal session (any area)",
         "1x RF Microneedling or PRP Facial",
         "15% off injectables, fillers, and exosomes",
         "Complimentary facial scan every 3 months",
-        "VIP event invites & early access to launches"
+        "VIP event invites & early access to launches",
       ],
-      mostPopular: true
+      mostPopular: true,
     },
     {
       name: "Veritas Prestige",
@@ -69,95 +69,106 @@ export default function MembershipProgramPage() {
         "Endolift (discounted once per year)",
         "3x CO₂ sessions",
         "Exosome therapy (1 included per 3 months)",
-        "Fillers & Botox at 20% off",
+        "Fillers & Anti-Wrinkle Treatment at 20% off",
         "RF Microneedling",
         "Laser Hair Removal",
         "Scalp & Hair Care treatments",
         "Free Product of the Month",
         "Members-only transformation days & VIP events",
-        "Annual Skin Health Report + Personalized Future Plan"
+        "Annual Skin Health Report + Personalized Future Plan",
       ],
-      mostPopular: false
-    }
+      mostPopular: false,
+    },
   ];
 
   const cardData = [
     {
       icon: <Eye className="w-5 h-5 text-gray-600" />,
       heading: "Commitment",
-      value: "3 Month Minimum"
+      value: "3 Month Minimum",
     },
     {
       icon: <RotateCcw className="w-5 h-5 text-gray-600" />,
       heading: "Session Banking",
-      value: "3 Months If Unused"
+      value: "3 Months If Unused",
     },
     {
       icon: <TrendingDown className="w-5 h-5 text-gray-600" />,
       heading: "Priority Booking",
-      value: "Online or Concierge"
+      value: "Online or Concierge",
     },
     {
       icon: <Gift className="w-5 h-5 text-gray-600" />,
       heading: "Gifting",
-      value: "Once Per 6 Months"
-    }
+      value: "Once Per 6 Months",
+    },
   ];
 
   const perks = [
     {
       icon: <BadgePercent className="w-10 h-10" />,
       title: "Exclusive Discounts",
-      description: "Enjoy significant savings on all treatments and products throughout your membership."
+      description:
+        "Enjoy significant savings on all treatments and products throughout your membership.",
     },
     {
       icon: <Ticket className="w-10 h-10" />,
       title: "Priority Booking",
-      description: "Get preferred scheduling with our top practitioners at times that work for you."
+      description:
+        "Get preferred scheduling with our top practitioners at times that work for you.",
     },
     {
       icon: <Gift className="w-10 h-10" />,
       title: "Complimentary Treatments",
-      description: "Receive special complimentary treatments and services throughout the year."
+      description:
+        "Receive special complimentary treatments and services throughout the year.",
     },
     {
       icon: <Users className="w-10 h-10" />,
       title: "Member Events",
-      description: "Access to exclusive events, workshops, and previews of new treatments."
+      description:
+        "Access to exclusive events, workshops, and previews of new treatments.",
     },
     {
       icon: <Shield className="w-10 h-10" />,
       title: "Skincare Consultations",
-      description: "Regular professional consultations to track and optimize your skin health journey."
+      description:
+        "Regular professional consultations to track and optimize your skin health journey.",
     },
     {
       icon: <Crown className="w-10 h-10" />,
       title: "VIP Treatment",
-      description: "Experience premium service with personalized attention from our expert team."
-    }
+      description:
+        "Experience premium service with personalized attention from our expert team.",
+    },
   ];
 
   const faqs = [
     {
       question: "How do I join the membership program?",
-      answer: "You can join directly through our website, by calling our clinic, or during your next appointment. Our team will guide you through the simple registration process."
+      answer:
+        "You can join directly through our website, by calling our clinic, or during your next appointment. Our team will guide you through the simple registration process.",
     },
     {
       question: "Can I cancel my membership?",
-      answer: "Yes, you can cancel your membership at any time with 30 days notice. We do require a minimum 3-month commitment for all membership tiers."
+      answer:
+        "Yes, you can cancel your membership at any time with 30 days notice. We do require a minimum 3-month commitment for all membership tiers.",
     },
     {
       question: "Are the discounts applicable to all treatments?",
-      answer: "Yes, your membership discount applies to all treatments and packages offered at Derma Veritas, including our signature packages."
+      answer:
+        "Yes, your membership discount applies to all treatments and packages offered at Derma Veritas, including our signature packages.",
     },
     {
       question: "Can I upgrade or downgrade my membership?",
-      answer: "Absolutely! You can change your membership tier at any time. The new rate will apply from your next billing cycle."
+      answer:
+        "Absolutely! You can change your membership tier at any time. The new rate will apply from your next billing cycle.",
     },
     {
       question: "Do membership benefits roll over?",
-      answer: "Some benefits like complimentary consultations reset annually, while discounts are available throughout your membership period."
-    }
+      answer:
+        "Some benefits like complimentary consultations reset annually, while discounts are available throughout your membership period.",
+    },
   ];
 
   const scrollToPricing = () => {
@@ -194,12 +205,14 @@ export default function MembershipProgramPage() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Experience premium aesthetic care with exclusive benefits, priority access, and significant savings through our tiered membership program.
+                Experience premium aesthetic care with exclusive benefits,
+                priority access, and significant savings through our tiered
+                membership program.
               </p>
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
-                <button 
+                <button
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider"
                 >
@@ -267,17 +280,24 @@ export default function MembershipProgramPage() {
               Exclusive Member Benefits
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Our membership program is designed to provide exceptional value, personalized care, and premium experiences throughout your aesthetic journey.
+              Our membership program is designed to provide exceptional value,
+              personalized care, and premium experiences throughout your
+              aesthetic journey.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {perks.map((perk, index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-lg hover:shadow-md transition-shadow">
+              <div
+                key={index}
+                className="bg-gray-50 p-8 rounded-lg hover:shadow-md transition-shadow"
+              >
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                   {perk.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">{perk.title}</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  {perk.title}
+                </h3>
                 <p className="text-gray-600">{perk.description}</p>
               </div>
             ))}
@@ -293,17 +313,18 @@ export default function MembershipProgramPage() {
               Membership Tiers
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Choose the membership level that best suits your aesthetic goals and enjoy exclusive benefits designed to enhance your experience.
+              Choose the membership level that best suits your aesthetic goals
+              and enjoy exclusive benefits designed to enhance your experience.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {membershipTiers.map((tier, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className={`relative border rounded-lg p-8 flex flex-col h-full ${
-                  tier.mostPopular 
-                    ? "border-blue-500 shadow-xl transform scale-105" 
+                  tier.mostPopular
+                    ? "border-blue-500 shadow-xl transform scale-105"
                     : "border-gray-200 shadow-md"
                 }`}
               >
@@ -314,14 +335,22 @@ export default function MembershipProgramPage() {
                     </span>
                   </div>
                 )}
-                
-                <h3 className="text-2xl font-bold text-gray-900 text-center mb-2">{tier.name}</h3>
+
+                <h3 className="text-2xl font-bold text-gray-900 text-center mb-2">
+                  {tier.name}
+                </h3>
                 <p className="text-gray-500 text-center mb-2">{tier.level}</p>
-                <div className="text-center text-blue-600 font-bold text-3xl mb-4">{tier.price}</div>
-                <p className="text-gray-600 text-center mb-8">{tier.description}</p>
-                
+                <div className="text-center text-blue-600 font-bold text-3xl mb-4">
+                  {tier.price}
+                </div>
+                <p className="text-gray-600 text-center mb-8">
+                  {tier.description}
+                </p>
+
                 <div className="mb-8 flex-grow">
-                  <h4 className="font-semibold text-gray-900 mb-4">Benefits include:</h4>
+                  <h4 className="font-semibold text-gray-900 mb-4">
+                    Benefits include:
+                  </h4>
                   <ul className="space-y-3">
                     {tier.benefits.map((benefit, i) => (
                       <li key={i} className="flex items-start">
@@ -331,12 +360,14 @@ export default function MembershipProgramPage() {
                     ))}
                   </ul>
                 </div>
-                
-                <button className={`w-full py-3 font-medium rounded-lg ${
-                  tier.mostPopular
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-gray-900 text-white hover:bg-gray-800"
-                } transition-colors`}>
+
+                <button
+                  className={`w-full py-3 font-medium rounded-lg ${
+                    tier.mostPopular
+                      ? "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-gray-900 text-white hover:bg-gray-800"
+                  } transition-colors`}
+                >
                   SELECT PLAN
                 </button>
               </div>
@@ -359,32 +390,52 @@ export default function MembershipProgramPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-blue-600">1</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Choose Your Plan</h3>
-              <p className="text-gray-600">Select the membership tier that aligns with your aesthetic goals and budget.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Choose Your Plan
+              </h3>
+              <p className="text-gray-600">
+                Select the membership tier that aligns with your aesthetic goals
+                and budget.
+              </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-blue-600">2</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Onboard With Us</h3>
-              <p className="text-gray-600">Complete a quick registration and initial consultation with our experts.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Onboard With Us
+              </h3>
+              <p className="text-gray-600">
+                Complete a quick registration and initial consultation with our
+                experts.
+              </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-blue-600">3</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Enjoy Benefits</h3>
-              <p className="text-gray-600">Immediately access all your membership perks, discounts, and privileges.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Enjoy Benefits
+              </h3>
+              <p className="text-gray-600">
+                Immediately access all your membership perks, discounts, and
+                privileges.
+              </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                 <span className="text-2xl font-bold text-blue-600">4</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Achieve Results</h3>
-              <p className="text-gray-600">Follow your personalized treatment plan and enjoy your transformation journey.</p>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                Achieve Results
+              </h3>
+              <p className="text-gray-600">
+                Follow your personalized treatment plan and enjoy your
+                transformation journey.
+              </p>
             </div>
           </div>
         </div>
@@ -403,17 +454,24 @@ export default function MembershipProgramPage() {
             <div className="bg-white p-8 rounded-lg shadow-md">
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star
+                    key={i}
+                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                  />
                 ))}
               </div>
               <p className="text-gray-600 italic mb-6">
-                "The Veritas Sculpt membership has been worth every penny. The savings on my regular treatments alone have covered the cost, and the priority booking is a game-changer!"
+                "The Veritas Sculpt membership has been worth every penny. The
+                savings on my regular treatments alone have covered the cost,
+                and the priority booking is a game-changer!"
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Sarah Johnson</h4>
-                  <p className="text-gray-600 text-sm">Gold Member for 1 year</p>
+                  <p className="text-gray-600 text-sm">
+                    Gold Member for 1 year
+                  </p>
                 </div>
               </div>
             </div>
@@ -421,17 +479,26 @@ export default function MembershipProgramPage() {
             <div className="bg-white p-8 rounded-lg shadow-md">
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star
+                    key={i}
+                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                  />
                 ))}
               </div>
               <p className="text-gray-600 italic mb-6">
-                "As a Veritas Prestige member, I feel truly valued. The personal coordinator ensures I always get appointments with my preferred practitioner, and the complimentary treatments are amazing."
+                "As a Veritas Prestige member, I feel truly valued. The personal
+                coordinator ensures I always get appointments with my preferred
+                practitioner, and the complimentary treatments are amazing."
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Michael Reynolds</h4>
-                  <p className="text-gray-600 text-sm">Platinum Member for 2 years</p>
+                  <h4 className="font-semibold text-gray-900">
+                    Michael Reynolds
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Platinum Member for 2 years
+                  </p>
                 </div>
               </div>
             </div>
@@ -439,11 +506,16 @@ export default function MembershipProgramPage() {
             <div className="bg-white p-8 rounded-lg shadow-md">
               <div className="flex items-center gap-2 mb-4">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  <Star
+                    key={i}
+                    className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                  />
                 ))}
               </div>
               <p className="text-gray-600 italic mb-6">
-                "I started with Veritas Glow membership and recently upgraded to Sculpt. The consultations have helped me understand my skin better, and the discounts make premium treatments accessible."
+                "I started with Veritas Glow membership and recently upgraded to
+                Sculpt. The consultations have helped me understand my skin
+                better, and the discounts make premium treatments accessible."
               </p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
@@ -470,7 +542,9 @@ export default function MembershipProgramPage() {
             {faqs.map((faq, index) => (
               <div key={index}>
                 <button
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                  onClick={() =>
+                    setOpenIndex(openIndex === index ? null : index)
+                  }
                   className="w-full flex justify-between items-center py-4 text-left text-lg font-medium text-gray-900 focus:outline-none"
                 >
                   {faq.question}
@@ -513,7 +587,8 @@ export default function MembershipProgramPage() {
             Ready to Elevate Your Experience?
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-10">
-            Join our membership program today and start enjoying exclusive benefits, premium treatments, and personalized care.
+            Join our membership program today and start enjoying exclusive
+            benefits, premium treatments, and personalized care.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button className="relative px-8 py-4 text-sm font-bold uppercase text-gray-900 bg-white rounded-none tracking-wider">

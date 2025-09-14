@@ -24,6 +24,7 @@ import {
   UserPlus,
   TrendingUp,
   Calendar,
+  DollarSign,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -79,7 +80,8 @@ export default function UsersPage() {
     banned: users.filter((u) => u.isBanned).length,
     withReferrals: users.filter((u) => u.referralCount > 0).length,
     totalReferrals: users.reduce((sum, u) => sum + (u.referralCount || 0), 0),
-    referred: users.filter((u) => u.referrerInfo).length,
+    totalRewards: users.reduce((sum, u) => sum + (u.totalRewardsEarned || 0), 0),
+    usersWhoUsedCodes: users.filter((u) => u.usedReferralCodesCount > 0).length,
   };
 
   const handleToggleBan = async (userId, currentStatus) => {
@@ -199,14 +201,6 @@ export default function UsersPage() {
 
           <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
-              <UserPlus className="w-8 h-8 text-blue-600" />
-            </div>
-            <div className="text-2xl font-bold text-blue-600">{stats.referred}</div>
-            <div className="text-sm text-gray-600">Referred Users</div>
-          </div>
-
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-            <div className="flex items-center justify-between mb-2">
               <TrendingUp className="w-8 h-8 text-orange-600" />
             </div>
             <div className="text-2xl font-bold text-orange-600">{stats.withReferrals}</div>
@@ -219,6 +213,14 @@ export default function UsersPage() {
             </div>
             <div className="text-2xl font-bold text-indigo-600">{stats.totalReferrals}</div>
             <div className="text-sm text-gray-600">Total Referrals</div>
+          </div>
+
+          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div className="flex items-center justify-between mb-2">
+              <DollarSign className="w-8 h-8 text-green-600" />
+            </div>
+            <div className="text-2xl font-bold text-green-600">£{stats.totalRewards.toFixed(2)}</div>
+            <div className="text-sm text-gray-600">Total Rewards</div>
           </div>
         </div>
 
@@ -275,8 +277,9 @@ export default function UsersPage() {
                   <TableHead className="font-semibold text-gray-900 hidden sm:table-cell">Email</TableHead>
                   <TableHead className="font-semibold text-gray-900">Role</TableHead>
                   <TableHead className="font-semibold text-gray-900">Status</TableHead>
-                  <TableHead className="font-semibold text-gray-900 hidden md:table-cell">Referred By</TableHead>
-                  <TableHead className="font-semibold text-gray-900 hidden md:table-cell">Referrals</TableHead>
+                  <TableHead className="font-semibold text-gray-900 hidden md:table-cell">Referrals Made</TableHead>
+                  <TableHead className="font-semibold text-gray-900 hidden md:table-cell">Codes Used</TableHead>
+                  <TableHead className="font-semibold text-gray-900 hidden lg:table-cell">Rewards Earned</TableHead>
                   <TableHead className="font-semibold text-gray-900 hidden lg:table-cell">Joined</TableHead>
                   <TableHead className="font-semibold text-gray-900 hidden lg:table-cell">Plan</TableHead>
                   <TableHead className="font-semibold text-gray-900 text-right">Actions</TableHead>
@@ -339,35 +342,7 @@ export default function UsersPage() {
                         </Badge>
                       </TableCell>
 
-                      <TableCell className="hidden md:table-cell">
-                        {user.referrerInfo ? (
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <div className="flex items-center space-x-2 cursor-help">
-                                <Avatar className="h-6 w-6">
-                                  <AvatarFallback className="bg-blue-100 text-blue-600 text-xs">
-                                    {user.referrerInfo.name?.charAt(0)?.toUpperCase() ||
-                                      user.referrerInfo.email?.charAt(0)?.toUpperCase()}
-                                  </AvatarFallback>
-                                </Avatar>
-                                <span className="text-sm text-blue-600 font-medium">
-                                  {user.referrerInfo.name || "Referrer"}
-                                </span>
-                              </div>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              <div className="text-sm">
-                                <div className="font-medium">{user.referrerInfo.name}</div>
-                                <div className="text-gray-500">{user.referrerInfo.email}</div>
-                              </div>
-                            </TooltipContent>
-                          </Tooltip>
-                        ) : (
-                          <span className="text-sm text-gray-400">Direct signup</span>
-                        )}
-                      </TableCell>
-
-                      <TableCell className="hidden md:table-cell">
+                      <TableCell>
                         <div className="flex items-center space-x-1">
                           <Badge
                             variant="outline"
@@ -381,6 +356,34 @@ export default function UsersPage() {
                           </Badge>
                           {user.referralCount > 0 && (
                             <TrendingUp className="w-3 h-3 text-orange-500" />
+                          )}
+                        </div>
+                      </TableCell>
+
+                      <TableCell className="hidden md:table-cell">
+                        <div className="flex items-center space-x-1">
+                          <Badge
+                            variant="outline"
+                            className={`text-xs ${
+                              user.usedReferralCodesCount > 0
+                                ? "bg-blue-50 text-blue-600 border-blue-200"
+                                : "bg-gray-50 text-gray-500 border-gray-200"
+                            }`}
+                          >
+                            {user.usedReferralCodesCount || 0}
+                          </Badge>
+                        </div>
+                      </TableCell>
+
+                      <TableCell className="text-sm text-gray-500 hidden lg:table-cell">
+                        <div className="flex items-center space-x-1">
+                          <span className="font-medium text-green-600">
+                            £{(user.totalRewardsEarned || 0).toFixed(2)}
+                          </span>
+                          {user.pendingRewards > 0 && (
+                            <Badge variant="outline" className="text-xs bg-yellow-50 text-yellow-600 border-yellow-200">
+                              {user.pendingRewards} pending
+                            </Badge>
                           )}
                         </div>
                       </TableCell>

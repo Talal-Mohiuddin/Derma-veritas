@@ -7,6 +7,10 @@ import { Toaster } from "sonner";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Chatwindow from "@/components/Chatwindow";
+import { useStore } from "@/store/zustand";
+import { MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const ChildLayout = ({ children }) => {
   const pathname = usePathname();
@@ -15,6 +19,8 @@ const ChildLayout = ({ children }) => {
     pathname === "/" || pathname.includes("/admin") || pathname === "/login"
       ? "calc(100vh - 4rem)"
       : "";
+
+  const { isChatOpen, setIsChatOpen } = useStore();
 
   return (
     <AuthProvider>
@@ -54,6 +60,23 @@ const ChildLayout = ({ children }) => {
           {children}
         </div>
         {!ShowNavbar && <Footer />}
+
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="relative">
+            <Button
+              className="bg-black hover:bg-gray-800 text-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg transition-colors"
+              onClick={() => setIsChatOpen(true)}
+            >
+              <MessageCircle
+                className="w-20 h-20"
+                style={{ width: "24px", height: "24px" }}
+              />
+              <span className="font-medium">DV Assistant</span>
+            </Button>
+          </div>
+        </div>
+
+        <Chatwindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       </QueryClientProvider>
     </AuthProvider>
   );

@@ -54,13 +54,12 @@ const staticBlogPosts = [
   },
   {
     id: "static-5",
-    title: "Botox: Separating Myths from Facts",
+    title: "Anti-Wrinkle Treatment: Separating Myths from Facts",
     date: "June 15, 2025",
     image: "/images/professional-aesthetic-consultation-modern-clinic.png",
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Get the truth about Botox treatments and what to expect from the procedure.",
-    directory: "botox-myths-facts"
   },
   {
     id: "static-6",
@@ -143,7 +142,7 @@ export default function BlogsPage() {
 
   // Helper function to strip HTML tags and get plain text
   const stripHtmlTags = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
+    const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent || "";
   };
 
@@ -153,13 +152,19 @@ export default function BlogsPage() {
       id: blog.id,
       slug: slugify(blog.title), // Generate slug for dynamic posts
       title: blog.title,
-      date: convertFirestoreTimestamp(blog.createdAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }),
+      date: convertFirestoreTimestamp(blog.createdAt).toLocaleDateString(
+        "en-US",
+        {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }
+      ),
       image: blog.coverImage || "/images/placeholder.svg",
-      tags: Array.isArray(blog.tags) && blog.tags.length > 0 ? blog.tags : [blog.category || "General"],
+      tags:
+        Array.isArray(blog.tags) && blog.tags.length > 0
+          ? blog.tags
+          : [blog.category || "General"],
       excerpt: stripHtmlTags(blog.content).substring(0, 100) + "...", // Generate excerpt from content
     })) || [];
 

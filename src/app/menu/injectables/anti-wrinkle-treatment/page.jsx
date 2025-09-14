@@ -159,8 +159,8 @@ export default function DermalFillersSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Turn back the clocks on your skin using Botox injections at AL
-                Aesthetics.
+                Turn back the clocks on your skin using Anti-Wrinkle Treatment
+                injections at Derma Veritas.
               </p>
 
               {/* Buttons */}
@@ -359,7 +359,7 @@ export default function DermalFillersSection() {
             <div className="space-y-6">
               <div>
                 <span className="text-sm text-gray-600 font-medium">
-                  Botox Cost
+                  Anti-Wrinkle Treatment Cost
                 </span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6">
                   Our Pricing
@@ -385,7 +385,7 @@ export default function DermalFillersSection() {
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Botox Pricing (Midlands)
+                    Anti-Wrinkle Treatment Pricing (Midlands)
                   </h3>
                   <button
                     className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"
@@ -421,7 +421,7 @@ export default function DermalFillersSection() {
               <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-base font-semibold text-gray-900">
-                    Botox Pricing (London)
+                    Anti-Wrinkle Treatment Pricing (London)
                   </h3>
                   <button
                     className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition rounded-lg"

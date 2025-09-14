@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { toast } from "sonner";
@@ -24,6 +25,7 @@ export default function LoginForm({ csrfToken }) {
     password: "",
     confirmPassword: "",
     name: "",
+    phone: "",
   });
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -47,6 +49,11 @@ export default function LoginForm({ csrfToken }) {
           throw new Error("Password must be at least 6 characters long");
         }
 
+        // Validate phone number
+        if (!inputValue.phone || inputValue.phone.length < 10) {
+          throw new Error("Please enter a valid phone number");
+        }
+
         // First, get referral data from API
         const signupResponse = await fetch("/api/signup", {
           method: "POST",
@@ -57,6 +64,7 @@ export default function LoginForm({ csrfToken }) {
             email: inputValue.email,
             password: inputValue.password,
             displayName: inputValue.name,
+            phone: inputValue.phone,
           }),
         });
 
@@ -73,6 +81,9 @@ export default function LoginForm({ csrfToken }) {
           inputValue.password
         );
 
+        // Send email verification
+        await sendEmailVerification(userCredential.user);
+
         // Create user document with referral data
         await createUserDocumentWithReferral(
           userCredential.user,
@@ -80,24 +91,43 @@ export default function LoginForm({ csrfToken }) {
           signupData.referredBy
         );
 
-        toast.success("Account created successfully!");
+        toast.success("Account created! Please check your email for verification link.");
+        
+        // Sign out the user until they verify their email
+        await auth.signOut();
+        
+        // Switch to sign in mode
+        setIsSignup(false);
+        setInputValue({
+          email: "",
+          password: "",
+          confirmPassword: "",
+          name: "",
+          phone: "",
+        });
       } else {
-        await signInWithEmailAndPassword(
+        const userCredential = await signInWithEmailAndPassword(
           auth,
           inputValue.email,
           inputValue.password
         );
 
-        toast.success("Logged in successfully!");
-      }
+        // Check if email is verified
+        if (!userCredential.user.emailVerified) {
+          await auth.signOut();
+          throw new Error("Please verify your email before signing in. Check your inbox for the verification link.");
+        }
 
-      // Check for redirect URL
-      const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
-      if (redirectUrl) {
-        sessionStorage.removeItem('redirectAfterLogin');
-        router.push(redirectUrl);
-      } else {
-        router.push("/");
+        toast.success("Logged in successfully!");
+
+        // Check for redirect URL
+        const redirectUrl = sessionStorage.getItem('redirectAfterLogin');
+        if (redirectUrl) {
+          sessionStorage.removeItem('redirectAfterLogin');
+          router.push(redirectUrl);
+        } else {
+          router.push("/");
+        }
       }
     } catch (error) {
       console.error("Authentication error:", error);
@@ -249,6 +279,25 @@ export default function LoginForm({ csrfToken }) {
               disabled={loading}
             />
           </div>
+          {isSignup && (
+            <div>
+              <Label htmlFor="phone" className="sr-only">
+                Phone Number
+              </Label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                required
+                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-black focus:border-black focus:z-10 sm:text-sm"
+                placeholder="Phone number"
+                value={inputValue.phone}
+                onChange={handleInputChange}
+                disabled={loading}
+              />
+            </div>
+          )}
           <div className="relative">
             <Label htmlFor="password" className="sr-only">
               Password

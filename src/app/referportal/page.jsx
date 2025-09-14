@@ -34,7 +34,7 @@ import { toast } from "sonner";
 import RouteProtection from "@/components/RouteProtection";
 
 export default function ReferralPortalPage() {
-  const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const { user, loading: authLoading } = useAuth();
 
@@ -50,11 +50,11 @@ export default function ReferralPortalPage() {
   } = useCurrentUserProfile(user?.uid);
 
   const copyToClipboard = () => {
-    if (referralData?.referralLink) {
-      navigator.clipboard.writeText(referralData.referralLink);
-      setCopiedLink(true);
-      toast.success("Referral link copied to clipboard!");
-      setTimeout(() => setCopiedLink(false), 2000);
+    if (referralData?.referralCode) {
+      navigator.clipboard.writeText(referralData.referralCode);
+      setCopiedCode(true);
+      toast.success("Referral code copied to clipboard!");
+      setTimeout(() => setCopiedCode(false), 2000);
     }
   };
 
@@ -238,41 +238,27 @@ export default function ReferralPortalPage() {
               {/* Overview Tab */}
               {activeTab === "overview" && (
                 <div className="space-y-6">
-                  {/* Your Referral Link */}
+                  {/* Your Referral Code */}
                   <Card className="p-6 bg-gradient-to-br from-gray-100 to-gray-200 border border-gray-400 shadow-lg">
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                       <Share2 className="w-5 h-5 text-gray-700" />
-                      Your Referral Link
+                      Your Referral Code
                     </h3>
                     <div className="space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-800 mb-2">
-                          Your Referral Code
+                          Share this code with friends
                         </label>
                         <div className="flex items-center gap-3">
-                          <div className="bg-white px-4 py-3 rounded-lg font-mono text-lg flex-1 text-center border-2 border-gray-300 shadow-inner">
+                          <div className="bg-white px-6 py-4 rounded-lg font-mono text-2xl flex-1 text-center border-2 border-gray-300 shadow-inner font-bold tracking-wider">
                             {referralData?.referralCode || "Loading..."}
                           </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-800 mb-2">
-                          Your Unique Link
-                        </label>
-                        <div className="flex items-center gap-3">
-                          <input
-                            type="text"
-                            value={referralData?.referralLink || ""}
-                            readOnly
-                            className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg bg-white text-gray-700 font-mono text-sm shadow-inner"
-                          />
                           <Button
                             onClick={copyToClipboard}
-                            className="px-4 py-3 bg-gray-900 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl transition-all duration-200"
-                            disabled={!referralData?.referralLink}
+                            className="px-6 py-4 bg-gray-900 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                            disabled={!referralData?.referralCode}
                           >
-                            {copiedLink ? (
+                            {copiedCode ? (
                               <>
                                 <Check className="w-4 h-4 mr-2" />
                                 Copied!
@@ -280,19 +266,79 @@ export default function ReferralPortalPage() {
                             ) : (
                               <>
                                 <Copy className="w-4 h-4 mr-2" />
-                                Copy
+                                Copy Code
                               </>
                             )}
                           </Button>
                         </div>
                       </div>
 
-                      <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 rounded-lg border border-gray-700 shadow-lg">
-                        <p className="text-sm text-white">
-                          <strong className="text-gray-200">How it works:</strong> Share this link with
-                          friends and family. When they book and complete their
-                          first treatment, you earn 10% of the treatment cost as
-                          a reward!
+                      <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 shadow-lg">
+                        <div className="space-y-3">
+                          <h4 className="font-semibold text-white text-lg">
+                            💰 How to Earn Rewards
+                          </h4>
+                          <div className="space-y-2 text-sm text-gray-200">
+                            <div className="flex items-start gap-3">
+                              <span className="bg-gray-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
+                              <p><strong>Share your code:</strong> Give your referral code to friends and family</p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <span className="bg-gray-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
+                              <p><strong>They book a treatment:</strong> Your friends enter your code when booking</p>
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <span className="bg-gray-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
+                              <p><strong>You earn 10%:</strong> Receive 10% of their treatment cost as a reward!</p>
+                            </div>
+                          </div>
+                          <div className="mt-4 p-3 bg-green-800 rounded-lg border border-green-700">
+                            <p className="text-green-100 text-sm font-medium">
+                              ✨ <strong>Example:</strong> If your friend books a £300 treatment, you earn £30!
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+
+                  {/* Sharing Tips */}
+                  <Card className="p-6 shadow-lg border border-gray-300">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                      <UserCheck className="w-5 h-5 text-gray-700" />
+                      Ways to Share Your Code
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border border-blue-200">
+                        <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                          📱 Social Media
+                        </h4>
+                        <p className="text-sm text-blue-800">
+                          Share your code on WhatsApp, Instagram, Facebook, or other social platforms
+                        </p>
+                      </div>
+                      <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg border border-green-200">
+                        <h4 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
+                          💬 Direct Message
+                        </h4>
+                        <p className="text-sm text-green-800">
+                          Send your code directly to friends via text or messaging apps
+                        </p>
+                      </div>
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border border-purple-200">
+                        <h4 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
+                          👥 Word of Mouth
+                        </h4>
+                        <p className="text-sm text-purple-800">
+                          Tell friends and family about your experience and share your code
+                        </p>
+                      </div>
+                      <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg border border-orange-200">
+                        <h4 className="font-semibold text-orange-900 mb-2 flex items-center gap-2">
+                          ✉️ Email
+                        </h4>
+                        <p className="text-sm text-orange-800">
+                          Email your code to friends who might be interested in treatments
                         </p>
                       </div>
                     </div>
@@ -310,7 +356,7 @@ export default function ReferralPortalPage() {
                           No referral activity yet
                         </p>
                         <p className="text-sm text-gray-500">
-                          Start sharing your link to see activity here
+                          Start sharing your code to see activity here
                         </p>
                       </div>
                     ) : (

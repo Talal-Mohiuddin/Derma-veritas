@@ -22,7 +22,10 @@ import {
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useRouter } from "next/navigation";
 import { useCreateAppointment } from "@/hooks/useAppointment";
+import { useCurrentUserProfile } from "@/hooks/useUser";
 import { toast } from "sonner";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertTriangle, X } from "lucide-react";
 
 export function BookingModal({
   open,
@@ -34,6 +37,12 @@ export function BookingModal({
   const router = useRouter();
   const createAppointment = useCreateAppointment();
 
+  // Get user profile data
+  const {
+    data: profileData,
+    isLoading: profileLoading,
+  } = useCurrentUserProfile(user?.uid);
+
   const [formData, setFormData] = useState({
     treatment: "",
     treatmentOption: "",
@@ -44,7 +53,11 @@ export function BookingModal({
     callbackTime: "anytime", // Set default to "anytime"
     ageConfirm: false,
     newsletter: false,
+    referralCode: "", // Add referral code field
   });
+
+  const [referralError, setReferralError] = useState(null);
+  const [originalReferralCode, setOriginalReferralCode] = useState(null);
 
   // Treatment options mapping
   const treatmentOptions = {
@@ -219,7 +232,7 @@ export function BookingModal({
       ],
     },
     "anti-wrinkle-treatment": {
-      name: "Botox (Advanced Anti-Wrinkle Treatment)",
+      name: "Anti-Wrinkle Treatment (Advanced Anti-Wrinkle Treatment)",
       options: [
         {
           id: "one-area",
@@ -428,102 +441,104 @@ export function BookingModal({
           id: "single-session",
           name: "1 Session",
           price: "£300",
-          description: "Advanced biohacking treatment with peptides and exosomal delivery"
+          description:
+            "Advanced biohacking treatment with peptides and exosomal delivery",
         },
         {
           id: "two-sessions",
           name: "2 Sessions",
           price: "£500",
-          description: "Recommended course for enhanced results"
+          description: "Recommended course for enhanced results",
         },
         {
           id: "three-sessions",
           name: "3 Sessions",
           price: "£700",
-          description: "Complete course for optimal cellular-level results"
-        }
-      ]
+          description: "Complete course for optimal cellular-level results",
+        },
+      ],
     },
-    "revitalizing": {
+    revitalizing: {
       name: "Hair+ Revitalizing Treatment",
       options: [
         {
           id: "four-session-package",
           name: "4-Session Package",
           price: "£600",
-          description: "Complete treatment course for optimal hair restoration"
+          description: "Complete treatment course for optimal hair restoration",
         },
         {
           id: "single-session",
           name: "Single Session",
           price: "£180",
-          description: "Individual treatment session"
+          description: "Individual treatment session",
         },
         {
           id: "maintenance-session",
           name: "Maintenance Session",
           price: "£150",
-          description: "After initial package completion"
+          description: "After initial package completion",
         },
         {
           id: "with-prp",
           name: "With PRP Enhancement",
           price: "+£200",
-          description: "Enhanced results with PRP therapy"
+          description: "Enhanced results with PRP therapy",
         },
         {
           id: "with-light-therapy",
           name: "With Light Therapy",
           price: "+£100",
-          description: "Additional light therapy for better results"
-        }
-      ]
+          description: "Additional light therapy for better results",
+        },
+      ],
     },
-    "exosignal": {
+    exosignal: {
       name: "ExoSignal™ Hair Treatment",
       options: [
         {
           id: "complete-course",
           name: "Complete Course (4 sessions)",
           price: "£700",
-          description: "Full treatment course using synthetic exosome technology"
+          description:
+            "Full treatment course using synthetic exosome technology",
         },
         {
           id: "single-session",
           name: "Single Session",
           price: "£200",
-          description: "Individual treatment session"
+          description: "Individual treatment session",
         },
         {
           id: "maintenance-session",
           name: "Maintenance Session",
           price: "£180",
-          description: "After initial course completion"
-        }
-      ]
+          description: "After initial course completion",
+        },
+      ],
     },
-    "exo": {
+    exo: {
       name: "EXO–NAD Skin Longevity Peeling",
       options: [
         {
           id: "single-session",
           name: "Single Session",
           price: "£380",
-          description: "Multi-step peel with synthetic exosome technology"
+          description: "Multi-step peel with synthetic exosome technology",
         },
         {
           id: "three-sessions",
           name: "Course of 3 Sessions",
           price: "£1,000",
-          description: "Recommended course for optimal results"
+          description: "Recommended course for optimal results",
         },
         {
           id: "six-sessions",
           name: "Course of 6 Sessions",
           price: "£1,900",
-          description: "Complete rejuvenation program"
-        }
-      ]
+          description: "Complete rejuvenation program",
+        },
+      ],
     },
     "skinfill-bacio": {
       name: "Skinfill™ Bacio Lip Enhancement",
@@ -532,16 +547,16 @@ export function BookingModal({
           id: "single-session",
           name: "Single Session",
           price: "£230",
-          description: "Professional lip booster with Vitamin B12 and HA"
+          description: "Professional lip booster with Vitamin B12 and HA",
         },
         {
           id: "three-sessions",
           name: "Course of 3 Sessions",
           price: "£600",
-          description: "Complete treatment course (Save £90)"
-        }
-      ]
-    }
+          description: "Complete treatment course (Save £90)",
+        },
+      ],
+    },
   };
 
   // Auto-fill user info when logged in
@@ -549,8 +564,9 @@ export function BookingModal({
     if (user && open) {
       setFormData((prev) => ({
         ...prev,
-        name: user.displayName || "",
+        name: user.displayName || profileData?.name || "",
         email: user.email || "",
+        phone: profileData?.phone || "",
         treatment: selectedTreatment || prev.treatment,
       }));
     } else if (selectedTreatment && open) {
@@ -559,7 +575,7 @@ export function BookingModal({
         treatment: selectedTreatment,
       }));
     }
-  }, [user, selectedTreatment, open]);
+  }, [user, profileData, selectedTreatment, open]);
 
   // Reset treatmentOption when treatment changes
   useEffect(() => {
@@ -573,6 +589,9 @@ export function BookingModal({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Clear any previous referral errors
+    setReferralError(null);
 
     // Check if user is logged in - redirect to login if not
     if (!user) {
@@ -607,9 +626,12 @@ export function BookingModal({
 
       await createAppointment.mutateAsync(appointmentData);
 
-      toast.success(
-        "Appointment request submitted successfully! We'll contact you soon."
-      );
+      // Show success message with referral info if applicable
+      const successMessage = createAppointment.data?.referralRewardProcessed
+        ? `Appointment request submitted successfully! Your friend will receive a £${createAppointment.data.referrerReward} reward for referring you. We'll contact you soon.`
+        : "Appointment request submitted successfully! We'll contact you soon.";
+
+      toast.success(successMessage);
       onOpenChange(false);
 
       // Reset form
@@ -623,12 +645,57 @@ export function BookingModal({
         callbackTime: "anytime", // Set default to "anytime" here too
         ageConfirm: false,
         newsletter: false,
+        referralCode: "", // Reset referral code
       });
+      setReferralError(null);
     } catch (error) {
       console.error("Error submitting appointment:", error);
-      toast.error(
-        error.message || "Failed to submit appointment. Please try again."
-      );
+      
+      // Check if this is a referral code error
+      if (error.message.includes("referral code") || error.message.includes("referred")) {
+        setReferralError(error.message);
+        
+        // If there's an original referral code, store it for suggestion
+        if (error.response?.data?.originalReferralCode) {
+          setOriginalReferralCode(error.response.data.originalReferralCode);
+        }
+        
+        // Scroll to referral code section
+        const referralSection = document.getElementById("referralCode");
+        if (referralSection) {
+          referralSection.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      } else {
+        toast.error(
+          error.message || "Failed to submit appointment. Please try again."
+        );
+      }
+    }
+  };
+
+  const handleReferralCodeChange = (e) => {
+    const value = e.target.value.toUpperCase().trim();
+    setFormData({ 
+      ...formData, 
+      referralCode: value 
+    });
+    
+    // Clear referral error when user starts typing
+    if (referralError) {
+      setReferralError(null);
+    }
+  };
+
+  const clearReferralCode = () => {
+    setFormData({ ...formData, referralCode: "" });
+    setReferralError(null);
+  };
+
+  const useOriginalReferralCode = () => {
+    if (originalReferralCode) {
+      setFormData({ ...formData, referralCode: originalReferralCode });
+      setReferralError(null);
+      setOriginalReferralCode(null);
     }
   };
 
@@ -1034,6 +1101,75 @@ export function BookingModal({
                     </SelectContent>
                   </Select>
                 </div>
+
+                {/* Referral Code Input */}
+                <div className="space-y-3">
+                  <Label
+                    htmlFor="referralCode"
+                    className="text-sm font-semibold text-gray-700"
+                  >
+                    Referral Code (Optional)
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="referralCode"
+                      placeholder="Enter referral code if you have one"
+                      value={formData.referralCode}
+                      onChange={handleReferralCodeChange}
+                      className={`h-12 pr-10 border-gray-200 focus:border-gray-400 transition-colors ${
+                        referralError ? "border-red-300 focus:border-red-400" : ""
+                      }`}
+                      maxLength={8}
+                    />
+                    {formData.referralCode && (
+                      <button
+                        type="button"
+                        onClick={clearReferralCode}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                      >
+                        <X size={16} />
+                      </button>
+                    )}
+                  </div>
+                  
+                  {/* Referral Error Alert */}
+                  {referralError && (
+                    <Alert className="border-red-200 bg-red-50">
+                      <AlertTriangle className="h-4 w-4 text-red-600" />
+                      <AlertDescription className="text-red-700">
+                        <div className="space-y-2">
+                          <p>{referralError}</p>
+                          {originalReferralCode && (
+                            <div className="flex flex-col gap-2">
+                              <p className="text-sm">
+                                Your original referral code was: <strong>{originalReferralCode}</strong>
+                              </p>
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={useOriginalReferralCode}
+                                className="w-fit"
+                              >
+                                Use Original Code ({originalReferralCode})
+                              </Button>
+                            </div>
+                          )}
+                        </div>
+                      </AlertDescription>
+                    </Alert>
+                  )}
+                  
+                  {!referralError && (
+                    <p className="text-xs text-gray-500">
+                      Have a friend's referral code? Enter it here to give them credit for referring you!
+                      <br />
+                      <span className="text-green-600 font-medium">
+                        🎁 Valid codes give your friend a 10% reward based on your treatment cost
+                      </span>
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -1105,17 +1241,64 @@ export function BookingModal({
               </div>
             </div>
 
+            {/* Show referral reward preview if referral code is entered and valid */}
+            {formData.referralCode && !referralError && selectedTreatmentData && formData.treatmentOption && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-blue-600 font-semibold">🎁 Referral Reward Preview</span>
+                </div>
+                <div className="text-sm text-blue-700">
+                  {(() => {
+                    const selectedOption = selectedTreatmentData.options.find(
+                      (opt) => opt.id === formData.treatmentOption
+                    );
+                    if (selectedOption?.price) {
+                      const priceString = selectedOption.price;
+                      const numericPrice = parseFloat(priceString.replace(/[£$,]/g, ""));
+                      if (!isNaN(numericPrice)) {
+                        const reward = Math.round(numericPrice * 0.1 * 100) / 100;
+                        return (
+                          <div className="space-y-1">
+                            <div className="flex justify-between">
+                              <span>Treatment Cost:</span>
+                              <span>£{numericPrice}</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span>Friend's Reward (10%):</span>
+                              <span className="text-blue-600 font-semibold">£{reward}</span>
+                            </div>
+                            <div className="text-xs text-blue-600 mt-2 p-2 bg-blue-100 rounded">
+                              💡 Your friend will receive £{reward} as a thank you for referring you!
+                            </div>
+                          </div>
+                        );
+                      }
+                    }
+                    return "Reward will be calculated based on your treatment selection.";
+                  })()}
+                </div>
+              </div>
+            )}
+
             {/* Submit Button */}
             <div className="pt-4">
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 text-white py-4 h-14 text-base font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
-                disabled={!formData.ageConfirm || createAppointment.isPending}
+                className="w-full bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 text-white py-4 h-14 text-base font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                disabled={!formData.ageConfirm || createAppointment.isPending || referralError}
               >
                 {createAppointment.isPending
                   ? "SUBMITTING..."
+                  : referralError
+                  ? "PLEASE FIX REFERRAL CODE ISSUE"
                   : "SUBMIT CONSULTATION REQUEST"}
               </Button>
+              
+              {referralError && (
+                <p className="text-xs text-red-600 text-center mt-2">
+                  Please remove or correct the referral code to continue
+                </p>
+              )}
             </div>
           </form>
         </div>

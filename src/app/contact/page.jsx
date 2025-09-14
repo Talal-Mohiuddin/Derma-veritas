@@ -206,8 +206,7 @@ export default function ContactPage() {
                     htmlFor="newsletter"
                     className="text-sm text-muted-foreground leading-relaxed"
                   >
-                    I would like to occasionally receive news & offers from AL
-                    Aesthetics.
+                    I would like to occasionally receive news & offers from Derma Veritas.
                   </label>
                 </div>
               </div>

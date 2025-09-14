@@ -1,6 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useCreateProduct, useUpdateProduct } from "../../../../hooks/useProduct";
+import {
+  useCreateProduct,
+  useUpdateProduct,
+} from "../../../../hooks/useProduct";
 import { toast } from "sonner";
 import { uploadToCloudinary } from "../../../../utils/cloudinary-client";
 
@@ -14,10 +17,13 @@ export default function ProductForm({ product, onClose, onSuccess }) {
     servingSize: "",
     howToUse: "",
     ingredients: [],
-    images: []
+    images: [],
   });
 
-  const [newIngredient, setNewIngredient] = useState({ name: "", quantity: "" });
+  const [newIngredient, setNewIngredient] = useState({
+    name: "",
+    quantity: "",
+  });
   const [imageFiles, setImageFiles] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
@@ -27,7 +33,8 @@ export default function ProductForm({ product, onClose, onSuccess }) {
   const updateProductMutation = useUpdateProduct();
 
   const isEditing = !!product;
-  const isLoading = createProductMutation.isPending || updateProductMutation.isPending;
+  const isLoading =
+    createProductMutation.isPending || updateProductMutation.isPending;
 
   useEffect(() => {
     if (product) {
@@ -40,32 +47,34 @@ export default function ProductForm({ product, onClose, onSuccess }) {
         servingSize: product.servingSize || "",
         howToUse: product.howToUse || "",
         ingredients: product.ingredients || [],
-        images: product.images || []
+        images: product.images || [],
       });
-      setImagePreviews(product.images?.map(img => img.url) || []);
+      setImagePreviews(product.images?.map((img) => img.url) || []);
     }
   }, [product]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleImageChange = async (e) => {
     const files = Array.from(e.target.files);
-    
+
     // Validate file sizes
     const maxSize = 5 * 1024 * 1024; // 5MB
-    const oversizedFiles = files.filter(file => file.size > maxSize);
-    
+    const oversizedFiles = files.filter((file) => file.size > maxSize);
+
     if (oversizedFiles.length > 0) {
-      toast.error("Some images are too large. Please use images smaller than 5MB.");
+      toast.error(
+        "Some images are too large. Please use images smaller than 5MB."
+      );
       return;
     }
-    
+
     if (files.length > 5) {
       toast.error("Please select no more than 5 images.");
       return;
@@ -77,20 +86,20 @@ export default function ProductForm({ product, onClose, onSuccess }) {
     const uploadToastId = toast.loading("Uploading images...");
 
     try {
-      const uploadPromises = files.map(file => 
-        uploadToCloudinary(file, 'products')
+      const uploadPromises = files.map((file) =>
+        uploadToCloudinary(file, "products")
       );
-      
+
       const uploadResults = await Promise.all(uploadPromises);
-      
+
       setUploadedImages(uploadResults);
-      setImagePreviews(uploadResults.map(result => result.url));
+      setImagePreviews(uploadResults.map((result) => result.url));
       setImageFiles(files); // Keep for form validation
-      
+
       toast.dismiss(uploadToastId);
       toast.success(`${uploadResults.length} image(s) uploaded successfully!`);
     } catch (error) {
-      console.error('Upload error:', error);
+      console.error("Upload error:", error);
       toast.dismiss(uploadToastId);
       toast.error("Failed to upload images. Please try again.");
     } finally {
@@ -102,7 +111,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
     const newFiles = imageFiles.filter((_, i) => i !== index);
     const newPreviews = imagePreviews.filter((_, i) => i !== index);
     const newUploaded = uploadedImages.filter((_, i) => i !== index);
-    
+
     setImageFiles(newFiles);
     setImagePreviews(newPreviews);
     setUploadedImages(newUploaded);
@@ -110,25 +119,32 @@ export default function ProductForm({ product, onClose, onSuccess }) {
 
   const addIngredient = () => {
     if (newIngredient.name && newIngredient.quantity) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        ingredients: [...prev.ingredients, { ...newIngredient }]
+        ingredients: [...prev.ingredients, { ...newIngredient }],
       }));
       setNewIngredient({ name: "", quantity: "" });
     }
   };
 
   const removeIngredient = (index) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      ingredients: prev.ingredients.filter((_, i) => i !== index)
+      ingredients: prev.ingredients.filter((_, i) => i !== index),
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.name || !formData.description || !formData.category || !formData.price || !formData.stockQuantity || !formData.servingSize) {
+
+    if (
+      !formData.name ||
+      !formData.description ||
+      !formData.category ||
+      !formData.price ||
+      !formData.stockQuantity ||
+      !formData.servingSize
+    ) {
       toast.error("Please fill in all required fields ⚠️");
       return;
     }
@@ -137,24 +153,20 @@ export default function ProductForm({ product, onClose, onSuccess }) {
     const loadingToastId = toast.loading(
       isEditing ? "Updating product..." : "Creating product..."
     );
-    
+
     try {
       // Create the submit data object with proper structure
       const submitData = {
         ...formData,
         price: parseFloat(formData.price),
         stockQuantity: parseInt(formData.stockQuantity),
-        imageUrls: uploadedImages.length > 0 ? uploadedImages : []
+        imageUrls: uploadedImages.length > 0 ? uploadedImages : [],
       };
-
-      // Log the data being sent for debugging
-      console.log('Submitting product data:', submitData);
-      console.log('Uploaded images:', uploadedImages);
 
       if (isEditing) {
         await updateProductMutation.mutateAsync({
           id: product.id,
-          productData: submitData
+          productData: submitData,
         });
         toast.dismiss(loadingToastId);
         toast.success("Product updated successfully! ✨");
@@ -163,16 +175,28 @@ export default function ProductForm({ product, onClose, onSuccess }) {
         toast.dismiss(loadingToastId);
         toast.success("Product created successfully! 🎉");
       }
-      
+
       onSuccess();
     } catch (error) {
       console.error("Form submission error:", error);
       toast.dismiss(loadingToastId);
-      toast.error(error.message || `Failed to ${isEditing ? 'update' : 'create'} product. Please try again. ❌`);
+      toast.error(
+        error.message ||
+          `Failed to ${
+            isEditing ? "update" : "create"
+          } product. Please try again. ❌`
+      );
     }
   };
 
-  const categories = ["Cleanser", "Moisturizer", "Serum", "Sunscreen", "Treatment", "Supplements"];
+  const categories = [
+    "Cleanser",
+    "Moisturizer",
+    "Serum",
+    "Sunscreen",
+    "Treatment",
+    "Supplements",
+  ];
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -186,8 +210,18 @@ export default function ProductForm({ product, onClose, onSuccess }) {
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 p-2"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -197,8 +231,10 @@ export default function ProductForm({ product, onClose, onSuccess }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Basic Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Basic Information</h3>
-              
+              <h3 className="text-lg font-semibold text-gray-900">
+                Basic Information
+              </h3>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Product Name *
@@ -225,8 +261,10 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select Category</option>
-                  {categories.map(category => (
-                    <option key={category} value={category}>{category}</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -281,8 +319,10 @@ export default function ProductForm({ product, onClose, onSuccess }) {
 
             {/* Images */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-900">Product Images</h3>
-              
+              <h3 className="text-lg font-semibold text-gray-900">
+                Product Images
+              </h3>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Upload Images (Max 5 images, 5MB each)
@@ -360,14 +400,21 @@ export default function ProductForm({ product, onClose, onSuccess }) {
 
           {/* Ingredients */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Ingredients</h3>
-            
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Ingredients
+            </h3>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <input
                 type="text"
                 placeholder="Ingredient name"
                 value={newIngredient.name}
-                onChange={(e) => setNewIngredient(prev => ({...prev, name: e.target.value}))}
+                onChange={(e) =>
+                  setNewIngredient((prev) => ({
+                    ...prev,
+                    name: e.target.value,
+                  }))
+                }
                 className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
               <div className="flex space-x-2">
@@ -375,7 +422,12 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   type="text"
                   placeholder="Quantity (e.g., 5mg, 10%)"
                   value={newIngredient.quantity}
-                  onChange={(e) => setNewIngredient(prev => ({...prev, quantity: e.target.value}))}
+                  onChange={(e) =>
+                    setNewIngredient((prev) => ({
+                      ...prev,
+                      quantity: e.target.value,
+                    }))
+                  }
                   className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
                 <button
@@ -391,7 +443,10 @@ export default function ProductForm({ product, onClose, onSuccess }) {
             {formData.ingredients.length > 0 && (
               <div className="space-y-2">
                 {formData.ingredients.map((ingredient, index) => (
-                  <div key={index} className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between bg-gray-50 p-3 rounded-lg"
+                  >
                     <span className="text-sm">
                       <strong>{ingredient.name}</strong> - {ingredient.quantity}
                     </span>
@@ -422,7 +477,11 @@ export default function ProductForm({ product, onClose, onSuccess }) {
               disabled={isLoading || isUploading}
               className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
             >
-              {isLoading ? "Saving..." : (isEditing ? "Update Product" : "Create Product")}
+              {isLoading
+                ? "Saving..."
+                : isEditing
+                ? "Update Product"
+                : "Create Product"}
             </button>
           </div>
         </form>
