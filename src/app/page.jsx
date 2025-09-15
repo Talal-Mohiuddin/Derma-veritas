@@ -60,15 +60,15 @@ export default function Home() {
     { name: "Eye Bags", path: "/treatments/prp-therapy" },
     { name: "Acne Scars", path: "/treatments/co2" },
     { name: "Stretch Marks", path: "/treatments/microneedling" },
-    { name: "Sun Damage", path: "/treatments/chemical-peels" },
-    { name: "Open Pores", path: "/treatments/rf-microneedling" },
+    { name: "Sun Damage", path: "/treatments/co2" },
+    { name: "Open Pores", path: "/treatments/RF-Microneedling" },
     { name: "Loose skin", path: "/menu/injectables/profhilo" },
     { name: "Early Aging", path: "/menu/injectables/anti-wrinkle-treatment" },
     { name: "Hair Loss", path: "/treatments/prp-therapy" },
-    { name: "Postpartum Hair Thinning", path: "/treatments/mesotherapy" },
+    { name: "Postpartum Hair Thinning", path: "/treatments/exosome-therapy" },
     { name: "Damaged Hair", path: "/treatments/exosignal" },
     { name: "Dark Circles", path: "/menu/injectables/tear-trough-filler" },
-    { name: "Sensitive Skin", path: "/treatments/led-phototherapy" },
+    { name: "Sensitive Skin", path: "/treatments/prp-therapy" },
     { name: "Dry Skin", path: "/treatments/exosome-therapy" },
     { name: "Lip Volume Loss", path: "/menu/injectables/lip-fillers" }
   ];
@@ -123,9 +123,9 @@ export default function Home() {
       </main>
 
       {/* CTA Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-xl p-8 lg:p-10 text-white">
+      <section className="py-16 px-20 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-xl p-12 lg:p-12 text-white">
             <div className="text-center space-y-6">
               <div>
                 <h3 className="text-2xl font-semibold mb-3">

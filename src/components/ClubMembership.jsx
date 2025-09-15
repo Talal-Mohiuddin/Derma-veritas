@@ -13,7 +13,7 @@ export default function ClubMembership() {
           <div className="flex items-center gap-4">
             <div className="w-20 h-20  flex items-center justify-center">
               <img
-                src="/Derma Veritas Logo Design New File-01.svg"
+                src="/logo_black.png"
                 alt="Derma Veritas Logo"
                 className="w-30 h-30 object-contain"
               />
