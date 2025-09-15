@@ -132,7 +132,7 @@ export default function UsersPage() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-600 mx-auto mb-4"></div>
           <div className="text-xl font-semibold text-gray-700 mb-2">Loading Users...</div>
           <div className="text-gray-500">Please wait while we fetch the data</div>
         </div>
@@ -155,35 +155,35 @@ export default function UsersPage() {
     <TooltipProvider>
       <div className="space-y-6 px-4 sm:px-6 lg:px-0">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
+        <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
                 <Users className="w-8 h-8" />
                 User Management
               </h1>
-              <p className="text-purple-100 text-base sm:text-lg">
+              <p className="text-gray-300 text-base sm:text-lg">
                 Manage users, track referrals, and monitor growth
               </p>
             </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 min-w-[120px] text-center">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 min-w-[120px] text-center border border-white/20">
               <div className="text-2xl sm:text-3xl font-bold">{stats.total}</div>
-              <div className="text-sm text-purple-100">Total Users</div>
+              <div className="text-sm text-gray-300">Total Users</div>
             </div>
           </div>
         </div>
 
         {/* Enhanced Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
-              <Users className="w-8 h-8 text-purple-600" />
+              <Users className="w-8 h-8 text-gray-700" />
             </div>
-            <div className="text-2xl font-bold text-purple-600">{stats.total}</div>
+            <div className="text-2xl font-bold text-gray-900">{stats.total}</div>
             <div className="text-sm text-gray-600">Total Users</div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
               <UserCheck className="w-8 h-8 text-green-600" />
             </div>
@@ -191,7 +191,7 @@ export default function UsersPage() {
             <div className="text-sm text-gray-600">Active Users</div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
               <UserX className="w-8 h-8 text-red-600" />
             </div>
@@ -199,7 +199,7 @@ export default function UsersPage() {
             <div className="text-sm text-gray-600">Banned Users</div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
               <TrendingUp className="w-8 h-8 text-orange-600" />
             </div>
@@ -207,7 +207,7 @@ export default function UsersPage() {
             <div className="text-sm text-gray-600">Active Referrers</div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
               <Calendar className="w-8 h-8 text-indigo-600" />
             </div>
@@ -215,7 +215,7 @@ export default function UsersPage() {
             <div className="text-sm text-gray-600">Total Referrals</div>
           </div>
 
-          <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+          <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
               <DollarSign className="w-8 h-8 text-green-600" />
             </div>
@@ -225,7 +225,7 @@ export default function UsersPage() {
         </div>
 
         {/* Filters and Search */}
-        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-300">
           <div className="flex flex-col gap-4">
             {/* Search */}
             <div className="relative">
@@ -234,7 +234,7 @@ export default function UsersPage() {
                 placeholder="Search users by name or email..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 h-11"
+                className="pl-10 h-11 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               />
             </div>
 
@@ -245,7 +245,7 @@ export default function UsersPage() {
                 <select
                   value={roleFilter}
                   onChange={(e) => setRoleFilter(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-auto"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent w-full sm:w-auto"
                 >
                   <option value="all">All Roles</option>
                   <option value="user">User</option>
@@ -256,7 +256,7 @@ export default function UsersPage() {
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-auto"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent w-full sm:w-auto"
                 >
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
@@ -268,11 +268,11 @@ export default function UsersPage() {
         </div>
 
         {/* Enhanced Users Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="bg-gray-50/80">
+                <TableRow className="bg-gray-100">
                   <TableHead className="font-semibold text-gray-900 py-4">User</TableHead>
                   <TableHead className="font-semibold text-gray-900 hidden sm:table-cell">Email</TableHead>
                   <TableHead className="font-semibold text-gray-900">Role</TableHead>
@@ -298,12 +298,12 @@ export default function UsersPage() {
                   </TableRow>
                 ) : (
                   users.map((user) => (
-                    <TableRow key={user.id} className="hover:bg-gray-50/50 transition-colors">
+                    <TableRow key={user.id} className="hover:bg-gray-100 transition-colors duration-200">
                       <TableCell className="py-4">
                         <div className="flex items-center space-x-3">
                           <Avatar className="h-10 w-10">
                             <AvatarImage src={user.photoURL} alt={user.name} />
-                            <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium">
+                            <AvatarFallback className="bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium">
                               {user.name?.charAt(0)?.toUpperCase() ||
                                 user.email?.charAt(0)?.toUpperCase()}
                             </AvatarFallback>
@@ -393,7 +393,7 @@ export default function UsersPage() {
                       </TableCell>
 
                       <TableCell className="hidden lg:table-cell">
-                        <Badge variant="outline" className="text-xs border">
+                        <Badge variant="outline" className="text-xs border border-gray-300">
                           {user.plan || "Free"}
                         </Badge>
                       </TableCell>

@@ -66,10 +66,10 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto shadow-xl">
+        <DialogHeader className="p-4 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-t-lg -mx-6 -mt-6">
           <DialogTitle className="flex items-center gap-2 text-xl">
-            <ShoppingBag className="w-6 h-6 text-purple-600" />
+            <ShoppingBag className="w-6 h-6 text-white" />
             Order #{order.orderNumber || order.id?.slice(-8)}
           </DialogTitle>
         </DialogHeader>
@@ -78,7 +78,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
           {/* Left Column */}
           <div className="space-y-6">
             {/* Order Status */}
-            <div className="bg-gray-50 rounded-xl p-4">
+            <div className="bg-gray-100 rounded-xl p-4 border border-gray-300 shadow-lg">
               <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <StatusIcon className="w-5 h-5" />
                 Order Status
@@ -130,7 +130,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
             </div>
 
             {/* Customer Information */}
-            <div className="bg-gray-50 rounded-xl p-4">
+            <div className="bg-gray-100 rounded-xl p-4 border border-gray-300 shadow-lg">
               <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <User className="w-5 h-5" />
                 Customer Information
@@ -138,7 +138,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
               <div className="flex items-center space-x-3 mb-3">
                 <Avatar className="h-12 w-12">
                   <AvatarImage src={order.userDetails?.photoURL} />
-                  <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium">
+                  <AvatarFallback className="bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium">
                     {order.userDetails?.name?.charAt(0)?.toUpperCase() ||
                       order.userDetails?.email?.charAt(0)?.toUpperCase() ||
                       "U"}
@@ -157,7 +157,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
 
             {/* Shipping Address */}
             {order.shippingAddress && (
-              <div className="bg-gray-50 rounded-xl p-4">
+              <div className="bg-gray-100 rounded-xl p-4 border border-gray-300 shadow-lg">
                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                   <MapPin className="w-5 h-5" />
                   Shipping Address
@@ -184,7 +184,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
 
             {/* Payment Information */}
             {order.stripeSessionId && (
-              <div className="bg-gray-50 rounded-xl p-4">
+              <div className="bg-gray-100 rounded-xl p-4 border border-gray-300 shadow-lg">
                 <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                   <CreditCard className="w-5 h-5" />
                   Payment Information
@@ -216,7 +216,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
           {/* Right Column */}
           <div className="space-y-6">
             {/* Order Items */}
-            <div className="bg-gray-50 rounded-xl p-4">
+            <div className="bg-gray-100 rounded-xl p-4 border border-gray-300 shadow-lg">
               <h3 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                 <Package className="w-5 h-5" />
                 Order Items ({order.products?.length || 0})
@@ -225,7 +225,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
                 {order.products?.map((product, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-lg p-3 flex items-center space-x-3"
+                    className="bg-white rounded-lg p-3 flex items-center space-x-3 border border-gray-300 shadow-md"
                   >
                     <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
                       {product.productDetails?.images?.[0]?.url ? (
@@ -265,41 +265,41 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
             </div>
 
             {/* Order Summary */}
-            <div className="bg-gray-50 rounded-xl p-4">
-              <h3 className="font-semibold text-gray-900 mb-3">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl p-4 border border-gray-700 shadow-lg">
+              <h3 className="font-semibold text-white mb-3">
                 Order Summary
               </h3>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal:</span>
+                  <span className="text-gray-300">Subtotal:</span>
                   <span>
                     {formatCurrency(order.subtotal || order.totalAmount)}
                   </span>
                 </div>
                 {order.shipping && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Shipping:</span>
+                    <span className="text-gray-300">Shipping:</span>
                     <span>{formatCurrency(order.shipping)}</span>
                   </div>
                 )}
                 {order.tax && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Tax:</span>
+                    <span className="text-gray-300">Tax:</span>
                     <span>{formatCurrency(order.tax)}</span>
                   </div>
                 )}
                 {order.discount && (
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Discount:</span>
-                    <span className="text-green-600">
+                    <span className="text-gray-300">Discount:</span>
+                    <span className="text-green-400">
                       -{formatCurrency(order.discount)}
                     </span>
                   </div>
                 )}
-                <div className="border-t border-gray-200 pt-2 mt-2">
+                <div className="border-t border-gray-600 pt-2 mt-2">
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total:</span>
-                    <span className="text-purple-600">
+                    <span className="text-green-400">
                       {formatCurrency(order.totalAmount)}
                     </span>
                   </div>
@@ -309,7 +309,7 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
 
             {/* Additional Notes */}
             {order.notes && (
-              <div className="bg-gray-50 rounded-xl p-4">
+              <div className="bg-gray-100 rounded-xl p-4 border border-gray-300 shadow-lg">
                 <h3 className="font-semibold text-gray-900 mb-3">
                   Order Notes
                 </h3>
@@ -319,8 +319,8 @@ const OrderDetailsModal = ({ order, isOpen, onClose }) => {
           </div>
         </div>
 
-        <div className="flex justify-end mt-6 pt-6 border-t border-gray-200">
-          <Button onClick={onClose}>Close</Button>
+        <div className="flex justify-end mt-6 pt-6 border-t border-gray-300">
+          <Button onClick={onClose} className="bg-gray-900 hover:bg-gray-800">Close</Button>
         </div>
       </DialogContent>
     </Dialog>

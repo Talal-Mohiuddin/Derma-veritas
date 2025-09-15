@@ -65,11 +65,11 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
 
   const getStatusBadge = (status) => {
     const configs = {
-      pending: { color: "bg-yellow-100 text-yellow-800 border-yellow-200", icon: Clock },
-      processing: { color: "bg-blue-100 text-blue-800 border-blue-200", icon: Package },
-      shipped: { color: "bg-purple-100 text-purple-800 border-purple-200", icon: Truck },
-      delivered: { color: "bg-green-100 text-green-800 border-green-200", icon: CheckCircle },
-      cancelled: { color: "bg-red-100 text-red-800 border-red-200", icon: XCircle },
+      pending: { color: "bg-gray-100 text-gray-800 border-gray-200", icon: Clock },
+      processing: { color: "bg-gray-100 text-gray-800 border-gray-200", icon: Package },
+      shipped: { color: "bg-gray-100 text-gray-800 border-gray-200", icon: Truck },
+      delivered: { color: "bg-gray-100 text-gray-800 border-gray-200", icon: CheckCircle },
+      cancelled: { color: "bg-gray-100 text-gray-800 border-gray-200", icon: XCircle },
     };
 
     const config = configs[status] || configs.pending;
@@ -89,8 +89,8 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
       <Badge 
         className={`${
           isPaid 
-            ? "bg-green-100 text-green-800 border-green-200" 
-            : "bg-orange-100 text-orange-800 border-orange-200"
+            ? "bg-gray-100 text-gray-800 border-gray-200" 
+            : "bg-gray-100 text-gray-800 border-gray-200"
         } border`}
       >
         {isPaid ? "Paid" : "Pending"}
@@ -107,7 +107,7 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
+    <div className="bg-white rounded-xl shadow-lg border border-gray-300 p-6 hover:shadow-xl transition-all duration-300">
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
         <div>
@@ -160,7 +160,7 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
       <div className="flex items-center space-x-3 mb-4">
         <Avatar className="h-10 w-10">
           <AvatarImage src={order.userDetails?.photoURL} />
-          <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium">
+          <AvatarFallback className="bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium">
             {order.userDetails?.name?.charAt(0)?.toUpperCase() || 
              order.userDetails?.email?.charAt(0)?.toUpperCase() || "U"}
           </AvatarFallback>
@@ -206,18 +206,18 @@ const OrderCard = ({ order, onView, onUpdateStatus, onDelete, isUpdating, isDele
       </div>
 
       {/* Footer */}
-      <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+      <div className="flex justify-between items-center pt-4 border-t border-gray-200">
         <div className="text-sm text-gray-500">
           Total Amount
         </div>
-        <div className="text-lg font-bold text-purple-600">
+        <div className="text-lg font-bold text-gray-900">
           {formatCurrency(order.totalAmount)}
         </div>
       </div>
 
       {/* Shipping Address (if available) */}
       {order.shippingAddress && (
-        <div className="mt-3 pt-3 border-t border-gray-100">
+        <div className="mt-3 pt-3 border-t border-gray-200">
           <p className="text-xs text-gray-500 mb-1">Shipping to:</p>
           <p className="text-sm text-gray-700 truncate">
             {order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}

@@ -21,12 +21,10 @@ import {
   Check,
   LoaderCircle,
   TrendingUp,
-  Calendar,
   DollarSign,
   UserCheck,
   Clock,
   CheckCircle,
-  XCircle,
 } from "lucide-react";
 import { useAuth } from "@/store/FirebaseAuthProvider";
 import { useUserReferralData, useCurrentUserProfile } from "@/hooks/useUser";

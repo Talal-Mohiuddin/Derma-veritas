@@ -126,7 +126,7 @@ export default function AppointmentsPage() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-600 mx-auto mb-4"></div>
           <div className="text-xl font-semibold text-gray-700 mb-2">
             Loading Appointments...
           </div>
@@ -146,7 +146,7 @@ export default function AppointmentsPage() {
         </div>
         <button
           onClick={() => refetch()}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+          className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
         >
           Try Again
         </button>
@@ -157,23 +157,23 @@ export default function AppointmentsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white">
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-2xl p-8 text-white shadow-xl">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-bold mb-2">Appointments Management</h1>
-            <p className="text-blue-100 text-lg">
+            <h1 className="text-3xl font-bold mb-2">Appointments Management 📅</h1>
+            <p className="text-gray-300 text-lg">
               Manage and track all client appointments
             </p>
           </div>
-          <div className="text-right">
+          <div className="text-right bg-white/10 backdrop-blur-sm rounded-xl p-4 min-w-[120px] border border-white/20">
             <div className="text-2xl font-bold">{appointments.length}</div>
-            <div className="text-blue-100">Total Appointments</div>
+            <div className="text-gray-300">Total Appointments</div>
           </div>
         </div>
       </div>
 
       {/* Filters and Stats */}
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-300">
         <div className="flex flex-wrap gap-4 items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
@@ -183,7 +183,7 @@ export default function AppointmentsPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
@@ -222,7 +222,7 @@ export default function AppointmentsPage() {
 
       {/* Appointments List */}
       {filteredAppointments.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-xl border border-gray-100">
+        <div className="text-center py-12 bg-white rounded-xl border border-gray-300 shadow-lg">
           <h3 className="text-xl font-semibold text-gray-800 mb-2">
             No appointments found
           </h3>
@@ -237,10 +237,10 @@ export default function AppointmentsPage() {
           {filteredAppointments.map((appointment) => (
             <div
               key={appointment.id}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200"
+              className="bg-white rounded-xl shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300"
             >
               {/* Card Header */}
-              <div className="p-6 border-b border-gray-100">
+              <div className="p-6 border-b border-gray-200">
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <h3 className="font-semibold text-gray-800 text-lg">
@@ -253,7 +253,7 @@ export default function AppointmentsPage() {
                     </div>
                   </div>
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                    className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(
                       appointment.status
                     )}`}
                   >
@@ -262,7 +262,7 @@ export default function AppointmentsPage() {
                 </div>
 
                 {/* Treatment Info */}
-                <div className="bg-gray-50 rounded-lg p-3 mb-3">
+                <div className="bg-gray-100 rounded-lg p-3 mb-3 border border-gray-200">
                   <div className="text-sm font-medium text-gray-700 mb-1">
                     Treatment:
                   </div>
@@ -300,12 +300,12 @@ export default function AppointmentsPage() {
               </div>
 
               {/* Contact Information */}
-              <div className="p-6 border-b border-gray-100 space-y-3">
+              <div className="p-6 border-b border-gray-200 space-y-3">
                 <div className="flex items-center space-x-3">
                   <span className="text-gray-400">📧</span>
                   <a
                     href={`mailto:${appointment.email}`}
-                    className="text-blue-600 hover:text-blue-800 text-sm flex-1 hover:underline"
+                    className="text-gray-700 hover:text-gray-900 text-sm flex-1 hover:underline"
                     title="Click to send email"
                   >
                     {appointment.email}
@@ -316,7 +316,7 @@ export default function AppointmentsPage() {
                   <span className="text-gray-400">📱</span>
                   <a
                     href={`tel:${appointment.phone}`}
-                    className="text-blue-600 hover:text-blue-800 text-sm flex-1 hover:underline"
+                    className="text-gray-700 hover:text-gray-900 text-sm flex-1 hover:underline"
                     title="Click to call"
                   >
                     {appointment.phone}
@@ -336,7 +336,7 @@ export default function AppointmentsPage() {
               </div>
 
               {/* Appointment Details */}
-              <div className="p-6 border-b border-gray-100">
+              <div className="p-6 border-b border-gray-200">
                 <div className="text-xs text-gray-500 mb-2">Submitted:</div>
                 <div className="text-sm text-gray-700 font-medium">
                   {formatDate(appointment.createdAt)}
@@ -366,7 +366,7 @@ export default function AppointmentsPage() {
                         handleStatusChange(appointment.id, e.target.value)
                       }
                       disabled={updateStatusMutation.isPending}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                     >
                       <option value="pending">⏳ Pending</option>
                       <option value="confirmed">✅ Confirmed</option>
@@ -382,7 +382,7 @@ export default function AppointmentsPage() {
                         setSelectedAppointment(appointment);
                         setShowDetails(true);
                       }}
-                      className="flex-1 bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+                      className="flex-1 bg-gradient-to-r from-gray-800 to-gray-900 text-white px-3 py-2 rounded-lg text-sm font-medium hover:from-gray-900 hover:to-black transition-all duration-200 shadow-lg"
                     >
                       View Details
                     </button>
@@ -404,7 +404,7 @@ export default function AppointmentsPage() {
       {/* Delete Confirmation Modal */}
       {showDeleteModal && appointmentToDelete && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full">
+          <div className="bg-white rounded-xl max-w-md w-full shadow-xl">
             <div className="p-6">
               <div className="text-center">
                 <div className="text-6xl mb-4">⚠️</div>
@@ -423,7 +423,7 @@ export default function AppointmentsPage() {
                   </span>
                 </p>
 
-                <div className="bg-gray-50 rounded-lg p-3 mb-6 text-left">
+                <div className="bg-gray-100 rounded-lg p-3 mb-6 text-left border border-gray-300">
                   <div className="text-sm text-gray-600">
                     <div>
                       <strong>Client:</strong> {appointmentToDelete.name}
@@ -475,15 +475,15 @@ export default function AppointmentsPage() {
       {/* Appointment Details Modal */}
       {showDetails && selectedAppointment && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-gray-200">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl">
+            <div className="p-6 border-b border-gray-300 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-t-xl">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-800">
+                <h2 className="text-2xl font-bold">
                   Appointment Details
                 </h2>
                 <button
                   onClick={() => setShowDetails(false)}
-                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                  className="text-white hover:text-gray-300 text-2xl"
                 >
                   ×
                 </button>
@@ -492,7 +492,7 @@ export default function AppointmentsPage() {
 
             <div className="p-6 space-y-6">
               {/* Client Information */}
-              <div className="bg-gray-50 rounded-lg p-4">
+              <div className="bg-gray-100 rounded-lg p-4 border border-gray-300">
                 <h3 className="font-semibold text-gray-800 mb-3">
                   👤 Client Information
                 </h3>
@@ -518,7 +518,7 @@ export default function AppointmentsPage() {
                     <label className="text-sm text-gray-500">Email:</label>
                     <a
                       href={`mailto:${selectedAppointment.email}`}
-                      className="font-medium text-blue-600 hover:underline block"
+                      className="font-medium text-gray-700 hover:text-gray-900 hover:underline block"
                     >
                       {selectedAppointment.email}
                     </a>
@@ -527,7 +527,7 @@ export default function AppointmentsPage() {
                     <label className="text-sm text-gray-500">Phone:</label>
                     <a
                       href={`tel:${selectedAppointment.phone}`}
-                      className="font-medium text-blue-600 hover:underline block"
+                      className="font-medium text-gray-700 hover:text-gray-900 hover:underline block"
                     >
                       {selectedAppointment.phone}
                     </a>
@@ -536,7 +536,7 @@ export default function AppointmentsPage() {
               </div>
 
               {/* Appointment Information */}
-              <div className="bg-blue-50 rounded-lg p-4">
+              <div className="bg-gray-100 rounded-lg p-4 border border-gray-300">
                 <h3 className="font-semibold text-gray-800 mb-3">
                   📅 Appointment Information
                 </h3>
@@ -604,7 +604,7 @@ export default function AppointmentsPage() {
               </div>
 
               {/* Additional Details */}
-              <div className="bg-green-50 rounded-lg p-4">
+              <div className="bg-gray-100 rounded-lg p-4 border border-gray-300">
                 <h3 className="font-semibold text-gray-800 mb-3">
                   ℹ️ Additional Details
                 </h3>
@@ -640,7 +640,7 @@ export default function AppointmentsPage() {
               <div className="flex space-x-3">
                 <a
                   href={`mailto:${selectedAppointment.email}?subject=Regarding your appointment - ${selectedAppointment.treatmentDetails?.treatmentName || selectedAppointment.treatment}&body=Hello ${selectedAppointment.name},%0D%0A%0D%0AThank you for booking a consultation with us.%0D%0A%0D%0AAppointment Details:%0D%0A- Treatment: ${selectedAppointment.treatmentDetails?.treatmentName || selectedAppointment.treatment}%0D%0A${selectedAppointment.treatmentDetails?.optionName ? `- Option: ${selectedAppointment.treatmentDetails.optionName}%0D%0A` : ''}${selectedAppointment.treatmentDetails?.optionPrice ? `- Price: ${selectedAppointment.treatmentDetails.optionPrice}%0D%0A` : ''}- Status: ${selectedAppointment.status}%0D%0A%0D%0ABest regards,%0D%0ADerma Veritas Team`}
-                  className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors"
+                  className="flex-1 bg-gradient-to-r from-gray-800 to-gray-900 text-white px-4 py-2 rounded-lg text-center font-medium hover:from-gray-900 hover:to-black transition-all duration-200 shadow-lg"
                 >
                   📧 Send Email
                 </a>

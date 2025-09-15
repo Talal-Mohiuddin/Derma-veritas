@@ -201,14 +201,14 @@ export default function ProductForm({ product, onClose, onSuccess }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-gray-300 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-t-xl">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-gray-900">
+            <h2 className="text-2xl font-bold">
               {isEditing ? "Edit Product" : "Add New Product"}
             </h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 p-2"
+              className="text-white hover:text-gray-300 p-2"
             >
               <svg
                 className="w-6 h-6"
@@ -245,7 +245,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 />
               </div>
 
@@ -258,7 +258,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   value={formData.category}
                   onChange={handleInputChange}
                   required
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 >
                   <option value="">Select Category</option>
                   {categories.map((category) => (
@@ -282,7 +282,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                     step="0.01"
                     min="0"
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -296,7 +296,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                     onChange={handleInputChange}
                     min="0"
                     required
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -312,7 +312,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   onChange={handleInputChange}
                   placeholder="e.g., 1 capsule, 2ml, 1 pump"
                   required
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -333,7 +333,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                   accept="image/*"
                   onChange={handleImageChange}
                   disabled={isUploading}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50"
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent disabled:opacity-50"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Supported formats: JPG, PNG, GIF, WebP
@@ -380,7 +380,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
               onChange={handleInputChange}
               rows={4}
               required
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
             />
           </div>
 
@@ -394,7 +394,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
               value={formData.howToUse}
               onChange={handleInputChange}
               rows={3}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
             />
           </div>
 
@@ -415,7 +415,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                     name: e.target.value,
                   }))
                 }
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               />
               <div className="flex space-x-2">
                 <input
@@ -428,12 +428,12 @@ export default function ProductForm({ product, onClose, onSuccess }) {
                       quantity: e.target.value,
                     }))
                   }
-                  className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 />
                 <button
                   type="button"
                   onClick={addIngredient}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                  className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
                 >
                   Add
                 </button>
@@ -464,7 +464,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
           </div>
 
           {/* Form Actions */}
-          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-300">
             <button
               type="button"
               onClick={onClose}
@@ -475,7 +475,7 @@ export default function ProductForm({ product, onClose, onSuccess }) {
             <button
               type="submit"
               disabled={isLoading || isUploading}
-              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50"
+              className="px-6 py-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-lg hover:from-gray-900 hover:to-black disabled:opacity-50 shadow-lg"
             >
               {isLoading
                 ? "Saving..."

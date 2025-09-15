@@ -138,7 +138,7 @@ export default function ReferralRewardsPage() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-600 mx-auto mb-4"></div>
           <div className="text-xl font-semibold text-gray-700 mb-2">
             Loading Referral Rewards...
           </div>
@@ -162,27 +162,27 @@ export default function ReferralRewardsPage() {
   return (
     <div className="space-y-6 px-4 sm:px-6 lg:px-0">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
               <Gift className="w-8 h-8" />
               Referral Rewards Management
             </h1>
-            <p className="text-green-100 text-base sm:text-lg">
+            <p className="text-gray-300 text-base sm:text-lg">
               Manage and approve referral rewards for users
             </p>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 min-w-[120px] text-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 min-w-[120px] text-center border border-white/20">
             <div className="text-2xl sm:text-3xl font-bold">{stats.total || 0}</div>
-            <div className="text-sm text-green-100">Total Rewards</div>
+            <div className="text-sm text-gray-300">Total Rewards</div>
           </div>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
             <Clock className="w-8 h-8 text-yellow-600" />
           </div>
@@ -190,7 +190,7 @@ export default function ReferralRewardsPage() {
           <div className="text-sm text-gray-600">Pending Approval</div>
         </div>
 
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
@@ -198,7 +198,7 @@ export default function ReferralRewardsPage() {
           <div className="text-sm text-gray-600">Approved</div>
         </div>
 
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
             <XCircle className="w-8 h-8 text-red-600" />
           </div>
@@ -206,26 +206,26 @@ export default function ReferralRewardsPage() {
           <div className="text-sm text-gray-600">Rejected</div>
         </div>
 
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl p-4 shadow-lg border border-gray-700 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
-            <DollarSign className="w-8 h-8 text-purple-600" />
+            <DollarSign className="w-8 h-8 text-white" />
           </div>
-          <div className="text-2xl font-bold text-purple-600">
+          <div className="text-2xl font-bold text-white">
             {formatCurrency(stats.totalAmount)}
           </div>
-          <div className="text-sm text-gray-600">Total Approved</div>
+          <div className="text-sm text-gray-300">Total Approved</div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-300">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex items-center space-x-2">
             <label className="text-sm font-medium text-gray-700">Status:</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-auto"
+              className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent w-full sm:w-auto"
             >
               <option value="all">All Status</option>
               <option value="pending">Pending</option>
@@ -237,11 +237,11 @@ export default function ReferralRewardsPage() {
       </div>
 
       {/* Rewards Table */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-300 overflow-hidden">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
-              <TableRow className="bg-gray-50/80">
+              <TableRow className="bg-gray-100">
                 <TableHead className="font-semibold text-gray-900 py-4">Referrer</TableHead>
                 <TableHead className="font-semibold text-gray-900 hidden sm:table-cell">
                   Referred User
@@ -270,11 +270,11 @@ export default function ReferralRewardsPage() {
                 </TableRow>
               ) : (
                 rewards.map((reward) => (
-                  <TableRow key={reward.id} className="hover:bg-gray-50/50 transition-colors">
+                  <TableRow key={reward.id} className="hover:bg-gray-100 transition-colors duration-200">
                     <TableCell className="py-4">
                       <div className="flex items-center space-x-3">
                         <Avatar className="h-10 w-10">
-                          <AvatarFallback className="bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium">
+                          <AvatarFallback className="bg-gradient-to-r from-gray-700 to-gray-900 text-white font-medium">
                             {reward.referrerName?.charAt(0)?.toUpperCase() ||
                               reward.referrerEmail?.charAt(0)?.toUpperCase()}
                           </AvatarFallback>
@@ -373,7 +373,7 @@ export default function ReferralRewardsPage() {
       <Dialog open={confirmDialog.open} onOpenChange={(open) => 
         setConfirmDialog({ open, reward: null, action: null })
       }>
-        <DialogContent>
+        <DialogContent className="shadow-xl">
           <DialogHeader>
             <DialogTitle>
               {confirmDialog.action === "approved" ? "Approve" : "Reject"} Reward
@@ -395,6 +395,7 @@ export default function ReferralRewardsPage() {
               onClick={confirmStatusUpdate}
               variant={confirmDialog.action === "approved" ? "default" : "destructive"}
               disabled={updateStatusMutation.isPending}
+              className={confirmDialog.action === "approved" ? "bg-gray-900 hover:bg-gray-800" : ""}
             >
               {updateStatusMutation.isPending ? "Processing..." : 
                confirmDialog.action === "approved" ? "Approve" : "Reject"}
@@ -406,25 +407,25 @@ export default function ReferralRewardsPage() {
       {/* Reward Details Dialog */}
       {selectedReward && (
         <Dialog open={!!selectedReward} onOpenChange={() => setSelectedReward(null)}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto shadow-xl">
+            <DialogHeader className="p-4 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-t-lg -mx-6 -mt-6">
               <DialogTitle>Referral Reward Details</DialogTitle>
             </DialogHeader>
             <div className="space-y-4 pb-4">
               {/* Referrer Info */}
-              <div className="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-lg border border-green-200">
-                <h4 className="font-semibold text-green-800 mb-2">Referrer Information</h4>
+              <div className="bg-gradient-to-r from-gray-100 to-gray-200 p-4 rounded-lg border border-gray-300 shadow-lg">
+                <h4 className="font-semibold text-gray-800 mb-2">Referrer Information</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-green-600">Name</p>
+                    <p className="text-sm text-gray-600">Name</p>
                     <p className="font-medium">{selectedReward.referrerName}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-green-600">Email</p>
+                    <p className="text-sm text-gray-600">Email</p>
                     <p className="font-medium">{selectedReward.referrerEmail}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-green-600">Referral Code</p>
+                    <p className="text-sm text-gray-600">Referral Code</p>
                     <p className="font-mono font-medium">{selectedReward.referrerCode}</p>
                   </div>
                 </div>
@@ -432,44 +433,44 @@ export default function ReferralRewardsPage() {
 
               {/* Referred User & Appointment Info */}
               <div className="grid md:grid-cols-2 gap-4">
-                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                  <h4 className="font-semibold text-blue-800 mb-2">Referred User</h4>
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-lg border border-gray-300 shadow-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">Referred User</h4>
                   <div className="space-y-2">
                     <div>
-                      <p className="text-sm text-blue-600">Name</p>
+                      <p className="text-sm text-gray-600">Name</p>
                       <p className="font-medium">{selectedReward.referredUserName}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-blue-600">Email</p>
+                      <p className="text-sm text-gray-600">Email</p>
                       <p className="font-medium">{selectedReward.referredUserEmail}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-                  <h4 className="font-semibold text-purple-800 mb-2">Appointment Details</h4>
+                <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-lg border border-gray-300 shadow-lg">
+                  <h4 className="font-semibold text-gray-800 mb-2">Appointment Details</h4>
                   <div className="space-y-2">
                     <div>
-                      <p className="text-sm text-purple-600">Treatment</p>
+                      <p className="text-sm text-gray-600">Treatment</p>
                       <p className="font-medium">{selectedReward.treatmentName}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-purple-600">Treatment Cost</p>
+                      <p className="text-sm text-gray-600">Treatment Cost</p>
                       <p className="font-medium">{selectedReward.treatmentCost}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-purple-600">Appointment #</p>
+                      <p className="text-sm text-gray-600">Appointment #</p>
                       <p className="font-mono text-sm">{selectedReward.appointmentNumber}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-purple-600">Appointment Status</p>
+                      <p className="text-sm text-gray-600">Appointment Status</p>
                       <Badge className={`${getAppointmentStatusBadgeColor(selectedReward.appointmentStatus)} border mt-1`}>
                         {selectedReward.appointmentStatus || "unknown"}
                       </Badge>
                     </div>
                     {selectedReward.appointmentData?.createdAt && (
                       <div>
-                        <p className="text-sm text-purple-600">Appointment Date</p>
+                        <p className="text-sm text-gray-600">Appointment Date</p>
                         <p className="text-sm font-medium">{formatDate(selectedReward.appointmentData.createdAt)}</p>
                       </div>
                     )}
@@ -478,35 +479,35 @@ export default function ReferralRewardsPage() {
               </div>
 
               {/* Reward Info */}
-              <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                <h4 className="font-semibold text-yellow-800 mb-2">Reward Information</h4>
+              <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-4 rounded-lg border border-gray-700 shadow-lg text-white">
+                <h4 className="font-semibold text-white mb-2">Reward Information</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-yellow-600">Reward Amount (10% of treatment cost)</p>
-                    <p className="text-2xl font-bold text-green-600">
+                    <p className="text-sm text-gray-300">Reward Amount (10% of treatment cost)</p>
+                    <p className="text-2xl font-bold text-green-400">
                       {formatCurrency(selectedReward.rewardAmount)}
                     </p>
                   </div>
                   <div>
-                    <p className="text-sm text-yellow-600">Reward Status</p>
+                    <p className="text-sm text-gray-300">Reward Status</p>
                     <Badge className={`${getStatusBadgeColor(selectedReward.status)} border mt-1`}>
                       {selectedReward.status}
                     </Badge>
                   </div>
                   <div>
-                    <p className="text-sm text-yellow-600">Reward Created</p>
+                    <p className="text-sm text-gray-300">Reward Created</p>
                     <p className="font-medium">{formatDate(selectedReward.createdAt)}</p>
                   </div>
                   {selectedReward.processedAt && (
                     <div>
-                      <p className="text-sm text-yellow-600">Processed Date</p>
+                      <p className="text-sm text-gray-300">Processed Date</p>
                       <p className="font-medium">{formatDate(selectedReward.processedAt)}</p>
                     </div>
                   )}
                 </div>
                 
-                <div className="mt-3 p-3 bg-yellow-100 rounded-lg">
-                  <p className="text-sm text-yellow-800">
+                <div className="mt-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
+                  <p className="text-sm text-gray-200">
                     <strong>Note:</strong> This reward was automatically generated when the referred user completed their first appointment. 
                     The reward amount is calculated as 10% of the treatment cost.
                   </p>
@@ -520,7 +521,7 @@ export default function ReferralRewardsPage() {
                       setSelectedReward(null);
                       handleStatusUpdate(selectedReward, "approved");
                     }}
-                    className="flex-1 bg-green-600 hover:bg-green-700"
+                    className="flex-1 bg-gray-900 hover:bg-gray-800"
                   >
                     <Check className="mr-2 h-4 w-4" />
                     Approve Reward

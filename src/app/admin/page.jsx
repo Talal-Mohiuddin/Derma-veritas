@@ -14,7 +14,7 @@ export default function AdminDashboard() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-600 mx-auto mb-4"></div>
           <div className="text-xl font-semibold text-gray-700 mb-2">
             Loading Dashboard...
           </div>
@@ -103,12 +103,12 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome header */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-white">
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-2xl p-8 text-white shadow-xl">
         <h1 className="text-3xl font-bold mb-2">Welcome back, Admin! 👋</h1>
-        <p className="text-purple-100 text-lg">Here's what's happening with DermaVeritas today.</p>
+        <p className="text-gray-300 text-lg">Here's what's happening with DermaVeritas today.</p>
         {stats?.totalRevenue && (
           <div className="mt-4">
-            <p className="text-sm text-purple-200">Total Revenue</p>
+            <p className="text-sm text-gray-300">Total Revenue</p>
             <p className="text-2xl font-bold">{formatCurrency(stats.totalRevenue)}</p>
           </div>
         )}
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
       {/* Stats grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {dashboardStats.map((stat) => (
-          <div key={stat.name} className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-200">
+          <div key={stat.name} className="bg-white rounded-xl p-6 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">{stat.name}</p>
@@ -137,7 +137,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Appointment Status Breakdown */}
           {stats?.appointmentStatuses && (
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-300">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Appointment Status</h3>
               <div className="space-y-3">
                 {Object.entries(stats.appointmentStatuses).map(([status, count]) => (
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
 
           {/* Order Status Breakdown */}
           {stats?.orderStatuses && (
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-300">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Order Status</h3>
               <div className="space-y-3">
                 {Object.entries(stats.orderStatuses).map(([status, count]) => (
@@ -174,7 +174,7 @@ export default function AdminDashboard() {
       {/* Recent activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent orders */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-300">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Orders</h3>
           {activitiesLoading ? (
             <div className="animate-pulse space-y-3">
@@ -185,9 +185,9 @@ export default function AdminDashboard() {
           ) : recentOrders.length > 0 ? (
             <div className="space-y-3">
               {recentOrders.map((order) => (
-                <div key={order.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={order.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200 hover:from-gray-100 hover:to-gray-200 transition-all duration-200">
                   <div className="flex items-center space-x-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
                       <span className="text-white text-xs font-medium">
                         {order.orderNumber?.slice(-3) || 'N/A'}
                       </span>
@@ -218,7 +218,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Recent appointments */}
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-300">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Appointments</h3>
           {activitiesLoading ? (
             <div className="animate-pulse space-y-3">
@@ -229,9 +229,9 @@ export default function AdminDashboard() {
           ) : recentAppointments.length > 0 ? (
             <div className="space-y-3">
               {recentAppointments.map((appointment) => (
-                <div key={appointment.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={appointment.id} className="flex items-center justify-between p-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg border border-gray-200 hover:from-gray-100 hover:to-gray-200 transition-all duration-200">
                   <div className="flex items-center space-x-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center">
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
                       <span className="text-white text-xs font-medium">
                         {appointment.appointmentNumber?.slice(-3) || 'A'}
                       </span>

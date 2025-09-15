@@ -175,7 +175,7 @@ export default function OrdersPage() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-600 mx-auto mb-4"></div>
           <div className="text-xl font-semibold text-gray-700 mb-2">
             Loading Orders...
           </div>
@@ -201,37 +201,37 @@ export default function OrdersPage() {
   return (
     <div className="space-y-6 px-4 sm:px-6 lg:px-0">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-2xl p-6 sm:p-8 text-white shadow-xl">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-3">
               <ShoppingBag className="w-8 h-8" />
               Order Management
             </h1>
-            <p className="text-purple-100 text-base sm:text-lg">
+            <p className="text-gray-300 text-base sm:text-lg">
               Track and manage customer orders
             </p>
           </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 min-w-[140px] text-center">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 min-w-[140px] text-center border border-white/20">
             <div className="text-2xl sm:text-3xl font-bold">{stats.total}</div>
-            <div className="text-sm text-purple-100">Total Orders</div>
+            <div className="text-sm text-gray-300">Total Orders</div>
           </div>
         </div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
-            <ShoppingBag className="w-8 h-8 text-purple-600" />
+            <ShoppingBag className="w-8 h-8 text-gray-700" />
           </div>
-          <div className="text-2xl font-bold text-purple-600">
+          <div className="text-2xl font-bold text-gray-900">
             {stats.total}
           </div>
           <div className="text-sm text-gray-600">Total Orders</div>
         </div>
 
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
             <DollarSign className="w-8 h-8 text-green-600" />
           </div>
@@ -241,17 +241,17 @@ export default function OrdersPage() {
           <div className="text-sm text-gray-600">Total Revenue</div>
         </div>
 
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 shadow-lg border border-gray-700 hover:shadow-xl transition-all duration-300 text-white">
           <div className="flex items-center justify-between mb-2">
-            <CheckCircle className="w-8 h-8 text-blue-600" />
+            <CheckCircle className="w-8 h-8 text-white" />
           </div>
-          <div className="text-2xl font-bold text-blue-600">
+          <div className="text-2xl font-bold text-white">
             {stats.paidOrders}
           </div>
-          <div className="text-sm text-gray-600">Paid Orders</div>
+          <div className="text-sm text-gray-300">Paid Orders</div>
         </div>
 
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
             <Package className="w-8 h-8 text-orange-600" />
           </div>
@@ -263,7 +263,7 @@ export default function OrdersPage() {
       </div>
 
       {/* Status Overview */}
-      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-300">
         <h3 className="font-semibold text-gray-900 mb-4">
           Order Status Overview
         </h3>
@@ -281,7 +281,7 @@ export default function OrdersPage() {
             <div className="text-sm text-gray-600">Processing</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-purple-600">
+            <div className="text-2xl font-bold text-gray-700">
               {stats.shipped}
             </div>
             <div className="text-sm text-gray-600">Shipped</div>
@@ -302,7 +302,7 @@ export default function OrdersPage() {
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-gray-300">
         <div className="flex flex-col gap-4">
           {/* Search */}
           <div className="relative">
@@ -311,7 +311,7 @@ export default function OrdersPage() {
               placeholder="Search orders by number, customer name, or email..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 h-11"
+              className="pl-10 h-11 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
             />
           </div>
 
@@ -322,7 +322,7 @@ export default function OrdersPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-auto"
+                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent w-full sm:w-auto"
               >
                 <option value="all">All Status</option>
                 <option value="pending">Pending</option>
@@ -337,7 +337,7 @@ export default function OrdersPage() {
               <select
                 value={paymentStatusFilter}
                 onChange={(e) => setPaymentStatusFilter(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-auto"
+                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent w-full sm:w-auto"
               >
                 <option value="all">All Payments</option>
                 <option value="paid">Paid</option>
@@ -354,7 +354,7 @@ export default function OrdersPage() {
 
       {/* Orders Grid */}
       {filteredOrders.length === 0 ? (
-        <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 text-center">
+        <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-300 text-center">
           <ShoppingBag className="w-16 h-16 text-gray-300 mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
             No Orders Found

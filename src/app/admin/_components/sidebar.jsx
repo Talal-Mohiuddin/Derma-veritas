@@ -190,14 +190,14 @@ export default function Sidebar({ isOpen, onClose }) {
     <>
       {/* Desktop sidebar */}
       <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
-        <div className="flex-1 flex flex-col min-h-0 bg-gradient-to-b from-gray-900 to-gray-800 shadow-xl">
+        <div className="flex-1 flex flex-col min-h-0 bg-gradient-to-b from-gray-900 via-black to-gray-800 shadow-xl">
           {/* Logo */}
           <Link
             href="/"
             className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900"
           >
             <div className="flex items-center">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">DV</span>
               </div>
               <span className="ml-3 text-white text-lg font-semibold">
@@ -218,7 +218,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     group flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200
                     ${
                       isActive
-                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg transform scale-105"
+                        ? "bg-gradient-to-r from-gray-700 to-gray-900 text-white shadow-lg transform scale-105"
                         : "text-gray-300 hover:bg-gray-700 hover:text-white hover:scale-105"
                     }
                   `}
@@ -239,7 +239,7 @@ export default function Sidebar({ isOpen, onClose }) {
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="flex items-center w-full text-left hover:bg-gray-700 rounded-lg p-2 transition-colors duration-200"
             >
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-gray-600 to-gray-800 flex items-center justify-center">
                 <span className="text-white font-medium">{userInitials}</span>
               </div>
               <div className="ml-3 flex-1">
@@ -295,13 +295,13 @@ export default function Sidebar({ isOpen, onClose }) {
 
       {/* Mobile sidebar */}
       <div
-        className={`lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-gray-900 to-gray-800 shadow-xl transform ${
+        className={`lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-gray-900 via-black to-gray-800 shadow-xl transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out`}
       >
         <div className="flex items-center justify-between h-16 px-4 bg-gray-900">
           <div className="flex items-center">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-r from-gray-700 to-gray-900 flex items-center justify-center">
               <span className="text-white font-bold text-sm">DV</span>
             </div>
             <span className="ml-3 text-white text-lg font-semibold">
@@ -340,7 +340,7 @@ export default function Sidebar({ isOpen, onClose }) {
                   group flex items-center px-3 py-3 text-sm font-medium rounded-lg transition-all duration-200
                   ${
                     isActive
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg"
+                      ? "bg-gradient-to-r from-gray-700 to-gray-900 text-white shadow-lg"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white"
                   }
                 `}
@@ -356,7 +356,7 @@ export default function Sidebar({ isOpen, onClose }) {
         <div className="p-4 border-t border-gray-700">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-r from-gray-600 to-gray-800 flex items-center justify-center">
                 <span className="text-white font-medium">{userInitials}</span>
               </div>
               <div className="ml-3">

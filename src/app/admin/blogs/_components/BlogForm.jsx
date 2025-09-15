@@ -161,14 +161,14 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-t-2xl">
+        <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white p-6 rounded-t-2xl">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">
               {isEditing ? "Edit Blog" : "Create New Blog"}
             </h2>
             <button
               onClick={onClose}
-              className="text-white hover:text-gray-200 transition-colors"
+              className="text-white hover:text-gray-300 transition-colors"
             >
               <svg
                 className="w-6 h-6"
@@ -199,7 +199,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
               name="title"
               value={formData.title}
               onChange={handleInputChange}
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               placeholder="Enter blog title..."
               required
             />
@@ -215,7 +215,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                 name="category"
                 value={formData.category}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 required
               >
                 <option value="">Select Category</option>
@@ -234,7 +234,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                 name="status"
                 value={formData.status}
                 onChange={handleInputChange}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               >
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
@@ -288,7 +288,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                   </svg>
                   <div className="mt-4">
                     <label className="cursor-pointer">
-                      <span className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50">
+                      <span className="bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors disabled:opacity-50">
                         {isUploading ? "Uploading..." : "Upload Image"}
                       </span>
                       <input
@@ -317,13 +317,13 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
               {formData.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm flex items-center space-x-1"
+                  className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm flex items-center space-x-1 border border-gray-300"
                 >
                   <span>{tag}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveTag(tag)}
-                    className="text-purple-600 hover:text-purple-800"
+                    className="text-gray-600 hover:text-gray-800"
                   >
                     ×
                   </button>
@@ -338,7 +338,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
                 onKeyPress={(e) =>
                   e.key === "Enter" && (e.preventDefault(), handleAddTag())
                 }
-                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-gray-500 focus:border-transparent"
                 placeholder="Add a tag..."
               />
               <button
@@ -381,7 +381,7 @@ export default function BlogForm({ blog, onClose, onSuccess }) {
             <button
               type="submit"
               disabled={isLoading || isUploading}
-              className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+              className="px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-lg hover:from-gray-900 hover:to-black transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2 shadow-lg"
             >
               {(isLoading || isUploading) && (
                 <svg

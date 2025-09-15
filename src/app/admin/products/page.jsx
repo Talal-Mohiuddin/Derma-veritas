@@ -99,7 +99,7 @@ export default function ProductsPage() {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-gray-600 mx-auto mb-4"></div>
           <div className="text-xl font-semibold text-gray-700 mb-2">Loading Products...</div>
           <div className="text-gray-500">Please wait while we fetch the data</div>
         </div>
@@ -113,7 +113,7 @@ export default function ProductsPage() {
         <div className="text-red-500 text-lg mb-4">Error loading products</div>
         <button
           onClick={() => refetch()}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+          className="px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800"
         >
           Try Again
         </button>
@@ -124,17 +124,17 @@ export default function ProductsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8 text-white">
+      <div className="bg-gradient-to-r from-gray-900 via-black to-gray-800 rounded-2xl p-8 text-white shadow-xl">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold mb-2">Product Management 📦</h1>
-            <p className="text-purple-100 text-lg">
+            <p className="text-gray-300 text-lg">
               Manage your product catalog and inventory
             </p>
           </div>
           <button
             onClick={handleAddProduct}
-            className="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2"
+            className="bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 flex items-center space-x-2 shadow-lg"
           >
             <svg
               className="w-5 h-5"
@@ -155,7 +155,7 @@ export default function ProductsPage() {
       </div>
 
       {/* Filters and Actions */}
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-300">
         <div className="flex flex-wrap justify-between items-center gap-4">
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center space-x-2">
@@ -165,7 +165,7 @@ export default function ProductsPage() {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-gray-500 focus:border-transparent"
               >
                 <option value="">All Categories</option>
                 {categories.map((category) => (
@@ -205,7 +205,7 @@ export default function ProductsPage() {
               type="checkbox"
               checked={selectedProducts.length === products.length}
               onChange={handleSelectAll}
-              className="rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+              className="rounded border-gray-300 text-gray-600 focus:ring-gray-500"
             />
             <label className="ml-2 text-sm text-gray-600">
               Select all products on this page
@@ -235,7 +235,7 @@ export default function ProductsPage() {
 
       {/* Pagination */}
       {totalProducts > pageSize && (
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300">
           <div className="flex justify-center items-center space-x-4">
             <button
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}

@@ -87,26 +87,26 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg p-4 sm:p-6 w-full max-h-[90vh] overflow-y-auto max-w-3xl mx-auto"
+        className="bg-white rounded-xl p-4 sm:p-6 w-full max-h-[90vh] overflow-y-auto max-w-3xl mx-auto shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+        <div className="flex items-center justify-between mb-4 sm:mb-6 p-4 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-lg -mx-4 -mt-4 sm:-mx-6 sm:-mt-6">
+          <h2 className="text-xl sm:text-2xl font-bold">
             User Profile & Details
           </h2>
-          <Button variant="ghost" size="sm" onClick={onClose}>
+          <Button variant="ghost" size="sm" onClick={onClose} className="text-white hover:bg-white/20">
             <X className="h-4 w-4" />
           </Button>
         </div>
 
         <div className="space-y-4 sm:space-y-6">
           {/* User Header */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 p-4 sm:p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 p-4 sm:p-6 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl border border-gray-300 shadow-lg">
             <div className="flex items-center space-x-4 w-full sm:w-auto">
               <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-white shadow-md">
                 <AvatarImage src={user.photoURL} alt={user.name} />
-                <AvatarFallback className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg sm:text-xl font-bold">
+                <AvatarFallback className="bg-gradient-to-r from-gray-700 to-gray-900 text-white text-lg sm:text-xl font-bold">
                   {user.name?.charAt(0)?.toUpperCase() ||
                     user.email?.charAt(0)?.toUpperCase()}
                 </AvatarFallback>
@@ -139,7 +139,7 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                   {user.isBanned ? "Banned" : "Active"}
                 </Badge>
                 {user.referralCode && (
-                  <Badge variant="outline" className="text-xs border">
+                  <Badge variant="outline" className="text-xs border border-gray-300">
                     Code: {user.referralCode}
                   </Badge>
                 )}
@@ -162,7 +162,7 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                 {user.isBanned ? "Banned" : "Active"}
               </Badge>
               {user.referralCode && (
-                <Badge variant="outline" className="text-xs border">
+                <Badge variant="outline" className="text-xs border border-gray-300">
                   Code: {user.referralCode}
                 </Badge>
               )}
@@ -176,17 +176,17 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-2 gap-3 sm:gap-4">
-            <div className="bg-blue-50 rounded-lg p-3 sm:p-4 border border-blue-200">
+            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg p-3 sm:p-4 border border-gray-300 shadow-lg">
               <div className="flex items-center justify-between mb-2">
-                <CreditCard className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+                <CreditCard className="w-6 h-6 sm:w-8 sm:h-8 text-gray-700" />
               </div>
-              <div className="text-lg sm:text-2xl font-bold text-blue-600">
+              <div className="text-lg sm:text-2xl font-bold text-gray-900">
                 {user.plan || "Free"}
               </div>
-              <div className="text-xs sm:text-sm text-blue-700">Current Plan</div>
+              <div className="text-xs sm:text-sm text-gray-700">Current Plan</div>
             </div>
 
-            <div className="bg-green-50 rounded-lg p-3 sm:p-4 border border-green-200">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-3 sm:p-4 border border-green-200 shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
               </div>
@@ -196,17 +196,17 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
               <div className="text-xs sm:text-sm text-green-700">Users Referred</div>
             </div>
 
-            <div className="bg-purple-50 rounded-lg p-3 sm:p-4 border border-purple-200">
+            <div className="bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg p-3 sm:p-4 border border-gray-700 shadow-lg text-white">
               <div className="flex items-center justify-between mb-2">
-                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
+                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
-              <div className="text-lg sm:text-2xl font-bold text-purple-600">
+              <div className="text-lg sm:text-2xl font-bold text-white">
                 £{(user.totalRewardsEarned || 0).toFixed(2)}
               </div>
-              <div className="text-xs sm:text-sm text-purple-700">Total Rewards Earned</div>
+              <div className="text-xs sm:text-sm text-gray-300">Total Rewards Earned</div>
             </div>
 
-            <div className="bg-orange-50 rounded-lg p-3 sm:p-4 border border-orange-200">
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-3 sm:p-4 border border-orange-200 shadow-lg">
               <div className="flex items-center justify-between mb-2">
                 <UserPlus className="w-6 h-6 sm:w-8 sm:h-8 text-orange-600" />
               </div>
@@ -217,7 +217,7 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
             </div>
           </div>
 
-          <Separator />
+          <Separator className="border-gray-300" />
 
           {/* Main Content Grid */}
           <div className="space-y-6 sm:space-y-8">
@@ -225,11 +225,11 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
             <div className="space-y-4 sm:space-y-6">
               <div className="space-y-4">
                 <h4 className="text-base sm:text-lg font-semibold text-gray-900 flex items-center">
-                  <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-purple-600" />
+                  <User className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-gray-700" />
                   Personal Information
                 </h4>
 
-                <div className="bg-gray-50 rounded-lg p-3 sm:p-4 space-y-3 sm:space-y-4">
+                <div className="bg-gray-100 rounded-lg p-3 sm:p-4 space-y-3 sm:space-y-4 border border-gray-300 shadow-lg">
                   <div className="flex items-start space-x-3">
                     <Mail className="w-4 h-4 text-gray-500 mt-1" />
                     <div className="flex-1 min-w-0">
@@ -292,7 +292,7 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                 Referral Information
               </h4>
 
-              <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 sm:p-6 border border-green-200">
+              <div className="bg-gradient-to-r from-gray-100 to-gray-200 rounded-lg p-4 sm:p-6 border border-gray-300 shadow-lg">
                 <div className="space-y-4 sm:space-y-6">
                   {user.referralCode && (
                     <div>
@@ -300,14 +300,14 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
                         User's Referral Code
                       </p>
                       <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
-                        <code className="bg-white px-3 py-2 rounded border text-green-600 font-bold text-sm sm:text-base w-full sm:w-auto text-center sm:text-left">
+                        <code className="bg-white px-3 py-2 rounded border border-gray-300 text-gray-900 font-bold text-sm sm:text-base w-full sm:w-auto text-center sm:text-left">
                           {user.referralCode}
                         </code>
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={copyReferralCode}
-                          className="w-full sm:w-auto"
+                          className="w-full sm:w-auto border-gray-300 hover:bg-gray-100"
                         >
                           <Copy className="w-4 h-4 mr-2 sm:mr-0" />
                           <span className="sm:hidden">Copy Code</span>
@@ -318,19 +318,19 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
 
                   {/* Referral Activity Summary */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-white p-3 rounded border text-center">
+                    <div className="bg-white p-3 rounded border border-gray-300 text-center shadow-md">
                       <div className="text-lg font-bold text-green-600">
                         {user.referralCount || 0}
                       </div>
                       <div className="text-xs text-gray-600">Users Referred</div>
                     </div>
-                    <div className="bg-white p-3 rounded border text-center">
-                      <div className="text-lg font-bold text-purple-600">
+                    <div className="bg-white p-3 rounded border border-gray-300 text-center shadow-md">
+                      <div className="text-lg font-bold text-gray-900">
                         £{(user.totalRewardsEarned || 0).toFixed(2)}
                       </div>
                       <div className="text-xs text-gray-600">Total Earned</div>
                     </div>
-                    <div className="bg-white p-3 rounded border text-center">
+                    <div className="bg-white p-3 rounded border border-gray-300 text-center shadow-md">
                       <div className="text-lg font-bold text-orange-600">
                         {user.usedReferralCodesCount || 0}
                       </div>
@@ -383,8 +383,8 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
           </div>
 
           {/* Account Status */}
-          <Separator />
-          <div className="bg-gray-50 rounded-lg p-4 sm:p-6 border">
+          <Separator className="border-gray-300" />
+          <div className="bg-gray-100 rounded-lg p-4 sm:p-6 border border-gray-300 shadow-lg">
             <h4 className="text-base sm:text-lg font-semibold text-gray-900 mb-4 flex items-center">
               <Shield className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-gray-600" />
               Account Status & Security

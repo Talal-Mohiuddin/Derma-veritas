@@ -25,9 +25,9 @@ export default function ProductCard({
   };
 
   const getStockStatus = (quantity) => {
-    if (quantity === 0) return { text: 'Out of Stock', color: 'text-red-600 bg-red-100' };
-    if (quantity < 10) return { text: 'Low Stock', color: 'text-yellow-600 bg-yellow-100' };
-    return { text: 'In Stock', color: 'text-green-600 bg-green-100' };
+    if (quantity === 0) return { text: 'Out of Stock', color: 'text-red-600 bg-red-100 border-red-300' };
+    if (quantity < 10) return { text: 'Low Stock', color: 'text-yellow-600 bg-yellow-100 border-yellow-300' };
+    return { text: 'In Stock', color: 'text-green-600 bg-green-100 border-green-300' };
   };
 
   const handleDeleteClick = () => {
@@ -56,7 +56,7 @@ export default function ProductCard({
 
   return (
     <>
-      <div className={`bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200 ${isSelected ? 'ring-2 ring-purple-500' : ''}`}>
+      <div className={`bg-white rounded-xl shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300 ${isSelected ? 'ring-2 ring-gray-500' : ''}`}>
         {/* Selection checkbox and image */}
         <div className="relative">
           <div className="absolute top-3 left-3 z-10">
@@ -64,7 +64,7 @@ export default function ProductCard({
               type="checkbox"
               checked={isSelected}
               onChange={handleSelect}
-              className="rounded border-gray-300 text-purple-600 focus:ring-purple-500 bg-white shadow-sm"
+              className="rounded border-gray-300 text-gray-600 focus:ring-gray-500 bg-white shadow-sm"
             />
           </div>
           
@@ -92,7 +92,7 @@ export default function ProductCard({
               <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-2">
                 {product.name}
               </h3>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border border-gray-300">
                 {product.category}
               </span>
             </div>
@@ -106,7 +106,7 @@ export default function ProductCard({
             <div className="text-2xl font-bold text-gray-900">
               {formatPrice(product.price)}
             </div>
-            <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${stockStatus.color}`}>
+            <div className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${stockStatus.color}`}>
               {stockStatus.text}
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function ProductCard({
           <div className="flex space-x-2">
             <button
               onClick={() => onEdit(product)}
-              className="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-200 text-sm font-medium flex items-center justify-center space-x-2"
+              className="flex-1 bg-gradient-to-r from-gray-800 to-gray-900 text-white px-4 py-2 rounded-lg hover:from-gray-900 hover:to-black transition-colors duration-200 text-sm font-medium flex items-center justify-center space-x-2 shadow-lg"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -151,7 +151,7 @@ export default function ProductCard({
       {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Delete Product
             </h3>
