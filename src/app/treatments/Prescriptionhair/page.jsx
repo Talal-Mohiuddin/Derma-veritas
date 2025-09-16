@@ -2,7 +2,8 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star, ChevronDown, CheckCircle, Clock, AlertTriangle, Pound, RotateCcw } from "lucide-react";
+import { Star, ChevronDown, CheckCircle, Clock, AlertTriangle, RotateCcw } from "lucide-react";
+import { FaPoundSign } from "react-icons/fa";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import ConsultationSection from "@/components/consultation-section";
@@ -277,7 +278,7 @@ export default function PrescriptionHairTreatments() {
 
               <div className="text-center md:text-left">
                 <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                  <Pound className="w-5 h-5 text-gray-600" />
+                  <FaPoundSign className="w-5 h-5 text-gray-600" />
                   <span className="text-gray-600 text-sm font-light">
                     {treatmentData[7].heading}
                   </span>

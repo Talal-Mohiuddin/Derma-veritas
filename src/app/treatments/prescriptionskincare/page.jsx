@@ -1,19 +1,16 @@
 "use client";
 
 import { useStore } from "@/store/zustand";
-import { Button } from "@/components/ui/button";
-import { Star, ChevronDown, CheckCircle, Clock, AlertTriangle, Pound } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useState, useRef } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  Star,
+  ChevronDown,
+  CheckCircle,
+  Clock,
+  AlertTriangle,
+} from "lucide-react";
+import { FaPoundSign } from "react-icons/fa";
+import { useState, useRef } from "react";
 import BeforeAfterSection from "@/components/before-after-section";
-import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import ConsultationSection from "@/components/consultation-section";
@@ -31,72 +28,79 @@ export default function PrescriptionSkincareSection() {
     {
       heading: "Targeted Results",
       value: "Clinically proven to treat specific skin concerns",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Treatment Duration",
       value: "Varies by condition",
       description: "Typically 3-6 months for optimal results",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "No. of Products",
       value: "Customized regimen",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Application Time",
       value: "Daily routine",
       description: "Integrated into your skincare regimen",
-      icon: Clock
+      icon: Clock,
     },
     {
       heading: "Skin Sensitivity",
       value: "Managed through formulation",
-      icon: AlertTriangle
+      icon: AlertTriangle,
     },
     {
       heading: "Monitoring",
       value: "Regular follow-ups",
-      icon: CheckCircle
+      icon: CheckCircle,
     },
     {
       heading: "Side Effects",
       value: "Minimal with proper guidance",
-      icon: AlertTriangle
+      icon: AlertTriangle,
     },
     {
       heading: "Our Pricing",
       value: "From £60",
       description: "View all",
-      icon: Pound
+      icon: FaPoundSign,
     },
   ];
 
   const faqs = [
     {
       question: "What are prescription skincare treatments?",
-      answer: "Prescription skincare treatments are clinically guided therapies designed to target specific skin concerns such as acne, hyperpigmentation, and sensitivity. These medical-grade solutions are prescribed after a consultation with our clinical pharmacist or doctor to ensure they are safe, effective, and tailored to your skin's unique needs."
+      answer:
+        "Prescription skincare treatments are clinically guided therapies designed to target specific skin concerns such as acne, hyperpigmentation, and sensitivity. These medical-grade solutions are prescribed after a consultation with our clinical pharmacist or doctor to ensure they are safe, effective, and tailored to your skin's unique needs.",
     },
     {
-      question: "How do prescription treatments differ from over-the-counter products?",
-      answer: "Prescription treatments contain higher concentrations of active ingredients and are formulated to target specific dermatological conditions. They are backed by clinical research and require professional oversight to ensure safety and effectiveness, providing personalized solutions beyond standard over-the-counter products."
+      question:
+        "How do prescription treatments differ from over-the-counter products?",
+      answer:
+        "Prescription treatments contain higher concentrations of active ingredients and are formulated to target specific dermatological conditions. They are backed by clinical research and require professional oversight to ensure safety and effectiveness, providing personalized solutions beyond standard over-the-counter products.",
     },
     {
       question: "What conditions can prescription skincare treat?",
-      answer: "Our prescription skincare treatments can address a wide range of concerns including acne, rosacea, hyperpigmentation, melasma, fine lines and wrinkles, excessive oil production, and sensitive or reactive skin conditions."
+      answer:
+        "Our prescription skincare treatments can address a wide range of concerns including acne, rosacea, hyperpigmentation, melasma, fine lines and wrinkles, excessive oil production, and sensitive or reactive skin conditions.",
     },
     {
       question: "How long until I see results?",
-      answer: "Results vary depending on your specific skin condition and treatment plan. Most patients begin to see gradual improvement in skin clarity, tone, and texture within 4-8 weeks, with more significant results developing over 3-6 months of consistent use."
+      answer:
+        "Results vary depending on your specific skin condition and treatment plan. Most patients begin to see gradual improvement in skin clarity, tone, and texture within 4-8 weeks, with more significant results developing over 3-6 months of consistent use.",
     },
     {
       question: "Is a consultation required?",
-      answer: "Yes, all prescription skincare treatments require an initial consultation with our clinical pharmacist or doctor. This ensures we understand your skin concerns, medical history, and goals to create a safe and effective personalized treatment plan."
+      answer:
+        "Yes, all prescription skincare treatments require an initial consultation with our clinical pharmacist or doctor. This ensures we understand your skin concerns, medical history, and goals to create a safe and effective personalized treatment plan.",
     },
     {
       question: "How often will I need follow-up appointments?",
-      answer: "Follow-up frequency depends on your treatment plan but typically occurs every 4-12 weeks. Regular monitoring allows us to track your progress, adjust your regimen as needed, and ensure ongoing safety and effectiveness."
+      answer:
+        "Follow-up frequency depends on your treatment plan but typically occurs every 4-12 weeks. Regular monitoring allows us to track your progress, adjust your regimen as needed, and ensure ongoing safety and effectiveness.",
     },
   ];
 
@@ -152,7 +156,9 @@ export default function PrescriptionSkincareSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Clinically guided therapies tailored to your skin's unique needs for treating acne, hyperpigmentation, sensitivity, and other dermatological conditions.
+                Clinically guided therapies tailored to your skin's unique needs
+                for treating acne, hyperpigmentation, sensitivity, and other
+                dermatological conditions.
               </p>
 
               {/* Buttons */}
@@ -220,7 +226,9 @@ export default function PrescriptionSkincareSection() {
                 return (
                   <div key={index} className="text-center md:text-left">
                     <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                      {IconComponent && <IconComponent className="w-5 h-5 text-gray-600" />}
+                      {IconComponent && (
+                        <IconComponent className="w-5 h-5 text-gray-600" />
+                      )}
                       <span className="text-gray-600 text-sm font-light">
                         {card.heading}
                       </span>
@@ -245,7 +253,9 @@ export default function PrescriptionSkincareSection() {
                 return (
                   <div key={index} className="text-center md:text-left">
                     <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                      {IconComponent && <IconComponent className="w-5 h-5 text-gray-600" />}
+                      {IconComponent && (
+                        <IconComponent className="w-5 h-5 text-gray-600" />
+                      )}
                       <span className="text-gray-600 text-sm font-light">
                         {card.heading}
                       </span>
@@ -254,9 +264,17 @@ export default function PrescriptionSkincareSection() {
                       {card.value}
                     </h3>
                     {card.description && (
-                      <p 
-                        onClick={card.heading === "Our Pricing" ? scrollToPricing : undefined}
-                        className={`text-gray-500 text-sm font-light ${card.heading === "Our Pricing" ? "underline cursor-pointer hover:text-gray-700" : ""}`}
+                      <p
+                        onClick={
+                          card.heading === "Our Pricing"
+                            ? scrollToPricing
+                            : undefined
+                        }
+                        className={`text-gray-500 text-sm font-light ${
+                          card.heading === "Our Pricing"
+                            ? "underline cursor-pointer hover:text-gray-700"
+                            : ""
+                        }`}
                       >
                         {card.description}
                       </p>
@@ -277,11 +295,12 @@ export default function PrescriptionSkincareSection() {
               What are Prescription Skincare Treatments?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Prescription Skincare Treatments are clinically guided therapies designed to target a
-              wide range of skin concerns such as acne, hyperpigmentation, sensitivity, and other
-              common dermatological conditions. These treatments are prescribed only after a
-              consultation with our clinical pharmacist or doctor, ensuring they are safe, effective, and
-              tailored to your skin's unique needs.
+              Prescription Skincare Treatments are clinically guided therapies
+              designed to target a wide range of skin concerns such as acne,
+              hyperpigmentation, sensitivity, and other common dermatological
+              conditions. These treatments are prescribed only after a
+              consultation with our clinical pharmacist or doctor, ensuring they
+              are safe, effective, and tailored to your skin's unique needs.
             </p>
           </div>
 
@@ -307,7 +326,8 @@ export default function PrescriptionSkincareSection() {
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Provides personalised solutions beyond standard over-the-counter products
+                  Provides personalised solutions beyond standard
+                  over-the-counter products
                 </li>
               </ul>
             </div>
@@ -323,15 +343,18 @@ export default function PrescriptionSkincareSection() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  May include topical creams, oral therapies, or combined approaches depending on the condition
+                  May include topical creams, oral therapies, or combined
+                  approaches depending on the condition
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Treatment plans are customised and may involve regular monitoring to track progress
+                  Treatment plans are customised and may involve regular
+                  monitoring to track progress
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Medical-grade approach requiring ongoing follow-up to ensure safety, effectiveness, and long-term results
+                  Medical-grade approach requiring ongoing follow-up to ensure
+                  safety, effectiveness, and long-term results
                 </li>
               </ul>
             </div>
@@ -348,30 +371,42 @@ export default function PrescriptionSkincareSection() {
           <div className="grid md:grid-cols-2 gap-8 mt-12 text-left">
             <div className="space-y-4">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto md:mx-0" />
-              <h3 className="text-xl font-semibold text-gray-900">Gradual Improvement</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Gradual Improvement
+              </h3>
               <p className="text-gray-600">
-                Steady enhancement in skin clarity, tone, and texture with consistent use
+                Steady enhancement in skin clarity, tone, and texture with
+                consistent use
               </p>
             </div>
             <div className="space-y-4">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto md:mx-0" />
-              <h3 className="text-xl font-semibold text-gray-900">Reduction in Concerns</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Reduction in Concerns
+              </h3>
               <p className="text-gray-600">
-                Noticeable decrease in breakouts, irritation, or pigmentation over time
+                Noticeable decrease in breakouts, irritation, or pigmentation
+                over time
               </p>
             </div>
             <div className="space-y-4">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto md:mx-0" />
-              <h3 className="text-xl font-semibold text-gray-900">Healthier Skin</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Healthier Skin
+              </h3>
               <p className="text-gray-600">
-                Development of more resilient, balanced skin with continued treatment
+                Development of more resilient, balanced skin with continued
+                treatment
               </p>
             </div>
             <div className="space-y-4">
               <CheckCircle className="w-8 h-8 text-green-500 mx-auto md:mx-0" />
-              <h3 className="text-xl font-semibold text-gray-900">Optimal Outcomes</h3>
+              <h3 className="text-xl font-semibold text-gray-900">
+                Optimal Outcomes
+              </h3>
               <p className="text-gray-600">
-                Best results achieved when combined with professional skincare advice and lifestyle support
+                Best results achieved when combined with professional skincare
+                advice and lifestyle support
               </p>
             </div>
           </div>
@@ -405,13 +440,15 @@ export default function PrescriptionSkincareSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  All treatments are prescribed after a thorough consultation with our clinical pharmacist or doctor. 
-                  Our pricing reflects the personalized approach and medical-grade formulations that deliver results 
-                  beyond standard over-the-counter products.
+                  All treatments are prescribed after a thorough consultation
+                  with our clinical pharmacist or doctor. Our pricing reflects
+                  the personalized approach and medical-grade formulations that
+                  deliver results beyond standard over-the-counter products.
                 </p>
                 <p>
-                  If you would like to discuss which treatment might be right for your skin concerns, please 
-                  <button 
+                  If you would like to discuss which treatment might be right
+                  for your skin concerns, please
+                  <button
                     onClick={() => setBookingOpen(true)}
                     className="underline hover:text-gray-900 transition-colors mx-1"
                   >
@@ -440,13 +477,14 @@ export default function PrescriptionSkincareSection() {
 
                 <div className="divide-y divide-gray-200">
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Skin Assessment & Treatment Plan:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £60
+                    <span className="text-gray-700">
+                      Skin Assessment & Treatment Plan:
                     </span>
+                    <span className="text-lg font-bold text-gray-900">£60</span>
                   </div>
                   <div className="text-sm text-gray-500 mt-2">
-                    Consultation fee is deductible from any prescribed treatment costs
+                    Consultation fee is deductible from any prescribed treatment
+                    costs
                   </div>
                 </div>
               </div>
@@ -485,10 +523,10 @@ export default function PrescriptionSkincareSection() {
                     </span>
                   </div>
                   <div className="flex justify-between items-center py-3">
-                    <span className="text-gray-700">Follow-up Consultations:</span>
-                    <span className="text-lg font-bold text-gray-900">
-                      £30
+                    <span className="text-gray-700">
+                      Follow-up Consultations:
                     </span>
+                    <span className="text-lg font-bold text-gray-900">£30</span>
                   </div>
                 </div>
               </div>

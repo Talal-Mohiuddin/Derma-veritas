@@ -125,7 +125,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
         "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
-        "skin-boosters": "profhilo",
         "skinfill-bacio": "skinfill-bacio",
       };
       return treatmentMap[treatmentSlug] || "";
@@ -135,7 +134,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     if (pathname.includes("/treatments/")) {
       const treatmentSlug = pathname.split("/treatments/")[1];
       const treatmentMap = {
-        "chemical-peels": "chemical-peel",
         microneedling: "skinpen-microneedling",
         "rf-microneedling": "skinpen-microneedling",
         co2: "co2-laser",
@@ -184,7 +182,6 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   ];
 
   const skincareLinks = [
-    { name: "Chemical Peels", slug: "chemical-peels" },
     { name: "Microneedling", slug: "microneedling" },
     { name: "RF Microneedling", slug: "rf-microneedling" },
     { name: "Co2 Laser", slug: "co2" },

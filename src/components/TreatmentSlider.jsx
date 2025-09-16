@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useRef, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { useState, useRef, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const treatments = [
   {
@@ -19,13 +19,6 @@ const treatments = [
     image: "/images/sample_image.jpg",
     price: "From £450",
     slug: "cheek-fillers",
-  },
-  {
-    id: 3,
-    title: "Chemical Peels",
-    image: "/images/sample_image.jpg",
-    price: "From £150",
-    slug: "chemical-peels",
   },
   {
     id: 4,
@@ -91,48 +84,42 @@ const treatments = [
     price: "From £180",
     slug: "RF-Microneedling",
   },
-
-  {
-    id: 13,
-    title: "Skin Boosters",
-    image: "/images/sample_image.jpg",
-    price: "From £180",
-    slug: "skin-boosters",
-  },
 ];
 
 export default function TreatmentSlider() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const sliderRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      scrollRight()
-    }, 4000) // auto-scroll every 4s
-    return () => clearInterval(interval)
-  })
+      scrollRight();
+    }, 4000); // auto-scroll every 4s
+    return () => clearInterval(interval);
+  });
 
   const scrollToIndex = (index) => {
     if (sliderRef.current) {
       // responsive card width (smaller on mobile)
-      const cardWidth = sliderRef.current.querySelector("div").offsetWidth + 24
+      const cardWidth = sliderRef.current.querySelector("div").offsetWidth + 24;
       sliderRef.current.scrollTo({
         left: index * cardWidth,
         behavior: "smooth",
-      })
-      setCurrentIndex(index)
+      });
+      setCurrentIndex(index);
     }
-  }
+  };
 
   const scrollLeft = () => {
-    const newIndex = currentIndex > 0 ? currentIndex - 1 : treatments.length - 1
-    scrollToIndex(newIndex)
-  }
+    const newIndex =
+      currentIndex > 0 ? currentIndex - 1 : treatments.length - 1;
+    scrollToIndex(newIndex);
+  };
 
   const scrollRight = () => {
-    const newIndex = currentIndex < treatments.length - 1 ? currentIndex + 1 : 0
-    scrollToIndex(newIndex)
-  }
+    const newIndex =
+      currentIndex < treatments.length - 1 ? currentIndex + 1 : 0;
+    scrollToIndex(newIndex);
+  };
 
   return (
     <div className="relative">
@@ -217,5 +204,5 @@ export default function TreatmentSlider() {
         ))}
       </div>
     </div>
-  )
+  );
 }

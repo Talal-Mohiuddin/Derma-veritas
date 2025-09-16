@@ -50,7 +50,6 @@ export default function Navbar() {
   ];
 
   const skincareLinks = [
-    { name: "Chemical Peels", slug: "chemical-peels" },
     { name: "Microneedling", slug: "microneedling" },
     { name: "RF Microneedling", slug: "rf-microneedling" },
     { name: "Co2 Laser", slug: "co2" },
@@ -165,7 +164,6 @@ export default function Navbar() {
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
         "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
-        "skin-boosters": "profhilo",
         "skinfill-bacio": "skinfill-bacio",
       };
       return treatmentMap[treatmentSlug] || "";
@@ -175,7 +173,6 @@ export default function Navbar() {
     if (pathname.includes("/treatments/")) {
       const treatmentSlug = pathname.split("/treatments/")[1];
       const treatmentMap = {
-        "chemical-peels": "chemical-peel",
         microneedling: "skinpen-microneedling",
         "rf-microneedling": "skinpen-microneedling",
         "mole-removal": "mole-removal",
@@ -429,7 +426,7 @@ export default function Navbar() {
             {/* MENU Button (always visible) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-transparent border-0 rounded-none hover:bg-white/10 transition-colors duration-200"
+              className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-transparent border-0 rounded-none hover:bg-white/10 transition-colors duration-200 md:hidden"
             >
               <span
                 className={`text-sm font-medium mr-2 sm:mr-3 ${

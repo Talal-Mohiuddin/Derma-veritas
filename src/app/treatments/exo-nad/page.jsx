@@ -8,8 +8,8 @@ import {
   CheckCircle,
   Clock,
   AlertTriangle,
-  Pound,
 } from "lucide-react";
+import { FaPoundSign } from "react-icons/fa";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
@@ -64,7 +64,7 @@ export default function ExoNadPeelingSection() {
     {
       heading: "Our Pricing",
       value: "£380 per session",
-      icon: Pound,
+      icon: FaPoundSign,
     },
   ];
 

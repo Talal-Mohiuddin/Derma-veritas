@@ -55,7 +55,7 @@ export default function Home() {
   };
 
   const conditions = [
-    { name: "Sagging Skin", path: "/treatments/Endolift" },
+    { name: "Sagging Skin", path: "/treatments/endolift" },
     { name: "Double Chin", path: "/menu/injectables/fat-dissolving-injections" },
     { name: "Eye Bags", path: "/treatments/prp-therapy" },
     { name: "Acne Scars", path: "/treatments/co2" },

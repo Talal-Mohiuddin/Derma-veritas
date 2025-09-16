@@ -8,12 +8,10 @@ import {
   CheckCircle,
   Clock,
   AlertTriangle,
-  Pound,
 } from "lucide-react";
+import { FaPoundSign } from "react-icons/fa";
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
 import BeforeAfterSection from "@/components/before-after-section";
-import ReviewsSection from "@/components/reviews-section";
 import ConsultationSection from "@/components/consultation-section";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
@@ -64,7 +62,7 @@ export default function ExoSignalHairTreatmentSection() {
       heading: "Our Pricing",
       value: "From £700",
       description: "View all",
-      icon: Pound,
+      icon: FaPoundSign,
     },
   ];
 
