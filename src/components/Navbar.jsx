@@ -271,7 +271,7 @@ export default function Navbar() {
         className={`px-4 py-3 fixed left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? `bg-black/80 backdrop-blur-sm border-gray-700 ${
-                isScrollingUp ? "top-[36px]" : "-top-20"
+                isScrollingUp ? "top-[30px]" : "-top-16"
               }`
             : isHomePage
             ? "bg-transparent border-white/20 top-[38px]"
