@@ -220,7 +220,7 @@ export default function PrescriptionSkincareSection() {
                 return (
                   <div key={index} className="text-center md:text-left">
                     <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      {IconComponent && <IconComponent className="w-5 h-5 text-gray-600" />}
                       <span className="text-gray-600 text-sm font-light">
                         {card.heading}
                       </span>
@@ -245,7 +245,7 @@ export default function PrescriptionSkincareSection() {
                 return (
                   <div key={index} className="text-center md:text-left">
                     <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
-                      <IconComponent className="w-5 h-5 text-gray-600" />
+                      {IconComponent && <IconComponent className="w-5 h-5 text-gray-600" />}
                       <span className="text-gray-600 text-sm font-light">
                         {card.heading}
                       </span>
