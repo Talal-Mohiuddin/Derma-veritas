@@ -1,6 +1,14 @@
 "use client";
 
-import { Menu, ChevronDown, Gift, Star, Sparkles, Heart } from "lucide-react";
+import {
+  Menu,
+  ChevronDown,
+  Gift,
+  Star,
+  Sparkles,
+  Heart,
+  ChevronRight,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -21,6 +29,8 @@ export default function Navbar() {
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isHoveringTreatments, setIsHoveringTreatments] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
   const pathname = usePathname();
 
   // Determine if we're on home page
@@ -28,55 +38,68 @@ export default function Navbar() {
   const textColor = isHomePage ? "text-white" : "text-black";
   const iconColor = isHomePage ? "white" : "black";
 
-  // Treatment categories (fixed duplicate "Anti-Wrinkle Treatment")
-  const injectablesLinks = [
-    "Anti-Wrinkle Treatment",
-    "Non Surgical Rhinoplasty",
-    "8 Point Facelift",
-    "NCTF Skin Revitalisation",
-    "HArmonyCa Dermal Filler",
-    "Dermal Fillers",
-    "Lip Fillers",
-    "Chin Fillers",
-    "Tear Trough Filler",
-    "Cheek Fillers",
-    "Profhilo",
-    "Fat Dissolving Injections",
-    "Hand Rejuvenation",
-    "Polynucleotides Hair Loss Treatment",
-    "Polynucleotides Skin Rejuvenation Treatment",
-    "Skin Boosters",
-    "Skinfill™ Bacio",
-  ];
-
-  const skincareLinks = [
-    { name: "Microneedling", slug: "microneedling" },
-    { name: "RF Microneedling", slug: "rf-microneedling" },
-    { name: "Co2 Laser", slug: "co2" },
-    { name: "Polynucleotide", slug: "polynucleotide" },
-    { name: "Endolift", slug: "endolift" },
-    { name: "EXO–NAD Skin Longevity Peeling", slug: "exo-nad" },
-    { name: "Prescription Skincare", slug: "prescriptionskincare" },
-  ];
-
-  const wellnessLinks = [
-    { name: "Exosome Therapy", slug: "exosome-therapy" },
-    { name: "PRP Therapy", slug: "prp-therapy" },
-    { name: "V-Hacker", slug: "v-hacker" },
-    { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
-    { name: "Weight Loss", slug: "weightloss" },
-  ];
-
-  const laserLinks = [
-    { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
-    { name: "Ablative", slug: "ablative" },
-  ];
-
-  const hairLinks = [
-    { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
-    { name: "ExoSignal™ Hair", slug: "exosignal" },
-    { name: "Prescription Hair", slug: "prescriptionhair" },
-  ];
+  // Treatment categories organized by main categories
+  const treatmentCategories = {
+    injectables: {
+      title: "Injectables",
+      treatments: [
+        "Anti-Wrinkle Treatment",
+        "Non Surgical Rhinoplasty",
+        "8 Point Facelift",
+        "NCTF Skin Revitalisation",
+        "HArmonyCa Dermal Filler",
+        "Dermal Fillers",
+        "Lip Fillers",
+        "Chin Fillers",
+        "Tear Trough Filler",
+        "Cheek Fillers",
+        "Profhilo",
+        "Fat Dissolving Injections",
+        "Hand Rejuvenation",
+        "Polynucleotides Hair Loss Treatment",
+        "Polynucleotides Skin Rejuvenation Treatment",
+        "Skin Boosters",
+        "Skinfill™ Bacio",
+      ],
+    },
+    skincare: {
+      title: "Skincare",
+      treatments: [
+        { name: "Microneedling", slug: "microneedling" },
+        { name: "RF Microneedling", slug: "rf-microneedling" },
+        { name: "Co2 Laser", slug: "co2" },
+        { name: "Polynucleotide", slug: "polynucleotide" },
+        { name: "Endolift", slug: "endolift" },
+        { name: "EXO–NAD Skin Longevity Peeling", slug: "exo-nad" },
+        { name: "Prescription Skincare", slug: "prescriptionskincare" },
+      ],
+    },
+    wellness: {
+      title: "Wellness",
+      treatments: [
+        { name: "Exosome Therapy", slug: "exosome-therapy" },
+        { name: "PRP Therapy", slug: "prp-therapy" },
+        { name: "V-Hacker", slug: "v-hacker" },
+        { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
+        { name: "Weight Loss", slug: "weightloss" },
+      ],
+    },
+    laser: {
+      title: "Laser Treatments",
+      treatments: [
+        { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
+        { name: "Ablative", slug: "ablative" },
+      ],
+    },
+    hair: {
+      title: "Hair Treatments",
+      treatments: [
+        { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
+        { name: "ExoSignal™ Hair", slug: "exosignal" },
+        { name: "Prescription Hair", slug: "prescriptionhair" },
+      ],
+    },
+  };
 
   const slugify = (str) =>
     str
@@ -111,6 +134,56 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  // Clear timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, [hoverTimeout]);
+
+  const handleTreatmentsMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    setIsHoveringTreatments(true);
+  };
+
+  const handleTreatmentsMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setIsHoveringTreatments(false);
+      setHoveredCategory(null);
+    }, 150); // Small delay to allow moving to dropdown
+    setHoverTimeout(timeout);
+  };
+
+  const handleCategoryMouseEnter = (key) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+    setHoveredCategory(key);
+  };
+
+  const handleCategoryMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setHoveredCategory(null);
+    }, 100);
+    setHoverTimeout(timeout);
+  };
+
+  const handleDropdownMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+  };
+
+  const handleNestedDropdownMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+    }
+  };
 
   const bannerMessages = [
     {
@@ -283,10 +356,10 @@ export default function Navbar() {
           {/* Center - Navigation Links (hidden on mobile) */}
           <div className="hidden lg:flex items-center gap-8">
             {/* Treatments Dropdown */}
-            <div 
+            <div
               className="relative group"
-              onMouseEnter={() => setIsHoveringTreatments(true)}
-              onMouseLeave={() => setIsHoveringTreatments(false)}
+              onMouseEnter={handleTreatmentsMouseEnter}
+              onMouseLeave={handleTreatmentsMouseLeave}
             >
               <button
                 className={`flex items-center gap-1 text-sm font-medium ${
@@ -297,92 +370,71 @@ export default function Navbar() {
                 <ChevronDown className="w-4 h-4" />
               </button>
 
-              {/* Mega Dropdown Menu */}
+              {/* Main Dropdown Menu */}
               {isHoveringTreatments && (
-                <div className="absolute top-full left-0 mt-2 w-max bg-white shadow-xl rounded-md p-6 grid grid-cols-3 gap-8 z-50">
-                  {/* Injectables Column */}
-                  <div>
-                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
-                      Injectables
-                    </h3>
-                    <div className="space-y-2">
-                      {injectablesLinks.map((treatment, index) => (
-                        <Link
-                          key={`${treatment}-${index}`}
-                          href={`/menu/injectables/${slugify(treatment)}`}
-                          className="block text-gray-600 hover:text-black text-sm transition-colors"
-                        >
-                          {treatment}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                <div 
+                  className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-md py-2 z-50"
+                  onMouseEnter={handleDropdownMouseEnter}
+                  onMouseLeave={handleTreatmentsMouseLeave}
+                >
+                  {Object.entries(treatmentCategories).map(
+                    ([key, category]) => (
+                      <div
+                        key={key}
+                        className="relative"
+                        onMouseEnter={() => handleCategoryMouseEnter(key)}
+                      >
+                        <div className="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 cursor-pointer transition-colors">
+                          <span className="font-medium text-sm">
+                            {category.title}
+                          </span>
+                          <ChevronRight className="w-4 h-4" />
+                        </div>
 
-                  {/* Skincare & Wellness Column */}
-                  <div>
-                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
-                      Skincare
-                    </h3>
-                    <div className="space-y-2 mb-6">
-                      {skincareLinks.map((treatment) => (
-                        <Link
-                          key={treatment.slug}
-                          href={`/treatments/${treatment.slug}`}
-                          className="block text-gray-600 hover:text-black text-sm transition-colors"
-                        >
-                          {treatment.name}
-                        </Link>
-                      ))}
-                    </div>
+                        {/* Nested Dropdown */}
+                        {hoveredCategory === key && (
+                          <div 
+                            className="absolute left-full top-0 ml-1 w-72 bg-white shadow-xl rounded-md py-2 z-50"
+                            onMouseEnter={handleNestedDropdownMouseEnter}
+                            onMouseLeave={handleCategoryMouseLeave}
+                          >
+                            <div className="px-4 py-2 border-b border-gray-100">
+                              <h3 className="font-bold text-gray-800 text-sm uppercase">
+                                {category.title}
+                              </h3>
+                            </div>
+                            <div className="max-h-96 overflow-y-auto">
+                              {category.treatments.map((treatment, index) => {
+                                // Handle both string and object treatments
+                                const treatmentName =
+                                  typeof treatment === "string"
+                                    ? treatment
+                                    : treatment.name;
+                                const treatmentSlug =
+                                  typeof treatment === "string"
+                                    ? slugify(treatment)
+                                    : treatment.slug;
+                                const href =
+                                  key === "injectables"
+                                    ? `/menu/injectables/${treatmentSlug}`
+                                    : `/treatments/${treatmentSlug}`;
 
-                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
-                      Wellness
-                    </h3>
-                    <div className="space-y-2">
-                      {wellnessLinks.map((treatment) => (
-                        <Link
-                          key={treatment.slug}
-                          href={`/treatments/${treatment.slug}`}
-                          className="block text-gray-600 hover:text-black text-sm transition-colors"
-                        >
-                          {treatment.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Laser & Hair Column */}
-                  <div>
-                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
-                      Laser Treatments
-                    </h3>
-                    <div className="space-y-2 mb-6">
-                      {laserLinks.map((treatment) => (
-                        <Link
-                          key={treatment.slug}
-                          href={`/treatments/${treatment.slug}`}
-                          className="block text-gray-600 hover:text-black text-sm transition-colors"
-                        >
-                          {treatment.name}
-                        </Link>
-                      ))}
-                    </div>
-
-                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
-                      Hair Treatments
-                    </h3>
-                    <div className="space-y-2">
-                      {hairLinks.map((treatment) => (
-                        <Link
-                          key={treatment.slug}
-                          href={`/treatments/${treatment.slug}`}
-                          className="block text-gray-600 hover:text-black text-sm transition-colors"
-                        >
-                          {treatment.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                                return (
+                                  <Link
+                                    key={`${treatmentName}-${index}`}
+                                    href={href}
+                                    className="block px-4 py-2 text-gray-600 hover:text-black hover:bg-gray-50 text-sm transition-colors"
+                                  >
+                                    {treatmentName}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )
+                  )}
                 </div>
               )}
             </div>

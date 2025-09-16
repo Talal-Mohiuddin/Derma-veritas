@@ -557,6 +557,163 @@ export function BookingModal({
         },
       ],
     },
+    "skin-boosters": {
+      name: "Skin Boosters",
+      options: [
+        { id: "profhilo-1", name: "Profhilo - 1 Session", price: "£300" },
+        { id: "profhilo-2", name: "Profhilo - 2 Sessions", price: "£550" },
+        { id: "profhilo-3", name: "Profhilo - 3 Sessions", price: "£700" },
+        { id: "nctf-1", name: "NCTF - 1 Session", price: "£180" },
+        { id: "nctf-3", name: "NCTF - 3 Sessions", price: "£450" },
+        { id: "nctf-5", name: "NCTF - 5 Sessions", price: "£700" },
+      ],
+    },
+    "prescription-skincare": {
+      name: "Prescription Skincare",
+      options: [
+        {
+          id: "consultation",
+          name: "Initial Consultation & Assessment",
+          price: "£60",
+          description: "Professional skin assessment and treatment plan (deductible from treatment costs)",
+        },
+        {
+          id: "topical-formulations",
+          name: "Topical Formulations",
+          price: "From £40",
+          description: "Custom prescription topical treatments",
+        },
+        {
+          id: "oral-medications",
+          name: "Oral Medications",
+          price: "From £25",
+          description: "Prescription oral therapies",
+        },
+        {
+          id: "combination-therapy",
+          name: "Combination Therapy",
+          price: "From £65",
+          description: "Combined topical and oral treatment approach",
+        },
+        {
+          id: "follow-up",
+          name: "Follow-up Consultations",
+          price: "£30",
+          description: "Regular monitoring and treatment adjustments",
+        },
+      ],
+    },
+    "weight-loss": {
+      name: "Weight Loss Treatments",
+      options: [
+        {
+          id: "consultation",
+          name: "Initial Consultation",
+          price: "Consultation Required",
+          description: "Comprehensive assessment with clinical team",
+        },
+        {
+          id: "single-session",
+          name: "Single Injection Session",
+          price: "Consultation Required",
+          description: "Individual weight loss modulator injection",
+        },
+        {
+          id: "four-session-course",
+          name: "4-Session Course",
+          price: "Consultation Required",
+          description: "Standard treatment course for optimal results",
+        },
+        {
+          id: "eight-session-course",
+          name: "8-Session Course",
+          price: "Consultation Required",
+          description: "Extended course for comprehensive weight management",
+        },
+        {
+          id: "follow-up-appointments",
+          name: "Follow-up Appointments",
+          price: "Consultation Required",
+          description: "Regular monitoring and progress assessment",
+        },
+      ],
+    },
+    "ablative": {
+      name: "Ablative Laser Treatments",
+      options: [
+        {
+          id: "consultation",
+          name: "Initial Consultation & Assessment",
+          price: "Consultation Required",
+          description: "Comprehensive skin assessment and treatment planning",
+        },
+        {
+          id: "co2-single-area",
+          name: "CO₂ Fractional Laser - Single Area",
+          price: "Consultation Required",
+          description: "Pricing varies by treatment area and intensity",
+        },
+        {
+          id: "co2-full-face",
+          name: "CO₂ Fractional Laser - Full Face",
+          price: "Consultation Required",
+          description: "Complete facial resurfacing treatment",
+        },
+        {
+          id: "co2-multiple-sessions",
+          name: "Multiple Session Course",
+          price: "Consultation Required",
+          description: "Enhanced results with course of treatments",
+        },
+        {
+          id: "aftercare-products",
+          name: "Aftercare Products & Follow-up",
+          price: "Included",
+          description: "Required post-treatment care and monitoring",
+        },
+      ],
+    },
+    "prescription-hair": {
+      name: "Prescription Hair Treatments",
+      options: [
+        {
+          id: "hair-consultation",
+          name: "Initial Hair Assessment",
+          price: "Consultation Required",
+          description: "Comprehensive hair loss consultation and treatment planning",
+        },
+        {
+          id: "topical-treatments",
+          name: "Prescription Topical Solutions",
+          price: "Consultation Required",
+          description: "Custom topical hair restoration treatments",
+        },
+        {
+          id: "oral-therapies",
+          name: "Oral Hair Therapies",
+          price: "Consultation Required",
+          description: "Prescription oral medications for hair health",
+        },
+        {
+          id: "injection-treatments",
+          name: "Injectable Hair Treatments",
+          price: "Consultation Required",
+          description: "Professional injectable therapies for hair restoration",
+        },
+        {
+          id: "combination-plan",
+          name: "Combination Treatment Plan",
+          price: "Consultation Required",
+          description: "Multi-modal approach combining various therapies",
+        },
+        {
+          id: "follow-up-monitoring",
+          name: "Follow-up & Monitoring",
+          price: "Consultation Required",
+          description: "Regular assessment and treatment adjustments",
+        },
+      ],
+    },
   };
 
   // Auto-fill user info when logged in
@@ -750,80 +907,65 @@ export function BookingModal({
                     >
                       💉 Injectables
                     </SelectItem>
+                    <SelectItem value="anti-wrinkle-treatment" className="pl-6">
+                      Anti-Wrinkle Treatment
+                    </SelectItem>
+                    <SelectItem value="non-surgical-rhinoplasty" className="pl-6">
+                      Non Surgical Rhinoplasty
+                    </SelectItem>
                     <SelectItem value="8-point-facelift" className="pl-6">
                       8 Point Facelift
                     </SelectItem>
-                    <SelectItem value="anti-wrinkle-treatment" className="pl-6">
-                      Anti Wrinkle Treatment
+                    <SelectItem value="nctf-skin-revitalisation" className="pl-6">
+                      NCTF Skin Revitalisation
                     </SelectItem>
-                    <SelectItem value="cheek-fillers" className="pl-6">
-                      Cheek Fillers
-                    </SelectItem>
-                    <SelectItem value="chin-fillers" className="pl-6">
-                      Chin Fillers
+                    <SelectItem value="harmonyca-dermal-filler" className="pl-6">
+                      HArmonyCa Dermal Filler
                     </SelectItem>
                     <SelectItem value="dermal-fillers" className="pl-6">
                       Dermal Fillers
                     </SelectItem>
-                    <SelectItem
-                      value="fat-dissolving-injections"
-                      className="pl-6"
-                    >
+                    <SelectItem value="lip-fillers" className="pl-6">
+                      Lip Fillers
+                    </SelectItem>
+                    <SelectItem value="chin-fillers" className="pl-6">
+                      Chin Fillers
+                    </SelectItem>
+                    <SelectItem value="tear-trough-filler" className="pl-6">
+                      Tear Trough Filler
+                    </SelectItem>
+                    <SelectItem value="cheek-fillers" className="pl-6">
+                      Cheek Fillers
+                    </SelectItem>
+                    <SelectItem value="profhilo" className="pl-6">
+                      Profhilo
+                    </SelectItem>
+                    <SelectItem value="fat-dissolving-injections" className="pl-6">
                       Fat Dissolving Injections
                     </SelectItem>
                     <SelectItem value="hand-rejuvenation" className="pl-6">
                       Hand Rejuvenation
                     </SelectItem>
-                    <SelectItem
-                      value="harmonyca-dermal-filler"
-                      className="pl-6"
-                    >
-                      HarmonyCa Dermal Filler
-                    </SelectItem>
-                    <SelectItem value="lip-fillers" className="pl-6">
-                      Lip Fillers
-                    </SelectItem>
-                    <SelectItem
-                      value="nctf-skin-revitalisation"
-                      className="pl-6"
-                    >
-                      NCTF Skin Revitalisation
-                    </SelectItem>
-                    <SelectItem
-                      value="non-surgical-rhinoplasty"
-                      className="pl-6"
-                    >
-                      Non Surgical Rhinoplasty
-                    </SelectItem>
-                    <SelectItem
-                      value="polynucleotides-hair-loss-treatment"
-                      className="pl-6"
-                    >
+                    <SelectItem value="polynucleotides-hair-loss-treatment" className="pl-6">
                       Polynucleotides Hair Loss Treatment
                     </SelectItem>
-                    <SelectItem
-                      value="polynucleotides-skin-rejuvenation-treatment"
-                      className="pl-6"
-                    >
+                    <SelectItem value="polynucleotides-skin-rejuvenation-treatment" className="pl-6">
                       Polynucleotides Skin Rejuvenation Treatment
                     </SelectItem>
-                    <SelectItem value="profhilo" className="pl-6">
-                      Profhilo
+                    <SelectItem value="skin-boosters" className="pl-6">
+                      Skin Boosters
                     </SelectItem>
-                    <SelectItem value="tear-trough-filler" className="pl-6">
-                      Tear Trough Filler
+                    <SelectItem value="skinfill-bacio" className="pl-6">
+                      Skinfill™ Bacio
                     </SelectItem>
 
-                    {/* Skin Care */}
+                    {/* Skincare */}
                     <SelectItem
-                      value="header-skin-care"
+                      value="header-skincare"
                       disabled
                       className="font-bold text-gray-800 bg-gray-50 mt-2"
                     >
-                      ✨ Skin Care
-                    </SelectItem>
-                    <SelectItem value="chemical-peel" className="pl-6">
-                      Chemical Peel
+                      ✨ Skincare
                     </SelectItem>
                     <SelectItem value="microneedling" className="pl-6">
                       Microneedling
@@ -834,17 +976,17 @@ export function BookingModal({
                     <SelectItem value="co2-laser" className="pl-6">
                       Co2 Laser
                     </SelectItem>
-                    <SelectItem
-                      value="polynucleotides-skin-rejuvenation-treatment"
-                      className="pl-6"
-                    >
+                    <SelectItem value="polynucleotides-skin-rejuvenation-treatment" className="pl-6">
                       Polynucleotide
                     </SelectItem>
                     <SelectItem value="endolift" className="pl-6">
                       Endolift
                     </SelectItem>
-                    <SelectItem value="profusion-hydrafacial" className="pl-6">
-                      ProFusion HydraFacial
+                    <SelectItem value="exo" className="pl-6">
+                      EXO–NAD Skin Longevity Peeling
+                    </SelectItem>
+                    <SelectItem value="prescription-skincare" className="pl-6">
+                      Prescription Skincare
                     </SelectItem>
 
                     {/* Wellness */}
@@ -861,29 +1003,14 @@ export function BookingModal({
                     <SelectItem value="iv-drips" className="pl-6">
                       PRP Therapy
                     </SelectItem>
-
-                    {/* Advanced Treatments */}
-                    <SelectItem
-                      value="header-advanced"
-                      disabled
-                      className="font-bold text-gray-800 bg-gray-50 mt-2"
-                    >
-                      🔬 Advanced Treatments
-                    </SelectItem>
                     <SelectItem value="v-hacker" className="pl-6">
-                      V-Hacker Biohacking
-                    </SelectItem>
-                    <SelectItem value="exo" className="pl-6">
-                      EXO–NAD Skin Longevity Peeling
-                    </SelectItem>
-                    <SelectItem value="skinfill-bacio" className="pl-6">
-                      Skinfill™ Bacio
+                      V-Hacker
                     </SelectItem>
                     <SelectItem value="revitalizing" className="pl-6">
                       Hair+ Revitalizing
                     </SelectItem>
-                    <SelectItem value="exosignal" className="pl-6">
-                      ExoSignal™ Hair
+                    <SelectItem value="weight-loss" className="pl-6">
+                      Weight Loss
                     </SelectItem>
 
                     {/* Laser Treatments */}
@@ -894,11 +1021,41 @@ export function BookingModal({
                     >
                       🔥 Laser Treatments
                     </SelectItem>
-                    <SelectItem
-                      value="quad-laser-hair-removal"
-                      className="pl-6"
-                    >
+                    <SelectItem value="quad-laser-hair-removal" className="pl-6">
                       Quad Laser Hair Removal
+                    </SelectItem>
+                    <SelectItem value="ablative" className="pl-6">
+                      Ablative
+                    </SelectItem>
+
+                    {/* Hair Treatments */}
+                    <SelectItem
+                      value="header-hair"
+                      disabled
+                      className="font-bold text-gray-800 bg-gray-50 mt-2"
+                    >
+                      💇 Hair Treatments
+                    </SelectItem>
+                    <SelectItem value="revitalizing" className="pl-6">
+                      Hair+ Revitalizing
+                    </SelectItem>
+                    <SelectItem value="exosignal" className="pl-6">
+                      ExoSignal™ Hair
+                    </SelectItem>
+                    <SelectItem value="prescription-hair" className="pl-6">
+                      Prescription Hair
+                    </SelectItem>
+
+                    {/* Packages */}
+                    <SelectItem
+                      value="header-packages"
+                      disabled
+                      className="font-bold text-gray-800 bg-gray-50 mt-2"
+                    >
+                      📦 Packages
+                    </SelectItem>
+                    <SelectItem value="profusion-hydrafacial" className="pl-6">
+                      ProFusion HydraFacial
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -1242,7 +1399,8 @@ export function BookingModal({
             </div>
 
             {/* Show referral reward preview if referral code is entered and valid */}
-            {formData.referralCode && !referralError && selectedTreatmentData && formData.treatmentOption && (
+            {formData.referralCode && !referralError && selectedTreatmentData && formData.treatmentOption && 
+             !["skin-boosters", "prescription-skincare", "weight-loss", "ablative", "prescription-hair"].includes(formData.treatment) && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-blue-600 font-semibold">🎁 Referral Reward Preview</span>
@@ -1252,7 +1410,7 @@ export function BookingModal({
                     const selectedOption = selectedTreatmentData.options.find(
                       (opt) => opt.id === formData.treatmentOption
                     );
-                    if (selectedOption?.price) {
+                    if (selectedOption?.price && !selectedOption.price.includes("Consultation Required")) {
                       const priceString = selectedOption.price;
                       const numericPrice = parseFloat(priceString.replace(/[£$,]/g, ""));
                       if (!isNaN(numericPrice)) {
@@ -1274,7 +1432,7 @@ export function BookingModal({
                         );
                       }
                     }
-                    return "Reward will be calculated based on your treatment selection.";
+                    return "Reward will be calculated based on your treatment selection during consultation.";
                   })()}
                 </div>
               </div>

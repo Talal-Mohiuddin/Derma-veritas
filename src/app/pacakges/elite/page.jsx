@@ -24,10 +24,13 @@ import {
   AlertTriangle,
   Pound,
 } from "lucide-react";
+import { useStore } from "@/store/zustand";
 
 export default function MembershipProgramPage() {
   const [openIndex, setOpenIndex] = useState(null);
   const pricingSectionRef = useRef(null);
+    const { bookingOpen, setBookingOpen } = useStore();
+
 
   const membershipTiers = [
     {
@@ -220,7 +223,10 @@ export default function MembershipProgramPage() {
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
 
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors">
+                <button
+                  onClick={() => setBookingOpen(true)}
+                  className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-none tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
+                >
                   BOOK CONSULTATION
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>

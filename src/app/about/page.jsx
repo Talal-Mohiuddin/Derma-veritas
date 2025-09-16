@@ -62,12 +62,13 @@ export default function AboutPage() {
 
           <p className="text-gray-600 text-lg leading-relaxed mb-6">
             At Derma Veritas, our team consists of highly trained medical
-            professionals with extensive experience in both hospital and clinical settings.
+            professionals with extensive experience in both hospital and
+            clinical settings.
           </p>
 
           <p className="text-gray-600 text-lg leading-relaxed">
-            We combine medical expertise with aesthetic precision to deliver safe,
-            effective treatments tailored to your unique needs and goals.
+            We combine medical expertise with aesthetic precision to deliver
+            safe, effective treatments tailored to your unique needs and goals.
           </p>
         </div>
 
@@ -157,7 +158,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Bottom Sections - Full Width */}
+
       <div className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
         <div className="w-full grid md:grid-cols-2 gap-12 px-4 md:px-8">
           {/* International Ambassador */}
@@ -194,7 +195,9 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-        
+
+
+
       {/* Core Values */}
       <section className="py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -239,20 +242,28 @@ export default function AboutPage() {
       </section>
 
       {/* Call to Action Section - Full Width */}
-      <section className="w-full py-16 bg-muted text-foreground">
-        <div className="text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">
-            Ready to meet your Clinician in Person?
-          </h2>
-          <p className="text-muted-foreground text-xl max-w-3xl mx-auto mb-12">
-            Schedule a consultation with one of our specialists to discuss your Skin & Hair goals and develop a personalized treatment plan.
-          </p>
-          <button
-            onClick={() => setBookingOpen(true)}
-            className="bg-foreground text-background px-8 py-4 text-sm font-medium tracking-wider hover:opacity-90 transition-opacity rounded-lg"
+      <section className="py-16 lg:py-20 bg-gray-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true }}
           >
-            BOOK A CONSULTATION
-          </button>
+            <h2 className="text-4xl lg:text-5xl font-light mb-8">
+              Ready to meet your Clinician in Person?
+            </h2>
+            <p className="text-gray-300 text-xl max-w-3xl mx-auto mb-12">
+              Schedule a consultation with one of our specialists to discuss
+              your Skin & Hair goals and develop a personalized treatment plan.
+            </p>
+            <button
+              onClick={() => setBookingOpen(true)}
+              className="bg-white text-gray-800 px-8 py-4 text-sm font-medium tracking-wider hover:bg-gray-100 transition-colors rounded-lg"
+            >
+              BOOK A CONSULTATION
+            </button>
+          </motion.div>
         </div>
       </section>
     </div>

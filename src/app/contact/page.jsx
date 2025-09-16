@@ -61,7 +61,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-16 max-w-4xl">
+      <div className="container mx-auto px-4 py-16 max-w-4xl mt-4">
         {/* Header Section */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-6">

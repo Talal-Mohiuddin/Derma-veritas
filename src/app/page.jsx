@@ -56,21 +56,21 @@ export default function Home() {
 
   const conditions = [
     { name: "Sagging Skin", path: "/treatments/endolift" },
-    { name: "Double Chin", path: "/menu/injectables/fat-dissolving-injections" },
+    { name: "Double Chin", path: "/menu/injectables/dermal-fillers" },
     { name: "Eye Bags", path: "/treatments/prp-therapy" },
     { name: "Acne Scars", path: "/treatments/co2" },
     { name: "Stretch Marks", path: "/treatments/microneedling" },
-    { name: "Sun Damage", path: "/treatments/co2" },
-    { name: "Open Pores", path: "/treatments/RF-Microneedling" },
+    { name: "Sun Damage", path: "/treatments/exo-nad" },
+    { name: "Open Pores", path: "/treatments/rf-microneedling" },
     { name: "Loose skin", path: "/menu/injectables/profhilo" },
     { name: "Early Aging", path: "/menu/injectables/anti-wrinkle-treatment" },
     { name: "Hair Loss", path: "/treatments/prp-therapy" },
-    { name: "Postpartum Hair Thinning", path: "/treatments/exosome-therapy" },
+    { name: "Postpartum Hair Thinning", path: "/treatments/hair-revitalizing" },
     { name: "Damaged Hair", path: "/treatments/exosignal" },
     { name: "Dark Circles", path: "/menu/injectables/tear-trough-filler" },
     { name: "Sensitive Skin", path: "/treatments/prp-therapy" },
     { name: "Dry Skin", path: "/treatments/exosome-therapy" },
-    { name: "Lip Volume Loss", path: "/menu/injectables/lip-fillers" }
+    { name: "Lip Volume Loss", path: "/menu/injectables/dermal-fillers" }
   ];
 
   return (
