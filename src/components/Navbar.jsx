@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Menu,
-  ChevronDown,
-  Gift,
-  Star,
-  Sparkles,
-  Heart,
-  ChevronRight,
-} from "lucide-react";
+import { Menu, ChevronDown, Gift, Star, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -22,15 +14,14 @@ import UserMenuDropdown from "./UserMenuDropdown";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { bookingOpen, setBookingOpen, userRole } = useStore();
+  const { bookingOpen, setBookingOpen } = useStore();
   const { user } = useAuth();
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isHoveringTreatments, setIsHoveringTreatments] = useState(false);
-  const [hoveredCategory, setHoveredCategory] = useState(null);
-  const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [isClickedTreatments, setIsClickedTreatments] = useState(false);
+  const [clickedCategory, setClickedCategory] = useState(null);
   const pathname = usePathname();
 
   // Determine if we're on home page
@@ -38,7 +29,7 @@ export default function Navbar() {
   const textColor = isHomePage ? "text-white" : "text-black";
   const iconColor = isHomePage ? "white" : "black";
 
-  // Treatment categories organized by main categories
+  // Treatment categories
   const treatmentCategories = {
     injectables: {
       title: "Injectables",
@@ -107,27 +98,12 @@ export default function Navbar() {
       .replace(/\s+/g, "-")
       .replace(/[^a-z0-9-]/g, "");
 
-  // Add scroll listener to detect scroll direction
+  // Scroll listener
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      if (currentScrollY === 0) {
-        // At top of page
-        setIsScrolled(false);
-        setIsScrollingUp(true);
-      } else {
-        setIsScrolled(true);
-        // Determine scroll direction
-        if (currentScrollY < lastScrollY) {
-          // Scrolling up
-          setIsScrollingUp(true);
-        } else if (currentScrollY > lastScrollY) {
-          // Scrolling down
-          setIsScrollingUp(false);
-        }
-      }
-
+      setIsScrolled(currentScrollY > 0);
+      setIsScrollingUp(currentScrollY < lastScrollY || currentScrollY === 0);
       setLastScrollY(currentScrollY);
     };
 
@@ -135,54 +111,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
-  // Clear timeout on unmount
+  // Close dropdown when clicking outside
   useEffect(() => {
-    return () => {
-      if (hoverTimeout) {
-        clearTimeout(hoverTimeout);
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".treatments-dropdown")) {
+        setIsClickedTreatments(false);
+        setClickedCategory(null);
       }
     };
-  }, [hoverTimeout]);
 
-  const handleTreatmentsMouseEnter = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-    }
-    setIsHoveringTreatments(true);
-  };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  const handleTreatmentsMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setIsHoveringTreatments(false);
-      setHoveredCategory(null);
-    }, 150); // Small delay to allow moving to dropdown
-    setHoverTimeout(timeout);
-  };
-
-  const handleCategoryMouseEnter = (key) => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-    }
-    setHoveredCategory(key);
-  };
-
-  const handleCategoryMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setHoveredCategory(null);
-    }, 100);
-    setHoverTimeout(timeout);
-  };
-
-  const handleDropdownMouseEnter = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
+  const handleTreatmentsClick = () => {
+    setIsClickedTreatments(!isClickedTreatments);
+    if (isClickedTreatments) {
+      setClickedCategory(null);
     }
   };
 
-  const handleNestedDropdownMouseEnter = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-    }
+  const handleCategoryClick = (key) => {
+    setClickedCategory(clickedCategory === key ? null : key);
   };
 
   const bannerMessages = [
@@ -204,9 +154,7 @@ export default function Navbar() {
     },
   ];
 
-  // Function to determine treatment based on current page
   const getCurrentTreatment = () => {
-    // Handle packages - fix the path matching
     if (
       pathname.includes("/packages/profusion") ||
       pathname === "/pacakges/profusion"
@@ -214,10 +162,8 @@ export default function Navbar() {
       return "profusion-hydrafacial";
     }
 
-    // Handle injectable treatments
     if (pathname.includes("/menu/injectables/")) {
       const treatmentSlug = pathname.split("/menu/injectables/")[1];
-      // Convert slug back to treatment name
       const treatmentMap = {
         "anti-wrinkle-treatment": "anti-wrinkle-treatment",
         "non-surgical-rhinoplasty": "non-surgical-rhinoplasty",
@@ -242,7 +188,6 @@ export default function Navbar() {
       return treatmentMap[treatmentSlug] || "";
     }
 
-    // Handle other treatment types
     if (pathname.includes("/treatments/")) {
       const treatmentSlug = pathname.split("/treatments/")[1];
       const treatmentMap = {
@@ -270,37 +215,35 @@ export default function Navbar() {
   return (
     <>
       {/* Animated Referral Program Banner */}
-      <header className="bg-gray-100 px-4 py-1 overflow-hidden fixed top-0 left-0 right-0 z-50">
+      <header className="bg-gray-100 px-4 py-0.5 overflow-hidden fixed top-0 left-0 right-0 z-50">
         <div className="flex animate-scroll whitespace-nowrap text-black">
-          {/* Repeat messages for seamless scrolling */}
           {[...bannerMessages, ...bannerMessages].map((message, index) => (
             <div
               key={index}
-              className="flex items-center justify-center min-w-fit mx-8 sm:mx-12"
+              className="flex items-center justify-center min-w-fit mx-6 sm:mx-10"
             >
               <div className="flex items-center gap-2 text-black">
                 <div className="text-black">{message.icon}</div>
-                <span className="text-black font-bold text-lg uppercase tracking-wide">
+                <span className="text-black font-bold text-base uppercase tracking-wide">
                   {message.title}
                 </span>
               </div>
               <div className="hidden sm:block ml-3">
-                <span className="text-black text-lg font-medium">
+                <span className="text-black text-base font-medium">
                   {message.content}
                 </span>
               </div>
               <Link
                 href={message.link}
-                className="ml-3 bg-black text-white px-3 py-1 rounded-full text-sm font-bold uppercase hover:bg-gray-800 transition-colors shadow-sm"
+                className="ml-2 bg-black text-white px-2.5 py-0.5 rounded-full text-xs font-bold uppercase hover:bg-gray-800 transition-colors shadow-sm"
               >
                 {message.cta}
               </Link>
-              <div className="mx-4 sm:mx-6 w-px h-4 bg-black/30"></div>
+              <div className="mx-3 sm:mx-5 w-px h-4 bg-black/30"></div>
             </div>
           ))}
         </div>
 
-        {/* Gradient overlays for smooth edges */}
         <div className="absolute left-0 top-0 w-8 h-full bg-gradient-to-r from-gray-100 to-transparent pointer-events-none"></div>
         <div className="absolute right-0 top-0 w-8 h-full bg-gradient-to-l from-gray-100 to-transparent pointer-events-none"></div>
       </header>
@@ -329,11 +272,11 @@ export default function Navbar() {
         className={`px-4 py-3 fixed left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled
             ? `bg-black/80 backdrop-blur-sm border-gray-700 ${
-                isScrollingUp ? "top-[40px]" : "-top-20"
+                isScrollingUp ? "top-[36px]" : "-top-20"
               }`
             : isHomePage
-            ? "bg-transparent border-white/20 top-[42px]"
-            : "bg-white border-gray-200 top-[42px]"
+            ? "bg-transparent border-white/20 top-[38px]"
+            : "bg-white border-gray-200 top-[38px]"
         }`}
       >
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -356,87 +299,76 @@ export default function Navbar() {
           {/* Center - Navigation Links (hidden on mobile) */}
           <div className="hidden lg:flex items-center gap-8">
             {/* Treatments Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={handleTreatmentsMouseEnter}
-              onMouseLeave={handleTreatmentsMouseLeave}
-            >
+            <div className="relative treatments-dropdown group">
               <button
+                onClick={handleTreatmentsClick}
                 className={`flex items-center gap-1 text-sm font-medium ${
                   isScrolled ? "text-white" : textColor
                 } hover:opacity-80 transition-opacity`}
               >
                 TREATMENTS
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform ${
+                    isClickedTreatments ? "rotate-180" : ""
+                  }`}
+                />
               </button>
 
               {/* Main Dropdown Menu */}
-              {isHoveringTreatments && (
-                <div 
-                  className="absolute top-full left-0 mt-2 w-64 bg-white shadow-xl rounded-md py-2 z-50"
-                  onMouseEnter={handleDropdownMouseEnter}
-                  onMouseLeave={handleTreatmentsMouseLeave}
-                >
-                  {Object.entries(treatmentCategories).map(
-                    ([key, category]) => (
-                      <div
-                        key={key}
-                        className="relative"
-                        onMouseEnter={() => handleCategoryMouseEnter(key)}
-                      >
-                        <div className="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 cursor-pointer transition-colors">
-                          <span className="font-medium text-sm">
-                            {category.title}
-                          </span>
-                          <ChevronRight className="w-4 h-4" />
-                        </div>
+              <div className="absolute top-full left-0 mt-1 w-64 bg-white shadow-xl rounded-md py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                {Object.entries(treatmentCategories).map(([key, category]) => (
+                  <div key={key} className="relative group/item">
+                    <div
+                      className="flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 cursor-pointer transition-colors"
+                      onClick={() => handleCategoryClick(key)}
+                    >
+                      <span className="font-medium text-sm">
+                        {category.title}
+                      </span>
+                      <ChevronRight className="w-4 h-4" />
+                    </div>
 
-                        {/* Nested Dropdown */}
-                        {hoveredCategory === key && (
-                          <div 
-                            className="absolute left-full top-0 ml-1 w-72 bg-white shadow-xl rounded-md py-2 z-50"
-                            onMouseEnter={handleNestedDropdownMouseEnter}
-                            onMouseLeave={handleCategoryMouseLeave}
-                          >
-                            <div className="px-4 py-2 border-b border-gray-100">
-                              <h3 className="font-bold text-gray-800 text-sm uppercase">
-                                {category.title}
-                              </h3>
-                            </div>
-                            <div className="max-h-96 overflow-y-auto">
-                              {category.treatments.map((treatment, index) => {
-                                // Handle both string and object treatments
-                                const treatmentName =
-                                  typeof treatment === "string"
-                                    ? treatment
-                                    : treatment.name;
-                                const treatmentSlug =
-                                  typeof treatment === "string"
-                                    ? slugify(treatment)
-                                    : treatment.slug;
-                                const href =
-                                  key === "injectables"
-                                    ? `/menu/injectables/${treatmentSlug}`
-                                    : `/treatments/${treatmentSlug}`;
-
-                                return (
-                                  <Link
-                                    key={`${treatmentName}-${index}`}
-                                    href={href}
-                                    className="block px-4 py-2 text-gray-600 hover:text-black hover:bg-gray-50 text-sm transition-colors"
-                                  >
-                                    {treatmentName}
-                                  </Link>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
+                    {/* Nested Dropdown */}
+                    <div className="absolute left-full top-0 ml-2 w-72 bg-white shadow-xl rounded-md py-2 z-50 opacity-0 invisible group-hover/item:opacity-100 group-hover/item:visible transition-all duration-200">
+                      <div className="px-4 py-2 border-b border-gray-100">
+                        <h3 className="font-bold text-gray-800 text-sm uppercase">
+                          {category.title}
+                        </h3>
                       </div>
-                    )
-                  )}
-                </div>
-              )}
+                      <div className="max-h-96 overflow-y-auto">
+                        {category.treatments.map((treatment, index) => {
+                          const treatmentName =
+                            typeof treatment === "string"
+                              ? treatment
+                              : treatment.name;
+                          const treatmentSlug =
+                            typeof treatment === "string"
+                              ? slugify(treatment)
+                              : treatment.slug;
+                          const href =
+                            key === "injectables"
+                              ? `/menu/injectables/${treatmentSlug}`
+                              : `/treatments/${treatmentSlug}`;
+
+                          return (
+                            <Link
+                              key={`${treatmentName}-${index}`}
+                              href={href}
+                              className="block px-4 py-2 text-gray-600 hover:text-black hover:bg-gray-50 text-sm transition-colors"
+                              onClick={() => {
+                                setIsClickedTreatments(false);
+                                setClickedCategory(null);
+                              }}
+                            >
+                              {treatmentName}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Other Navigation Links */}
@@ -461,7 +393,6 @@ export default function Navbar() {
 
           {/* Right - Buttons */}
           <div className="flex items-center gap-3 sm:gap-4">
-            {/* Book Consultation Button - hidden on mobile */}
             <div className="hidden md:block">
               <button
                 onClick={() => setBookingOpen(true)}
@@ -475,7 +406,6 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* MENU Button (always visible) */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 bg-transparent border-0 rounded-none hover:bg-white/10 transition-colors duration-200 md:hidden"
@@ -494,7 +424,6 @@ export default function Navbar() {
               />
             </button>
 
-            {/* User Menu Dropdown - visible on larger screens */}
             <div className="hidden sm:block">
               <UserMenuDropdown iconColor={isScrolled ? "white" : iconColor} />
             </div>
@@ -502,13 +431,11 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
       <MobileMenuDrawer
         isOpen={isMobileMenuOpen}
         setIsOpen={setIsMobileMenuOpen}
       />
 
-      {/* Clinics Modal */}
       <ClinicsModal
         isOpen={isClinicsOpen}
         onClose={() => setIsClinicsOpen(false)}
