@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import MobileMenuDrawer from "./MobileMenuDrawer";
-import ClinicsModal from "./ClinicsModal"; // import your modal
+import ClinicsModal from "./ClinicsModal";
 import { BookingModal } from "./booking-modal";
 import { useStore } from "@/store/zustand";
 import { useAuth } from "@/store/FirebaseAuthProvider";
@@ -20,12 +20,70 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isHoveringTreatments, setIsHoveringTreatments] = useState(false);
   const pathname = usePathname();
 
   // Determine if we're on home page
   const isHomePage = pathname === "/";
   const textColor = isHomePage ? "text-white" : "text-black";
   const iconColor = isHomePage ? "white" : "black";
+
+  // Treatment categories (fixed duplicate "Anti-Wrinkle Treatment")
+  const injectablesLinks = [
+    "Anti-Wrinkle Treatment",
+    "Non Surgical Rhinoplasty",
+    "8 Point Facelift",
+    "NCTF Skin Revitalisation",
+    "HArmonyCa Dermal Filler",
+    "Dermal Fillers",
+    "Lip Fillers",
+    "Chin Fillers",
+    "Tear Trough Filler",
+    "Cheek Fillers",
+    "Profhilo",
+    "Fat Dissolving Injections",
+    "Hand Rejuvenation",
+    "Polynucleotides Hair Loss Treatment",
+    "Polynucleotides Skin Rejuvenation Treatment",
+    "Skin Boosters",
+    "Skinfill™ Bacio",
+  ];
+
+  const skincareLinks = [
+    { name: "Chemical Peels", slug: "chemical-peels" },
+    { name: "Microneedling", slug: "microneedling" },
+    { name: "RF Microneedling", slug: "rf-microneedling" },
+    { name: "Co2 Laser", slug: "co2" },
+    { name: "Polynucleotide", slug: "polynucleotide" },
+    { name: "Endolift", slug: "endolift" },
+    { name: "EXO–NAD Skin Longevity Peeling", slug: "exo-nad" },
+    { name: "Prescription Skincare", slug: "prescriptionskincare" },
+  ];
+
+  const wellnessLinks = [
+    { name: "Exosome Therapy", slug: "exosome-therapy" },
+    { name: "PRP Therapy", slug: "prp-therapy" },
+    { name: "V-Hacker", slug: "v-hacker" },
+    { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
+    { name: "Weight Loss", slug: "weightloss" },
+  ];
+
+  const laserLinks = [
+    { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
+    { name: "Ablative", slug: "ablative" },
+  ];
+
+  const hairLinks = [
+    { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
+    { name: "ExoSignal™ Hair", slug: "exosignal" },
+    { name: "Prescription Hair", slug: "prescriptionhair" },
+  ];
+
+  const slugify = (str) =>
+    str
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
 
   // Add scroll listener to detect scroll direction
   useEffect(() => {
@@ -108,7 +166,6 @@ export default function Navbar() {
           "polynucleotides-skin-rejuvenation-treatment",
         "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
         "skin-boosters": "profhilo",
-
         "skinfill-bacio": "skinfill-bacio",
       };
       return treatmentMap[treatmentSlug] || "";
@@ -129,7 +186,6 @@ export default function Navbar() {
         endolift: "endolift",
         "prp-therapy": "iv-drips",
         "quad-laser-hair-removal": "quad-laser-hair-removal",
-
         "exo-nad": "exo",
         "v-hacker": "v-hacker",
         "hair-revitalizing": "revitalizing",
@@ -225,6 +281,133 @@ export default function Navbar() {
               height={90}
               priority
             />
+          </div>
+
+          {/* Center - Navigation Links (hidden on mobile) */}
+          <div className="hidden lg:flex items-center gap-8">
+            {/* Treatments Dropdown */}
+            <div 
+              className="relative group"
+              onMouseEnter={() => setIsHoveringTreatments(true)}
+              onMouseLeave={() => setIsHoveringTreatments(false)}
+            >
+              <button
+                className={`flex items-center gap-1 text-sm font-medium ${
+                  isScrolled ? "text-white" : textColor
+                } hover:opacity-80 transition-opacity`}
+              >
+                TREATMENTS
+                <ChevronDown className="w-4 h-4" />
+              </button>
+
+              {/* Mega Dropdown Menu */}
+              {isHoveringTreatments && (
+                <div className="absolute top-full left-0 mt-2 w-max bg-white shadow-xl rounded-md p-6 grid grid-cols-3 gap-8 z-50">
+                  {/* Injectables Column */}
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
+                      Injectables
+                    </h3>
+                    <div className="space-y-2">
+                      {injectablesLinks.map((treatment, index) => (
+                        <Link
+                          key={`${treatment}-${index}`}
+                          href={`/menu/injectables/${slugify(treatment)}`}
+                          className="block text-gray-600 hover:text-black text-sm transition-colors"
+                        >
+                          {treatment}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Skincare & Wellness Column */}
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
+                      Skincare
+                    </h3>
+                    <div className="space-y-2 mb-6">
+                      {skincareLinks.map((treatment) => (
+                        <Link
+                          key={treatment.slug}
+                          href={`/treatments/${treatment.slug}`}
+                          className="block text-gray-600 hover:text-black text-sm transition-colors"
+                        >
+                          {treatment.name}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
+                      Wellness
+                    </h3>
+                    <div className="space-y-2">
+                      {wellnessLinks.map((treatment) => (
+                        <Link
+                          key={treatment.slug}
+                          href={`/treatments/${treatment.slug}`}
+                          className="block text-gray-600 hover:text-black text-sm transition-colors"
+                        >
+                          {treatment.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Laser & Hair Column */}
+                  <div>
+                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
+                      Laser Treatments
+                    </h3>
+                    <div className="space-y-2 mb-6">
+                      {laserLinks.map((treatment) => (
+                        <Link
+                          key={treatment.slug}
+                          href={`/treatments/${treatment.slug}`}
+                          className="block text-gray-600 hover:text-black text-sm transition-colors"
+                        >
+                          {treatment.name}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <h3 className="font-bold text-gray-800 mb-3 uppercase text-sm">
+                      Hair Treatments
+                    </h3>
+                    <div className="space-y-2">
+                      {hairLinks.map((treatment) => (
+                        <Link
+                          key={treatment.slug}
+                          href={`/treatments/${treatment.slug}`}
+                          className="block text-gray-600 hover:text-black text-sm transition-colors"
+                        >
+                          {treatment.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Other Navigation Links */}
+            {[
+              { name: "PACKAGES", href: "/pacakges" },
+              { name: "DV MEMBERSHIP", href: "/pacakges/membership" },
+              { name: "SHOP", href: "/shop" },
+              { name: "ABOUT US", href: "/about" },
+              { name: "CONTACT", href: "/contact" },
+            ].map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`text-sm font-medium ${
+                  isScrolled ? "text-white" : textColor
+                } hover:opacity-80 transition-opacity`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
 
           {/* Right - Buttons */}

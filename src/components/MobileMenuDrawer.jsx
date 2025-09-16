@@ -150,6 +150,10 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
         "v-hacker": "v-hacker",
         "hair-revitalizing": "revitalizing",
         exosignal: "exosignal",
+        ablative: "ablative",
+        prescriptionskincare: "prescriptionskincare",
+        prescriptionhair: "prescriptionhair",
+        weightloss: "weightloss",
       };
       return treatmentMap[treatmentSlug] || "";
     }
@@ -187,6 +191,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     { name: "Polynucleotide", slug: "polynucleotide" },
     { name: "Endolift", slug: "endolift" },
     { name: "EXO–NAD Skin Longevity Peeling", slug: "exo-nad" },
+    { name: "Prescription Skincare", slug: "prescriptionskincare" }, // Added new treatment
   ];
 
   const wellnessLinks = [
@@ -194,15 +199,18 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     { name: "PRP Therapy", slug: "prp-therapy" },
     { name: "V-Hacker", slug: "v-hacker" },
     { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
+    { name: "Weight Loss", slug: "weightloss" }, // Added new treatment
   ];
 
   const laserLinks = [
     { name: "Quad Laser Hair Removal", slug: "quad-laser-hair-removal" },
+    { name: "Ablative", slug: "ablative" }, // Added new treatment
   ];
 
   const hairLinks = [
     { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
     { name: "ExoSignal™ Hair", slug: "exosignal" },
+    { name: "Prescription Hair", slug: "prescriptionhair" }, // Added new treatment
   ];
 
   const facialConcernsLinks = [
