@@ -9,7 +9,6 @@ import { useState, useRef } from "react";
 import BeforeAfterSection from "@/components/before-after-section";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
-import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -29,8 +28,9 @@ export default function GummySmileTreatmentSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
   // Create a ref for the pricing section
-const beforeAfterSectionRef = useRef(null);
-  const pricingSectionRef = useRef(null);  const { bookingOpen, setBookingOpen } = useStore();
+  const beforeAfterSectionRef = useRef(null);
+  const pricingSectionRef = useRef(null);
+  const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
     {
@@ -112,7 +112,7 @@ const beforeAfterSectionRef = useRef(null);
     }
   };
 
-   const scrollToBeforeAfter = () => {
+  const scrollToBeforeAfter = () => {
     if (beforeAfterSectionRef.current) {
       beforeAfterSectionRef.current.scrollIntoView({
         behavior: "smooth",
@@ -164,7 +164,7 @@ const beforeAfterSectionRef = useRef(null);
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
                 {/* VIEW RESULTS */}
-               <button 
+                <button
                   onClick={scrollToBeforeAfter}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
                 >
@@ -431,12 +431,9 @@ const beforeAfterSectionRef = useRef(null);
         </div>
       </section>
 
-      <BotoxSection />
-
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />
       </div>
-       
 
       <ConsultationSection />
 

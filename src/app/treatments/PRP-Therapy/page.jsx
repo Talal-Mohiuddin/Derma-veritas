@@ -22,7 +22,6 @@ import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
 import MobileMenuDrawer from "@/components/MobileMenuDrawer";
-import BotoxSection from "@/components/BotoxSection";
 import {
   Eye,
   CheckCircle,
@@ -429,8 +428,6 @@ export default function PRPTherapySection() {
           </div>
         </div>
       </section>
-
-      <BotoxSection />
 
       <div ref={beforeAfterSectionRef}>
         <BeforeAfterSection />

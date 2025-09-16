@@ -157,7 +157,7 @@ export default function CO2ResurfacingTreatmentSection() {
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                CO₂ Laser
+                Ablative CO₂ Laser
                 <br />
                 Resurfacing for
                 <br />
@@ -166,7 +166,9 @@ export default function CO2ResurfacingTreatmentSection() {
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Transform your skin with our advanced Ablative CO₂ Resurfacing treatment, designed to improve texture, tone, and overall complexion for fresher, healthier-looking skin.
+                Transform your skin with our advanced Ablative CO₂ Resurfacing
+                treatment, designed to improve texture, tone, and overall
+                complexion for fresher, healthier-looking skin.
               </p>
 
               {/* Buttons */}
@@ -348,9 +350,10 @@ export default function CO2ResurfacingTreatmentSection() {
               What is Ablative CO₂ Resurfacing?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Ablative CO₂ Resurfacing is an advanced skin rejuvenation therapy designed to improve
-              skin texture, tone, and overall complexion. By carefully resurfacing the skin, it helps
-              reduce the appearance of fine lines, wrinkles, scarring, and uneven pigmentation.
+              Ablative CO₂ Resurfacing is an advanced skin rejuvenation therapy
+              designed to improve skin texture, tone, and overall complexion. By
+              carefully resurfacing the skin, it helps reduce the appearance of
+              fine lines, wrinkles, scarring, and uneven pigmentation.
             </p>
           </div>
 
@@ -440,14 +443,14 @@ export default function CO2ResurfacingTreatmentSection() {
 
               <div className="text-gray-600 leading-relaxed space-y-4">
                 <p>
-                  Ablative CO₂ Resurfacing is a customized treatment with pricing 
-                  that varies based on the treatment area, intensity, and individual 
-                  patient needs. A consultation is required to determine the exact 
-                  treatment plan and associated costs.
+                  Ablative CO₂ Resurfacing is a customized treatment with
+                  pricing that varies based on the treatment area, intensity,
+                  and individual patient needs. A consultation is required to
+                  determine the exact treatment plan and associated costs.
                 </p>
                 <p>
-                  If you would like to discuss this treatment and get a personalized 
-                  quote, please feel free to{" "}
+                  If you would like to discuss this treatment and get a
+                  personalized quote, please feel free to{" "}
                   <button className="underline hover:text-gray-900 transition-colors">
                     get in touch
                   </button>
@@ -474,13 +477,11 @@ export default function CO2ResurfacingTreatmentSection() {
 
                 <div className="text-gray-600">
                   <p className="mb-4">
-                    During your consultation, our clinical team will assess your skin, 
-                    discuss your goals, and create a personalized treatment plan with 
-                    exact pricing.
+                    During your consultation, our clinical team will assess your
+                    skin, discuss your goals, and create a personalized
+                    treatment plan with exact pricing.
                   </p>
-                  <p>
-                    Factors affecting price include:
-                  </p>
+                  <p>Factors affecting price include:</p>
                   <ul className="list-disc pl-5 mt-2 space-y-1">
                     <li>Treatment area size</li>
                     <li>Intensity of resurfacing required</li>

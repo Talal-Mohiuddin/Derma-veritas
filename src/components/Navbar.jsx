@@ -59,7 +59,6 @@ export default function Navbar() {
         { name: "Microneedling", slug: "microneedling" },
         { name: "RF Microneedling", slug: "rf-microneedling" },
         { name: "Co2 Laser", slug: "co2" },
-        { name: "Polynucleotide", slug: "polynucleotide" },
         { name: "Endolift", slug: "endolift" },
         { name: "EXO–NAD Skin Longevity Peeling", slug: "exo-nad" },
         { name: "Prescription Skincare", slug: "prescriptionskincare" },
@@ -71,7 +70,6 @@ export default function Navbar() {
         { name: "Exosome Therapy", slug: "exosome-therapy" },
         { name: "PRP Therapy", slug: "prp-therapy" },
         { name: "V-Hacker", slug: "v-hacker" },
-        { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
         { name: "Weight Loss", slug: "weightloss" },
       ],
     },
@@ -88,6 +86,7 @@ export default function Navbar() {
         { name: "Hair+ Revitalizing", slug: "hair-revitalizing" },
         { name: "ExoSignal™ Hair", slug: "exosignal" },
         { name: "Prescription Hair", slug: "prescriptionhair" },
+        { name: "Polynucleotide Hair Treatment", slug: "polynucleotide" },
       ],
     },
   };
