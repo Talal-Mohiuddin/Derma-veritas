@@ -6,91 +6,91 @@ import { useStore } from "@/store/zustand";
 import { Star, CheckCircle, ChevronDown } from "lucide-react";
 import { useState, useRef } from "react";
 
-export default function ProFusionHydraFacialPage() {
+export default function CorrectRejuvenatePackagePage() {
   const [openIndex, setOpenIndex] = useState(null);
   const pricingSectionRef = useRef(null);
   const { setBookingOpen } = useStore();
 
   const treatmentDetails = [
     {
-      name: "Signature + RF",
-      duration: "40 min",
-      price: "£150",
-      packagePrice: "£750 for 6 sessions",
-      description: "Cleanse, exfoliate, extraction, hydration + RF tightening",
+      name: "CO₂ Fractional Laser",
+      sessions: "3 sessions",
+      description: "Scar removal, pigmentation correction, skin resurfacing",
       benefits: [
-        "Deep cleansing and exfoliation",
-        "Gentle extraction of impurities",
-        "Hydration infusion",
-        "RF tightening for firmer skin",
+        "Targeted scar reduction",
+        "Pigmentation correction",
+        "Skin texture improvement",
+        "Minimal downtime with advanced technology",
       ],
     },
     {
-      name: "Deluxe + RF",
-      duration: "50 min",
-      price: "£180",
-      packagePrice: "£900 for 6 sessions",
-      description: "Signature + custom booster serum + LED therapy + RF",
+      name: "Exosome Therapy with Microneedling",
+      sessions: "3 sessions",
+      description: "Post-laser healing and rejuvenation",
       benefits: [
-        "All Signature treatment benefits",
-        "Custom booster serum for specific concerns",
-        "LED light therapy for skin rejuvenation",
-        "Enhanced RF technology",
+        "Enhanced healing process",
+        "Stimulates collagen production",
+        "Improves skin elasticity",
+        "Reduces inflammation and redness",
       ],
     },
     {
-      name: "Platinum + RF",
-      duration: "70 min",
-      price: "£210",
-      packagePrice: "£1,050 for 6 sessions",
-      description: "Deluxe + lymphatic drainage + advanced RF lifting",
+      name: "Polynucleotide Therapy",
+      sessions: "3 sessions",
+      description: "Deep cellular regeneration",
       benefits: [
-        "All Deluxe treatment benefits",
-        "Lymphatic drainage massage",
-        "Advanced RF lifting technology",
-        "Comprehensive skin rejuvenation",
+        "Cellular repair and regeneration",
+        "Improves skin density and thickness",
+        "Enhances hydration at cellular level",
+        "Long-lasting rejuvenation effects",
       ],
     },
     {
-      name: "Elite – Cellular Repair & Lift",
-      duration: "75 min",
-      price: "£250",
-      packagePrice: "£1,250 for 6 sessions",
-      description: "Platinum + enhanced serums + deep RF collagen stimulation",
+      name: "3 Area Neuro-Modulator Treatment",
+      sessions: "Included in package",
+      description: "Smooths fine lines and wrinkles",
       benefits: [
-        "All Platinum treatment benefits",
-        "Enhanced specialized serums",
-        "Deep RF collagen stimulation",
-        "Cellular repair and lifting",
+        "Reduces appearance of dynamic wrinkles",
+        "Preventative aging treatment",
+        "Non-surgical facial enhancement",
+        "Natural-looking results",
       ],
     },
   ];
 
+  const packageInclusions = [
+    "AI-Based Facial Mapping & Progress Tracking",
+    "Personalized treatment plan",
+    "Post-treatment care products",
+    "Dedicated skincare specialist",
+    "Follow-up consultations",
+  ];
+
   const faqs = [
     {
-      question: "What is ProFusion HydraFacial?",
+      question: "Who is the Correct & Rejuvenate package ideal for?",
       answer:
-        "ProFusion HydraFacial is an advanced skin rejuvenation treatment using state-of-the-art devices that combine cutting-edge technology with clinical expertise. It uses specialized serums, creams, and boosters to target unique skin concerns with remarkable results.",
+        "This package is perfect for those with acne scars, pigmentation issues, uneven texture, and general skin damage. It's designed for clients seeking advanced skin repair with visible transformation.",
     },
     {
-      question: "How often should I get a ProFusion HydraFacial?",
+      question: "How long does the complete package take?",
       answer:
-        "For optimal results, we recommend starting with a series of treatments spaced 4-6 weeks apart. Many clients then transition to maintenance treatments every 8-12 weeks depending on their skin goals and concerns.",
+        "The full package is designed to be completed over 8-12 weeks, with treatments spaced appropriately for optimal healing and results. Your specialist will create a customized timeline during your consultation.",
     },
     {
-      question: "Is there any downtime after the treatment?",
+      question: "Is there any downtime with these treatments?",
       answer:
-        "There is minimal to no downtime with ProFusion HydraFacial. You may experience slight redness immediately after the treatment, but this typically subsides within a few hours. You can resume normal activities immediately after your session.",
+        "Some treatments like CO₂ Fractional Laser may have a few days of downtime with redness and peeling. Other treatments have minimal downtime. We'll schedule your sessions to minimize disruption to your routine.",
     },
     {
-      question: "Who is a good candidate for ProFusion HydraFacial?",
+      question: "What results can I expect?",
       answer:
-        "Almost anyone can benefit from ProFusion HydraFacial treatments. They are suitable for all skin types and address various concerns including fine lines, wrinkles, hyperpigmentation, congested pores, oily skin, and dull complexion.",
+        "You can expect significant improvement in skin texture, reduction in scars and pigmentation, more even skin tone, and overall rejuvenation. Results are cumulative and improve over time as the treatments work synergistically.",
     },
     {
-      question: "Can I combine ProFusion HydraFacial with other treatments?",
+      question: "Can I purchase individual treatments instead of the package?",
       answer:
-        "Yes, ProFusion HydraFacial can be effectively combined with other treatments for enhanced results. Our experts will create a customized treatment plan based on your skin goals during your consultation.",
+        "While we recommend the complete package for optimal results, individual treatments are available. However, the package offers better value and is specifically designed for comprehensive correction and rejuvenation.",
     },
   ];
 
@@ -115,22 +115,21 @@ export default function ProFusionHydraFacialPage() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Advanced Skin Rejuvenation
+                  Advanced Skin Correction
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                ProFusion HydraFacial
+                Correct & Rejuvenate
                 <br />
-                Treatment Packages
+                Treatment Package
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Ultimate skin rejuvenation using state-of-the-art ProFusion
-                devices that combine cutting-edge technology with clinical
-                expertise.
+                Advanced skin repair for visible transformation. Perfect for acne scars,
+                pigmentation, uneven texture, and skin damage.
               </p>
 
               {/* Buttons */}
@@ -146,7 +145,7 @@ export default function ProFusionHydraFacialPage() {
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
-                  VIEW PACKAGES
+                  VIEW PACKAGE DETAILS
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
               </div>
@@ -156,11 +155,10 @@ export default function ProFusionHydraFacialPage() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/pacakage\Pro-Fusion.jpg"
-                  alt="Professional HydraFacial treatment being administered"
+                  src="/pacakage/Correct & Rejuvenate.jpg"
+                  alt="Correct and Rejuvenate skin treatment"
                   className="w-full h-full object-cover"
                 />
-
                 {/* Review Badge */}
                 <div className="absolute bottom-6 right-6 bg-white rounded-full px-4 py-3 shadow-lg flex items-center gap-2">
                   <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center">
@@ -189,70 +187,69 @@ export default function ProFusionHydraFacialPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What is ProFusion HydraFacial?
+              About the Correct & Rejuvenate Package
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              ProFusion HydraFacial represents the pinnacle of skin rejuvenation
-              technology. Our state-of-the-art devices combine cutting-edge
-              technology with clinical expertise, using specialized serums,
-              creams, and boosters that target your unique skin concerns for
-              remarkable results.
+              Our Correct & Rejuvenate package combines advanced technologies to address
+              stubborn skin concerns like acne scars, pigmentation, and texture issues.
+              This comprehensive approach delivers visible transformation through a
+              synergistic combination of laser treatments, cellular therapy, and injectables.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Key Benefits:
+                Ideal For:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Deep cleansing and hydration
+                  Acne scarring and post-inflammatory hyperpigmentation
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Exfoliation and extraction without irritation
+                  Sun damage and age spots
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  RF technology for skin tightening
+                  Uneven skin texture and tone
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Customizable for specific skin concerns
+                  Loss of skin elasticity and firmness
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Immediate results with no downtime
+                  Fine lines and wrinkles
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our ProFusion Treatment:
+                Why This Package Works:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Latest technology with advanced RF capabilities
+                  Combines multiple advanced technologies for comprehensive results
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Performed by certified skincare specialists
+                  Treatments work synergistically to enhance each other's effects
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized treatment plans for your skin type
+                  AI-based tracking ensures optimal progress and adjustments
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Medical-grade products and equipment
+                  Medical-grade products and cutting-edge equipment
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Luxurious experience with exceptional results
+                  Customized to your specific skin concerns and goals
                 </li>
               </ul>
             </div>
@@ -269,65 +266,69 @@ export default function ProFusionHydraFacialPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              ProFusion HydraFacial Packages
+              Correct & Rejuvenate Package
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Choose from our range of specialized treatments designed to
-              address various skin concerns with our advanced ProFusion
-              technology.
+              Comprehensive transformation package combining advanced technologies for
+              scar revision, pigmentation correction, and skin rejuvenation.
             </p>
+
+            <div className="mt-8 bg-white p-6 rounded-lg shadow-md inline-block">
+              <h3 className="text-2xl font-bold text-gray-900">Package Price: £1,950 + VAT</h3>
+              <p className="text-gray-600 mt-2">Complete 8-12 week transformation program</p>
+            </div>
           </div>
 
-          <div className="grid md:grid-cols-4  gap-6">
-            {treatmentDetails.map((treatment, index) => (
-              <Card
-                key={index}
-                className="p-8 border-gray-200 hover:shadow-lg transition-shadow relative h-full flex flex-col"
-              >
-                <div className="text-center flex-1">
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-                    {treatment.name}
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {treatment.description}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Treatment Components:</h3>
+              <div className="space-y-6">
+                {treatmentDetails.map((treatment, index) => (
+                  <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                    <h4 className="text-lg font-semibold text-gray-900">{treatment.name}</h4>
+                    <p className="text-gray-600 text-sm mb-2">{treatment.sessions}</p>
+                    <p className="text-gray-700 mb-3">{treatment.description}</p>
+                    <ul className="space-y-2">
+                      {treatment.benefits.map((benefit, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                          <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                          {benefit}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Package Inclusions:</h3>
+              <Card className="p-6 h-full">
+                <ul className="space-y-4">
+                  {packageInclusions.map((inclusion, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700">{inclusion}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+                  <h4 className="font-semibold text-gray-900 mb-2">Package Value:</h4>
+                  <p className="text-gray-600 text-sm">
+                    Purchasing these treatments individually would cost over £2,600.
+                    Save more than 25% with our comprehensive package pricing.
                   </p>
-
-                  <div className="space-y-3 mb-8 text-left">
-                    {treatment.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-600" />
-                        <span className="text-gray-700 text-sm">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Single Session:</span>
-                      <span className="text-lg font-bold text-gray-900">
-                        {treatment.price}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Package of 6:</span>
-                      <span className="text-lg font-bold text-gray-900">
-                        {treatment.packagePrice}
-                      </span>
-                    </div>
-                    <div className="text-center text-sm text-gray-600 mt-2">
-                      {treatment.duration}
-                    </div>
-                  </div>
                 </div>
 
                 <Button
-                  className="w-full bg-gray-800 hover:bg-gray-900 text-white mt-auto"
+                  className="w-full bg-gray-800 hover:bg-gray-900 text-white mt-6 py-6 text-lg"
                   onClick={() => setBookingOpen(true)}
                 >
-                  BOOK NOW
+                  BOOK CONSULTATION
                 </Button>
               </Card>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -349,18 +350,16 @@ export default function ProFusionHydraFacialPage() {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                }`}
+                  }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

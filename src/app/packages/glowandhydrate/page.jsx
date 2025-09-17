@@ -13,84 +13,51 @@ export default function ProFusionHydraFacialPage() {
 
   const treatmentDetails = [
     {
-      name: "Signature + RF",
-      duration: "40 min",
-      price: "£150",
-      packagePrice: "£750 for 6 sessions",
-      description: "Cleanse, exfoliate, extraction, hydration + RF tightening",
+      name: "Glow & Hydrate Package",
+      duration: "10-12 week program",
+      price: "£1,100 + VAT",
+      packagePrice: "Complete transformation program",
+      description: "Perfect for dull, dry, or tired-looking skin",
       benefits: [
-        "Deep cleansing and exfoliation",
-        "Gentle extraction of impurities",
-        "Hydration infusion",
-        "RF tightening for firmer skin",
+        "1x Facial Analysis - Personalized assessment for your unique skin needs",
+        "3x ProFusion HydraFacial - Deep cleansing, hydration, and RF lifting",
+        "3x PRP Facial Rejuvenation - Boosts collagen, restores glow and texture",
+        "3x Polynucleotide Therapy - Regenerates cells and enhances elasticity",
+        "Complimentary Skincare Mini Kit - Maintain your results at home",
       ],
-    },
-    {
-      name: "Deluxe + RF",
-      duration: "50 min",
-      price: "£180",
-      packagePrice: "£900 for 6 sessions",
-      description: "Signature + custom booster serum + LED therapy + RF",
-      benefits: [
-        "All Signature treatment benefits",
-        "Custom booster serum for specific concerns",
-        "LED light therapy for skin rejuvenation",
-        "Enhanced RF technology",
-      ],
-    },
-    {
-      name: "Platinum + RF",
-      duration: "70 min",
-      price: "£210",
-      packagePrice: "£1,050 for 6 sessions",
-      description: "Deluxe + lymphatic drainage + advanced RF lifting",
-      benefits: [
-        "All Deluxe treatment benefits",
-        "Lymphatic drainage massage",
-        "Advanced RF lifting technology",
-        "Comprehensive skin rejuvenation",
-      ],
-    },
-    {
-      name: "Elite – Cellular Repair & Lift",
-      duration: "75 min",
-      price: "£250",
-      packagePrice: "£1,250 for 6 sessions",
-      description: "Platinum + enhanced serums + deep RF collagen stimulation",
-      benefits: [
-        "All Platinum treatment benefits",
-        "Enhanced specialized serums",
-        "Deep RF collagen stimulation",
-        "Cellular repair and lifting",
-      ],
-    },
+      idealFor: [
+        "Restores natural radiance and hydration",
+        "Non-invasive, safe, and clinically tailored",
+        "Perfect starting point for rejuvenation"
+      ]
+    }
   ];
 
   const faqs = [
     {
-      question: "What is ProFusion HydraFacial?",
+      question: "What is the Glow & Hydrate Package?",
       answer:
-        "ProFusion HydraFacial is an advanced skin rejuvenation treatment using state-of-the-art devices that combine cutting-edge technology with clinical expertise. It uses specialized serums, creams, and boosters to target unique skin concerns with remarkable results.",
+        "The Glow & Hydrate Package is a comprehensive 10-12 week skin transformation program designed specifically for dull, dry, or tired-looking skin. It combines multiple advanced treatments including ProFusion HydraFacial, PRP Facial Rejuvenation, and Polynucleotide Therapy for optimal results.",
     },
     {
-      question: "How often should I get a ProFusion HydraFacial?",
+      question: "How long does the program take?",
       answer:
-        "For optimal results, we recommend starting with a series of treatments spaced 4-6 weeks apart. Many clients then transition to maintenance treatments every 8-12 weeks depending on their skin goals and concerns.",
+        "The complete Glow & Hydrate program spans 10-12 weeks with treatments scheduled at optimal intervals to maximize results. This includes a facial analysis session, 3 ProFusion HydraFacial treatments, 3 PRP Facial Rejuvenation sessions, and 3 Polynucleotide Therapy treatments.",
     },
     {
-      question: "Is there any downtime after the treatment?",
+      question: "Is there any downtime after the treatments?",
       answer:
-        "There is minimal to no downtime with ProFusion HydraFacial. You may experience slight redness immediately after the treatment, but this typically subsides within a few hours. You can resume normal activities immediately after your session.",
+        "There is minimal to no downtime with the treatments in this package. You may experience slight redness immediately after some sessions, but this typically subsides within a few hours. You can resume normal activities immediately after your sessions.",
     },
     {
-      question: "Who is a good candidate for ProFusion HydraFacial?",
+      question: "Who is a good candidate for this package?",
       answer:
-        "Almost anyone can benefit from ProFusion HydraFacial treatments. They are suitable for all skin types and address various concerns including fine lines, wrinkles, hyperpigmentation, congested pores, oily skin, and dull complexion.",
+        "This package is ideal for anyone with dull, dry, or tired-looking skin seeking comprehensive rejuvenation. It's perfect as a starting point for those new to advanced skincare treatments or anyone looking to restore natural radiance and hydration to their skin.",
     },
     {
-      question: "Can I combine ProFusion HydraFacial with other treatments?",
+      question: "What results can I expect?",
       answer:
-        "Yes, ProFusion HydraFacial can be effectively combined with other treatments for enhanced results. Our experts will create a customized treatment plan based on your skin goals during your consultation.",
+        "You can expect restored natural radiance and hydration, improved skin texture, enhanced elasticity, and a more youthful appearance. The package is clinically tailored to provide safe, non-invasive rejuvenation with noticeable results that develop over the course of the program.",
     },
   ];
 
@@ -115,22 +82,21 @@ export default function ProFusionHydraFacialPage() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Advanced Skin Rejuvenation
+                  Complete Skin Transformation
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                ProFusion HydraFacial
+                Glow & Hydrate
                 <br />
-                Treatment Packages
+                Package
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Ultimate skin rejuvenation using state-of-the-art ProFusion
-                devices that combine cutting-edge technology with clinical
-                expertise.
+                A comprehensive 10-12 week program designed to restore natural radiance 
+                and hydration to dull, dry, or tired-looking skin.
               </p>
 
               {/* Buttons */}
@@ -141,12 +107,12 @@ export default function ProFusionHydraFacialPage() {
                   <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
 
-                {/* VIEW PACKAGES - Updated to call scrollToPricing */}
+                {/* VIEW PACKAGE - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
-                  VIEW PACKAGES
+                  VIEW PACKAGE
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
               </div>
@@ -156,7 +122,7 @@ export default function ProFusionHydraFacialPage() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/pacakage\Pro-Fusion.jpg"
+                  src="/images/hydrafacial-treatment.png"
                   alt="Professional HydraFacial treatment being administered"
                   className="w-full h-full object-cover"
                 />
@@ -189,70 +155,69 @@ export default function ProFusionHydraFacialPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What is ProFusion HydraFacial?
+              What is the Glow & Hydrate Package?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              ProFusion HydraFacial represents the pinnacle of skin rejuvenation
-              technology. Our state-of-the-art devices combine cutting-edge
-              technology with clinical expertise, using specialized serums,
-              creams, and boosters that target your unique skin concerns for
-              remarkable results.
+              The Glow & Hydrate Package is a comprehensive 10-12 week skin transformation 
+              program specifically designed for dull, dry, or tired-looking skin. This 
+              clinically tailored program combines multiple advanced treatments to restore 
+              your skin's natural radiance and hydration.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Key Benefits:
+                Included Treatments:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Deep cleansing and hydration
+                  Facial Analysis - Personalized assessment for your unique skin needs
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Exfoliation and extraction without irritation
+                  ProFusion HydraFacial - Deep cleansing, hydration, and RF lifting
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  RF technology for skin tightening
+                  PRP Facial Rejuvenation - Boosts collagen, restores glow and texture
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Customizable for specific skin concerns
+                  Polynucleotide Therapy - Regenerates cells and enhances elasticity
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Immediate results with no downtime
+                  Complimentary Skincare Mini Kit to maintain results at home
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our ProFusion Treatment:
+                Why This Package is Ideal:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Latest technology with advanced RF capabilities
+                  Restores natural radiance and hydration
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Performed by certified skincare specialists
+                  Non-invasive, safe, and clinically tailored
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized treatment plans for your skin type
+                  Perfect starting point for rejuvenation
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Medical-grade products and equipment
+                  Comprehensive approach combining multiple advanced treatments
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Luxurious experience with exceptional results
+                  Includes at-home maintenance products for lasting results
                 </li>
               </ul>
             </div>
@@ -269,16 +234,15 @@ export default function ProFusionHydraFacialPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              ProFusion HydraFacial Packages
+              Glow & Hydrate Package
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Choose from our range of specialized treatments designed to
-              address various skin concerns with our advanced ProFusion
-              technology.
+              A complete 10-12 week transformation program designed specifically 
+              for dull, dry, or tired-looking skin.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4  gap-6">
+          <div className="grid md:grid-cols-1 gap-6 max-w-2xl mx-auto">
             {treatmentDetails.map((treatment, index) => (
               <Card
                 key={index}
@@ -303,28 +267,36 @@ export default function ProFusionHydraFacialPage() {
 
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Single Session:</span>
+                      <span className="text-gray-700">Program Price:</span>
                       <span className="text-lg font-bold text-gray-900">
                         {treatment.price}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Package of 6:</span>
+                      <span className="text-gray-700">Duration:</span>
                       <span className="text-lg font-bold text-gray-900">
-                        {treatment.packagePrice}
+                        {treatment.duration}
                       </span>
                     </div>
-                    <div className="text-center text-sm text-gray-600 mt-2">
-                      {treatment.duration}
-                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-4 rounded-lg mt-6 text-left">
+                    <h4 className="font-semibold text-blue-800 mb-2">Why this package is ideal:</h4>
+                    <ul className="text-blue-700 text-sm">
+                      {treatment.idealFor.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 mb-1">
+                          <span>•</span> {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 
                 <Button
-                  className="w-full bg-gray-800 hover:bg-gray-900 text-white mt-auto"
+                  className="w-full bg-gray-800 hover:bg-gray-900 text-white mt-6"
                   onClick={() => setBookingOpen(true)}
                 >
-                  BOOK NOW
+                  BOOK CONSULTATION
                 </Button>
               </Card>
             ))}

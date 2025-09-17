@@ -13,84 +13,46 @@ export default function ProFusionHydraFacialPage() {
 
   const treatmentDetails = [
     {
-      name: "Signature + RF",
-      duration: "40 min",
-      price: "£150",
-      packagePrice: "£750 for 6 sessions",
-      description: "Cleanse, exfoliate, extraction, hydration + RF tightening",
+      name: "Lift & Reshape",
+      duration: "10-12 week program",
+      price: "£2,500 + VAT",
+      packagePrice: "Complete package",
+      description: "Non-surgical face lifting and contouring for early signs of aging",
       benefits: [
-        "Deep cleansing and exfoliation",
-        "Gentle extraction of impurities",
-        "Hydration infusion",
-        "RF tightening for firmer skin",
-      ],
-    },
-    {
-      name: "Deluxe + RF",
-      duration: "50 min",
-      price: "£180",
-      packagePrice: "£900 for 6 sessions",
-      description: "Signature + custom booster serum + LED therapy + RF",
-      benefits: [
-        "All Signature treatment benefits",
-        "Custom booster serum for specific concerns",
-        "LED light therapy for skin rejuvenation",
-        "Enhanced RF technology",
-      ],
-    },
-    {
-      name: "Platinum + RF",
-      duration: "70 min",
-      price: "£210",
-      packagePrice: "£1,050 for 6 sessions",
-      description: "Deluxe + lymphatic drainage + advanced RF lifting",
-      benefits: [
-        "All Deluxe treatment benefits",
-        "Lymphatic drainage massage",
-        "Advanced RF lifting technology",
-        "Comprehensive skin rejuvenation",
-      ],
-    },
-    {
-      name: "Elite – Cellular Repair & Lift",
-      duration: "75 min",
-      price: "£250",
-      packagePrice: "£1,250 for 6 sessions",
-      description: "Platinum + enhanced serums + deep RF collagen stimulation",
-      benefits: [
-        "All Platinum treatment benefits",
-        "Enhanced specialized serums",
-        "Deep RF collagen stimulation",
-        "Cellular repair and lifting",
+        "1x Endolift Treatment – Non-surgical face lifting for jawline/cheeks",
+        "3x RF Microneedling Sessions – Stimulates collagen and tightens skin",
+        "2x Profhilo Treatments – Deep hydration and skin lifting",
+        "2 ml Dermal Filler – Enhances facial contours naturally",
+        "1x Facial Scan & Aging Report – Track progress with precision",
       ],
     },
   ];
 
   const faqs = [
     {
-      question: "What is ProFusion HydraFacial?",
+      question: "What is the Lift & Reshape package?",
       answer:
-        "ProFusion HydraFacial is an advanced skin rejuvenation treatment using state-of-the-art devices that combine cutting-edge technology with clinical expertise. It uses specialized serums, creams, and boosters to target unique skin concerns with remarkable results.",
+        "The Lift & Reshape package is a comprehensive non-surgical facial contouring program designed to address early signs of aging, sagging skin, and facial contouring needs. It combines advanced technologies including Endolift, RF Microneedling, Profhilo, and dermal fillers for natural-looking results.",
     },
     {
-      question: "How often should I get a ProFusion HydraFacial?",
+      question: "Who is the ideal candidate for this package?",
       answer:
-        "For optimal results, we recommend starting with a series of treatments spaced 4-6 weeks apart. Many clients then transition to maintenance treatments every 8-12 weeks depending on their skin goals and concerns.",
+        "This package is perfect for individuals showing early signs of aging, those experiencing mild to moderate skin sagging, or anyone looking to enhance their facial contours without surgery. It's suitable for all skin types seeking non-surgical lifting and reshaping solutions.",
     },
     {
-      question: "Is there any downtime after the treatment?",
+      question: "How long does the complete package take?",
       answer:
-        "There is minimal to no downtime with ProFusion HydraFacial. You may experience slight redness immediately after the treatment, but this typically subsides within a few hours. You can resume normal activities immediately after your session.",
+        "The complete Lift & Reshape program spans 10-12 weeks, with treatments strategically scheduled to allow for proper healing and optimal results between sessions.",
     },
     {
-      question: "Who is a good candidate for ProFusion HydraFacial?",
+      question: "Is there any downtime with these treatments?",
       answer:
-        "Almost anyone can benefit from ProFusion HydraFacial treatments. They are suitable for all skin types and address various concerns including fine lines, wrinkles, hyperpigmentation, congested pores, oily skin, and dull complexion.",
+        "Most treatments in this package have minimal downtime. You may experience slight redness or swelling after RF Microneedling or filler injections, but this typically subsides within 24-48 hours. Our specialists will provide detailed aftercare instructions.",
     },
     {
-      question: "Can I combine ProFusion HydraFacial with other treatments?",
+      question: "How long do the results last?",
       answer:
-        "Yes, ProFusion HydraFacial can be effectively combined with other treatments for enhanced results. Our experts will create a customized treatment plan based on your skin goals during your consultation.",
+        "Results vary by individual, but most clients enjoy the benefits for 12-18 months. Maintenance treatments may be recommended to prolong the results. The collagen stimulation from RF Microneedling continues to improve skin quality for several months after treatment.",
     },
   ];
 
@@ -115,22 +77,21 @@ export default function ProFusionHydraFacialPage() {
               <div className="flex items-center justify-center md:justify-start gap-3 mb-6">
                 <div className="w-12 h-px bg-gray-400"></div>
                 <span className="text-gray-600 text-sm font-medium tracking-wide">
-                  Advanced Skin Rejuvenation
+                  Non-Surgical Facial Contouring
                 </span>
               </div>
 
               {/* Main Heading */}
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                ProFusion HydraFacial
+                Lift & Reshape
                 <br />
-                Treatment Packages
+                Treatment Package
               </h2>
 
               {/* Description */}
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-xl mx-auto md:mx-0 mt-6">
-                Ultimate skin rejuvenation using state-of-the-art ProFusion
-                devices that combine cutting-edge technology with clinical
-                expertise.
+                A comprehensive non-surgical solution for early signs of aging,
+                sagging skin, and facial contouring needs with lasting results.
               </p>
 
               {/* Buttons */}
@@ -146,7 +107,7 @@ export default function ProFusionHydraFacialPage() {
                   onClick={scrollToPricing}
                   className="relative px-8 py-4 text-sm font-bold uppercase text-[#272728] bg-white border-2 border-[#272728] rounded-lg tracking-wider hover:bg-[#272728] hover:text-white transition-colors"
                 >
-                  VIEW PACKAGES
+                  VIEW PACKAGE
                   <span className="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
                 </button>
               </div>
@@ -156,8 +117,8 @@ export default function ProFusionHydraFacialPage() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/pacakage\Pro-Fusion.jpg"
-                  alt="Professional HydraFacial treatment being administered"
+                  src="/pacakage\Lift & Reshape.jpg"
+                  alt="Non-surgical face lifting treatment"
                   className="w-full h-full object-cover"
                 />
 
@@ -189,14 +150,14 @@ export default function ProFusionHydraFacialPage() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              What is ProFusion HydraFacial?
+              What is the Lift & Reshape Package?
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed">
-              ProFusion HydraFacial represents the pinnacle of skin rejuvenation
-              technology. Our state-of-the-art devices combine cutting-edge
-              technology with clinical expertise, using specialized serums,
-              creams, and boosters that target your unique skin concerns for
-              remarkable results.
+              Our Lift & Reshape package is a comprehensive non-surgical solution designed to
+              address early signs of aging, sagging skin, and facial contouring needs. This
+              expertly curated program combines cutting-edge technologies including Endolift,
+              RF Microneedling, Profhilo, and dermal fillers to deliver natural-looking lifting
+              and reshaping results without surgery.
             </p>
           </div>
 
@@ -208,51 +169,51 @@ export default function ProFusionHydraFacialPage() {
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Deep cleansing and hydration
+                  Non-surgical face lifting and natural reshaping
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Exfoliation and extraction without irritation
+                  Improved firmness, elasticity, and facial symmetry
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  RF technology for skin tightening
+                  Combines advanced technologies for maximum effect
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Customizable for specific skin concerns
+                  Minimal downtime with long-lasting results
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                  Immediate results with no downtime
+                  Personalized treatment plan with progress tracking
                 </li>
               </ul>
             </div>
 
             <div className="space-y-6">
               <h3 className="text-xl font-semibold text-gray-900">
-                Why Choose Our ProFusion Treatment:
+                Why Choose This Package:
               </h3>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Latest technology with advanced RF capabilities
+                  Comprehensive approach combining multiple advanced technologies
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Performed by certified skincare specialists
+                  Performed by certified aesthetic specialists
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Personalized treatment plans for your skin type
+                  Customized to your specific facial structure and goals
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Medical-grade products and equipment
+                  Medical-grade treatments with proven results
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                  Luxurious experience with exceptional results
+                  Luxurious experience with exceptional, natural-looking results
                 </li>
               </ul>
             </div>
@@ -269,20 +230,19 @@ export default function ProFusionHydraFacialPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              ProFusion HydraFacial Packages
+              Lift & Reshape Package
             </h2>
             <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Choose from our range of specialized treatments designed to
-              address various skin concerns with our advanced ProFusion
-              technology.
+              Our comprehensive non-surgical solution for facial lifting and contouring,
+              combining multiple advanced technologies for optimal results.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4  gap-6">
+          <div className="flex justify-center">
             {treatmentDetails.map((treatment, index) => (
               <Card
                 key={index}
-                className="p-8 border-gray-200 hover:shadow-lg transition-shadow relative h-full flex flex-col"
+                className="p-8 border-gray-200 hover:shadow-lg transition-shadow relative h-full flex flex-col max-w-md"
               >
                 <div className="text-center flex-1">
                   <h3 className="text-2xl font-semibold text-gray-900 mb-2">
@@ -294,8 +254,8 @@ export default function ProFusionHydraFacialPage() {
 
                   <div className="space-y-3 mb-8 text-left">
                     {treatment.benefits.map((benefit, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-600" />
+                      <div key={i} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-sm">{benefit}</span>
                       </div>
                     ))}
@@ -303,19 +263,16 @@ export default function ProFusionHydraFacialPage() {
 
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Single Session:</span>
+                      <span className="text-gray-700">Program Duration:</span>
                       <span className="text-lg font-bold text-gray-900">
-                        {treatment.price}
+                        {treatment.duration}
                       </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700">Package of 6:</span>
+                      <span className="text-gray-700">Package Price:</span>
                       <span className="text-lg font-bold text-gray-900">
-                        {treatment.packagePrice}
+                        {treatment.price}
                       </span>
-                    </div>
-                    <div className="text-center text-sm text-gray-600 mt-2">
-                      {treatment.duration}
                     </div>
                   </div>
                 </div>
@@ -324,7 +281,7 @@ export default function ProFusionHydraFacialPage() {
                   className="w-full bg-gray-800 hover:bg-gray-900 text-white mt-auto"
                   onClick={() => setBookingOpen(true)}
                 >
-                  BOOK NOW
+                  BOOK CONSULTATION
                 </Button>
               </Card>
             ))}
@@ -349,18 +306,16 @@ export default function ProFusionHydraFacialPage() {
               >
                 {faq.question}
                 <ChevronDown
-                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  openIndex === index
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index
                     ? "max-h-40 opacity-100"
                     : "max-h-0 opacity-0"
-                }`}
+                  }`}
               >
                 <div className="pb-4 text-gray-600">{faq.answer}</div>
               </div>

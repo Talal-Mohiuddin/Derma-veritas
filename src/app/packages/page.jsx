@@ -15,7 +15,7 @@ export default function PackagesPage() {
       title: "ProFusion",
       description:
         "Ultimate skin rejuvenation using state-of-the-art ProFusion devices",
-      image: "/images/hydrafacial.jpg",
+      image: "/pacakage/Pro-Fusion.jpg", // Fixed path to match your actual file
       href: "/packages/profusion",
       treatments: "4 Treatment Options",
       duration: "40-75 minutes",
@@ -25,8 +25,8 @@ export default function PackagesPage() {
       title: "Lift & Reshape",
       description:
         "Comprehensive treatment programs designed for specific skin concerns",
-      image: "/images/signature.jpg",
-      href: "/packages/signature",
+      image: "/pacakage/Lift & Reshape.jpg", // Fixed path to match your actual file
+      href: "/packages/liftreshape",
       treatments: "4 Complete Programs",
       duration: "8-18 weeks",
       priceRange: "£1,100",
@@ -35,8 +35,8 @@ export default function PackagesPage() {
       title: "Correct & Rejuvenate",
       description:
         "Exclusive membership tiers with ongoing treatments and benefits",
-      image: "/images/membership.jpg",
-      href: "/packages/membership",
+      image: "/pacakage/Correct & Rejuvenate.jpg", // Fixed path to match your actual file
+      href: "/packages/correctrejuvenate",
       treatments: "3 Membership Tiers",
       duration: "Monthly Plans",
       priceRange: "£80",
@@ -45,8 +45,8 @@ export default function PackagesPage() {
       title: "Restore & Prevent Hair Loss",
       description:
         "Comprehensive hair restoration program for thinning, shedding, or early hair loss",
-      image: "/images/hair-treatment.jpg",
-      href: "/packages/hair-restoration",
+      image: "/pacakage/Hair Restoration.jpg", // Fixed path to match your actual file
+      href: "/packages/restoreprevent",
       treatments: "17 Treatment Sessions",
       duration: "16-18 weeks",
       priceRange: "£2,500",
@@ -70,8 +70,7 @@ export default function PackagesPage() {
               {/* Reduced from mb-12 to mb-8 */}
               <div className="w-28 h-28  flex items-center justify-center">
                 <img
-                  src="/logo_black.png
-"
+                  src="/logo_black.png"
                   alt="Derma Veritas Logo"
                   className="w-full h-full object-contain"
                 />
@@ -124,14 +123,12 @@ export default function PackagesPage() {
                 <Link href={category.href} className="block">
                   <div className="bg-white border border-gray-200 overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                     <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200">
-                      {/* Placeholder for image */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center">
-                          <span className="text-gray-600 text-2xl font-light">
-                            {index + 1}
-                          </span>
-                        </div>
-                      </div>
+                      {/* Replace placeholder with actual image */}
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
 
                     <div className="p-8">

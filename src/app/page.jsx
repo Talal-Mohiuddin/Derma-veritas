@@ -78,18 +78,14 @@ export default function Home() {
     <div className="min-h-screen bg-white" style={sectionStyle}>
       {/* Hero Section */}
       <main className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 w-full h-full bg-black">
-          <iframe
-            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${
-              videoLoaded ? "opacity-100" : "opacity-0"
-            } transition-opacity duration-500`}
-            src="https://www.youtube.com/embed/0T9C5RcoLMo?autoplay=1&mute=1&loop=1&playlist=0T9C5RcoLMo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&start=0&end=0&version=3&enablejsapi=1"
-            title="Background Video"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            onLoad={handleVideoLoad}
-          />
-        </div>
+      <div className="absolute inset-0 w-full h-full bg-black">
+  <img
+    src="/hero.jpeg"
+    alt="Background"
+    className="absolute inset-0 w-full h-full object-cover"
+  />
+</div>
+
         <div className="absolute inset-0 bg-black/40 z-10" />
         <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 pt-40">
           <h1 className="text-white text-5xl md:text-6xl lg:text-7xl font-light leading-tight mb-12 max-w-4xl">

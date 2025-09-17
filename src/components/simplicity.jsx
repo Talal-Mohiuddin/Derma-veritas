@@ -65,27 +65,13 @@ export default function Simplicity() {
           <div className="relative flex flex-col items-center lg:items-end">
             <div className="aspect-[4/3] overflow-hidden rounded-lg w-full max-w-md lg:max-w-none">
               <img
-                src="https://plus.unsplash.com/premium_photo-1661281397737-9b5d75b52beb?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="/pacakage\Refferal Program.jpg"
                 alt="Derma Veritas Team"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            {/* Referral Stats Overlay */}
-            <div className="absolute -bottom-6 lg:bottom-6 lg:right-6 bg-white rounded-full px-6 py-3 shadow-lg flex items-center gap-3">
-              <div className="flex items-center gap-1">
-                <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                  <Gift className="w-3 h-3 text-white" />
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-gray-900 text-sm font-bold">£5</span>
-                  <span className="text-gray-600 text-xs">cash per £100</span>
-                </div>
-              </div>
-              <span className="text-gray-600 text-sm font-medium">
-                You earn + Friend saves
-              </span>
-            </div>
+            
           </div>
         </div>
       </div>
