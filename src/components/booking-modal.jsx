@@ -795,7 +795,7 @@ export function BookingModal({
 
       // Show success message with referral info if applicable
       const successMessage = createAppointment.data?.referralRewardProcessed
-        ? `Appointment request submitted successfully! You received a 5% discount (£${createAppointment.data.discountAmount}), and your friend will receive a £${createAppointment.data.referrerReward} reward for referring you. We'll contact you soon.`
+        ? `Appointment request submitted successfully! You received a 5% discount (£${createAppointment.data.discountAmount}). We'll contact you soon.`
         : "Appointment request submitted successfully! We'll contact you soon.";
 
       toast.success(successMessage);
@@ -1637,8 +1637,8 @@ export function BookingModal({
                       credit for referring you!
                       <br />
                       <span className="text-green-600 font-medium">
-                        🎁 Valid codes give you 5% discount and your friend a 5%
-                        reward based on your treatment cost
+                        🎁 Valid codes give you 5% discount reward based on your
+                        treatment cost
                       </span>
                     </p>
                   )}
@@ -1762,8 +1762,7 @@ export function BookingModal({
                                 <span>£{finalPrice}</span>
                               </div>
                               <div className="text-xs text-green-600 mt-2 p-2 bg-green-100 rounded">
-                                💡 You save £{discount} and your friend gets £
-                                {reward} as a thank you!
+                                💡 You save £{discount}
                               </div>
                             </div>
                           );
