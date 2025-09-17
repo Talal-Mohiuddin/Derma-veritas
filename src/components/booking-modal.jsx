@@ -597,6 +597,106 @@ export function BookingModal({
         { id: "nctf-5", name: "NCTF - 5 Sessions", price: "£700" },
       ],
     },
+    "profusion-hydrafacial-package": {
+      name: "ProFusion HydraFacial Packages",
+      options: [
+        {
+          id: "signature-rf-single",
+          name: "Signature + RF (Single Session)",
+          price: "£150",
+          description:
+            "40 min - Cleanse, exfoliate, extraction, hydration + RF tightening",
+        },
+        {
+          id: "signature-rf-package",
+          name: "Signature + RF (6 Sessions)",
+          price: "£750",
+          description: "40 min sessions - Complete package",
+        },
+        {
+          id: "deluxe-rf-single",
+          name: "Deluxe + RF (Single Session)",
+          price: "£180",
+          description:
+            "50 min - Signature + custom booster serum + LED therapy + RF",
+        },
+        {
+          id: "deluxe-rf-package",
+          name: "Deluxe + RF (6 Sessions)",
+          price: "£900",
+          description: "50 min sessions - Complete package",
+        },
+        {
+          id: "platinum-rf-single",
+          name: "Platinum + RF (Single Session)",
+          price: "£210",
+          description:
+            "70 min - Deluxe + lymphatic drainage + advanced RF lifting",
+        },
+        {
+          id: "platinum-rf-package",
+          name: "Platinum + RF (6 Sessions)",
+          price: "£1,050",
+          description: "70 min sessions - Complete package",
+        },
+        {
+          id: "elite-cellular-single",
+          name: "Elite – Cellular Repair & Lift (Single Session)",
+          price: "£250",
+          description:
+            "75 min - Platinum + enhanced serums + deep RF collagen stimulation",
+        },
+        {
+          id: "elite-cellular-package",
+          name: "Elite – Cellular Repair & Lift (6 Sessions)",
+          price: "£1,250",
+          description: "75 min sessions - Complete package",
+        },
+      ],
+    },
+    "lift-reshape-package": {
+      name: "Lift & Reshape Treatment Package",
+      options: [
+        {
+          id: "complete-package",
+          name: "Complete Lift & Reshape Package",
+          price: "£2,500 + VAT",
+          description:
+            "10-12 week program: Endolift + 3x RF Microneedling + 2x Profhilo + 2ml Dermal Filler + Facial Scan",
+        },
+      ],
+    },
+    "correct-rejuvenate-package": {
+      name: "Correct & Rejuvenate Treatment Package",
+      options: [
+        {
+          id: "complete-package",
+          name: "Complete Correct & Rejuvenate Package",
+          price: "£1,950 + VAT",
+          description:
+            "8-12 week program: 3x CO₂ Laser + 3x Exosome Therapy + 3x Polynucleotide + 3 Area Neuro-Modulator + AI Facial Mapping",
+        },
+      ],
+    },
+    "restore-prevent-package": {
+      name: "Restore & Prevent Hair Loss Package",
+      options: [
+        {
+          id: "complete-package",
+          name: "Complete Hair Restoration Package",
+          price: "£1,190 + VAT",
+          description:
+            "16-18 week program: 3x Polynucleotides + 4x PRP Hair + 5x Hair+ Treatments + 4x Phototherapy + ExoHair Kit",
+        },
+        {
+          id: "with-exosignal",
+          name: "Package + 4x Exo Signal Hair Treatments",
+          price: "£1,590 + VAT",
+          description:
+            "Complete package with additional 4x Exo Signal treatments for enhanced growth stimulation",
+        },
+      ],
+    },
     "prescription-skincare": {
       name: "Prescription Skincare",
       options: [
@@ -1206,8 +1306,17 @@ export function BookingModal({
                     >
                       📦 Packages
                     </SelectItem>
-                    <SelectItem value="profusion-hydrafacial" className="pl-6">
-                      ProFusion HydraFacial
+                    <SelectItem value="profusion-hydrafacial-package" className="pl-6">
+                      ProFusion HydraFacial Packages
+                    </SelectItem>
+                    <SelectItem value="lift-reshape-package" className="pl-6">
+                      Lift & Reshape Package
+                    </SelectItem>
+                    <SelectItem value="correct-rejuvenate-package" className="pl-6">
+                      Correct & Rejuvenate Package
+                    </SelectItem>
+                    <SelectItem value="restore-prevent-package" className="pl-6">
+                      Restore & Prevent Hair Loss Package
                     </SelectItem>
                   </SelectContent>
                 </Select>

@@ -135,12 +135,6 @@ export default function ProFusionHydraFacialPage() {
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
-                {/* LEARN MORE */}
-                <button className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wider">
-                  LEARN MORE
-                  <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-                </button>
-
                 {/* VIEW PACKAGES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
@@ -156,7 +150,7 @@ export default function ProFusionHydraFacialPage() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/hydrafacial-treatment.png"
+                  src="/pacakage/Pro-Fusion.jpg"
                   alt="Professional HydraFacial treatment being administered"
                   className="w-full h-full object-cover"
                 />
@@ -278,7 +272,7 @@ export default function ProFusionHydraFacialPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-4  gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {treatmentDetails.map((treatment, index) => (
               <Card
                 key={index}
