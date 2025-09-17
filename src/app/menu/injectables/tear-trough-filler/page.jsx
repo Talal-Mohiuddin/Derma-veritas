@@ -2,7 +2,6 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
@@ -16,7 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Play } from "lucide-react";
-import BeforeAfterSection from "@/components/before-after-section";
+
 import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
@@ -199,28 +198,10 @@ export default function TearTroughFillerSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
+                  src="/injectables/Tear Trough Treatmet Vertical.jpg"
                   alt="Professional tear trough filler treatment being administered"
                   className="w-full h-full object-cover"
                 />
-
-                {/* Review Badge */}
-                <div className="absolute bottom-6 right-6 bg-white rounded-full px-4 py-3 shadow-lg flex items-center gap-2">
-                  <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">G</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-gray-600 text-sm font-medium">
-                    Read Reviews
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -425,9 +406,31 @@ export default function TearTroughFillerSection() {
         </div>
       </section>
 
-      <div ref={beforeAfterSectionRef}>
-        <BeforeAfterSection />
-      </div>
+      <section ref={beforeAfterSectionRef} className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="rounded-2xl overflow-hidden bg-gray-100">
+            <img
+              src="/injectables/Tear Trough Treatmet Horizental.jpg"
+              alt="Tear trough filler results"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+              About Tear Trough Filler
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Brighten the under-eye area by restoring volume and smoothing
+              hollows for a refreshed look.
+            </p>
+            <ul className="text-gray-600 space-y-2">
+              <li>• Immediate results with minimal downtime</li>
+              <li>• Lasts 6–12 months</li>
+              <li>• 30–45 minutes, numbing available</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <ConsultationSection />
 

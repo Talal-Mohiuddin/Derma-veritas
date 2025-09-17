@@ -357,9 +357,21 @@ export function BookingModal({
           name: "Single – One Area Lower Face",
           price: "£700",
         },
-        { id: "body-limb", name: "Single – Body (per limb)", price: "£700" },
-        { id: "full-face-single", name: "Single – Full Face", price: "£1,250" },
-        { id: "full-face-3", name: "3 Sessions – Full Face", price: "£2,500" },
+        {
+          id: "body-limb",
+          name: "Single – Body (per limb)",
+          price: "£700",
+        },
+        {
+          id: "full-face-single",
+          name: "Single – Full Face",
+          price: "£1,250",
+        },
+        {
+          id: "full-face-3",
+          name: "3 Sessions – Full Face",
+          price: "£2,500",
+        },
       ],
     },
     microneedling: {
@@ -368,14 +380,18 @@ export function BookingModal({
         {
           id: "full-face",
           name: "Single Treatment – Full Face",
-          price: "£350",
+          price: "£450",
         },
         {
           id: "scars-stretch",
           name: "Single Treatment – Scars & Stretch Marks (One Area)",
-          price: "£300",
+          price: "£350",
         },
-        { id: "full-face-3", name: "3 Sessions – Full Face", price: "£950" },
+        {
+          id: "full-face-3",
+          name: "3 Sessions – Full Face",
+          price: "£1,250",
+        },
       ],
     },
     "skinpen-microneedling": {
@@ -391,7 +407,11 @@ export function BookingModal({
           name: "Single Treatment – Scars & Stretch Marks (One Area)",
           price: "£350",
         },
-        { id: "full-face-3", name: "3 Sessions – Full Face", price: "£1,250" },
+        {
+          id: "full-face-3",
+          name: "3 Sessions – Full Face",
+          price: "£1,250",
+        },
       ],
     },
     "quad-laser-hair-removal": {

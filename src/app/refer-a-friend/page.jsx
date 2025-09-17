@@ -50,7 +50,7 @@ export default function ReferAFriendPage() {
     {
       question: "What are the benefits of each program?",
       answer:
-        "Individual referrals earn 10% of treatment costs. B2B partnerships include custom terms and bulk discounts. Influencer programs offer collaboration packages and content creation support.",
+        "Individual referrals: You earn 5% cash rewards, your friends get 5% discounts. B2B partnerships include custom terms and bulk discounts. Influencer programs offer collaboration packages and content creation support.",
     },
     {
       question: "Who can participate in these programs?",
@@ -94,9 +94,8 @@ export default function ReferAFriendPage() {
           </h1>
 
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Choose the referral program that best suits your needs. Earn cash
-            rewards for every successful referral - 10% of each treatment cost
-            goes directly to you!
+            Choose the referral program that best suits your needs. When you refer 
+            someone, you earn 5% cash rewards while they get 5% discount on their treatment!
           </p>
         </div>
       </section>
@@ -133,13 +132,13 @@ export default function ReferAFriendPage() {
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-600" />
                     <span className="text-gray-700">
-                      Earn 10% of treatment cost
+                      You earn 5% cash rewards
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Check className="w-5 h-5 text-green-600" />
                     <span className="text-gray-700">
-                      Special offer for your friend
+                      Friends get 5% discount
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -301,9 +300,9 @@ export default function ReferAFriendPage() {
               {
                 step: "3",
                 icon: Gift,
-                title: "Earn Rewards",
+                title: "Everyone Benefits",
                 description:
-                  "Receive rewards when your referrals complete treatments. Individual referrals earn 10% of treatment costs.",
+                  "You receive 5% cash rewards when your referrals complete treatments. Your friends save 5% on their treatment costs.",
               },
             ].map((item, index) => (
               <Card

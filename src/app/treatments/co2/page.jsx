@@ -3,7 +3,6 @@
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
 
-import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
@@ -176,16 +175,7 @@ export default function CO2LaserTreatmentSection() {
               </p>
 
               {/* Buttons */}
-              <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
-                {/* VIEW RESULTS */}
-                <button
-                  onClick={scrollToBeforeAfter}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
-                >
-                  VIEW RESULTS
-                  <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-                </button>
-
+              <div className="mt-10 flex justify-start gap-4 flex-wrap">
                 {/* VIEW PRICES - Updated to call scrollToPricing */}
                 <button
                   onClick={scrollToPricing}
@@ -201,28 +191,10 @@ export default function CO2LaserTreatmentSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="https://tse1.explicit.bing.net/th/id/OIP.5hvTQpZGjLVwuOB14-AAqAHaHa?cb=thfc1&rs=1&pid=ImgDetMain&o=7&rm=3"
+                  src="/skin_care/CO2 Laser veritcal.jpg"
                   alt="Professional CO₂ Fractional Laser treatment"
                   className="w-full h-full object-cover"
                 />
-
-                {/* Review Badge */}
-                <div className="absolute bottom-6 right-6 bg-white rounded-full px-4 py-3 shadow-lg flex items-center gap-2">
-                  <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">G</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-gray-600 text-sm font-medium">
-                    Read Reviews
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -430,9 +402,31 @@ export default function CO2LaserTreatmentSection() {
         </div>
       </section>
 
-      <div ref={beforeAfterSectionRef}>
-        <BeforeAfterSection />
-      </div>
+      <section ref={beforeAfterSectionRef} className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="rounded-2xl overflow-hidden bg-gray-100">
+            <img
+              src="/skin_care/CO2  Horizental.jpg"
+              alt="CO₂ laser treatment results"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+              About CO₂ Fractional Laser
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Advanced skin resurfacing to smooth texture, reduce scars and
+              lines, and stimulate collagen.
+            </p>
+            <ul className="text-gray-600 space-y-2">
+              <li>• Results appear over 2–6 weeks</li>
+              <li>• Long-lasting improvements with collagen remodeling</li>
+              <li>• 30–60 minutes; 3–7 days downtime</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <ConsultationSection />
 

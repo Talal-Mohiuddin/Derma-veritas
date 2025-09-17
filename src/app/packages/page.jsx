@@ -16,7 +16,7 @@ export default function PackagesPage() {
       description:
         "Ultimate skin rejuvenation using state-of-the-art ProFusion devices",
       image: "/images/hydrafacial.jpg",
-      href: "/pacakges/profusion",
+      href: "/packages/profusion",
       treatments: "4 Treatment Options",
       duration: "40-75 minutes",
       priceRange: "£150",
@@ -26,7 +26,7 @@ export default function PackagesPage() {
       description:
         "Comprehensive treatment programs designed for specific skin concerns",
       image: "/images/signature.jpg",
-      href: "/pacakges/signature",
+      href: "/packages/signature",
       treatments: "4 Complete Programs",
       duration: "8-18 weeks",
       priceRange: "£1,100",
@@ -36,7 +36,7 @@ export default function PackagesPage() {
       description:
         "Exclusive membership tiers with ongoing treatments and benefits",
       image: "/images/membership.jpg",
-      href: "/pacakges/membership",
+      href: "/packages/membership",
       treatments: "3 Membership Tiers",
       duration: "Monthly Plans",
       priceRange: "£80",
@@ -46,7 +46,7 @@ export default function PackagesPage() {
       description:
         "Comprehensive hair restoration program for thinning, shedding, or early hair loss",
       image: "/images/hair-treatment.jpg",
-      href: "/pacakges/hair-restoration",
+      href: "/packages/hair-restoration",
       treatments: "17 Treatment Sessions",
       duration: "16-18 weeks",
       priceRange: "£2,500",
@@ -88,14 +88,6 @@ export default function PackagesPage() {
               your unique skin concerns and aesthetic goals with the latest in
               medicDerma Veritas technology.
             </p>
-
-            <Button
-              onClick={() => setBookingOpen(true)}
-              className="relative !px-12 !py-6 text-sm font-bold uppercase text-white bg-[#272728] tracking-wide hover:bg-gray-700 transition-colors rounded-lg"
-            >
-              <span>BOOK A CONSULTATION</span>
-              <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-            </Button>
           </motion.div>
         </div>
       </div>

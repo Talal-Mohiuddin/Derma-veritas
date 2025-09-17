@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import { FaPoundSign } from "react-icons/fa";
 import { useState, useRef } from "react";
-import BeforeAfterSection from "@/components/before-after-section";
+
 import ConsultationSection from "@/components/consultation-section";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
@@ -19,7 +19,7 @@ import MediaCoverage from "@/components/MediaCoverage";
 export default function ExoSignalHairTreatmentSection() {
   const [openIndex, setOpenIndex] = useState(null);
   const pricingSectionRef = useRef(null);
-  const beforeAfterSectionRef = useRef(null);
+
   const { bookingOpen, setBookingOpen } = useStore();
 
   const cardData = [
@@ -108,15 +108,6 @@ export default function ExoSignalHairTreatmentSection() {
     }
   };
 
-  const scrollToBeforeAfter = () => {
-    if (beforeAfterSectionRef.current) {
-      beforeAfterSectionRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
   return (
     <>
       {/* Hero Section */}
@@ -151,15 +142,6 @@ export default function ExoSignalHairTreatmentSection() {
 
               {/* Buttons */}
               <div className="mt-10 flex justify-center md:justify-start gap-4 flex-wrap">
-                {/* VIEW RESULTS */}
-                <button
-                  onClick={scrollToBeforeAfter}
-                  className="relative px-8 py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-lg tracking-wider"
-                >
-                  VIEW RESULTS
-                  <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-                </button>
-
                 {/* VIEW PRICES */}
                 <button
                   onClick={scrollToPricing}
@@ -175,33 +157,17 @@ export default function ExoSignalHairTreatmentSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/exosignal-hair-treatment.png"
-                  alt="ExoSignal Hair treatment procedure"
+                  src="/hair_trearments/ExoSignal™ Hair Treatment Vertical.jpg"
+                  alt="ExoSignal Hair treatment"
                   className="w-full h-full object-cover"
                 />
-
-                {/* Review Badge */}
-                <div className="absolute bottom-6 right-6 bg-white rounded-full px-4 py-3 shadow-lg flex items-center gap-2">
-                  <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">G</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-gray-600 text-sm font-medium">
-                    Read Reviews
-                  </span>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Results Section: image left, info right */}
 
       {/* Treatment Highlights Section */}
       <section className="py-12 bg-gray-50">
@@ -252,6 +218,32 @@ export default function ExoSignalHairTreatmentSection() {
                 );
               })}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="rounded-2xl overflow-hidden bg-gray-100">
+            <img
+              src="/hair_trearments/ExoSignal™ Hair Treatment Horizental.jpg"
+              alt="ExoSignal Hair treatment results"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+              About ExoSignal™ Hair Treatment
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Synthetic exosome-powered therapy that targets follicles at a
+              cellular level to improve thickness, volume, and scalp health.
+            </p>
+            <ul className="text-gray-600 space-y-2">
+              <li>• Course of 4 sessions; ~2 weeks apart</li>
+              <li>• Visible improvements over 3–6 months</li>
+              <li>• 30–45 minutes; minimal downtime</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -416,10 +408,6 @@ export default function ExoSignalHairTreatmentSection() {
           </div>
         </div>
       </section>
-
-      <div ref={beforeAfterSectionRef}>
-        <BeforeAfterSection />
-      </div>
 
       <ConsultationSection />
 

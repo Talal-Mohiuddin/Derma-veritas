@@ -483,7 +483,7 @@ export default function ReferralRewardsPage() {
                 <h4 className="font-semibold text-white mb-2">Reward Information</h4>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-gray-300">Reward Amount (10% of treatment cost)</p>
+                    <p className="text-sm text-gray-300">Reward Amount (5% of treatment cost)</p>
                     <p className="text-2xl font-bold text-green-400">
                       {formatCurrency(selectedReward.rewardAmount)}
                     </p>
@@ -509,7 +509,7 @@ export default function ReferralRewardsPage() {
                 <div className="mt-3 p-3 bg-gray-700 rounded-lg border border-gray-600">
                   <p className="text-sm text-gray-200">
                     <strong>Note:</strong> This reward was automatically generated when the referred user completed their first appointment. 
-                    The reward amount is calculated as 10% of the treatment cost.
+                    The reward amount is calculated as 5% of the treatment cost.
                   </p>
                 </div>
               </div>

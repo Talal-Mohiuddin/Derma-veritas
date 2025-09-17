@@ -22,9 +22,8 @@ export default function Simplicity() {
               </h1>
 
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0">
-                Refer friends to Derma Veritas and earn 10% of their treatment
-                cost. Help others discover their natural beauty while you
-                benefit too.
+                Refer friends to Derma Veritas and earn 5% cash of their treatment
+                cost. Your friends get 5% discount on their treatment. Everyone wins!
               </p>
 
               {/* Key Benefits */}
@@ -32,19 +31,19 @@ export default function Simplicity() {
                 <div className="flex items-center gap-3">
                   <Gift className="w-5 h-5 text-gray-600" />
                   <span className="text-muted-foreground">
-                    Earn 10% cash rewards
+                    You earn 5% cash rewards
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Users className="w-5 h-5 text-gray-600" />
                   <span className="text-muted-foreground">
-                    Unlimited referrals
+                    Friends get 5% discount
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Star className="w-5 h-5 text-gray-600" />
                   <span className="text-muted-foreground">
-                    Special offers for friends
+                    Unlimited referrals
                   </span>
                 </div>
               </div>
@@ -79,12 +78,12 @@ export default function Simplicity() {
                   <Gift className="w-3 h-3 text-white" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="text-gray-900 text-sm font-bold">$10</span>
-                  <span className="text-gray-600 text-xs">per $100</span>
+                  <span className="text-gray-900 text-sm font-bold">£5</span>
+                  <span className="text-gray-600 text-xs">cash per £100</span>
                 </div>
               </div>
               <span className="text-gray-600 text-sm font-medium">
-                Earned per referral
+                You earn + Friend saves
               </span>
             </div>
           </div>

@@ -2,7 +2,6 @@
 
 import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
@@ -16,7 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Play } from "lucide-react";
-import BeforeAfterSection from "@/components/before-after-section";
+
 import Footer from "@/components/Footer";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
@@ -31,8 +30,8 @@ export default function DermalFillersSection() {
 
   const scrollToBeforeAfter = () => {
     beforeAfterSectionRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+      behavior: "smooth",
+      block: "start",
     });
   };
 
@@ -176,28 +175,10 @@ export default function DermalFillersSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
+                  src="/injectables/Dermal Filler Vertical.jpg"
                   alt="Professional dermal filler treatment consultation"
                   className="w-full h-full object-cover"
                 />
-
-                {/* Review Badge */}
-                <div className="absolute bottom-6 right-6 bg-white rounded-full px-4 py-3 shadow-lg flex items-center gap-2">
-                  <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">G</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-gray-600 text-sm font-medium">
-                    Read Reviews
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -377,9 +358,31 @@ export default function DermalFillersSection() {
         </div>
       </section>
 
-      <div ref={beforeAfterSectionRef}>
-        <BeforeAfterSection />
-      </div>
+      <section ref={beforeAfterSectionRef} className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="rounded-2xl overflow-hidden bg-gray-100">
+            <img
+              src="/injectables/Dermal Filler Horizental.jpg"
+              alt="Dermal filler results"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+              About Dermal Fillers
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Add volume, smooth lines, and refine contours with safe, effective
+              hyaluronic acid fillers.
+            </p>
+            <ul className="text-gray-600 space-y-2">
+              <li>• Immediate improvement; settles within days</li>
+              <li>• Lasts 6–12 months (area dependent)</li>
+              <li>• Minimal downtime</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <ConsultationSection />
 

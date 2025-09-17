@@ -71,7 +71,7 @@ export default function Home() {
     { name: "Dark Circles", path: "/menu/injectables/tear-trough-filler" },
     { name: "Sensitive Skin", path: "/treatments/prp-therapy" },
     { name: "Dry Skin", path: "/treatments/exosome-therapy" },
-    { name: "Lip Volume Loss", path: "/menu/injectables/dermal-fillers" }
+    { name: "Lip Volume Loss", path: "/menu/injectables/dermal-fillers" },
   ];
 
   return (
@@ -80,8 +80,9 @@ export default function Home() {
       <main className="relative h-screen overflow-hidden">
         <div className="absolute inset-0 w-full h-full bg-black">
           <iframe
-            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${videoLoaded ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-500`}
+            className={`absolute inset-0 w-full h-full object-cover pointer-events-none ${
+              videoLoaded ? "opacity-100" : "opacity-0"
+            } transition-opacity duration-500`}
             src="https://www.youtube.com/embed/0T9C5RcoLMo?autoplay=1&mute=1&loop=1&playlist=0T9C5RcoLMo&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&start=0&end=0&version=3&enablejsapi=1"
             title="Background Video"
             frameBorder="0"
@@ -302,7 +303,7 @@ export default function Home() {
                   technologies for comprehensive results.
                 </p>
                 <a
-                  href="/pacakges/profusion"
+                  href="/packages/profusion"
                   className="mt-3 text-black font-medium hover:text-gray-700 inline-block"
                 >
                   Learn more
@@ -393,7 +394,7 @@ export default function Home() {
       </section>
 
       <ReviewsSection />
-      <GallerySection />
+      <GallerySection showAll={false} />
       {/* <TechnologiesBrandsSection /> */}
 
       <Simplicity />

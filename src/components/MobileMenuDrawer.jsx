@@ -41,7 +41,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
   const toggleSection = (section) => {
     setExpandedSections((prev) => {
       const isCurrentlyExpanded = prev[section];
-      
+
       // If the section is currently expanded, just close it
       if (isCurrentlyExpanded) {
         return {
@@ -49,7 +49,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
           [section]: false,
         };
       }
-      
+
       // If opening a new section, close all others and open this one
       return {
         [section]: true,
@@ -107,7 +107,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
     // Handle packages - fix the path matching
     if (
       pathname.includes("/packages/profusion") ||
-      pathname === "/pacakges/profusion"
+      pathname === "/packages/profusion"
     ) {
       return "profusion-hydrafacial";
     }
@@ -400,8 +400,8 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                 {/* Static Links */}
                 {[
-                  { name: "PACKAGES", href: "/pacakges" },
-                  { name: "DV MEMBERSHIP", href: "/pacakges/membership" },
+                  { name: "PACKAGES", href: "/packages" },
+                  { name: "DV MEMBERSHIP", href: "/packages/membership" },
                   { name: "GALLERY", href: "/gallery" },
                   { name: "SHOP", href: "/shop" },
                   { name: "ABOUT US", href: "/about" },
@@ -567,7 +567,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                   {/* Static Links */}
                   <div className="py-4">
                     <Link
-                      href="/pacakges"
+                      href="/packages"
                       className="block text-xl font-light text-black hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >
@@ -577,7 +577,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
 
                   <div className="py-4">
                     <Link
-                      href="/pacakges/membership"
+                      href="/packages/membership"
                       className="block text-xl font-light text-black hover:text-gray-600 transition-colors cursor-pointer"
                       onClick={() => setIsOpen(false)}
                     >

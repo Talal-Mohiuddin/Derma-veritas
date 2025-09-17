@@ -137,7 +137,7 @@ export default function Navbar() {
       icon: <Gift className="w-5 h-5 text-black" />,
       title: "Refer & Earn",
       content:
-        "Earn 10% cash reward when your friend completes their treatment",
+        "Earn 5% cash reward when your friend completes their treatment",
       cta: "Learn More",
       link: "/refer-a-friend",
     },
@@ -154,7 +154,7 @@ export default function Navbar() {
   const getCurrentTreatment = () => {
     if (
       pathname.includes("/packages/profusion") ||
-      pathname === "/pacakges/profusion"
+      pathname === "/packages/profusion"
     ) {
       return "profusion-hydrafacial";
     }
@@ -371,8 +371,8 @@ export default function Navbar() {
 
             {/* Other Navigation Links */}
             {[
-              { name: "PACKAGES", href: "/pacakges" },
-              { name: "DV MEMBERSHIP", href: "/pacakges/membership" },
+              { name: "PACKAGES", href: "/packages" },
+              { name: "DV MEMBERSHIP", href: "/packages/membership" },
               { name: "GALLERY", href: "/gallery" },
               { name: "SHOP", href: "/shop" },
               { name: "ABOUT US", href: "/about" },

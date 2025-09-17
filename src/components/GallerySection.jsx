@@ -4,7 +4,7 @@ import { useState } from "react";
 import { X, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const GallerySection = () => {
+const GallerySection = ({ showAll = true }) => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
@@ -13,30 +13,6 @@ const GallerySection = () => {
   const galleryItems = [
     {
       id: 1,
-      src: "/gallery/Anti-Wrinkle B&A 2.jpg",
-      category: "anti-aging",
-      title: "Anti-Wrinkle Treatment",
-      description: "Before and after results",
-      size: "medium",
-    },
-    {
-      id: 2,
-      src: "/gallery/Anti-Wrinkle B&A 3.jpg",
-      category: "anti-aging",
-      title: "Anti-Wrinkle Treatment",
-      description: "Botox treatment results",
-      size: "medium",
-    },
-    {
-      id: 3,
-      src: "/gallery/Anti-Wrinkle B&A.jpg",
-      category: "anti-aging",
-      title: "Anti-Wrinkle Treatment",
-      description: "Fine lines reduction",
-      size: "small",
-    },
-    {
-      id: 4,
       src: "/gallery/CO2 Laser B&A 1.jpg",
       category: "laser-treatment",
       title: "CO2 Laser Treatment",
@@ -44,15 +20,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 5,
-      src: "/gallery/CO2 Laser B&A 3.jpg",
-      category: "laser-treatment",
-      title: "CO2 Laser Treatment",
-      description: "Acne scar reduction",
-      size: "medium",
-    },
-    {
-      id: 6,
+      id: 2,
       src: "/gallery/Endolift B&A 2.jpeg",
       category: "anti-aging",
       title: "Endolift Treatment",
@@ -60,7 +28,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 7,
+      id: 3,
       src: "/gallery/Endolift B&A 3.jpeg",
       category: "anti-aging",
       title: "Endolift Treatment",
@@ -68,7 +36,7 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 8,
+      id: 4,
       src: "/gallery/Endolift B&A1.jpeg",
       category: "anti-aging",
       title: "Endolift Treatment",
@@ -76,7 +44,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 9,
+      id: 5,
       src: "/gallery/Quad Laser B&A.jpg",
       category: "hair-removal",
       title: "Quad Laser Hair Removal",
@@ -84,7 +52,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 10,
+      id: 6,
       src: "/gallery/Quad lasier.jpg 1.jpg",
       category: "hair-removal",
       title: "Quad Laser Treatment",
@@ -92,7 +60,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 11,
+      id: 7,
       src: "/gallery/Untitled-2.png",
       category: "skin-rejuvenation",
       title: "Skin Treatment",
@@ -100,7 +68,7 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 12,
+      id: 8,
       src: "/gallery/Untitled-3.png",
       category: "skin-rejuvenation",
       title: "Skin Treatment",
@@ -108,7 +76,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 13,
+      id: 9,
       src: "/gallery/Untitled-4.png",
       category: "skin-rejuvenation",
       title: "Skin Treatment",
@@ -116,7 +84,7 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 14,
+      id: 10,
       src: "/gallery/Untitled-5.png",
       category: "skin-rejuvenation",
       title: "Skin Treatment",
@@ -124,7 +92,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 15,
+      id: 11,
       src: "/gallery/Untitled-6.png",
       category: "skin-rejuvenation",
       title: "Skin Treatment",
@@ -132,7 +100,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 16,
+      id: 12,
       src: "/gallery/Untitled-7.png",
       category: "skin-rejuvenation",
       title: "Skin Treatment",
@@ -140,7 +108,7 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 17,
+      id: 13,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM (1).jpeg",
       category: "acne-treatment",
       title: "Acne Treatment",
@@ -148,7 +116,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 18,
+      id: 14,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM (2).jpeg",
       category: "anti-aging",
       title: "Anti-Aging Treatment",
@@ -156,7 +124,7 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 19,
+      id: 15,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM (3).jpeg",
       category: "laser-treatment",
       title: "Laser Treatment",
@@ -164,7 +132,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 20,
+      id: 16,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM (4).jpeg",
       category: "hair-removal",
       title: "Hair Removal",
@@ -172,7 +140,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 21,
+      id: 17,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM (5).jpeg",
       category: "skin-rejuvenation",
       title: "Skin Rejuvenation",
@@ -180,7 +148,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 22,
+      id: 18,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM (6).jpeg",
       category: "acne-treatment",
       title: "Acne Treatment",
@@ -188,7 +156,7 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 23,
+      id: 19,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.13 PM.jpeg",
       category: "anti-aging",
       title: "Anti-Aging Care",
@@ -196,7 +164,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 24,
+      id: 20,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.14 PM (1).jpeg",
       category: "laser-treatment",
       title: "Laser Therapy",
@@ -204,7 +172,7 @@ const GallerySection = () => {
       size: "medium",
     },
     {
-      id: 25,
+      id: 21,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.10.14 PM.jpeg",
       category: "hair-removal",
       title: "Hair Removal Treatment",
@@ -212,27 +180,11 @@ const GallerySection = () => {
       size: "small",
     },
     {
-      id: 26,
+      id: 22,
       src: "/gallery/WhatsApp Image 2025-09-16 at 3.12.03 PM.jpeg",
-      category: 'prp-hair-restoration',
+      category: "prp-hair-restoration",
       title: "PRP Hair Restoration",
       description: "Complete transformation",
-      size: "medium",
-    },
-    {
-      id: 27,
-      src: "/gallery/before after.jpg",
-      category: "acne-treatment",
-      title: "Acne Treatment",
-      description: "Dramatic improvement",
-      size: "medium",
-    },
-    {
-      id: 28,
-      src: "/gallery/dl.beatsnoop.com-3000-KAI6e1P2kU.jpg",
-      category: "skin-rejuvenation",
-      title: "Skin Enhancement",
-      description: "Professional results",
       size: "medium",
     },
   ];
@@ -251,6 +203,21 @@ const GallerySection = () => {
     selectedFilter === "all"
       ? galleryItems
       : galleryItems.filter((item) => item.category === selectedFilter);
+
+  // Limit items when not showing all (for home page preview)
+  const displayItems = showAll ? filteredItems : filteredItems.slice(0, 8);
+
+  // Encode filenames to avoid broken images in production (spaces, & and special chars)
+  const toSafeSrc = (src) => {
+    if (!src) return src;
+    // Only transform gallery paths
+    const prefix = "/gallery/";
+    if (src.startsWith(prefix)) {
+      const fileName = src.slice(prefix.length);
+      return `${prefix}${encodeURIComponent(fileName)}`;
+    }
+    return encodeURI(src);
+  };
 
   const openLightbox = (index) => {
     setCurrentImage(index);
@@ -295,30 +262,32 @@ const GallerySection = () => {
           </p>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          <div className="flex items-center gap-2 text-gray-600 mr-4">
-            <Filter className="w-4 h-4" />
-            <span className="text-sm font-medium">Filter by:</span>
+        {/* Filter Buttons - Only show when showAll is true */}
+        {showAll && (
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <div className="flex items-center gap-2 text-gray-600 mr-4">
+              <Filter className="w-4 h-4" />
+              <span className="text-sm font-medium">Filter by:</span>
+            </div>
+            {filters.map((filter) => (
+              <button
+                key={filter.key}
+                onClick={() => setSelectedFilter(filter.key)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  selectedFilter === filter.key
+                    ? "bg-gray-900 text-white shadow-lg"
+                    : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+                }`}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
-          {filters.map((filter) => (
-            <button
-              key={filter.key}
-              onClick={() => setSelectedFilter(filter.key)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                selectedFilter === filter.key
-                  ? "bg-gray-900 text-white shadow-lg"
-                  : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-              }`}
-            >
-              {filter.label}
-            </button>
-          ))}
-        </div>
+        )}
 
         {/* Masonry Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-max">
-          {filteredItems.map((item, index) => (
+          {displayItems.map((item, index) => (
             <div
               key={item.id}
               className={`relative group cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 ${getSizeClasses(
@@ -328,7 +297,7 @@ const GallerySection = () => {
             >
               {/* Real image */}
               <img
-                src={item.src}
+                src={toSafeSrc(item.src)}
                 alt={item.title}
                 className="w-full h-full object-cover"
               />
@@ -343,6 +312,18 @@ const GallerySection = () => {
             </div>
           ))}
         </div>
+
+        {/* View Full Gallery Button - Only show when not showing all */}
+        {!showAll && (
+          <div className="text-center mt-12">
+            <Button
+              onClick={() => window.location.href = '/gallery'}
+              className="bg-gray-900 text-white hover:bg-gray-800 px-8 py-3 text-lg font-medium rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
+              View Full Gallery
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal */}
@@ -373,7 +354,7 @@ const GallerySection = () => {
           <div className="relative max-w-4xl max-h-full">
             {/* Image */}
             <img
-              src={filteredItems[currentImage]?.src}
+              src={toSafeSrc(filteredItems[currentImage]?.src)}
               alt={filteredItems[currentImage]?.title}
               className="max-w-full max-h-[70vh] object-contain rounded-lg"
             />

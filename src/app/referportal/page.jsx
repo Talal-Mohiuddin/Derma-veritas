@@ -274,7 +274,7 @@ export default function ReferralPortalPage() {
                       <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 shadow-lg">
                         <div className="space-y-3">
                           <h4 className="font-semibold text-white text-lg">
-                            💰 How to Earn Rewards
+                            💰 How to Earn Cash Rewards
                           </h4>
                           <div className="space-y-2 text-sm text-gray-200">
                             <div className="flex items-start gap-3">
@@ -283,16 +283,16 @@ export default function ReferralPortalPage() {
                             </div>
                             <div className="flex items-start gap-3">
                               <span className="bg-gray-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                              <p><strong>They book a treatment:</strong> Your friends enter your code when booking</p>
+                              <p><strong>They get a discount:</strong> Your friends save 5% on their treatment when using your code</p>
                             </div>
                             <div className="flex items-start gap-3">
                               <span className="bg-gray-700 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                              <p><strong>You earn 10%:</strong> Receive 10% of their treatment cost as a reward!</p>
+                              <p><strong>You earn cash:</strong> Receive 5% of their treatment cost as cash reward!</p>
                             </div>
                           </div>
                           <div className="mt-4 p-3 bg-green-800 rounded-lg border border-green-700">
                             <p className="text-green-100 text-sm font-medium">
-                              ✨ <strong>Example:</strong> If your friend books a £300 treatment, you earn £30!
+                              ✨ <strong>Example:</strong> Friend books £300 treatment → They pay £285 (save £15) → You earn £15 cash!
                             </p>
                           </div>
                         </div>

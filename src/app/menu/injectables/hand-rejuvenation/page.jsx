@@ -1,7 +1,6 @@
 "use client";
 
 import { useStore } from "@/store/zustand";
-import { Star } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState, useRef } from "react";
@@ -225,28 +224,10 @@ export default function HandRejuvenationSection() {
             <div className="relative flex items-center justify-center">
               <div className="rounded-3xl overflow-hidden bg-gray-200 aspect-[4/5] w-full max-w-lg">
                 <img
-                  src="/images/professional-aesthetic-consultation-modern-clinic-.png"
+                  src="/injectables/Hand Rejuvenation Vertical.jpg"
                   alt="Professional hand rejuvenation treatment"
                   className="w-full h-full object-cover"
                 />
-
-                {/* Review Badge */}
-                <div className="absolute bottom-6 right-6 bg-white rounded-full px-4 py-3 shadow-lg flex items-center gap-2">
-                  <div className="w-5 h-5 bg-blue-500 rounded-sm flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">G</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-gray-600 text-sm font-medium">
-                    Read Reviews
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -457,10 +438,31 @@ export default function HandRejuvenationSection() {
         </div>
       </section>
 
-      {/* BeforeAfterSection would go here if you have hand-specific before/after images */}
-      <div ref={beforeAfterSectionRef}>
-        <BeforeAfterSection />
-      </div>
+      <section ref={beforeAfterSectionRef} className="py-16 px-4 bg-white">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+          <div className="rounded-2xl overflow-hidden bg-gray-100">
+            <img
+              src="/injectables/Hand Rejuvenation Horizental.jpg"
+              alt="Hand rejuvenation results"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="space-y-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+              About Hand Rejuvenation
+            </h3>
+            <p className="text-gray-600 text-lg leading-relaxed">
+              Restore youthful volume, improve skin quality, and reduce visible
+              veins/tendons using fillers and regenerative therapies.
+            </p>
+            <ul className="text-gray-600 space-y-2">
+              <li>• Results immediate to gradual depending on treatment</li>
+              <li>• Duration 3–12 months</li>
+              <li>• 20–45 minutes, minimal downtime</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
       <ConsultationSection />
 

@@ -9,80 +9,79 @@ const treatments = [
   {
     id: 1,
     title: "Anti-Wrinkle Treatment",
-    image: "/images/sample_image.jpg",
+    image: "/injectables/Anti Wrinkle Vertical.jpg",
     price: "From £200",
-    slug: "Anti-Wrinkle-treatment",
+    href: "/menu/injectables/anti-wrinkle-treatment",
   },
   {
     id: 2,
     title: "Cheek Fillers",
-    image: "/images/sample_image.jpg",
+    image: "/injectables/Cheeks Filler Veritcal.jpg",
     price: "From £450",
-    slug: "cheek-fillers",
+    href: "/menu/injectables/cheek-fillers",
+  },
+  {
+    id: 3,
+    title: "Dermal Fillers",
+    image: "/injectables/Dermal Filler Vertical.jpg",
+    price: "From £350",
+    href: "/treatments/dermal-fillers",
   },
   {
     id: 4,
-    title: "Dermal Fillers",
-    image: "/images/sample_image.jpg",
+    title: "Exosome Therapy",
+    image: "/wellness/Exosome Therapy Vertical.jpg",
     price: "From £350",
-    slug: "dermal-fillers",
+    href: "/treatments/exosome-therapy",
   },
   {
     id: 5,
-    title: "Exosome Therapy",
-    image: "/images/sample_image.jpg",
-    price: "From £350",
-    slug: "exosome-therapy",
+    title: "Lip Fillers",
+    image: "/injectables/Lips Filler Vertical.jpg",
+    price: "From £300",
+    href: "/menu/injectables/lip-fillers",
   },
   {
     id: 6,
-    title: "Lip Fillers",
-    image: "/images/sample_image.jpg",
-    price: "From £300",
-    slug: "lip-fillers",
+    title: "Microneedling",
+    image: "/skin_care/Microneedling Horizental.jpg",
+    price: "From £180",
+    href: "/treatments/microneedling",
   },
   {
     id: 7,
-    title: "Microneedling",
-    image: "/images/sample_image.jpg",
-    price: "From £180",
-    slug: "microneedling",
+    title: "Endolift",
+    image: "/skin_care/Endolift Vertical.jpg",
+    price: "From £600",
+    href: "/treatments/endolift",
   },
   {
     id: 8,
-    title: "Non-Surgical Face Lift",
-    image: "/images/sample_image.jpg",
-    price: "From £600",
-    slug: "non-surgical-face-lift",
+    title: "Polynucleotide",
+    image: "/skin_care/Polynucleotide Vertical.jpg",
+    price: "From £800",
+    href: "/treatments/polynucleotide",
   },
   {
     id: 9,
-    title: "Polynucleotide",
-    image: "/images/sample_image.jpg",
-    price: "From £800",
-    slug: "Polynucleotide",
+    title: "PRP Therapy",
+    image: "/wellness/PRP Therapy Vertical.jpg",
+    price: "From £180",
+    href: "/treatments/prp-therapy",
   },
   {
     id: 10,
-    title: "PRP Therapy",
-    image: "/images/sample_image.jpg",
-    price: "From £180",
-    slug: "PRP-Therapy",
+    title: "Quad Laser Hair Removal",
+    image: "/laser_treatments/Quad Laser Treatment Vertical.jpg",
+    price: "From £250",
+    href: "/treatments/quad-laser-hair-removal",
   },
   {
     id: 11,
-    title: "Quad Laser Hair Removal",
-    image: "/images/sample_image.jpg",
-    price: "From £250",
-    slug: "Quad-Laser-Hair-Removal",
-  },
-
-  {
-    id: 12,
     title: "RF Microneedling",
-    image: "/images/sample_image.jpg",
+    image: "/skin_care/RF Microneedling Vertical.jpg",
     price: "From £180",
-    slug: "RF-Microneedling",
+    href: "/treatments/rf-microneedling",
   },
 ];
 
@@ -148,7 +147,7 @@ export default function TreatmentSlider() {
         {treatments.map((treatment) => (
           <div
             key={treatment.id}
-            className="flex-shrink-0 w-[85%] sm:w-[300px] md:w-[400px] lg:w-[500px] xl:w-[550px] h-[400px] sm:h-[450px] md:h-[550px] lg:h-[650px] relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg transition-all"
+            className="flex-shrink-0 w-[70%] sm:w-[250px] md:w-[320px] lg:w-[380px] xl:w-[420px] h-[300px] sm:h-[350px] md:h-[400px] lg:h-[550px] relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg transition-all"
           >
             {/* Image */}
             <img
@@ -178,7 +177,7 @@ export default function TreatmentSlider() {
 
               {/* Button (Hidden until hover) */}
               <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                <Link href={`/treatments/${treatment.slug}`}>
+                <Link href={treatment.href}>
                   <Button className="bg-white text-black hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-4 sm:py-6 font-medium transition-colors shadow-md rounded-none">
                     VIEW TREATMENT
                   </Button>
