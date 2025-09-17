@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/logo_white.png" />
         <script dangerouslySetInnerHTML={{ __html: headSnippet }} />
         <style>{`
 html {
@@ -20,6 +21,7 @@ html {
   --font-sans: ${GeistSans.variable};
   --font-mono: ${GeistMono.variable};
 }
+
         `}</style>
       </head>
       <body>
