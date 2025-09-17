@@ -402,6 +402,7 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                 {[
                   { name: "PACKAGES", href: "/pacakges" },
                   { name: "DV MEMBERSHIP", href: "/pacakges/membership" },
+                  { name: "GALLERY", href: "/gallery" },
                   { name: "SHOP", href: "/shop" },
                   { name: "ABOUT US", href: "/about" },
                   { name: "CONTACT", href: "/contact" },
@@ -581,6 +582,16 @@ export default function MobileMenuDrawer({ isOpen, setIsOpen }) {
                       onClick={() => setIsOpen(false)}
                     >
                       DV MEMBERSHIP
+                    </Link>
+                  </div>
+
+                  <div className="py-4">
+                    <Link
+                      href="/gallery"
+                      className="block text-xl font-light text-black hover:text-gray-600 transition-colors cursor-pointer"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      GALLERY
                     </Link>
                   </div>
 

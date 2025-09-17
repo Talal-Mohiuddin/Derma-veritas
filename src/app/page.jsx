@@ -12,6 +12,7 @@ import RecentBlogsSection from "@/components/recent-blogs-section";
 import Simplicity from "@/components/simplicity";
 import ClubMembership from "@/components/ClubMembership";
 import MediaCoverage from "@/components/MediaCoverage";
+import GallerySection from "@/components/GallerySection";
 import Chatwindow from "@/components/Chatwindow";
 import { useRouter } from "next/navigation";
 
@@ -392,11 +393,8 @@ export default function Home() {
       </section>
 
       <ReviewsSection />
-      <BeforeAfterSection />
+      <GallerySection />
       {/* <TechnologiesBrandsSection /> */}
-
-
-
 
       <Simplicity />
 

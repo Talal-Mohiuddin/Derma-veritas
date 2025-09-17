@@ -373,6 +373,7 @@ export default function Navbar() {
             {[
               { name: "PACKAGES", href: "/pacakges" },
               { name: "DV MEMBERSHIP", href: "/pacakges/membership" },
+              { name: "GALLERY", href: "/gallery" },
               { name: "SHOP", href: "/shop" },
               { name: "ABOUT US", href: "/about" },
               { name: "CONTACT", href: "/contact" },
