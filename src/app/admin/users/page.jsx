@@ -24,7 +24,7 @@ import {
   UserPlus,
   TrendingUp,
   Calendar,
-  DollarSign,
+  PoundSterling,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -217,7 +217,7 @@ export default function UsersPage() {
 
           <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-2">
-              <DollarSign className="w-8 h-8 text-green-600" />
+              <PoundSterling className="w-8 h-8 text-green-600" />
             </div>
             <div className="text-2xl font-bold text-green-600">£{stats.totalRewards.toFixed(2)}</div>
             <div className="text-sm text-gray-600">Total Rewards</div>

@@ -32,10 +32,12 @@ import {
 import { toast } from "sonner";
 import RouteProtection from "@/components/RouteProtection";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import BookingsModal from "@/components/BookingsModal";
 
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [showReferralStats, setShowReferralStats] = useState(false);
+  const [showBookingsModal, setShowBookingsModal] = useState(false);
   const { user, loading: authLoading } = useAuth();
 
   const {
@@ -485,7 +487,7 @@ export default function ProfilePage() {
                   <Button
                     variant="outline"
                     className="w-full justify-start"
-                    onClick={() => (window.location.href = "/bookings")}
+                    onClick={() => setShowBookingsModal(true)}
                   >
                     <Calendar className="w-4 h-4 mr-2" />
                     My Bookings
@@ -503,6 +505,13 @@ export default function ProfilePage() {
             </div>
           </div>
         </section>
+
+        {/* Bookings Modal */}
+        <BookingsModal
+          isOpen={showBookingsModal}
+          onClose={() => setShowBookingsModal(false)}
+          userId={user?.uid}
+        />
       </div>
     </RouteProtection>
   );

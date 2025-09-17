@@ -14,6 +14,7 @@ import {
   UserPlus,
   Copy,
   X,
+  PoundSterling,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -198,7 +199,7 @@ export function UserDetailsModal({ userId, isOpen, onClose }) {
 
             <div className="bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg p-3 sm:p-4 border border-gray-700 shadow-lg text-white">
               <div className="flex items-center justify-between mb-2">
-                <Users className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                <PoundSterling className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
               <div className="text-lg sm:text-2xl font-bold text-white">
                 £{(user.totalRewardsEarned || 0).toFixed(2)}

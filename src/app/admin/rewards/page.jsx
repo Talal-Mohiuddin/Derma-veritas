@@ -29,7 +29,7 @@ import {
 import {
   Gift,
   Users,
-  DollarSign,
+  PoundSterling,
   Clock,
   CheckCircle,
   XCircle,
@@ -208,7 +208,7 @@ export default function ReferralRewardsPage() {
 
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 text-white rounded-xl p-4 shadow-lg border border-gray-700 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
-            <DollarSign className="w-8 h-8 text-white" />
+            <PoundSterling className="w-8 h-8 text-white" />
           </div>
           <div className="text-2xl font-bold text-white">
             {formatCurrency(stats.totalAmount)}

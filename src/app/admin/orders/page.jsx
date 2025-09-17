@@ -12,7 +12,7 @@ import {
   Search,
   Filter,
   ShoppingBag,
-  DollarSign,
+  PoundSterling,
   Package,
   TrendingUp,
   Calendar,
@@ -233,7 +233,7 @@ export default function OrdersPage() {
 
         <div className="bg-white rounded-xl p-4 shadow-lg border border-gray-300 hover:shadow-xl transition-all duration-300">
           <div className="flex items-center justify-between mb-2">
-            <DollarSign className="w-8 h-8 text-green-600" />
+            <PoundSterling className="w-8 h-8 text-green-600" />
           </div>
           <div className="text-2xl font-bold text-green-600">
             {formatCurrency(stats.totalRevenue)}
