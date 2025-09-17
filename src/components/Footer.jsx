@@ -61,7 +61,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/services"
+                href="/treatments"
                 className="hover:text-white transition-colors"
               >
                 Our Services
@@ -69,7 +69,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/pricing"
+                href="/packages"
                 className="hover:text-white transition-colors"
               >
                 Pricing Plans
