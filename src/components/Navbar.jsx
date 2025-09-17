@@ -9,13 +9,11 @@ import MobileMenuDrawer from "./MobileMenuDrawer";
 import ClinicsModal from "./ClinicsModal";
 import { BookingModal } from "./booking-modal";
 import { useStore } from "@/store/zustand";
-import { useAuth } from "@/store/FirebaseAuthProvider";
 import UserMenuDropdown from "./UserMenuDropdown";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { bookingOpen, setBookingOpen } = useStore();
-  const { user } = useAuth();
   const [isClinicsOpen, setIsClinicsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isScrollingUp, setIsScrollingUp] = useState(true);

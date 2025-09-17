@@ -726,7 +726,7 @@ export function BookingModal({
       ],
     },
   };
-  // Auto-fill user info when logged in
+
   useEffect(() => {
     if (user && open) {
       setFormData((prev) => ({
