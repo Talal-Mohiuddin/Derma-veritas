@@ -457,7 +457,10 @@ export default function LaserHairRemovalSection() {
             <div className="border border-gray-200 p-6 bg-white shadow-[3px_3px_6px_rgba(0,0,0,0.15)]">
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-base font-semibold text-gray-900">Face</h3>
-                <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button
+                  className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                  onClick={() => setBookingOpen(true)}
+                >
                   BOOK
                 </button>
               </div>
@@ -527,7 +530,10 @@ export default function LaserHairRemovalSection() {
                 <h3 className="text-base font-semibold text-gray-900">
                   Men's Laser
                 </h3>
-                <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button
+                  className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                  onClick={() => setBookingOpen(true)}
+                >
                   BOOK
                 </button>
               </div>
@@ -597,7 +603,10 @@ export default function LaserHairRemovalSection() {
                 <h3 className="text-base font-semibold text-gray-900">
                   Body Areas
                 </h3>
-                <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button
+                  className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                  onClick={() => setBookingOpen(true)}
+                >
                   BOOK
                 </button>
               </div>
@@ -667,7 +676,10 @@ export default function LaserHairRemovalSection() {
                 <h3 className="text-base font-semibold text-gray-900">
                   Intimate Areas
                 </h3>
-                <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button
+                  className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                  onClick={() => setBookingOpen(true)}
+                >
                   BOOK
                 </button>
               </div>
@@ -726,7 +738,10 @@ export default function LaserHairRemovalSection() {
                 <h3 className="text-base font-semibold text-gray-900">
                   Full Body Packages
                 </h3>
-                <button className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition">
+                <button
+                  className="px-4 py-1 border border-gray-900 text-gray-900 text-sm font-medium hover:bg-gray-900 hover:text-white transition"
+                  onClick={() => setBookingOpen(true)}
+                >
                   BOOK
                 </button>
               </div>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Calendar } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useStore } from "@/store/zustand";
 import ClinicsModal from "@/components/ClinicsModal";
 import { useBlogsData } from "@/hooks/useBlog";
 import { slugify } from "@/utils/slugify";
@@ -20,7 +21,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Get your skin glowing and camera-ready for your special day with these expert tips.",
-    directory: "prepare-skin-special-event"
+    directory: "prepare-skin-special-event",
   },
   {
     id: "static-2",
@@ -30,7 +31,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Learn why proper sun protection is crucial for optimal healing and results.",
-    directory: "sun-protection-after-procedures"
+    directory: "sun-protection-after-procedures",
   },
   {
     id: "static-3",
@@ -40,7 +41,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Discover the perfect aesthetic treatments to help you look radiant on your wedding day.",
-    directory: "aesthetic-treatments-brides"
+    directory: "aesthetic-treatments-brides",
   },
   {
     id: "static-4",
@@ -50,7 +51,7 @@ const staticBlogPosts = [
     tags: ["Face", "Skincare"],
     excerpt:
       "Create a comprehensive anti-aging routine that delivers visible results.",
-    directory: "anti-aging-skincare-routine"
+    directory: "anti-aging-skincare-routine",
   },
   {
     id: "static-5",
@@ -69,7 +70,7 @@ const staticBlogPosts = [
     tags: ["Face", "Skincare"],
     excerpt:
       "Protect and nourish your skin during the hot summer months with these expert tips.",
-    directory: "summer-skincare-tips"
+    directory: "summer-skincare-tips",
   },
   {
     id: "static-7",
@@ -79,7 +80,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Everything you need to know about chemical peels and their transformative benefits.",
-    directory: "chemical-peels-guide"
+    directory: "chemical-peels-guide",
   },
   {
     id: "static-8",
@@ -89,7 +90,7 @@ const staticBlogPosts = [
     tags: ["Face", "Skincare"],
     excerpt:
       "Discover how proper hydration impacts your skin health and appearance.",
-    directory: "hydration-healthy-skin"
+    directory: "hydration-healthy-skin",
   },
   {
     id: "static-9",
@@ -99,7 +100,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Learn about different types of dermal fillers and their applications.",
-    directory: "dermal-fillers-explained"
+    directory: "dermal-fillers-explained",
   },
   {
     id: "static-10",
@@ -109,7 +110,7 @@ const staticBlogPosts = [
     tags: ["Face", "Aesthetics"],
     excerpt:
       "Follow these essential aftercare tips to ensure the best possible treatment outcomes.",
-    directory: "post-treatment-care"
+    directory: "post-treatment-care",
   },
 ].map((post) => ({
   ...post,
@@ -118,7 +119,7 @@ const staticBlogPosts = [
 
 // Create a mapping from slug to directory name
 const slugToDirectoryMap = {};
-staticBlogPosts.forEach(post => {
+staticBlogPosts.forEach((post) => {
   slugToDirectoryMap[post.slug] = post.directory;
 });
 
@@ -127,6 +128,7 @@ export default function BlogsPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState({});
   const router = useRouter();
+  const { setBookingOpen } = useStore();
 
   // Fetch dynamic blog posts (only published)
   const { data, isLoading, error } = useBlogsData("", "published");
@@ -197,13 +199,13 @@ export default function BlogsPage() {
       <div className="relative bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="flex flex-col items-center justify-center text-center">
-             <div className="w-40 h-40 flex items-center justify-center mb-12">
-        <img 
-          src="/Derma Veritas Logo Design New File-01.svg" 
-          alt="Derma Veritas Logo" 
-          className="w-full h-full object-contain"
-        />
-      </div>
+            <div className="w-40 h-40 flex items-center justify-center mb-12">
+              <img
+                src="/Derma Veritas Logo Design New File-01.svg"
+                alt="Derma Veritas Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
 
             <h1 className="text-5xl lg:text-7xl font-light text-center mb-8">
               <span className="text-black">News</span>{" "}
@@ -245,13 +247,13 @@ export default function BlogsPage() {
 
         <div className="bg-gradient-to-br from-gray-100 to-gray-50 px-6 sm:px-8 lg:px-12 py-12 lg:py-16 flex flex-col justify-center">
           <div className="flex items-center gap-4 mb-8">
-              <div className="w-40 h-40 pd-100 flex items-center justify-center mb-12">
-        <img 
-          src="/Derma Veritas Logo Design New File-01.svg" 
-          alt="Derma Veritas Logo" 
-          className="w-full h-full object-contain"
-        />
-      </div>
+            <div className="w-40 h-40 pd-100 flex items-center justify-center mb-12">
+              <img
+                src="/Derma Veritas Logo Design New File-01.svg"
+                alt="Derma Veritas Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
             <div>
               <span className="text-3xl font-light text-black">Expert</span>
               <br />
@@ -387,7 +389,7 @@ export default function BlogsPage() {
           </p>
 
           <Button
-            onClick={() => setIsClinicsOpen(true)}
+            onClick={() => setBookingOpen(true)}
             className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728]  tracking-wide hover:bg-gray-700 transition-colors w-fit rounded-lg"
           >
             <span>BOOK A CONSULTATION</span>

@@ -396,14 +396,6 @@ export default function ClubMembershipPage() {
             their ongoing aesthetic care. Experience the difference of premium
             treatments, expert guidance, and personalized attention every month.
           </p>
-
-          <Button
-            onClick={() => setBookingOpen(true)}
-            className="relative !px-8 !py-4 text-sm font-bold uppercase text-white bg-[#272728] rounded-none tracking-wide hover:bg-gray-700 transition-colors w-fit"
-          >
-            <span>START YOUR MEMBERSHIP</span>
-            <span className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-[35%] top-0 left-0 pointer-events-none" />
-          </Button>
         </div>
 
         <div className="bg-gray-50 relative flex items-center justify-center min-h-[400px] lg:min-h-[70vh]">

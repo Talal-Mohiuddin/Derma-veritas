@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useStore } from "@/store/zustand";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,6 +19,7 @@ export default function ContactPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const { setBookingOpen } = useStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +27,10 @@ export default function ContactPage() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('/api/user/contact', {
-        method: 'POST',
+      const response = await fetch("/api/user/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -36,7 +38,10 @@ export default function ContactPage() {
       const result = await response.json();
 
       if (response.ok) {
-        setSubmitStatus({ type: 'success', message: 'Message sent successfully! We\'ll get back to you soon.' });
+        setSubmitStatus({
+          type: "success",
+          message: "Message sent successfully! We'll get back to you soon.",
+        });
         setFormData({
           name: "",
           email: "",
@@ -46,10 +51,16 @@ export default function ContactPage() {
           ageConfirm: false,
         });
       } else {
-        setSubmitStatus({ type: 'error', message: result.error || 'Failed to send message. Please try again.' });
+        setSubmitStatus({
+          type: "error",
+          message: result.error || "Failed to send message. Please try again.",
+        });
       }
     } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'Network error. Please check your connection and try again.' });
+      setSubmitStatus({
+        type: "error",
+        message: "Network error. Please check your connection and try again.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -97,6 +108,7 @@ export default function ContactPage() {
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 font-medium rounded-lg"
+                onClick={() => setBookingOpen(true)}
               >
                 BOOK A CONSULTATION
               </Button>
@@ -107,11 +119,13 @@ export default function ContactPage() {
           <div className="space-y-6">
             {/* Status Message */}
             {submitStatus && (
-              <div className={`p-4 rounded-lg ${
-                submitStatus.type === 'success' 
-                  ? 'bg-green-50 text-green-800 border border-green-200' 
-                  : 'bg-red-50 text-red-800 border border-red-200'
-              }`}>
+              <div
+                className={`p-4 rounded-lg ${
+                  submitStatus.type === "success"
+                    ? "bg-green-50 text-green-800 border border-green-200"
+                    : "bg-red-50 text-red-800 border border-red-200"
+                }`}
+              >
                 {submitStatus.message}
               </div>
             )}
@@ -206,7 +220,8 @@ export default function ContactPage() {
                     htmlFor="newsletter"
                     className="text-sm text-muted-foreground leading-relaxed"
                   >
-                    I would like to occasionally receive news & offers from Derma Veritas.
+                    I would like to occasionally receive news & offers from
+                    Derma Veritas.
                   </label>
                 </div>
               </div>
@@ -218,7 +233,7 @@ export default function ContactPage() {
                 disabled={isSubmitting}
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
+                {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
               </Button>
             </form>
           </div>
