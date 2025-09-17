@@ -6,25 +6,28 @@ import { motion } from "framer-motion";
 
 export default function AboutPage() {
   const { setBookingOpen } = useStore();
-  
+
   // Define coreValues inside the component
   const coreValues = [
     {
       title: "Excellence",
-      description: "We strive for the highest standards in all our treatments and services."
+      description:
+        "We strive for the highest standards in all our treatments and services.",
     },
     {
       title: "Integrity",
-      description: "We believe in honesty, transparency, and ethical practice."
+      description: "We believe in honesty, transparency, and ethical practice.",
     },
     {
       title: "Innovation",
-      description: "We continuously seek the latest advancements in aesthetic medicine."
+      description:
+        "We continuously seek the latest advancements in aesthetic medicine.",
     },
     {
       title: "Care",
-      description: "Your wellbeing and satisfaction are at the heart of everything we do."
-    }
+      description:
+        "Your wellbeing and satisfaction are at the heart of everything we do.",
+    },
   ];
 
   return (
@@ -157,46 +160,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-
-
-      <div className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
-        <div className="w-full grid md:grid-cols-2 gap-12 px-4 md:px-8">
-          {/* International Ambassador */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-foreground">
-              An International Ambassador to the Industry
-            </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              As an International Ambassador for Allergan, Dr. Mofasher Nawaz
-              and Mr. A. Singh. imparts advanced faciDerma Veritas training on a
-              national and global scale. He participates in clinical research
-              and audits, contributing to the advancement of the field. Dr.
-              Mofasher Nawaz and Mr. A. Singh.'s passion extends beyond patient
-              care as he serves as a trainer and educator for fellow industry
-              professionals at the AL Medical Academy. He strongly advocates for
-            </p>
-          </div>
-
-          {/* Statistics */}
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-foreground">
-              Over 6500 completed Non-Surgical Rhinoplasties
-            </h3>
-            <p className="text-muted-foreground leading-relaxed">
-              With Dr. Mofasher Nawaz and Mr. A. Singh. vast experience and
-              unwavering commitment to enhancing natural beauty, Derma Veritas
-              stands at the forefront of the field. Our impressive track record
-              includes{" "}
-              <strong>over 6500 completed non-surgical rhinoplasties</strong>{" "}
-              and the training of <strong>over 2000 injectors worldwide</strong>
-              . You can trust Derma Veritas to deliver unparalleled expertise
-              and help boost your confidence by utilising dermal fillers, anti-
-            </p>
-          </div>
-        </div>
-      </div>
-
-
 
       {/* Core Values */}
       <section className="py-16 lg:py-20 bg-white">
