@@ -182,6 +182,7 @@ export default function Navbar() {
         "polynucleotides-skin-rejuvenation-treatment":
           "polynucleotides-skin-rejuvenation-treatment",
         "Anti-Wrinkle-treatment": "anti-wrinkle-treatment",
+        "skin-boosters": "skin-boosters",
         "skinfill-bacio": "skinfill-bacio",
       };
       return treatmentMap[treatmentSlug] || "";
