@@ -107,6 +107,17 @@ export default function AppointmentsPage() {
     });
   };
 
+  const formatPreferredDate = (dateString) => {
+    if (!dateString) return "Not specified";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   const getCallbackTimeEmoji = (time) => {
     switch (time) {
       case "morning":
@@ -278,6 +289,11 @@ export default function AppointmentsPage() {
                     {appointment.treatmentDetails?.optionPrice && (
                       <div className="text-xs font-semibold text-green-600">
                         💰 {appointment.treatmentDetails.optionPrice}
+                        {appointment.userDiscount && appointment.userDiscount > 0 && (
+                          <div className="text-xs text-blue-600 mt-1">
+                            💸 Discount Applied: £{appointment.userDiscount} (Final: £{appointment.finalPrice})
+                          </div>
+                        )}
                       </div>
                     )}
                     {appointment.treatmentDetails?.optionDescription && (
@@ -331,6 +347,31 @@ export default function AppointmentsPage() {
                     <span className="text-sm text-gray-600 capitalize">
                       Best time: {appointment.callbackTime}
                     </span>
+                  </div>
+                )}
+
+                {appointment.preferredDate && (
+                  <div className="flex items-center space-x-3">
+                    <span className="text-gray-400">📅</span>
+                    <span className="text-sm text-gray-600">
+                      Preferred: {formatPreferredDate(appointment.preferredDate)}
+                    </span>
+                  </div>
+                )}
+
+                {appointment.additionalInfo && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                    <div className="flex items-start space-x-2">
+                      <span className="text-blue-600 text-sm">💬</span>
+                      <div className="text-sm text-blue-800">
+                        <div className="font-medium mb-1">Additional Info:</div>
+                        <div className="text-blue-700">
+                          {appointment.additionalInfo.length > 100
+                            ? `${appointment.additionalInfo.substring(0, 100)}...`
+                            : appointment.additionalInfo}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -561,8 +602,20 @@ export default function AppointmentsPage() {
                               )}
                             </div>
                             {selectedAppointment.treatmentDetails.optionPrice && (
-                              <div className="ml-3 font-bold text-green-600 text-lg">
-                                {selectedAppointment.treatmentDetails.optionPrice}
+                              <div className="ml-3 text-right">
+                                <div className="font-bold text-green-600 text-lg">
+                                  {selectedAppointment.treatmentDetails.optionPrice}
+                                </div>
+                                {selectedAppointment.userDiscount && selectedAppointment.userDiscount > 0 && (
+                                  <div className="text-sm space-y-1 mt-2">
+                                    <div className="text-blue-600">
+                                      💸 Discount: £{selectedAppointment.userDiscount}
+                                    </div>
+                                    <div className="font-bold text-orange-600">
+                                      Final: £{selectedAppointment.finalPrice}
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             )}
                           </div>
@@ -570,38 +623,69 @@ export default function AppointmentsPage() {
                       )}
                     </div>
                   </div>
-                  <div>
-                    <label className="text-sm text-gray-500">Status:</label>
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
-                        selectedAppointment.status
-                      )}`}
-                    >
-                      {getStatusEmoji(selectedAppointment.status)}{" "}
-                      {selectedAppointment.status}
-                    </span>
+                </div>
+              </div>
+
+              {/* Referral Information */}
+              {(selectedAppointment.referralCodeUsed || selectedAppointment.userDiscount > 0) && (
+                <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+                  <h3 className="font-semibold text-purple-800 mb-3">
+                    🎁 Referral Information
+                  </h3>
+                  <div className="space-y-2">
+                    {selectedAppointment.referralCodeUsed && (
+                      <div className="flex justify-between">
+                        <span className="text-sm text-purple-600">Referral Code Used:</span>
+                        <span className="font-medium font-mono text-purple-800">
+                          {selectedAppointment.referralCodeUsed}
+                        </span>
+                      </div>
+                    )}
+                    {selectedAppointment.userDiscount > 0 && (
+                      <div className="flex justify-between">
+                        <span className="text-sm text-blue-600">User Discount (5%):</span>
+                        <span className="font-medium text-blue-800">
+                          £{selectedAppointment.userDiscount}
+                        </span>
+                      </div>
+                    )}
+                    {selectedAppointment.referrerReward > 0 && (
+                      <div className="flex justify-between">
+                        <span className="text-sm text-green-600">Referrer Reward (5%):</span>
+                        <span className="font-medium text-green-800">
+                          £{selectedAppointment.referrerReward}
+                        </span>
+                      </div>
+                    )}
+                    {selectedAppointment.originalPrice && selectedAppointment.finalPrice && (
+                      <div className="pt-2 border-t border-purple-200">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-600">Original Price:</span>
+                          <span className="text-gray-800">£{selectedAppointment.originalPrice}</span>
+                        </div>
+                        <div className="flex justify-between font-bold">
+                          <span className="text-purple-700">Final Price:</span>
+                          <span className="text-purple-800">£{selectedAppointment.finalPrice}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div>
-                    <label className="text-sm text-gray-500">
-                      Preferred Callback Time:
-                    </label>
-                    <div className="font-medium capitalize">
-                      {getCallbackTimeEmoji(selectedAppointment.callbackTime)}{" "}
-                      {selectedAppointment.callbackTime}
-                    </div>
-                  </div>
-                  <div>
-                    <label className="text-sm text-gray-500">
-                      Appointment Number:
-                    </label>
-                    <div className="font-medium font-mono">
-                      #
-                      {selectedAppointment.appointmentNumber ||
-                        selectedAppointment.id.slice(0, 8)}
+                </div>
+              )}
+
+              {/* Additional Information */}
+              {selectedAppointment.additionalInfo && (
+                <div className="bg-gray-100 rounded-lg p-4 border border-gray-300">
+                  <h3 className="font-semibold text-gray-800 mb-3">
+                    💬 Additional Information
+                  </h3>
+                  <div className="bg-white rounded-lg p-4 border border-gray-300">
+                    <div className="text-gray-700 whitespace-pre-wrap">
+                      {selectedAppointment.additionalInfo}
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Additional Details */}
               <div className="bg-gray-100 rounded-lg p-4 border border-gray-300">

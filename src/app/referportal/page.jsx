@@ -21,7 +21,7 @@ import {
   Check,
   LoaderCircle,
   TrendingUp,
-  DollarSign,
+  PoundSterling,
   UserCheck,
   Clock,
   CheckCircle,
@@ -198,7 +198,7 @@ export default function ReferralPortalPage() {
 
             <Card className="p-6 bg-gradient-to-br from-gray-800 to-gray-900 shadow-lg border border-gray-700 hover:shadow-xl transition-all duration-300 text-white">
               <div className="flex items-center justify-between mb-2">
-                <DollarSign className="w-8 h-8 text-white" />
+                <PoundSterling className="w-8 h-8 text-white" />
               </div>
               <div className="text-2xl font-bold text-white">
                 {formatCurrency(stats.totalRewards)}

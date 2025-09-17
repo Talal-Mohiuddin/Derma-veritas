@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -25,7 +26,13 @@ import { useCreateAppointment } from "@/hooks/useAppointment";
 import { useCurrentUserProfile } from "@/hooks/useUser";
 import { toast } from "sonner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { AlertTriangle, X } from "lucide-react";
+import {
+  AlertTriangle,
+  X,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export function BookingModal({
   open,
@@ -38,10 +45,8 @@ export function BookingModal({
   const createAppointment = useCreateAppointment();
 
   // Get user profile data
-  const {
-    data: profileData,
-    isLoading: profileLoading,
-  } = useCurrentUserProfile(user?.uid);
+  const { data: profileData, isLoading: profileLoading } =
+    useCurrentUserProfile(user?.uid);
 
   const [formData, setFormData] = useState({
     treatment: "",
@@ -50,7 +55,8 @@ export function BookingModal({
     name: "",
     phone: "",
     email: "",
-    callbackTime: "anytime", // Set default to "anytime"
+    preferredDate: "", // Changed from callbackTime
+    additionalInfo: "", // New field
     ageConfirm: false,
     newsletter: false,
     referralCode: "", // Add referral code field
@@ -58,6 +64,9 @@ export function BookingModal({
 
   const [referralError, setReferralError] = useState(null);
   const [originalReferralCode, setOriginalReferralCode] = useState(null);
+
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   // Treatment options mapping
   const treatmentOptions = {
@@ -575,7 +584,8 @@ export function BookingModal({
           id: "consultation",
           name: "Initial Consultation & Assessment",
           price: "£60",
-          description: "Professional skin assessment and treatment plan (deductible from treatment costs)",
+          description:
+            "Professional skin assessment and treatment plan (deductible from treatment costs)",
         },
         {
           id: "topical-formulations",
@@ -638,7 +648,7 @@ export function BookingModal({
         },
       ],
     },
-    "ablative": {
+    ablative: {
       name: "Ablative Laser Treatments",
       options: [
         {
@@ -680,7 +690,8 @@ export function BookingModal({
           id: "hair-consultation",
           name: "Initial Hair Assessment",
           price: "Consultation Required",
-          description: "Comprehensive hair loss consultation and treatment planning",
+          description:
+            "Comprehensive hair loss consultation and treatment planning",
         },
         {
           id: "topical-treatments",
@@ -715,7 +726,6 @@ export function BookingModal({
       ],
     },
   };
-
   // Auto-fill user info when logged in
   useEffect(() => {
     if (user && open) {
@@ -785,7 +795,7 @@ export function BookingModal({
 
       // Show success message with referral info if applicable
       const successMessage = createAppointment.data?.referralRewardProcessed
-        ? `Appointment request submitted successfully! Your friend will receive a £${createAppointment.data.referrerReward} reward for referring you. We'll contact you soon.`
+        ? `Appointment request submitted successfully! You received a 5% discount (£${createAppointment.data.discountAmount}), and your friend will receive a £${createAppointment.data.referrerReward} reward for referring you. We'll contact you soon.`
         : "Appointment request submitted successfully! We'll contact you soon.";
 
       toast.success(successMessage);
@@ -799,7 +809,8 @@ export function BookingModal({
         name: "",
         phone: "",
         email: "",
-        callbackTime: "anytime", // Set default to "anytime" here too
+        preferredDate: "", // Reset new field
+        additionalInfo: "", // Reset new field
         ageConfirm: false,
         newsletter: false,
         referralCode: "", // Reset referral code
@@ -807,20 +818,26 @@ export function BookingModal({
       setReferralError(null);
     } catch (error) {
       console.error("Error submitting appointment:", error);
-      
+
       // Check if this is a referral code error
-      if (error.message.includes("referral code") || error.message.includes("referred")) {
+      if (
+        error.message.includes("referral code") ||
+        error.message.includes("referred")
+      ) {
         setReferralError(error.message);
-        
+
         // If there's an original referral code, store it for suggestion
         if (error.response?.data?.originalReferralCode) {
           setOriginalReferralCode(error.response.data.originalReferralCode);
         }
-        
+
         // Scroll to referral code section
         const referralSection = document.getElementById("referralCode");
         if (referralSection) {
-          referralSection.scrollIntoView({ behavior: "smooth", block: "center" });
+          referralSection.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
         }
       } else {
         toast.error(
@@ -832,11 +849,11 @@ export function BookingModal({
 
   const handleReferralCodeChange = (e) => {
     const value = e.target.value.toUpperCase().trim();
-    setFormData({ 
-      ...formData, 
-      referralCode: value 
+    setFormData({
+      ...formData,
+      referralCode: value,
     });
-    
+
     // Clear referral error when user starts typing
     if (referralError) {
       setReferralError(null);
@@ -857,6 +874,97 @@ export function BookingModal({
   };
 
   const selectedTreatmentData = treatmentOptions[formData.treatment];
+
+  // Get minimum date (today)
+  const getMinDate = () => {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
+  };
+
+  // Format date for display
+  const formatDateForDisplay = (dateString) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-GB", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Calendar helper functions
+  const getDaysInMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  };
+
+  const getFirstDayOfMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  };
+
+  const isDateDisabled = (date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date < today;
+  };
+
+  const isDateSelected = (date) => {
+    if (!formData.preferredDate) return false;
+    const selectedDate = new Date(formData.preferredDate);
+    return date.toDateString() === selectedDate.toDateString();
+  };
+
+  const handleDateSelect = (date) => {
+    const dateString = date.toISOString().split("T")[0];
+    setFormData({ ...formData, preferredDate: dateString });
+    setShowCalendar(false);
+  };
+
+  const navigateMonth = (direction) => {
+    const newMonth = new Date(currentMonth);
+    newMonth.setMonth(currentMonth.getMonth() + direction);
+    setCurrentMonth(newMonth);
+  };
+
+  const generateCalendarDays = () => {
+    const daysInMonth = getDaysInMonth(currentMonth);
+    const firstDay = getFirstDayOfMonth(currentMonth);
+    const days = [];
+
+    // Add empty cells for days before the first day of the month
+    for (let i = 0; i < firstDay; i++) {
+      days.push(null);
+    }
+
+    // Add days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(
+        currentMonth.getFullYear(),
+        currentMonth.getMonth(),
+        day
+      );
+      days.push(date);
+    }
+
+    return days;
+  };
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -910,16 +1018,25 @@ export function BookingModal({
                     <SelectItem value="anti-wrinkle-treatment" className="pl-6">
                       Anti-Wrinkle Treatment
                     </SelectItem>
-                    <SelectItem value="non-surgical-rhinoplasty" className="pl-6">
+                    <SelectItem
+                      value="non-surgical-rhinoplasty"
+                      className="pl-6"
+                    >
                       Non Surgical Rhinoplasty
                     </SelectItem>
                     <SelectItem value="8-point-facelift" className="pl-6">
                       8 Point Facelift
                     </SelectItem>
-                    <SelectItem value="nctf-skin-revitalisation" className="pl-6">
+                    <SelectItem
+                      value="nctf-skin-revitalisation"
+                      className="pl-6"
+                    >
                       NCTF Skin Revitalisation
                     </SelectItem>
-                    <SelectItem value="harmonyca-dermal-filler" className="pl-6">
+                    <SelectItem
+                      value="harmonyca-dermal-filler"
+                      className="pl-6"
+                    >
                       HArmonyCa Dermal Filler
                     </SelectItem>
                     <SelectItem value="dermal-fillers" className="pl-6">
@@ -940,16 +1057,25 @@ export function BookingModal({
                     <SelectItem value="profhilo" className="pl-6">
                       Profhilo
                     </SelectItem>
-                    <SelectItem value="fat-dissolving-injections" className="pl-6">
+                    <SelectItem
+                      value="fat-dissolving-injections"
+                      className="pl-6"
+                    >
                       Fat Dissolving Injections
                     </SelectItem>
                     <SelectItem value="hand-rejuvenation" className="pl-6">
                       Hand Rejuvenation
                     </SelectItem>
-                    <SelectItem value="polynucleotides-hair-loss-treatment" className="pl-6">
+                    <SelectItem
+                      value="polynucleotides-hair-loss-treatment"
+                      className="pl-6"
+                    >
                       Polynucleotides Hair Loss Treatment
                     </SelectItem>
-                    <SelectItem value="polynucleotides-skin-rejuvenation-treatment" className="pl-6">
+                    <SelectItem
+                      value="polynucleotides-skin-rejuvenation-treatment"
+                      className="pl-6"
+                    >
                       Polynucleotides Skin Rejuvenation Treatment
                     </SelectItem>
                     <SelectItem value="skin-boosters" className="pl-6">
@@ -976,7 +1102,10 @@ export function BookingModal({
                     <SelectItem value="co2-laser" className="pl-6">
                       Co2 Laser
                     </SelectItem>
-                    <SelectItem value="polynucleotides-skin-rejuvenation-treatment" className="pl-6">
+                    <SelectItem
+                      value="polynucleotides-skin-rejuvenation-treatment"
+                      className="pl-6"
+                    >
                       Polynucleotide
                     </SelectItem>
                     <SelectItem value="endolift" className="pl-6">
@@ -1021,7 +1150,10 @@ export function BookingModal({
                     >
                       🔥 Laser Treatments
                     </SelectItem>
-                    <SelectItem value="quad-laser-hair-removal" className="pl-6">
+                    <SelectItem
+                      value="quad-laser-hair-removal"
+                      className="pl-6"
+                    >
                       Quad Laser Hair Removal
                     </SelectItem>
                     <SelectItem value="ablative" className="pl-6">
@@ -1232,34 +1364,213 @@ export function BookingModal({
                 </div>
 
                 <div className="space-y-3">
-                  <Label className="text-sm font-semibold text-gray-700">
-                    Best Time for Callback
-                  </Label>
-                  <Select
-                    value={formData.callbackTime}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, callbackTime: value })
-                    }
+                  <Label
+                    htmlFor="preferredDate"
+                    className="text-sm font-semibold text-gray-700"
                   >
-                    <SelectTrigger className="h-12 border-gray-200 hover:border-gray-300 transition-colors">
-                      <SelectValue placeholder="Select preferred time" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="morning">
-                        🌅 Morning (9AM - 12PM)
-                      </SelectItem>
-                      <SelectItem value="afternoon">
-                        ☀️ Afternoon (12PM - 5PM)
-                      </SelectItem>
-                      <SelectItem value="evening">
-                        🌆 Evening (5PM - 8PM)
-                      </SelectItem>
-                      <SelectItem value="anytime">🕐 Anytime</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    Preferred Appointment Date *
+                  </Label>
+
+                  {/* Custom Calendar UI */}
+                  <div className="relative">
+                    {/* Date Input Display */}
+                    <div
+                      onClick={() => setShowCalendar(!showCalendar)}
+                      className="h-12 border border-gray-200 rounded-lg px-3 py-2 cursor-pointer hover:border-gray-300 transition-colors flex items-center justify-between bg-white"
+                    >
+                      <span
+                        className={
+                          formData.preferredDate
+                            ? "text-gray-900"
+                            : "text-gray-500"
+                        }
+                      >
+                        {formData.preferredDate
+                          ? formatDateForDisplay(formData.preferredDate)
+                          : "Select your preferred date"}
+                      </span>
+                      <Calendar className="h-5 w-5 text-gray-400" />
+                    </div>
+
+                    {/* Custom Calendar Dropdown */}
+                    {showCalendar && (
+                      <div className="absolute top-14 left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-xl z-50 p-4">
+                        {/* Calendar Header */}
+                        <div className="flex items-center justify-between mb-4">
+                          <button
+                            type="button"
+                            onClick={() => navigateMonth(-1)}
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                          >
+                            <ChevronLeft className="h-4 w-4 text-gray-600" />
+                          </button>
+
+                          <h3 className="font-semibold text-gray-800">
+                            {monthNames[currentMonth.getMonth()]}{" "}
+                            {currentMonth.getFullYear()}
+                          </h3>
+
+                          <button
+                            type="button"
+                            onClick={() => navigateMonth(1)}
+                            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                          >
+                            <ChevronRight className="h-4 w-4 text-gray-600" />
+                          </button>
+                        </div>
+
+                        {/* Day Names */}
+                        <div className="grid grid-cols-7 gap-1 mb-2">
+                          {dayNames.map((day) => (
+                            <div
+                              key={day}
+                              className="text-center text-xs font-medium text-gray-500 py-2"
+                            >
+                              {day}
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Calendar Days */}
+                        <div className="grid grid-cols-7 gap-1">
+                          {generateCalendarDays().map((date, index) => {
+                            if (!date) {
+                              return <div key={index} className="h-10"></div>;
+                            }
+
+                            const isDisabled = isDateDisabled(date);
+                            const isSelected = isDateSelected(date);
+                            const isToday =
+                              date.toDateString() === new Date().toDateString();
+
+                            return (
+                              <button
+                                key={index}
+                                type="button"
+                                onClick={() =>
+                                  !isDisabled && handleDateSelect(date)
+                                }
+                                disabled={isDisabled}
+                                className={`
+                                  h-10 w-full text-sm rounded-lg transition-all duration-200 font-medium
+                                  ${
+                                    isSelected
+                                      ? "bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-lg transform scale-105"
+                                      : isToday
+                                      ? "bg-blue-100 text-blue-800 border border-blue-300"
+                                      : isDisabled
+                                      ? "text-gray-300 cursor-not-allowed"
+                                      : "text-gray-700 hover:bg-gray-100 hover:scale-105"
+                                  }
+                                  ${
+                                    !isDisabled && !isSelected
+                                      ? "hover:shadow-md"
+                                      : ""
+                                  }
+                                `}
+                              >
+                                {date.getDate()}
+                              </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* Calendar Footer */}
+                        <div className="mt-4 pt-3 border-t border-gray-200 flex justify-between items-center">
+                          <div className="text-xs text-gray-500">
+                            💡 Select your preferred consultation date
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => setShowCalendar(false)}
+                            className="text-xs text-gray-600 hover:text-gray-800 px-3 py-1 rounded hover:bg-gray-100 transition-colors"
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Hidden native date input for form validation */}
+                    <input
+                      type="date"
+                      value={formData.preferredDate}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          preferredDate: e.target.value,
+                        })
+                      }
+                      min={getMinDate()}
+                      required
+                      className="sr-only"
+                      tabIndex={-1}
+                    />
+                  </div>
+
+                  {/* Selected Date Display */}
+                  {formData.preferredDate && (
+                    <div className="text-sm text-gray-600 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="font-medium text-blue-800">
+                            📅 Selected Date:
+                          </span>
+                          <div className="text-blue-700 font-semibold mt-1">
+                            {formatDateForDisplay(formData.preferredDate)}
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData({ ...formData, preferredDate: "" });
+                            setShowCalendar(false);
+                          }}
+                          className="text-blue-600 hover:text-blue-800 text-sm underline"
+                        >
+                          Change Date
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  <p className="text-xs text-gray-500">
+                    📅 Please select your preferred date for the consultation.
+                    We'll contact you to confirm the exact time.
+                  </p>
                 </div>
 
-                {/* Referral Code Input */}
+                <div className="space-y-3">
+                  <Label
+                    htmlFor="additionalInfo"
+                    className="text-sm font-semibold text-gray-700"
+                  >
+                    Additional Information (Optional)
+                  </Label>
+                  <Textarea
+                    id="additionalInfo"
+                    placeholder="Please share any additional information, specific concerns, questions, or preferences you'd like us to know about..."
+                    value={formData.additionalInfo}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        additionalInfo: e.target.value,
+                      })
+                    }
+                    className="min-h-[100px] border-gray-200 focus:border-gray-400 transition-colors resize-vertical"
+                    maxLength={500}
+                  />
+                  <div className="flex justify-between items-center">
+                    <p className="text-xs text-gray-500">
+                      💬 Feel free to mention any specific areas of concern,
+                      medical history, or questions
+                    </p>
+                    <span className="text-xs text-gray-400">
+                      {formData.additionalInfo.length}/500
+                    </span>
+                  </div>
+                </div>
+
                 <div className="space-y-3">
                   <Label
                     htmlFor="referralCode"
@@ -1274,7 +1585,9 @@ export function BookingModal({
                       value={formData.referralCode}
                       onChange={handleReferralCodeChange}
                       className={`h-12 pr-10 border-gray-200 focus:border-gray-400 transition-colors ${
-                        referralError ? "border-red-300 focus:border-red-400" : ""
+                        referralError
+                          ? "border-red-300 focus:border-red-400"
+                          : ""
                       }`}
                       maxLength={8}
                     />
@@ -1288,7 +1601,7 @@ export function BookingModal({
                       </button>
                     )}
                   </div>
-                  
+
                   {/* Referral Error Alert */}
                   {referralError && (
                     <Alert className="border-red-200 bg-red-50">
@@ -1299,7 +1612,8 @@ export function BookingModal({
                           {originalReferralCode && (
                             <div className="flex flex-col gap-2">
                               <p className="text-sm">
-                                Your original referral code was: <strong>{originalReferralCode}</strong>
+                                Your original referral code was:{" "}
+                                <strong>{originalReferralCode}</strong>
                               </p>
                               <Button
                                 type="button"
@@ -1316,13 +1630,15 @@ export function BookingModal({
                       </AlertDescription>
                     </Alert>
                   )}
-                  
+
                   {!referralError && (
                     <p className="text-xs text-gray-500">
-                      Have a friend's referral code? Enter it here to give them credit for referring you!
+                      Have a friend's referral code? Enter it here to give them
+                      credit for referring you!
                       <br />
                       <span className="text-green-600 font-medium">
-                        🎁 Valid codes give your friend a 10% reward based on your treatment cost
+                        🎁 Valid codes give you 5% discount and your friend a 5%
+                        reward based on your treatment cost
                       </span>
                     </p>
                   )}
@@ -1391,59 +1707,84 @@ export function BookingModal({
               </div>
             </div>
 
-            {/* reCAPTCHA Placeholder */}
-            <div className="bg-gradient-to-r from-gray-50 to-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-              <div className="text-gray-400 text-sm">
-                🛡️ reCAPTCHA verification would appear here
-              </div>
-            </div>
-
             {/* Show referral reward preview if referral code is entered and valid */}
-            {formData.referralCode && !referralError && selectedTreatmentData && formData.treatmentOption && 
-             !["skin-boosters", "prescription-skincare", "weight-loss", "ablative", "prescription-hair"].includes(formData.treatment) && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-blue-600 font-semibold">🎁 Referral Reward Preview</span>
-                </div>
-                <div className="text-sm text-blue-700">
-                  {(() => {
-                    const selectedOption = selectedTreatmentData.options.find(
-                      (opt) => opt.id === formData.treatmentOption
-                    );
-                    if (selectedOption?.price && !selectedOption.price.includes("Consultation Required")) {
-                      const priceString = selectedOption.price;
-                      const numericPrice = parseFloat(priceString.replace(/[£$,]/g, ""));
-                      if (!isNaN(numericPrice)) {
-                        const reward = Math.round(numericPrice * 0.1 * 100) / 100;
-                        return (
-                          <div className="space-y-1">
-                            <div className="flex justify-between">
-                              <span>Treatment Cost:</span>
-                              <span>£{numericPrice}</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span>Friend's Reward (10%):</span>
-                              <span className="text-blue-600 font-semibold">£{reward}</span>
-                            </div>
-                            <div className="text-xs text-blue-600 mt-2 p-2 bg-blue-100 rounded">
-                              💡 Your friend will receive £{reward} as a thank you for referring you!
-                            </div>
-                          </div>
+            {formData.referralCode &&
+              !referralError &&
+              selectedTreatmentData &&
+              formData.treatmentOption &&
+              ![
+                "skin-boosters",
+                "prescription-skincare",
+                "weight-loss",
+                "ablative",
+                "prescription-hair",
+              ].includes(formData.treatment) && (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-green-600 font-semibold">
+                      🎁 Referral Benefits Preview
+                    </span>
+                  </div>
+                  <div className="text-sm text-green-700">
+                    {(() => {
+                      const selectedOption = selectedTreatmentData.options.find(
+                        (opt) => opt.id === formData.treatmentOption
+                      );
+                      if (
+                        selectedOption?.price &&
+                        !selectedOption.price.includes("Consultation Required")
+                      ) {
+                        const priceString = selectedOption.price;
+                        const numericPrice = parseFloat(
+                          priceString.replace(/[£$,]/g, "")
                         );
+                        if (!isNaN(numericPrice)) {
+                          const reward =
+                            Math.round(numericPrice * 0.05 * 100) / 100;
+                          const discount =
+                            Math.round(numericPrice * 0.05 * 100) / 100;
+                          const finalPrice =
+                            Math.round((numericPrice - discount) * 100) / 100;
+                          return (
+                            <div className="space-y-2">
+                              <div className="flex justify-between">
+                                <span>Original Treatment Cost:</span>
+                                <span>£{numericPrice}</span>
+                              </div>
+                              <div className="flex justify-between text-blue-600">
+                                <span>Your Discount (5%):</span>
+                                <span className="font-semibold">
+                                  -£{discount}
+                                </span>
+                              </div>
+                              <div className="flex justify-between text-lg font-bold text-green-600 border-t pt-2">
+                                <span>Your Final Cost:</span>
+                                <span>£{finalPrice}</span>
+                              </div>
+                              <div className="text-xs text-green-600 mt-2 p-2 bg-green-100 rounded">
+                                💡 You save £{discount} and your friend gets £
+                                {reward} as a thank you!
+                              </div>
+                            </div>
+                          );
+                        }
                       }
-                    }
-                    return "Reward will be calculated based on your treatment selection during consultation.";
-                  })()}
+                      return "Benefits will be calculated based on your treatment selection during consultation.";
+                    })()}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             {/* Submit Button */}
             <div className="pt-4">
               <Button
                 type="submit"
                 className="w-full bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 text-white py-4 h-14 text-base font-semibold rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                disabled={!formData.ageConfirm || createAppointment.isPending || referralError}
+                disabled={
+                  !formData.ageConfirm ||
+                  createAppointment.isPending ||
+                  referralError
+                }
               >
                 {createAppointment.isPending
                   ? "SUBMITTING..."
@@ -1451,7 +1792,7 @@ export function BookingModal({
                   ? "PLEASE FIX REFERRAL CODE ISSUE"
                   : "SUBMIT CONSULTATION REQUEST"}
               </Button>
-              
+
               {referralError && (
                 <p className="text-xs text-red-600 text-center mt-2">
                   Please remove or correct the referral code to continue

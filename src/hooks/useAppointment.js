@@ -71,6 +71,9 @@ export const useCreateAppointment = () => {
         queryClient.invalidateQueries({ queryKey: ["referralData"] });
         queryClient.invalidateQueries({ queryKey: ["users"] });
       }
+
+      // Update success message to mention both reward and discount
+      console.log("Appointment created successfully. Referrer rewarded 5% and referee received 5% discount.");
     },
     onError: (error) => {
       // Log specific error types for debugging

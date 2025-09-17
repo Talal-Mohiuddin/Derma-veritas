@@ -104,13 +104,14 @@ export async function POST(request) {
       !body.treatment ||
       !body.name ||
       !body.email ||
-      !body.phone
+      !body.phone ||
+      !body.preferredDate
     ) {
       return Response.json(
         {
           success: false,
           message:
-            "Missing required fields: userId, treatment, name, email, phone",
+            "Missing required fields: userId, treatment, name, email, phone, preferredDate",
         },
         { status: 400 }
       );
@@ -208,14 +209,18 @@ export async function POST(request) {
     const allAppointments = await getDocs(appointmentsCountQuery);
     const appointmentNumber = `APT-${timestamp}-${allAppointments.size + 1}`;
 
-    // Calculate referrer reward (10% of treatment cost)
+    // Calculate referrer reward and user discount (both 5% of treatment cost)
     let rewardAmount = 0;
+    let discountAmount = 0;
     let originalPrice = 0;
+    let finalPrice = 0;
     if (body.treatmentDetails?.optionPrice) {
       const priceString = body.treatmentDetails.optionPrice;
       originalPrice = parseFloat(priceString.replace(/[£$,]/g, ""));
       if (!isNaN(originalPrice) && referralCodeToProcess) {
-        rewardAmount = Math.round(originalPrice * 0.1 * 100) / 100; // 10% reward for referrer
+        rewardAmount = Math.round(originalPrice * 0.05 * 100) / 100; // 5% reward for referrer
+        discountAmount = Math.round(originalPrice * 0.05 * 100) / 100; // 5% discount for user
+        finalPrice = Math.round((originalPrice - discountAmount) * 100) / 100; // Final price after discount
       }
     }
 
@@ -229,7 +234,8 @@ export async function POST(request) {
       name: body.name,
       phone: body.phone,
       email: body.email,
-      callbackTime: body.callbackTime || null,
+      preferredDate: body.preferredDate, // New field
+      additionalInfo: body.additionalInfo || null, // New field
       ageConfirm: body.ageConfirm || false,
       newsletter: body.newsletter || false,
       clinic: body.clinic || "main",
@@ -240,7 +246,9 @@ export async function POST(request) {
       // Referral information
       referralCodeUsed: referralCodeToProcess,
       referrerReward: rewardAmount,
+      userDiscount: discountAmount,
       originalPrice,
+      finalPrice: finalPrice || originalPrice,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -260,7 +268,9 @@ export async function POST(request) {
           appointmentNumber,
           treatmentName: body.treatmentDetails?.treatmentName || body.treatment,
           treatmentCost: body.treatmentDetails?.optionPrice || "N/A",
+          originalPrice,
           rewardAmount,
+          userDiscount: discountAmount,
           status: "pending", // Admin needs to approve
           referralSource: "booking", // Track where referral came from
           createdAt: new Date(),
@@ -277,6 +287,9 @@ export async function POST(request) {
             appointmentId: docRef.id,
             appointmentNumber,
             referralSource: "booking",
+            originalPrice,
+            rewardAmount,
+            userDiscount: discountAmount,
             createdAt: new Date(),
             updatedAt: new Date(),
           }
@@ -291,7 +304,7 @@ export async function POST(request) {
         });
 
         referralRewardProcessed = true;
-        console.log(`Referral reward of £${rewardAmount} added for referrer ${referrerId}`);
+        console.log(`Referral reward of £${rewardAmount} added for referrer ${referrerId}, user discount of £${discountAmount} applied`);
       } catch (error) {
         console.error("Error processing referral reward:", error);
         // Don't fail the appointment creation if referral processing fails
@@ -308,6 +321,9 @@ export async function POST(request) {
           appointmentId: docRef.id,
           appointmentNumber,
           referrerReward: rewardAmount,
+          userDiscount: discountAmount,
+          originalPrice,
+          finalPrice,
         }
       ];
 
@@ -325,6 +341,9 @@ export async function POST(request) {
       isFirstAppointment,
       referralRewardProcessed,
       referrerReward: rewardAmount,
+      discountAmount,
+      originalPrice,
+      finalPrice,
     });
   } catch (error) {
     console.error("Error creating appointment:", error);
