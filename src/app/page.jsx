@@ -125,7 +125,7 @@ export default function Home() {
       </main>
 
       {/* CTA Section */}
-      <section className="py-16 px-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 px-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-6xl mx-auto">
           <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-xl p-12 lg:p-12 text-white">
             <div className="text-center space-y-6">
@@ -359,7 +359,7 @@ export default function Home() {
       {/* Treatments Section */}
       <section
         id="treatments"
-        className="bg-[var(--section-bg)] text-[var(--section-fg)] py-20 px-4"
+        className="bg-[var(--section-bg)] text-[var(--section-fg)] px-4"
       >
         <div className="max-w-7xl mx-auto text-black">
           {/* Header */}

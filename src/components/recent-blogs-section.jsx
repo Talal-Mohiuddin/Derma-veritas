@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function RecentBlogsSection() {
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-12 bg-white">
+    <section className="py-20 px-4 md:px-8 lg:px-12 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Centered Blog CTA */}
         <div className="text-center">

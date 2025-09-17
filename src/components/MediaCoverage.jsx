@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 
 export default function MediaCoverage() {
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-20 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between gap-8 flex-wrap">
           {/* ITV Logo */}

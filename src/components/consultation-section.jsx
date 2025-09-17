@@ -26,7 +26,7 @@ export default function ConsultationSection() {
 
   return (
     <section
-      className="py-45 px-4 md:px-8 lg:px-12"
+      className="py-20 px-4 md:px-8 lg:px-12"
       style={{ backgroundColor: "var(--section-bg)" }}
     >
       <div className="max-w-7xl mx-auto">

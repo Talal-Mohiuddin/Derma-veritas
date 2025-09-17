@@ -12,7 +12,7 @@ export default function Simplicity() {
 
   return (
     <section className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
           {/* Left Content */}
           <div className="space-y-8 text-center lg:text-left flex flex-col items-center lg:items-start">
